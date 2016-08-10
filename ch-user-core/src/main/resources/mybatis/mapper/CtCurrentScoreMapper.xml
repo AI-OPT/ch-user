@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ch.user.dao.mapper.interfaces.CtCurrentScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.CtCurrentScore" >
+    <id column="OPER_ID" property="operId" jdbcType="DECIMAL" />
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="SCORE_DATE" property="scoreDate" jdbcType="TIMESTAMP" />
+    <result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OPER_ID, USER_ID, SCORE_DATE, TOTAL_SCORE, TENANT_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScoreCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ct_current_score
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScoreKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ct_current_score
+    where OPER_ID = #{operId,jdbcType=DECIMAL}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScoreKey" >
+    delete from ct_current_score
+    where OPER_ID = #{operId,jdbcType=DECIMAL}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScoreCriteria" >
+    delete from ct_current_score
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScore" >
+    insert into ct_current_score (OPER_ID, USER_ID, SCORE_DATE, 
+      TOTAL_SCORE, TENANT_ID)
+    values (#{operId,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR}, #{scoreDate,jdbcType=TIMESTAMP}, 
+      #{totalScore,jdbcType=INTEGER}, #{tenantId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScore" >
+    insert into ct_current_score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operId != null" >
+        OPER_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="scoreDate != null" >
+        SCORE_DATE,
+      </if>
+      <if test="totalScore != null" >
+        TOTAL_SCORE,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operId != null" >
+        #{operId,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreDate != null" >
+        #{scoreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalScore != null" >
+        #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScoreCriteria" resultType="java.lang.Integer" >
+    select count(*) from ct_current_score
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ct_current_score
+    <set >
+      <if test="record.operId != null" >
+        OPER_ID = #{record.operId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoreDate != null" >
+        SCORE_DATE = #{record.scoreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalScore != null" >
+        TOTAL_SCORE = #{record.totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ct_current_score
+    set OPER_ID = #{record.operId,jdbcType=DECIMAL},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      SCORE_DATE = #{record.scoreDate,jdbcType=TIMESTAMP},
+      TOTAL_SCORE = #{record.totalScore,jdbcType=INTEGER},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScore" >
+    update ct_current_score
+    <set >
+      <if test="scoreDate != null" >
+        SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalScore != null" >
+        TOTAL_SCORE = #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OPER_ID = #{operId,jdbcType=DECIMAL}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.ch.user.dao.mapper.bo.CtCurrentScore" >
+    update ct_current_score
+    set SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP},
+      TOTAL_SCORE = #{totalScore,jdbcType=INTEGER},
+      TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+    where OPER_ID = #{operId,jdbcType=DECIMAL}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>
