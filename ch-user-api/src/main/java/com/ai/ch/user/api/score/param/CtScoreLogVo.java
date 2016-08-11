@@ -1,21 +1,30 @@
 package com.ai.ch.user.api.score.param;
 
-import com.ai.opt.base.vo.BaseInfo;
+import java.sql.Timestamp;
 
 /**
- * 保存评分记录入参 Date: 2016年8月11日 <br>
+ * 评分记录
+ * Date: 2016年8月11日 <br>
  * Copyright (c) 2016 asiainfo.com <br>
  * 
  * @author zhangqiang7
  */
-public class InsertScoreLogRequest extends BaseInfo {
+public class CtScoreLogVo {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 租户ID
+	 */
+	private String tenantId;
 
 	/**
 	 * 评分人
 	 */
 	private Long operId;
+
+	/**
+	 * 评分时间
+	 */
+	private Timestamp scoreDate;
 
 	/**
 	 * 供货商ID
@@ -127,12 +136,28 @@ public class InsertScoreLogRequest extends BaseInfo {
 	 */
 	private Integer score20;
 
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
 	public Long getOperId() {
 		return operId;
 	}
 
 	public void setOperId(Long operId) {
 		this.operId = operId;
+	}
+
+	public Timestamp getScoreDate() {
+		return scoreDate;
+	}
+
+	public void setScoreDate(Timestamp scoreDate) {
+		this.scoreDate = scoreDate;
 	}
 
 	public String getUserId() {
