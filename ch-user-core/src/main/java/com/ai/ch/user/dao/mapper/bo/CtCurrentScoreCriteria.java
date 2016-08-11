@@ -185,6 +185,66 @@ public class CtCurrentScoreCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andScoreDateIsNull() {
+            addCriterion("SCORE_DATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateIsNotNull() {
+            addCriterion("SCORE_DATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateEqualTo(Timestamp value) {
+            addCriterion("SCORE_DATE =", value, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateNotEqualTo(Timestamp value) {
+            addCriterion("SCORE_DATE <>", value, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateGreaterThan(Timestamp value) {
+            addCriterion("SCORE_DATE >", value, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("SCORE_DATE >=", value, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateLessThan(Timestamp value) {
+            addCriterion("SCORE_DATE <", value, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateLessThanOrEqualTo(Timestamp value) {
+            addCriterion("SCORE_DATE <=", value, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateIn(List<Timestamp> values) {
+            addCriterion("SCORE_DATE in", values, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateNotIn(List<Timestamp> values) {
+            addCriterion("SCORE_DATE not in", values, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("SCORE_DATE between", value1, value2, "scoreDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreDateNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("SCORE_DATE not between", value1, value2, "scoreDate");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("USER_ID is null");
             return (Criteria) this;
@@ -252,66 +312,6 @@ public class CtCurrentScoreCriteria {
 
         public Criteria andUserIdNotBetween(String value1, String value2) {
             addCriterion("USER_ID not between", value1, value2, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateIsNull() {
-            addCriterion("SCORE_DATE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateIsNotNull() {
-            addCriterion("SCORE_DATE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateEqualTo(Timestamp value) {
-            addCriterion("SCORE_DATE =", value, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateNotEqualTo(Timestamp value) {
-            addCriterion("SCORE_DATE <>", value, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateGreaterThan(Timestamp value) {
-            addCriterion("SCORE_DATE >", value, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateGreaterThanOrEqualTo(Timestamp value) {
-            addCriterion("SCORE_DATE >=", value, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateLessThan(Timestamp value) {
-            addCriterion("SCORE_DATE <", value, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateLessThanOrEqualTo(Timestamp value) {
-            addCriterion("SCORE_DATE <=", value, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateIn(List<Timestamp> values) {
-            addCriterion("SCORE_DATE in", values, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateNotIn(List<Timestamp> values) {
-            addCriterion("SCORE_DATE not in", values, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("SCORE_DATE between", value1, value2, "scoreDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andScoreDateNotBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("SCORE_DATE not between", value1, value2, "scoreDate");
             return (Criteria) this;
         }
 

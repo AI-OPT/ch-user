@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ai.ch.user.dao.mapper.interfaces.CtScoreLogMapper" >
   <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.CtScoreLog" >
-    <id column="OPER_ID" property="operId" jdbcType="DECIMAL" />
-    <id column="SCORE_DATE" property="scoreDate" jdbcType="TIMESTAMP" />
-    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="OPER_ID" property="operId" jdbcType="DECIMAL" />
+    <result column="SCORE_DATE" property="scoreDate" jdbcType="TIMESTAMP" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER" />
     <result column="SCORE1" property="score1" jdbcType="INTEGER" />
     <result column="SCORE2" property="score2" jdbcType="INTEGER" />
@@ -109,20 +109,6 @@
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.CtScoreLogKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from ct_score_log
-    where OPER_ID = #{operId,jdbcType=DECIMAL}
-      and SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP}
-      and USER_ID = #{userId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.ai.ch.user.dao.mapper.bo.CtScoreLogKey" >
-    delete from ct_score_log
-    where OPER_ID = #{operId,jdbcType=DECIMAL}
-      and SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP}
-      and USER_ID = #{userId,jdbcType=VARCHAR}
-  </delete>
   <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.CtScoreLogCriteria" >
     delete from ct_score_log
     <if test="_parameter != null" >
@@ -425,107 +411,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.ch.user.dao.mapper.bo.CtScoreLog" >
-    update ct_score_log
-    <set >
-      <if test="totalScore != null" >
-        TOTAL_SCORE = #{totalScore,jdbcType=INTEGER},
-      </if>
-      <if test="score1 != null" >
-        SCORE1 = #{score1,jdbcType=INTEGER},
-      </if>
-      <if test="score2 != null" >
-        SCORE2 = #{score2,jdbcType=INTEGER},
-      </if>
-      <if test="score3 != null" >
-        SCORE3 = #{score3,jdbcType=INTEGER},
-      </if>
-      <if test="score4 != null" >
-        SCORE4 = #{score4,jdbcType=INTEGER},
-      </if>
-      <if test="score5 != null" >
-        SCORE5 = #{score5,jdbcType=INTEGER},
-      </if>
-      <if test="score6 != null" >
-        SCORE6 = #{score6,jdbcType=INTEGER},
-      </if>
-      <if test="score7 != null" >
-        SCORE7 = #{score7,jdbcType=INTEGER},
-      </if>
-      <if test="score8 != null" >
-        SCORE8 = #{score8,jdbcType=INTEGER},
-      </if>
-      <if test="score9 != null" >
-        SCORE9 = #{score9,jdbcType=INTEGER},
-      </if>
-      <if test="score10 != null" >
-        SCORE10 = #{score10,jdbcType=INTEGER},
-      </if>
-      <if test="score11 != null" >
-        SCORE11 = #{score11,jdbcType=INTEGER},
-      </if>
-      <if test="score12 != null" >
-        SCORE12 = #{score12,jdbcType=INTEGER},
-      </if>
-      <if test="score13 != null" >
-        SCORE13 = #{score13,jdbcType=INTEGER},
-      </if>
-      <if test="score14 != null" >
-        SCORE14 = #{score14,jdbcType=INTEGER},
-      </if>
-      <if test="score15 != null" >
-        SCORE15 = #{score15,jdbcType=INTEGER},
-      </if>
-      <if test="score16 != null" >
-        SCORE16 = #{score16,jdbcType=INTEGER},
-      </if>
-      <if test="score17 != null" >
-        SCORE17 = #{score17,jdbcType=INTEGER},
-      </if>
-      <if test="score18 != null" >
-        SCORE18 = #{score18,jdbcType=INTEGER},
-      </if>
-      <if test="score19 != null" >
-        SCORE19 = #{score19,jdbcType=INTEGER},
-      </if>
-      <if test="score20 != null" >
-        SCORE20 = #{score20,jdbcType=INTEGER},
-      </if>
-      <if test="tenantId != null" >
-        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where OPER_ID = #{operId,jdbcType=DECIMAL}
-      and SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP}
-      and USER_ID = #{userId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.ch.user.dao.mapper.bo.CtScoreLog" >
-    update ct_score_log
-    set TOTAL_SCORE = #{totalScore,jdbcType=INTEGER},
-      SCORE1 = #{score1,jdbcType=INTEGER},
-      SCORE2 = #{score2,jdbcType=INTEGER},
-      SCORE3 = #{score3,jdbcType=INTEGER},
-      SCORE4 = #{score4,jdbcType=INTEGER},
-      SCORE5 = #{score5,jdbcType=INTEGER},
-      SCORE6 = #{score6,jdbcType=INTEGER},
-      SCORE7 = #{score7,jdbcType=INTEGER},
-      SCORE8 = #{score8,jdbcType=INTEGER},
-      SCORE9 = #{score9,jdbcType=INTEGER},
-      SCORE10 = #{score10,jdbcType=INTEGER},
-      SCORE11 = #{score11,jdbcType=INTEGER},
-      SCORE12 = #{score12,jdbcType=INTEGER},
-      SCORE13 = #{score13,jdbcType=INTEGER},
-      SCORE14 = #{score14,jdbcType=INTEGER},
-      SCORE15 = #{score15,jdbcType=INTEGER},
-      SCORE16 = #{score16,jdbcType=INTEGER},
-      SCORE17 = #{score17,jdbcType=INTEGER},
-      SCORE18 = #{score18,jdbcType=INTEGER},
-      SCORE19 = #{score19,jdbcType=INTEGER},
-      SCORE20 = #{score20,jdbcType=INTEGER},
-      TENANT_ID = #{tenantId,jdbcType=VARCHAR}
-    where OPER_ID = #{operId,jdbcType=DECIMAL}
-      and SCORE_DATE = #{scoreDate,jdbcType=TIMESTAMP}
-      and USER_ID = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>
