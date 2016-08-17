@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ch.user.dao.mapper.interfaces.ShopDefaultLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.ShopDefaultLog" >
+    <id column="SERIAL_CODE" property="serialCode" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="DEFAULT_REASON" property="defaultReason" jdbcType="VARCHAR" />
+    <result column="DEDUCT_DATE" property="deductDate" jdbcType="DATE" />
+    <result column="DEDUCT_BALANCE" property="deductBalance" jdbcType="DECIMAL" />
+    <result column="OPER_ID" property="operId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SERIAL_CODE, USER_ID, DEFAULT_REASON, DEDUCT_DATE, DEDUCT_BALANCE, OPER_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_default_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_default_log
+    where SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop_default_log
+    where SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLogCriteria" >
+    delete from shop_default_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLog" >
+    insert into shop_default_log (SERIAL_CODE, USER_ID, DEFAULT_REASON, 
+      DEDUCT_DATE, DEDUCT_BALANCE, OPER_ID
+      )
+    values (#{serialCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{defaultReason,jdbcType=VARCHAR}, 
+      #{deductDate,jdbcType=DATE}, #{deductBalance,jdbcType=DECIMAL}, #{operId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLog" >
+    insert into shop_default_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialCode != null" >
+        SERIAL_CODE,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="defaultReason != null" >
+        DEFAULT_REASON,
+      </if>
+      <if test="deductDate != null" >
+        DEDUCT_DATE,
+      </if>
+      <if test="deductBalance != null" >
+        DEDUCT_BALANCE,
+      </if>
+      <if test="operId != null" >
+        OPER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialCode != null" >
+        #{serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultReason != null" >
+        #{defaultReason,jdbcType=VARCHAR},
+      </if>
+      <if test="deductDate != null" >
+        #{deductDate,jdbcType=DATE},
+      </if>
+      <if test="deductBalance != null" >
+        #{deductBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from shop_default_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_default_log
+    <set >
+      <if test="record.serialCode != null" >
+        SERIAL_CODE = #{record.serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultReason != null" >
+        DEFAULT_REASON = #{record.defaultReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deductDate != null" >
+        DEDUCT_DATE = #{record.deductDate,jdbcType=DATE},
+      </if>
+      <if test="record.deductBalance != null" >
+        DEDUCT_BALANCE = #{record.deductBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operId != null" >
+        OPER_ID = #{record.operId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_default_log
+    set SERIAL_CODE = #{record.serialCode,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      DEFAULT_REASON = #{record.defaultReason,jdbcType=VARCHAR},
+      DEDUCT_DATE = #{record.deductDate,jdbcType=DATE},
+      DEDUCT_BALANCE = #{record.deductBalance,jdbcType=DECIMAL},
+      OPER_ID = #{record.operId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLog" >
+    update shop_default_log
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultReason != null" >
+        DEFAULT_REASON = #{defaultReason,jdbcType=VARCHAR},
+      </if>
+      <if test="deductDate != null" >
+        DEDUCT_DATE = #{deductDate,jdbcType=DATE},
+      </if>
+      <if test="deductBalance != null" >
+        DEDUCT_BALANCE = #{deductBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="operId != null" >
+        OPER_ID = #{operId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLog" >
+    update shop_default_log
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      DEFAULT_REASON = #{defaultReason,jdbcType=VARCHAR},
+      DEDUCT_DATE = #{deductDate,jdbcType=DATE},
+      DEDUCT_BALANCE = #{deductBalance,jdbcType=DECIMAL},
+      OPER_ID = #{operId,jdbcType=DECIMAL}
+    where SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </update>
+</mapper>
