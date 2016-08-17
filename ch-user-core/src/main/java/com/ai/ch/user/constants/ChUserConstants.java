@@ -25,5 +25,19 @@ public final class ChUserConstants {
 		 */
 		public static final String Fail = "999999";
 	}
+	
+	public final static class ShopRank {
+		private ShopRank(){}
+		/**
+		 * 成功，成功时取返回报文体
+		 */
+		public static final String SUCCESS = "000000";
+		
+		
+		/**
+		 * 失败
+		 */
+		public static final String Fail = "999999";
+	}
 
 }

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ch.user.dao.mapper.interfaces.ShopRankRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.ShopRankRule" >
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="period_type" property="periodType" jdbcType="CHAR" />
+    <result column="min_fee" property="minFee" jdbcType="DECIMAL" />
+    <result column="max_fee" property="maxFee" jdbcType="DECIMAL" />
+    <result column="rank_name" property="rankName" jdbcType="VARCHAR" />
+    <result column="rank_logo" property="rankLogo" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="oper_Id" property="operId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rank, period_type, min_fee, max_fee, rank_name, rank_logo, TENANT_ID, update_time, 
+    oper_Id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_rank_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria" >
+    delete from shop_rank_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRule" >
+    insert into shop_rank_rule (rank, period_type, min_fee, 
+      max_fee, rank_name, rank_logo, 
+      TENANT_ID, update_time, oper_Id
+      )
+    values (#{rank,jdbcType=INTEGER}, #{periodType,jdbcType=CHAR}, #{minFee,jdbcType=DECIMAL}, 
+      #{maxFee,jdbcType=DECIMAL}, #{rankName,jdbcType=VARCHAR}, #{rankLogo,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRule" >
+    insert into shop_rank_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="periodType != null" >
+        period_type,
+      </if>
+      <if test="minFee != null" >
+        min_fee,
+      </if>
+      <if test="maxFee != null" >
+        max_fee,
+      </if>
+      <if test="rankName != null" >
+        rank_name,
+      </if>
+      <if test="rankLogo != null" >
+        rank_logo,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="operId != null" >
+        oper_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="periodType != null" >
+        #{periodType,jdbcType=CHAR},
+      </if>
+      <if test="minFee != null" >
+        #{minFee,jdbcType=DECIMAL},
+      </if>
+      <if test="maxFee != null" >
+        #{maxFee,jdbcType=DECIMAL},
+      </if>
+      <if test="rankName != null" >
+        #{rankName,jdbcType=VARCHAR},
+      </if>
+      <if test="rankLogo != null" >
+        #{rankLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria" resultType="java.lang.Integer" >
+    select count(*) from shop_rank_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_rank_rule
+    <set >
+      <if test="record.rank != null" >
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.periodType != null" >
+        period_type = #{record.periodType,jdbcType=CHAR},
+      </if>
+      <if test="record.minFee != null" >
+        min_fee = #{record.minFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxFee != null" >
+        max_fee = #{record.maxFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rankName != null" >
+        rank_name = #{record.rankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rankLogo != null" >
+        rank_logo = #{record.rankLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operId != null" >
+        oper_Id = #{record.operId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_rank_rule
+    set rank = #{record.rank,jdbcType=INTEGER},
+      period_type = #{record.periodType,jdbcType=CHAR},
+      min_fee = #{record.minFee,jdbcType=DECIMAL},
+      max_fee = #{record.maxFee,jdbcType=DECIMAL},
+      rank_name = #{record.rankName,jdbcType=VARCHAR},
+      rank_logo = #{record.rankLogo,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      oper_Id = #{record.operId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

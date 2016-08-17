@@ -20,7 +20,7 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 
 /**
- * 
+ * 供货商评价
  * Date: 2016年8月11日 <br>
  * Copyright (c) 2016 asiainfo.com <br>
  * 

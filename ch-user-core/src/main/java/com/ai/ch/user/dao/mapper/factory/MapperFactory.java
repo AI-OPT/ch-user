@@ -10,6 +10,7 @@ import com.ai.ch.user.dao.mapper.attach.CtScoreLogAttachMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtCurrentScoreMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreKpiMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreLogMapper;
+import com.ai.ch.user.dao.mapper.interfaces.ShopRankRuleMapper;
 
 @Component
 public class MapperFactory {
@@ -42,5 +43,8 @@ public class MapperFactory {
 
 	public static CtScoreLogAttachMapper getCtScoreLogAttachMapper() {
 		return sqlSessionTemplate.getMapper(CtScoreLogAttachMapper.class);
+	}
+	public static ShopRankRuleMapper getShopRankRuleMapper() {
+		return sqlSessionTemplate.getMapper(ShopRankRuleMapper.class);
 	}
 }
