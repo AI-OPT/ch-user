@@ -23,24 +23,12 @@ public class RankSVImpl {
 	public void testInsertRankRule(){
 		InsertRankRuleRequest re = new InsertRankRuleRequest();
 		re.setTenantId("ch");
-		re.setRankName("青铜");
-		re.setRank(5);
-		re.setPeriodType("一年");
-		re.setOperId(123456L);
-		re.setMaxFee(123445L);
-		re.setMinFee(123445L);
 		rankSV.insertRankRule(re);
 	}
 	@Test
 	public void testUpdateRankRule(){
 		UpdateRankRuleRequest re = new UpdateRankRuleRequest();
 		re.setTenantId("ch");
-		re.setRankName("白银");
-		re.setRank(5);
-		re.setPeriodType("一年");
-		re.setOperId(123456L);
-		re.setMaxFee(123445L);
-		re.setMinFee(123445L);
 		rankSV.updateRankRule(re);
 	}
 	@Test

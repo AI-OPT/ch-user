@@ -1,4 +1,4 @@
-package com.ai.ch.user.api.grade.impl;
+package com.ai.ch.user.api.rank.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
