@@ -1,5 +1,6 @@
 package com.ai.ch.user.service.business.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ai.ch.user.api.rank.params.InsertRankRuleRequest;
 import com.ai.ch.user.api.rank.params.QueryRankRuleRequest;
 import com.ai.ch.user.api.rank.params.QueryRankRuleResponse;
+import com.ai.ch.user.api.rank.params.ShopRankRuleVo;
 import com.ai.ch.user.api.rank.params.UpdateRankRuleRequest;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
@@ -29,20 +31,26 @@ public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiBusiSV {
 	@Override
 	public int insertRankRule(InsertRankRuleRequest request) throws BusinessException, SystemException {
 		ShopRankRule shopRankRule = new ShopRankRule();
-		BeanUtils.copyProperties(request, shopRankRule);
-		shopRankRule.setUpdateTime(DateUtil.getSysDate());
-		return shopRankRuleAtomSV.insert(shopRankRule); 
+		for (ShopRankRuleVo shopRankRuleVo : request.getList()) {
+			BeanUtils.copyProperties(shopRankRuleVo, shopRankRule);
+			shopRankRule.setUpdateTime(DateUtil.getSysDate());
+			shopRankRuleAtomSV.insert(shopRankRule);
+		}
+		return 0; 
 	}
 
 	@Override
 	public int updateRankRule(UpdateRankRuleRequest request) throws BusinessException, SystemException {
+		for(ShopRankRuleVo shopRankRuleVo:request.getList()){
 		ShopRankRuleCriteria example = new ShopRankRuleCriteria();
 		ShopRankRuleCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andTenantIdEqualTo(shopRankRuleVo.getTenantId());
 		ShopRankRule shopRankRule = new ShopRankRule();
-		BeanUtils.copyProperties(request, shopRankRule);
+		BeanUtils.copyProperties(shopRankRuleVo, shopRankRule);
 		shopRankRule.setUpdateTime(DateUtil.getSysDate());
-		return shopRankRuleAtomSV.updateByExample(shopRankRule, example);
+		shopRankRuleAtomSV.updateByExample(shopRankRule, example);
+		}
+		return 0;
 	}
 
 	@Override
@@ -52,8 +60,15 @@ public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiBusiSV {
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		QueryRankRuleResponse response = new QueryRankRuleResponse();
 		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(example);
-		if(!shopRankRuleList.isEmpty())
-		BeanUtils.copyProperties(shopRankRuleList.get(0), response);
+		List<ShopRankRuleVo> responseList = new ArrayList<ShopRankRuleVo>();
+		if(!shopRankRuleList.isEmpty()){
+			for (ShopRankRule shopRankRule : shopRankRuleList) {
+				ShopRankRuleVo shopRankRuleVo = new ShopRankRuleVo();
+				BeanUtils.copyProperties(shopRankRule, shopRankRuleVo);
+				responseList.add(shopRankRuleVo);
+				}
+			}
+		response.setList(responseList);
 		return response;
 	}
 
