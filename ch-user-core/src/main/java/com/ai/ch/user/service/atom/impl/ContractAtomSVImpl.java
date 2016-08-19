@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.dao.mapper.bo.CtContractInfo;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria;
+import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria.Criteria;
 import com.ai.ch.user.dao.mapper.interfaces.CtContractInfoMapper;
 import com.ai.ch.user.service.atom.interfaces.IContractAtomSV;
 import com.ai.opt.base.exception.BusinessException;
@@ -21,6 +22,11 @@ public class ContractAtomSVImpl implements IContractAtomSV{
 	@Override
 	public int insertContractInfo(CtContractInfo ctContractInfo)
 			throws BusinessException, SystemException {
+		CtContractInfoCriteria example = new CtContractInfoCriteria();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(ctContractInfo.getUserId());
+		criteria.andContractTypeEqualTo(ctContractInfo.getContractType());
+		contractInfoMapper.deleteByExample(example);
 		return contractInfoMapper.insert(ctContractInfo);
 	}
 
