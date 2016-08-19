@@ -27,4 +27,9 @@ public class ShopRankRuleAtomSVImpl implements IShopRankRuleAtomSV {
 		return MapperFactory.getShopRankRuleMapper().updateByExample(record, example);
 	}
 
+	@Override
+	public int deleteByExample(ShopRankRuleCriteria example) {
+		return MapperFactory.getShopRankRuleMapper().deleteByExample(example);
+	}
+
 }

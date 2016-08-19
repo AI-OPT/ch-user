@@ -14,4 +14,6 @@ public interface IShopRankRuleAtomSV {
 	List<ShopRankRule> selectByExample(ShopRankRuleCriteria example);
 	
 	int updateByExample(@Param("record") ShopRankRule record, @Param("example") ShopRankRuleCriteria example);
+	
+	int deleteByExample(ShopRankRuleCriteria example);
 }
