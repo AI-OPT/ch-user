@@ -27,7 +27,7 @@
     
      <!--  配置数据源 -->
 	<bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
-		 <constructor-arg name="dataSourceName" value="slp-user-db"/>
+		 <constructor-arg name="dataSourceName" value="ch-user-db"/>
 	</bean>
 
 	 <bean id="seqDataSourceLoader"
