@@ -30,8 +30,8 @@ public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiBusiSV {
 	
 	@Override
 	public int insertRankRule(InsertRankRuleRequest request) throws BusinessException, SystemException {
-		ShopRankRule shopRankRule = new ShopRankRule();
 		for (ShopRankRuleVo shopRankRuleVo : request.getList()) {
+			ShopRankRule shopRankRule = new ShopRankRule();
 			BeanUtils.copyProperties(shopRankRuleVo, shopRankRule);
 			shopRankRule.setUpdateTime(DateUtil.getSysDate());
 			shopRankRuleAtomSV.insert(shopRankRule);
@@ -41,14 +41,18 @@ public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiBusiSV {
 
 	@Override
 	public int updateRankRule(UpdateRankRuleRequest request) throws BusinessException, SystemException {
-		for(ShopRankRuleVo shopRankRuleVo:request.getList()){
-		ShopRankRuleCriteria example = new ShopRankRuleCriteria();
-		ShopRankRuleCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(shopRankRuleVo.getTenantId());
-		ShopRankRule shopRankRule = new ShopRankRule();
-		BeanUtils.copyProperties(shopRankRuleVo, shopRankRule);
-		shopRankRule.setUpdateTime(DateUtil.getSysDate());
-		shopRankRuleAtomSV.updateByExample(shopRankRule, example);
+		if(!request.getList().isEmpty()){
+			ShopRankRuleCriteria example=new ShopRankRuleCriteria();
+			ShopRankRuleCriteria.Criteria criteria = example.createCriteria();
+			criteria.andTenantIdEqualTo(request.getTenantId());
+			shopRankRuleAtomSV.deleteByExample(example);
+			
+			for (ShopRankRuleVo shopRankRuleVo : request.getList()) {
+				ShopRankRule shopRankRule = new ShopRankRule();
+				BeanUtils.copyProperties(shopRankRuleVo, shopRankRule);
+				shopRankRule.setUpdateTime(DateUtil.getSysDate());
+				shopRankRuleAtomSV.insert(shopRankRule);
+			}
 		}
 		return 0;
 	}
