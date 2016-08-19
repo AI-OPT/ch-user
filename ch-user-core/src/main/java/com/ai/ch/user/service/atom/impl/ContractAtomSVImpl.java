@@ -29,7 +29,7 @@ public class ContractAtomSVImpl implements IContractAtomSV{
 		contractInfoMapper.deleteByExample(example);
 		return contractInfoMapper.insert(ctContractInfo);
 	}
-
+ 
 	@Override
 	public List<CtContractInfo> queryContractInfo(CtContractInfoCriteria example)
 			throws BusinessException, SystemException {
