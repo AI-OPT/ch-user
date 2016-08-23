@@ -53,6 +53,7 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 		for (CmCustFileExt cmCustFileExt : list) {
 			CmCustFileExtVo cmCustFileExtVo = new CmCustFileExtVo();
 			BeanUtils.copyProperties(cmCustFileExt, cmCustFileExtVo);
+			responseList.add(cmCustFileExtVo);
 		}
 		QueryCustFileExtResponse response = new QueryCustFileExtResponse();
 		response.setList(responseList);
