@@ -11,6 +11,8 @@ import com.ai.ch.user.dao.mapper.interfaces.CmCustFileExtMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtCurrentScoreMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreKpiMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreLogMapper;
+import com.ai.ch.user.dao.mapper.interfaces.ShopDefaultLogMapper;
+import com.ai.ch.user.dao.mapper.interfaces.ShopInfoMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopRankRuleMapper;
 
 @Component
@@ -45,10 +47,20 @@ public class MapperFactory {
 	public static CtScoreLogAttachMapper getCtScoreLogAttachMapper() {
 		return sqlSessionTemplate.getMapper(CtScoreLogAttachMapper.class);
 	}
+
 	public static ShopRankRuleMapper getShopRankRuleMapper() {
 		return sqlSessionTemplate.getMapper(ShopRankRuleMapper.class);
 	}
+
 	public static CmCustFileExtMapper getCmCustFileExtMapper() {
 		return sqlSessionTemplate.getMapper(CmCustFileExtMapper.class);
+	}
+
+	public static ShopDefaultLogMapper getShopDefaultLogMapper() {
+		return sqlSessionTemplate.getMapper(ShopDefaultLogMapper.class);
+	}
+
+	public static ShopInfoMapper getShopInfoMapperMapper() {
+		return sqlSessionTemplate.getMapper(ShopInfoMapper.class);
 	}
 }

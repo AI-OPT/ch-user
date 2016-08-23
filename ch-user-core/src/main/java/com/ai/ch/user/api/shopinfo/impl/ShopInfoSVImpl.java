@@ -1,41 +1,36 @@
-package com.ai.ch.user.api.rank.impl;
+package com.ai.ch.user.api.shopinfo.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ai.ch.user.api.rank.interfaces.IRankSV;
-import com.ai.ch.user.api.rank.params.InsertRankRuleRequest;
-import com.ai.ch.user.api.rank.params.QueryRankRuleRequest;
-import com.ai.ch.user.api.rank.params.QueryRankRuleResponse;
-import com.ai.ch.user.api.rank.params.UpdateRankRuleRequest;
+import com.ai.ch.user.api.shopinfo.interfaces.IShopInfoSV;
+import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.constants.ChUserConstants;
-import com.ai.ch.user.service.business.interfaces.IShopRankRuleBusiSV;
+import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.alibaba.dubbo.config.annotation.Service;
 
-@Service
 @Component
-public class RankSVImpl implements IRankSV {
+@Service
+public class ShopInfoSVImpl implements IShopInfoSV {
 
-	private static final Log LOG = LogFactory.getLog(RankSVImpl.class);
-	
 	@Autowired
-	private IShopRankRuleBusiSV shopRankRuleBusiSV;
-
+	private IShopInfoBusiSV shopInfoBusiSV;
+	
 	@Override
-	public BaseResponse insertRankRule(InsertRankRuleRequest request) throws BusinessException, SystemException {
-		BaseResponse response = new BaseResponse();
+	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request) throws BusinessException, SystemException {
+		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		shopRankRuleBusiSV.insertRankRule(request);
+			response = shopInfoBusiSV.queryShopInfo(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
-			LOG.error("操作失败");
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
 		}
 		response.setResponseHeader(responseHeader);
@@ -43,14 +38,13 @@ public class RankSVImpl implements IRankSV {
 	}
 
 	@Override
-	public BaseResponse updateRankRule(UpdateRankRuleRequest request) throws BusinessException, SystemException {
+	public BaseResponse insertShopInfo(InsertShopInfoRequst request) throws BusinessException, SystemException {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		shopRankRuleBusiSV.updateRankRule(request);
+			shopInfoBusiSV.insertShopInfo(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
-			LOG.error("操作失败");
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
 		}
 		response.setResponseHeader(responseHeader);
@@ -58,14 +52,13 @@ public class RankSVImpl implements IRankSV {
 	}
 
 	@Override
-	public QueryRankRuleResponse queryRankRule(QueryRankRuleRequest request) throws BusinessException, SystemException {
-		QueryRankRuleResponse response=null;
+	public BaseResponse updateShopInfo(UpdateShopInfoRequest request) throws BusinessException, SystemException {
+		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		response = shopRankRuleBusiSV.queryRankRule(request);
+			shopInfoBusiSV.updateShopInfo(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
-			LOG.error("操作失败");
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
 		}
 		response.setResponseHeader(responseHeader);

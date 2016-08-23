@@ -7,7 +7,7 @@ import com.ai.ch.user.api.rank.params.UpdateRankRuleRequest;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 
-public interface IShopRankRuleBusiBusiSV {
+public interface IShopRankRuleBusiSV {
 
 	public int insertRankRule(InsertRankRuleRequest request) throws BusinessException, SystemException;
 	

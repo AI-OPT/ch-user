@@ -1,4 +1,4 @@
-package com.ai.ch.user.api.custfile;
+package com.ai.ch.user.api.custfile.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
