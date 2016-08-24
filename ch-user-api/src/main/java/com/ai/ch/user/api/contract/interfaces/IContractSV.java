@@ -11,9 +11,8 @@ import com.ai.ch.user.api.contract.param.ContactInfoResponse;
 import com.ai.ch.user.api.contract.param.InsertCustFileExtRequest;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
-import com.ai.opt.base.vo.BaseInfo;
 import com.ai.opt.base.vo.BaseResponse;
-
+ 
 
 /**
  * Date: 2016年8月16日 <br>
