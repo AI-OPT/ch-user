@@ -74,6 +74,7 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 				criteria.andTenantIdEqualTo(request.getTenantId());
 				criteria.andUserIdIsNull();
 				criteria.andAttrIdEqualTo(cmCustFileExtVo.getAttrId());
+				
 				custFileAtomSV.deleteByExample(example);
 				
 				CmCustFileExt cmCustFileExt = new CmCustFileExt();
@@ -85,4 +86,31 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 		return 0;
 	}
 
+	@Override
+	public int updateCustFileExtBycondition(UpdateCustFileExtRequest request) throws SystemException, BusinessException {
+		if(!request.getList().isEmpty()){
+			for(CmCustFileExtVo cmCustFileExtVo : request.getList()){
+				
+				CmCustFileExtCriteria example = new CmCustFileExtCriteria();
+				CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
+				criteria.andTenantIdEqualTo(request.getTenantId());
+				
+				if(request.getUserId()!=null&&!"".equals(request.getUserId())){
+					criteria.andUserIdEqualTo(request.getUserId());
+				}
+				if(request.getInfoItem()!=null&&!"".equals(request.getInfoItem())){
+					criteria.andInfoItemEqualTo(request.getInfoItem());
+				}
+				
+				custFileAtomSV.deleteByExample(example);
+				
+				CmCustFileExt cmCustFileExt = new CmCustFileExt();
+				BeanUtils.copyProperties(cmCustFileExtVo, cmCustFileExt);
+				cmCustFileExt.setInfoExtId(SeqUtil.getNewId(UserSequenceCode.CM_CUST_FILE_EXT$INFO_EXT$ID,18));
+				custFileAtomSV.insert(cmCustFileExt);
+			}
+		}
+		return 0;
+	}
+	
 }
