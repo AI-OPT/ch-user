@@ -63,12 +63,15 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 	@Override
 	public int updateCustFileExt(UpdateCustFileExtRequest request) throws SystemException, BusinessException {
 		if(!request.getList().isEmpty()){
-			CmCustFileExtCriteria example = new CmCustFileExtCriteria();
-			CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
-			criteria.andTenantIdEqualTo(request.getTenantId());
-			criteria.andUserIdIsNull();
-			custFileAtomSV.deleteByExample(example);
 			for(CmCustFileExtVo cmCustFileExtVo : request.getList()){
+				
+				CmCustFileExtCriteria example = new CmCustFileExtCriteria();
+				CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
+				criteria.andTenantIdEqualTo(request.getTenantId());
+				criteria.andUserIdIsNull();
+				criteria.andAttrIdEqualTo(cmCustFileExtVo.getAttrId());
+				custFileAtomSV.deleteByExample(example);
+				
 				CmCustFileExt cmCustFileExt = new CmCustFileExt();
 				BeanUtils.copyProperties(cmCustFileExtVo, cmCustFileExt);
 				cmCustFileExt.setInfoExtId(SeqUtil.getNewId(UserSequenceCode.CM_CUST_FILE_EXT$INFO_EXT$ID,18));
