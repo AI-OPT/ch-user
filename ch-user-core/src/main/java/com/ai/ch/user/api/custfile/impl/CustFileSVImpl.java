@@ -1,5 +1,8 @@
 package com.ai.ch.user.api.custfile.impl;
 
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -60,6 +63,24 @@ public class CustFileSVImpl implements ICustFileSV {
 		BaseResponse response = new BaseResponse();
 		try {
 			CustFileBusiSV.updateCustFileExt(request);
+			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
+		} catch (Exception e) {
+			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	@POST
+	@Path("/updateCustFileExtBycondition")
+	public BaseResponse updateCustFileExtBycondition(
+			UpdateCustFileExtRequest request) throws SystemException,
+			BusinessException {
+		ResponseHeader responseHeader = null;
+		BaseResponse response = new BaseResponse();
+		try {
+			CustFileBusiSV.updateCustFileExtBycondition(request);
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
