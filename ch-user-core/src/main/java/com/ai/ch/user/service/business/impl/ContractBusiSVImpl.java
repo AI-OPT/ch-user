@@ -6,25 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.ch.user.api.contract.param.CmCustFileExtVo;
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
 import com.ai.ch.user.api.contract.param.ContactInfoResponse;
+import com.ai.ch.user.api.contract.param.InsertCustFileExtRequest;
+import com.ai.ch.user.dao.mapper.bo.CmCustFileExt;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfo;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria.Criteria;
 import com.ai.ch.user.service.atom.interfaces.IContractAtomSV;
+import com.ai.ch.user.service.atom.interfaces.ICustFileAtomSV;
 import com.ai.ch.user.service.business.interfaces.IContractBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 
 @Service
 @Transactional
 public class ContractBusiSVImpl implements IContractBusiSV{
+	
 	@Autowired
 	private IContractAtomSV contractAtomSV;
+	
+	@Autowired
+    private ICustFileAtomSV custFileAtomSV;
+    
 	@Override
 	public int insertContractInfo(ContactInfoRequest ctContractInfo)
 			throws BusinessException, SystemException {
@@ -56,6 +67,18 @@ public class ContractBusiSVImpl implements IContractBusiSV{
 			BeanUtils.copyProperties(response, list.get(0));
 		}
 		return response;
+	}
+
+	@Override
+	public void insertCustFileExt(InsertCustFileExtRequest request)
+			throws SystemException, BusinessException {
+		 for(CmCustFileExtVo cmCustFileExtVo:request.getList()){
+	            CmCustFileExt cmCustFileExt = new CmCustFileExt();
+	            BeanUtils.copyProperties(cmCustFileExt,cmCustFileExtVo);
+	            cmCustFileExt.setInfoExtId(SeqUtil.getNewId("CM_CUST_FILE_EXT$INFO_EXT$ID", 18));
+	            cmCustFileExt.setCreateTime(DateUtil.getSysDate());
+	            custFileAtomSV.insert(cmCustFileExt);
+	        }
 	}
 
 }
