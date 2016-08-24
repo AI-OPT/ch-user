@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import com.ai.ch.user.api.contract.interfaces.IContractSV;
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
 import com.ai.ch.user.api.contract.param.ContactInfoResponse;
-import com.ai.ch.user.api.contract.param.InsertCustFileExtRequest;
 import com.ai.ch.user.constants.ExceptCodeConstants;
 import com.ai.ch.user.service.business.interfaces.IContractBusiSV;
 import com.ai.opt.base.exception.BusinessException;
@@ -59,21 +58,4 @@ public class contractSVImpl implements IContractSV{
 		return response;
 	}
 
-	@Override
-	@POST
-	@Path("/insertCustFileExt")
-	public BaseResponse insertCustFileExt(InsertCustFileExtRequest request)
-			throws SystemException, BusinessException {
-		BaseResponse baseResponse = new BaseResponse();
-        ResponseHeader responseHeader = null;
-
-        try {
-        	contractBusiSV.insertCustFileExt(request);
-            responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
-        }
-        baseResponse.setResponseHeader(responseHeader);
-        return baseResponse;
-	}
 }
