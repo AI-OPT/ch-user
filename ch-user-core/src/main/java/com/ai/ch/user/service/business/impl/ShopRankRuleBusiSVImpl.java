@@ -15,7 +15,7 @@ import com.ai.ch.user.api.rank.params.UpdateRankRuleRequest;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
 import com.ai.ch.user.service.atom.interfaces.IShopRankRuleAtomSV;
-import com.ai.ch.user.service.business.interfaces.IShopRankRuleBusiBusiSV;
+import com.ai.ch.user.service.business.interfaces.IShopRankRuleBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.DateUtil;
@@ -23,7 +23,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 
 @Service
 @Component
-public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiBusiSV {
+public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiSV {
 
 	@Autowired
 	private IShopRankRuleAtomSV shopRankRuleAtomSV;
