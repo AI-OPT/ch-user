@@ -66,6 +66,7 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 			CmCustFileExtCriteria example = new CmCustFileExtCriteria();
 			CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
 			criteria.andTenantIdEqualTo(request.getTenantId());
+			criteria.andUserIdIsNull();
 			custFileAtomSV.deleteByExample(example);
 			for(CmCustFileExtVo cmCustFileExtVo : request.getList()){
 				CmCustFileExt cmCustFileExt = new CmCustFileExt();
