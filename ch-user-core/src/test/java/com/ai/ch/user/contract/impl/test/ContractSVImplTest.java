@@ -11,10 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.ch.user.api.contract.interfaces.IContractSV;
-import com.ai.ch.user.api.contract.param.CmCustFileExtVo;
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
 import com.ai.ch.user.api.contract.param.ContactInfoResponse;
-import com.ai.ch.user.api.contract.param.InsertCustFileExtRequest;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,18 +43,4 @@ public class ContractSVImplTest {
 		System.out.println(JSON.toJSONString(response));
 	}
 	
-	@Test
-	public void insertCmCustFileExt(){
-		InsertCustFileExtRequest extRequest = new InsertCustFileExtRequest();
-		CmCustFileExtVo extVo = new CmCustFileExtVo();
-		extVo.setAttrId("chTest");
-		extVo.setTenantId("ch");
-		extVo.setUserId("1");
-		extVo.setInfoExtId("000000000000000835");
-		extVo.setAttrValue("57bc380dc9e77c0006309b94");
-		List<CmCustFileExtVo> list = new ArrayList<CmCustFileExtVo>();
-		list.add(extVo);
-		extRequest.setList(list);
-		contractSV.insertCustFileExt(extRequest);
-	}
 }
