@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
 import com.ai.ch.user.api.contract.param.ContactInfoResponse;
-import com.ai.ch.user.api.contract.param.InsertCustFileExtRequest;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
@@ -53,19 +52,4 @@ public interface IContractSV {
 	@POST
 	@Path("/queryContractInfo")
 	public ContactInfoResponse queryContractInfo(ContactInfoRequest  contactRequest)throws BusinessException, SystemException;
-	
-	/**
-	 * 新增上传附件信息
-	 * 
-	 * @param request
-	 * @return
-	 * @throws BusinessException
-	 * @throws SystemException
-	 * @author zhangyuehong
-	 * @ApiCode 
-	 * @RestRelativeURL contractservice/insertCustFileExt
-	 */
-	@POST
-    @Path("/insertCustFileExt")
-    public BaseResponse insertCustFileExt(InsertCustFileExtRequest request)throws SystemException, BusinessException;
 }
