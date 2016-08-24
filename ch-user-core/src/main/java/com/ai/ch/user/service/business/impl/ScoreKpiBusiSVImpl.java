@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.score.param.CtScoreKpiVo;
 import com.ai.ch.user.api.score.param.QueryScoreKpiRequest;
@@ -16,10 +17,9 @@ import com.ai.ch.user.service.atom.interfaces.IScoreKpiAtomSV;
 import com.ai.ch.user.service.business.interfaces.IScoreKpiBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
-import com.alibaba.dubbo.config.annotation.Service;
 
-@Service
 @Component
+@Transactional
 public class ScoreKpiBusiSVImpl implements IScoreKpiBusiSV{
 
 	@Autowired

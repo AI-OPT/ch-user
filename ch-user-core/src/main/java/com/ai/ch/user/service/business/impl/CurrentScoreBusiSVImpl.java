@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
@@ -19,7 +19,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.DateUtil;
 
-@Service
+@Component
 @Transactional
 public class CurrentScoreBusiSVImpl implements ICurrentScoreBusiSV {
 

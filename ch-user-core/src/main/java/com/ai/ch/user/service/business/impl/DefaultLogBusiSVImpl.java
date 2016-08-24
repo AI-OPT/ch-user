@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.defaultlog.params.DefaultLogVo;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
@@ -18,10 +19,9 @@ import com.ai.ch.user.service.business.interfaces.IDefaultLogBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
-import com.alibaba.dubbo.config.annotation.Service;
 
 @Component
-@Service
+@Transactional
 public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 
 	@Autowired

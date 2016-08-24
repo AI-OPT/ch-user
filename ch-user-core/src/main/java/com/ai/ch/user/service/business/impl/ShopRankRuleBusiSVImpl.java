@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.rank.params.InsertRankRuleRequest;
 import com.ai.ch.user.api.rank.params.QueryRankRuleRequest;
@@ -19,10 +20,9 @@ import com.ai.ch.user.service.business.interfaces.IShopRankRuleBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.DateUtil;
-import com.alibaba.dubbo.config.annotation.Service;
 
-@Service
 @Component
+@Transactional
 public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiSV {
 
 	@Autowired

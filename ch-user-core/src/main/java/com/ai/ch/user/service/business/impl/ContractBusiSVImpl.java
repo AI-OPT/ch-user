@@ -3,7 +3,7 @@ package com.ai.ch.user.service.business.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.contract.param.CmCustFileExtVo;
@@ -26,7 +26,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 
-@Service
+@Component
 @Transactional
 public class ContractBusiSVImpl implements IContractBusiSV{
 	
