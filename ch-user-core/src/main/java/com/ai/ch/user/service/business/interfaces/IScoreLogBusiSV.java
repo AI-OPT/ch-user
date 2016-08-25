@@ -1,5 +1,6 @@
 package com.ai.ch.user.service.business.interfaces;
 
+import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogResponse;
@@ -11,4 +12,6 @@ public interface IScoreLogBusiSV {
 	public int insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException;
 
 	public QueryScoreLogResponse queryScoreLog(QueryScoreLogRequest request) throws BusinessException, SystemException;
+	
+	public float countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException;
 }

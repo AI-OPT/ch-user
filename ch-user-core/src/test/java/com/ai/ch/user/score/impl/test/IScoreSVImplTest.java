@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.ch.user.api.score.interfaces.IScoreSV;
+import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
@@ -43,10 +44,10 @@ public class IScoreSVImplTest{
 	@Test
 	public void queryScoreLogTest(){
 		QueryScoreLogRequest request = new QueryScoreLogRequest();
-		request.setUserId("1234567");
+		request.setUserId("111333");
 		request.setTenantId("ch");
 		request.setPageSize(10);
-		request.setPageNo(10);
+		request.setPageNo(1);
 		System.out.println(JSON.toJSONString(scoreSV.queryScoreLog(request)));
 	}
 	
@@ -74,6 +75,13 @@ public class IScoreSVImplTest{
 		request.setTenantId("ch");
 		request.setUserId("1234567");
 		System.out.println(JSON.toJSONString(scoreSV.queryCurrentScore(request)));
+	}
+	@Test
+	public void queryAvgTest(){
+		CountScoreAvgRequest request = new CountScoreAvgRequest();
+		request.setTenantId("ch");
+		request.setUserId("111333");
+		System.out.println(JSON.toJSONString(scoreSV.countScoreAvg(request)));
 	}
 	
 }

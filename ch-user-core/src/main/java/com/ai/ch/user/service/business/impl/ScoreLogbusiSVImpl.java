@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.CtScoreLogVo;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
@@ -64,6 +65,20 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 		pageInfo.setResult(responseList);
 		response.setPageInfo(pageInfo);
 		return response;
+	}
+
+	@Override
+	public float countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException {
+		
+		List<CtScoreLog> list = scoreLogAtomSV.selectScoreLogMax(request.getTenantId(), request.getUserId());
+		float avgScore = 0;
+		if(!list.isEmpty()){
+			for (CtScoreLog ctScoreLog : list) {
+				avgScore+=ctScoreLog.getTotalScore();
+			}
+			avgScore=avgScore/list.size();
+		}
+		return avgScore;
 	}
 
 }

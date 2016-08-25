@@ -37,4 +37,9 @@ public class ScoreLogAtomSVImpl implements IScoreLogAtomSV {
 		return MapperFactory.getCtScoreLogAttachMapper().queryCountScoreLog(tenantId, userId);
 	}
 
+	@Override
+	public List<CtScoreLog> selectScoreLogMax(String tenantId, String userId) {
+		return MapperFactory.getCtScoreLogAttachMapper().selectScoreLogMax(tenantId, userId);
+	}
+
 }

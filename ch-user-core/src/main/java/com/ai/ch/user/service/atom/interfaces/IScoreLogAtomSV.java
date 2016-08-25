@@ -15,4 +15,6 @@ public interface IScoreLogAtomSV {
 	List<CtScoreLog> queryScoreLog(String tenantId, String userId, int startPage, int endPage);
 
 	int queryCountScoreLog(String tenantId, String userId);
+	
+	List<CtScoreLog> selectScoreLogMax(String tenantId,String userId);
 }

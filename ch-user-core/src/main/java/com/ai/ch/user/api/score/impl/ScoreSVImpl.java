@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.api.score.interfaces.IScoreSV;
+import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
@@ -131,6 +132,11 @@ public class ScoreSVImpl implements IScoreSV {
 		}
 		response.setResponseHeader(responseHeader);
 		return scoreLogBusiSV.queryScoreLog(request);
+	}
+
+	@Override
+	public float countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException {
+		return scoreLogBusiSV.countScoreAvg(request);
 	}
 
 }

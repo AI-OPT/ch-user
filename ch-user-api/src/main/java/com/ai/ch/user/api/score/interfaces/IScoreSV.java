@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
@@ -121,4 +122,18 @@ public interface IScoreSV {
 	@POST
 	@Path("/queryScoreLog")
 	public QueryScoreLogResponse queryScoreLog(QueryScoreLogRequest request) throws BusinessException, SystemException;
+	
+	/**
+	 * 计算平均总分
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-00000
+	 * @RestRelativeURL scoreservice/countScoreAvg
+	 */
+	@POST
+	@Path("/countScoreAvg")
+	public float countScoreAvg(CountScoreAvgRequest request)throws BusinessException,SystemException;
 }
