@@ -1,5 +1,9 @@
 package com.ai.ch.user.api.defaultlog.params;
 
+
+import java.sql.Timestamp;
+import java.util.Date;
+
 import com.ai.opt.base.vo.BaseInfo;
 
 /**
@@ -32,6 +36,14 @@ public class InsertDefaultLogRequest extends BaseInfo {
 	 * 操作员
 	 */
 	private Long operId;
+	/**
+	 * 扣款时间
+	 */
+	private Timestamp deductDate;
+	/**
+	 * 操作流水号
+	 */
+	private String serialCode;
 
 	public String getUserId() {
 		return userId;
@@ -63,6 +75,22 @@ public class InsertDefaultLogRequest extends BaseInfo {
 
 	public void setOperId(Long operId) {
 		this.operId = operId;
+	}
+
+	public Timestamp getDeductDate() {
+		return deductDate;
+	}
+
+	public void setDeductDate(Timestamp deductDate) {
+		this.deductDate = deductDate;
+	}
+
+	public String getSerialCode() {
+		return serialCode;
+	}
+
+	public void setSerialCode(String serialCode) {
+		this.serialCode = serialCode;
 	}
 
 }
