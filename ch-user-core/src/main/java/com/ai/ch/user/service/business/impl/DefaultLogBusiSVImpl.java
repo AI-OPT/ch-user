@@ -12,6 +12,7 @@ import com.ai.ch.user.api.defaultlog.params.DefaultLogVo;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
+import com.ai.ch.user.constants.SequenceCodeConstants.UserSequenceCode;
 import com.ai.ch.user.dao.mapper.bo.ShopDefaultLog;
 import com.ai.ch.user.dao.mapper.bo.ShopDefaultLogCriteria;
 import com.ai.ch.user.service.atom.interfaces.IDefaultLogAtomSV;
@@ -19,6 +20,7 @@ import com.ai.ch.user.service.business.interfaces.IDefaultLogBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 
 @Component
 @Transactional
@@ -31,6 +33,7 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	public int insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException {
 		ShopDefaultLog shopDefaultLog = new ShopDefaultLog();
 		BeanUtils.copyProperties(request, shopDefaultLog);
+		shopDefaultLog.setSerialCode(SeqUtil.getNewId(UserSequenceCode.SHOP_DEFAULT_LOG$SERIAL_CODE_ID$SEQ,17));
 		return defaultLogAtomSV.insert(shopDefaultLog);
 	}
 
