@@ -88,5 +88,11 @@ public class SequenceCodeConstants {
 		public static final String UC_USER_PHONEBOOKS$TEL_NO$SEQ = "UC_USER_PHONEBOOKS$TEL_NO$SEQ";
 
 		public static final String CM_CUST_FILE_EXT$INFO_EXT$ID = "CM_CUST_FILE_EXT$INFO_EXT$ID";
+		
+		
+		public static final String SHOP_DEFAULT_LOG$SERIAL_CODE_ID$SEQ = "SHOP_DEFAULT_LOG$SERIAL_CODE_ID$SEQ";
+		
+		
+		
 	}
 }
