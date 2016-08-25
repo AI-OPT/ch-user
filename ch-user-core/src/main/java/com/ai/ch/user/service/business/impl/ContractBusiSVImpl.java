@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
 import com.ai.ch.user.api.contract.param.ContactInfoResponse;
-import com.ai.ch.user.dao.mapper.bo.CmCustFileExt;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfo;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria.Criteria;
