@@ -101,6 +101,8 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 				
 				if(cmCustFileExtVo.getUserId()!=null&&!"".equals(cmCustFileExtVo.getUserId())){
 					criteria.andUserIdEqualTo(cmCustFileExtVo.getUserId());
+				}else{
+					criteria.andUserIdIsNull();
 				}												   
 				if(cmCustFileExtVo.getInfoItem()!=null&&!"".equals(cmCustFileExtVo.getInfoItem())){
 					criteria.andInfoItemEqualTo(cmCustFileExtVo.getInfoItem());
