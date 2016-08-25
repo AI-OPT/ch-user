@@ -28,7 +28,6 @@ public class defaultManagerSVImpl {
 		request.setDeductBalance(1212L);
 		request.setDeductDate(new Timestamp(new Date().getTime()));
 		request.setOperId(1L);
-		request.setSerialCode("1111111111");
 		defaultLogSV.insertDefaultLog(request);
 	}
 	
