@@ -56,7 +56,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfoCriteria.Criteria criteria =example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
-		return shopInfoAtomSV.updateByExample(shopInfo, example);
+		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 	}
 
 }
