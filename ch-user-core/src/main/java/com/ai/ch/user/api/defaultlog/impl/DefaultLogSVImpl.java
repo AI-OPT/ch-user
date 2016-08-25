@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.defaultlog.interfaces.IDefaultLogSV;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
@@ -16,9 +15,10 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
+import com.alibaba.dubbo.config.annotation.Service;
 
 @Component
-@Transactional
+@Service
 public class DefaultLogSVImpl implements IDefaultLogSV {
 
 	@Autowired
@@ -32,7 +32,7 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		ResponseHeader responseHeader =null;
 		try{
 			defaultLogBusiSV.insertDefaultLog(request);
-		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		    responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
