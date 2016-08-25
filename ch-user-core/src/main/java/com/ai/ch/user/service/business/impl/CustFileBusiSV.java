@@ -91,7 +91,9 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 		
 		if(!request.getList().isEmpty()){
 			
-			for(CmCustFileExtVo cmCustFileExtVo : request.getList()){
+			List<CmCustFileExtVo> list = request.getList();
+			
+			for(CmCustFileExtVo cmCustFileExtVo : list){
 				
 				CmCustFileExtCriteria example = new CmCustFileExtCriteria();
 				CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
@@ -99,9 +101,9 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 				
 				if(cmCustFileExtVo.getUserId()!=null&&!"".equals(cmCustFileExtVo.getUserId())){
 					criteria.andUserIdEqualTo(cmCustFileExtVo.getUserId());
-				}
+				}												   
 				if(cmCustFileExtVo.getInfoItem()!=null&&!"".equals(cmCustFileExtVo.getInfoItem())){
-					criteria.andInfoItemEqualTo(request.getInfoItem());
+					criteria.andInfoItemEqualTo(cmCustFileExtVo.getInfoItem());
 				}
 				custFileAtomSV.deleteByExample(example);
 				CmCustFileExt cmCustFileExt = new CmCustFileExt();
