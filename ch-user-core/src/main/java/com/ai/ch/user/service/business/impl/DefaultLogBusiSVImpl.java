@@ -46,8 +46,8 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		criteria.andUserIdEqualTo(request.getUserId());
 		int count =defaultLogAtomSV.countByExample(example);
 		int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
-		example.setLimitStart(request.getPageNo());
-		example.setLimitEnd((request.getPageNo()-1)*request.getPageSize());
+		example.setLimitStart((request.getPageNo()-1)*request.getPageSize());
+		example.setLimitEnd(request.getPageSize());
 		List<ShopDefaultLog> list = defaultLogAtomSV.selectByExample(example);
 		List<DefaultLogVo> responseList = new ArrayList<DefaultLogVo>();
 		for (ShopDefaultLog shopDefaultLog : list) {
