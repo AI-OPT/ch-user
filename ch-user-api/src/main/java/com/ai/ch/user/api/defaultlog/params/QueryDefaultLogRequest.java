@@ -15,7 +15,17 @@ public class QueryDefaultLogRequest extends BaseInfo {
 	 * 用户Id
 	 */
 	private String userId;
-
+	
+	/**
+	 * 用户名称
+	 */
+	private String  loginName;
+	
+	/**
+	 * 企业名称
+	 */
+    private String custName;
+    
 	private Integer pageNo;
 
 	private Integer pageSize;
