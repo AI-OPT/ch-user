@@ -2,6 +2,8 @@ package com.ai.ch.user.api.defaultlog.params;
 
 import java.sql.Timestamp;
 
+import com.ai.opt.base.vo.BaseInfo;
+
 /**
  * 扣款记录表
  * Date: 2016年8月23日 <br>
@@ -9,8 +11,12 @@ import java.sql.Timestamp;
  * 
  * @author zhangqiang7
  */
-public class DefaultLogVo {
+public class DefaultLogVo extends BaseInfo{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 扣款日期
 	 */
@@ -39,7 +45,12 @@ public class DefaultLogVo {
 	 * 操作员
 	 */
 	private Long operId;
-
+	
+	/**
+	 * 操作人
+	 */
+	private String operName;
+	
 	public Timestamp getDeductDate() {
 		return deductDate;
 	}
@@ -86,6 +97,14 @@ public class DefaultLogVo {
 
 	public void setOperId(Long operId) {
 		this.operId = operId;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
 	}
 
 }
