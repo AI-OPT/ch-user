@@ -15,6 +15,8 @@ public class ShopDefaultLog {
 
     private Long operId;
 
+    private String operName;
+
     public String getSerialCode() {
         return serialCode;
     }
@@ -61,5 +63,13 @@ public class ShopDefaultLog {
 
     public void setOperId(Long operId) {
         this.operId = operId;
+    }
+
+    public String getOperName() {
+        return operName;
+    }
+
+    public void setOperName(String operName) {
+        this.operName = operName == null ? null : operName.trim();
     }
 }
