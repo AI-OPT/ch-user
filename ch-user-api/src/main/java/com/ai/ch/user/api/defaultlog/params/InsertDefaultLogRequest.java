@@ -2,7 +2,6 @@ package com.ai.ch.user.api.defaultlog.params;
 
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import com.ai.opt.base.vo.BaseInfo;
 
