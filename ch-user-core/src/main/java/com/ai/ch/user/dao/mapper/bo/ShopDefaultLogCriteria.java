@@ -514,6 +514,76 @@ public class ShopDefaultLogCriteria {
             addCriterion("OPER_ID not between", value1, value2, "operId");
             return (Criteria) this;
         }
+
+        public Criteria andOperNameIsNull() {
+            addCriterion("OPER_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameIsNotNull() {
+            addCriterion("OPER_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameEqualTo(String value) {
+            addCriterion("OPER_NAME =", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotEqualTo(String value) {
+            addCriterion("OPER_NAME <>", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameGreaterThan(String value) {
+            addCriterion("OPER_NAME >", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameGreaterThanOrEqualTo(String value) {
+            addCriterion("OPER_NAME >=", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameLessThan(String value) {
+            addCriterion("OPER_NAME <", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameLessThanOrEqualTo(String value) {
+            addCriterion("OPER_NAME <=", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameLike(String value) {
+            addCriterion("OPER_NAME like", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotLike(String value) {
+            addCriterion("OPER_NAME not like", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameIn(List<String> values) {
+            addCriterion("OPER_NAME in", values, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotIn(List<String> values) {
+            addCriterion("OPER_NAME not in", values, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameBetween(String value1, String value2) {
+            addCriterion("OPER_NAME between", value1, value2, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotBetween(String value1, String value2) {
+            addCriterion("OPER_NAME not between", value1, value2, "operName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
