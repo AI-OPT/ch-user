@@ -45,6 +45,11 @@ public class InsertDefaultLogRequest extends BaseInfo {
 	 */
 	private String serialCode;
 
+	/**
+	 * 操作人
+	 */
+	private String operName;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -93,4 +98,11 @@ public class InsertDefaultLogRequest extends BaseInfo {
 		this.serialCode = serialCode;
 	}
 
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
+	}
 }
