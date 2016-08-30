@@ -32,7 +32,7 @@ public interface IDefaultLogSV {
 	 * @throws SystemException
 	 * @throws BusinessException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-001
+	 * @ApiCode COMM_TENANT_0006
 	 * @RestRelativeURL defaultlogservice/insertDefaultLog
 	 */
 	@POST
@@ -47,7 +47,7 @@ public interface IDefaultLogSV {
 	 * @throws SystemException
 	 * @throws BusinessException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-002
+	 * @ApiCode COMM_TENANT_0012
 	 * @RestRelativeURL defaultlogservice/queryDefaultLog
 	 */
 	@POST
