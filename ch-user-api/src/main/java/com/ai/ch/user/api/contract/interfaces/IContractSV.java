@@ -31,7 +31,7 @@ public interface IContractSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangyuehong
-	 * @ApiCode 
+	 * @ApiCode COMM_TENANT_0013
 	 * @RestRelativeURL contractservice/insertContractInfo
 	 */
 	@POST
@@ -46,7 +46,7 @@ public interface IContractSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangyuehong
-	 * @ApiCode 
+	 * @ApiCode COMM_TENANT_0014
 	 * @RestRelativeURL contractservice/queryContractInfo
 	 */
 	@POST
