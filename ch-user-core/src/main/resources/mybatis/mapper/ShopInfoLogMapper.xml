@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ch.user.dao.mapper.interfaces.ShopInfoLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.ShopInfoLog" >
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="DEPOSIT_BALANCE" property="depositBalance" jdbcType="DECIMAL" />
+    <result column="PERIOD_TYPE" property="periodType" jdbcType="VARCHAR" />
+    <result column="RENT_CYCLE_TYPE" property="rentCycleType" jdbcType="VARCHAR" />
+    <result column="RENT_FEE" property="rentFee" jdbcType="DECIMAL" />
+    <result column="RATIO" property="ratio" jdbcType="INTEGER" />
+    <result column="RANK" property="rank" jdbcType="INTEGER" />
+    <result column="RANK_LOGO" property="rankLogo" jdbcType="VARCHAR" />
+    <result column="SHOP_NAME" property="shopName" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC" property="shopDesc" jdbcType="VARCHAR" />
+    <result column="BUSI_TYPE" property="busiType" jdbcType="VARCHAR" />
+    <result column="GOODS_NUM" property="goodsNum" jdbcType="INTEGER" />
+    <result column="HAS_EXPERI" property="hasExperi" jdbcType="INTEGER" />
+    <result column="ECOMM_OWNER" property="ecommOwner" jdbcType="VARCHAR" />
+    <result column="OPER_ID" property="operId" jdbcType="DECIMAL" />
+    <result column="OPER_NAME" property="operName" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, DEPOSIT_BALANCE, PERIOD_TYPE, RENT_CYCLE_TYPE, RENT_FEE, RATIO, RANK, RANK_LOGO, 
+    SHOP_NAME, SHOP_DESC, BUSI_TYPE, GOODS_NUM, HAS_EXPERI, ECOMM_OWNER, OPER_ID, OPER_NAME, 
+    UPDATE_TIME, TENANT_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_info_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria" >
+    delete from shop_info_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLog" >
+    insert into shop_info_log (USER_ID, DEPOSIT_BALANCE, PERIOD_TYPE, 
+      RENT_CYCLE_TYPE, RENT_FEE, RATIO, 
+      RANK, RANK_LOGO, SHOP_NAME, 
+      SHOP_DESC, BUSI_TYPE, GOODS_NUM, 
+      HAS_EXPERI, ECOMM_OWNER, OPER_ID, 
+      OPER_NAME, UPDATE_TIME, TENANT_ID
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{depositBalance,jdbcType=DECIMAL}, #{periodType,jdbcType=VARCHAR}, 
+      #{rentCycleType,jdbcType=VARCHAR}, #{rentFee,jdbcType=DECIMAL}, #{ratio,jdbcType=INTEGER}, 
+      #{rank,jdbcType=INTEGER}, #{rankLogo,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
+      #{shopDesc,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, 
+      #{hasExperi,jdbcType=INTEGER}, #{ecommOwner,jdbcType=VARCHAR}, #{operId,jdbcType=DECIMAL}, 
+      #{operName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{tenantId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLog" >
+    insert into shop_info_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="depositBalance != null" >
+        DEPOSIT_BALANCE,
+      </if>
+      <if test="periodType != null" >
+        PERIOD_TYPE,
+      </if>
+      <if test="rentCycleType != null" >
+        RENT_CYCLE_TYPE,
+      </if>
+      <if test="rentFee != null" >
+        RENT_FEE,
+      </if>
+      <if test="ratio != null" >
+        RATIO,
+      </if>
+      <if test="rank != null" >
+        RANK,
+      </if>
+      <if test="rankLogo != null" >
+        RANK_LOGO,
+      </if>
+      <if test="shopName != null" >
+        SHOP_NAME,
+      </if>
+      <if test="shopDesc != null" >
+        SHOP_DESC,
+      </if>
+      <if test="busiType != null" >
+        BUSI_TYPE,
+      </if>
+      <if test="goodsNum != null" >
+        GOODS_NUM,
+      </if>
+      <if test="hasExperi != null" >
+        HAS_EXPERI,
+      </if>
+      <if test="ecommOwner != null" >
+        ECOMM_OWNER,
+      </if>
+      <if test="operId != null" >
+        OPER_ID,
+      </if>
+      <if test="operName != null" >
+        OPER_NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="depositBalance != null" >
+        #{depositBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="periodType != null" >
+        #{periodType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentCycleType != null" >
+        #{rentCycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentFee != null" >
+        #{rentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="ratio != null" >
+        #{ratio,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="rankLogo != null" >
+        #{rankLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDesc != null" >
+        #{shopDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null" >
+        #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNum != null" >
+        #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="hasExperi != null" >
+        #{hasExperi,jdbcType=INTEGER},
+      </if>
+      <if test="ecommOwner != null" >
+        #{ecommOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=DECIMAL},
+      </if>
+      <if test="operName != null" >
+        #{operName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from shop_info_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_info_log
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositBalance != null" >
+        DEPOSIT_BALANCE = #{record.depositBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.periodType != null" >
+        PERIOD_TYPE = #{record.periodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rentCycleType != null" >
+        RENT_CYCLE_TYPE = #{record.rentCycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rentFee != null" >
+        RENT_FEE = #{record.rentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ratio != null" >
+        RATIO = #{record.ratio,jdbcType=INTEGER},
+      </if>
+      <if test="record.rank != null" >
+        RANK = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.rankLogo != null" >
+        RANK_LOGO = #{record.rankLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null" >
+        SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopDesc != null" >
+        SHOP_DESC = #{record.shopDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiType != null" >
+        BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsNum != null" >
+        GOODS_NUM = #{record.goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasExperi != null" >
+        HAS_EXPERI = #{record.hasExperi,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecommOwner != null" >
+        ECOMM_OWNER = #{record.ecommOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operId != null" >
+        OPER_ID = #{record.operId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operName != null" >
+        OPER_NAME = #{record.operName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_info_log
+    set USER_ID = #{record.userId,jdbcType=VARCHAR},
+      DEPOSIT_BALANCE = #{record.depositBalance,jdbcType=DECIMAL},
+      PERIOD_TYPE = #{record.periodType,jdbcType=VARCHAR},
+      RENT_CYCLE_TYPE = #{record.rentCycleType,jdbcType=VARCHAR},
+      RENT_FEE = #{record.rentFee,jdbcType=DECIMAL},
+      RATIO = #{record.ratio,jdbcType=INTEGER},
+      RANK = #{record.rank,jdbcType=INTEGER},
+      RANK_LOGO = #{record.rankLogo,jdbcType=VARCHAR},
+      SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      SHOP_DESC = #{record.shopDesc,jdbcType=VARCHAR},
+      BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      GOODS_NUM = #{record.goodsNum,jdbcType=INTEGER},
+      HAS_EXPERI = #{record.hasExperi,jdbcType=INTEGER},
+      ECOMM_OWNER = #{record.ecommOwner,jdbcType=VARCHAR},
+      OPER_ID = #{record.operId,jdbcType=DECIMAL},
+      OPER_NAME = #{record.operName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -24,14 +24,14 @@ public class ShopRankRuleVo {
 	private String periodType;
 
 	/**
-	 * 服务费下限
+	 * 分数上限
 	 */
-	private Long minFee;
+	private Long minScore;
 
 	/**
-	 * 服务费上限
+	 * 分数下限
 	 */
-	private Long maxFee;
+	private Long maxScore;
 
 	/**
 	 * 等级名称
@@ -47,6 +47,11 @@ public class ShopRankRuleVo {
 	 * 操作人
 	 */
 	private Long operId;
+
+	/**
+	 * 操作员姓名
+	 */
+	private String operName;
 
 	public String getTenantId() {
 		return tenantId;
@@ -72,22 +77,6 @@ public class ShopRankRuleVo {
 		this.periodType = periodType;
 	}
 
-	public Long getMinFee() {
-		return minFee;
-	}
-
-	public void setMinFee(Long minFee) {
-		this.minFee = minFee;
-	}
-
-	public Long getMaxFee() {
-		return maxFee;
-	}
-
-	public void setMaxFee(Long maxFee) {
-		this.maxFee = maxFee;
-	}
-
 	public String getRankName() {
 		return rankName;
 	}
@@ -110,6 +99,30 @@ public class ShopRankRuleVo {
 
 	public void setOperId(Long operId) {
 		this.operId = operId;
+	}
+
+	public Long getMinScore() {
+		return minScore;
+	}
+
+	public void setMinScore(Long minScore) {
+		this.minScore = minScore;
+	}
+
+	public Long getMaxScore() {
+		return maxScore;
+	}
+
+	public void setMaxScore(Long maxScore) {
+		this.maxScore = maxScore;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
 	}
 
 }

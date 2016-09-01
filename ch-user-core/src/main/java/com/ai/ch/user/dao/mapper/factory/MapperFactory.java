@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 import com.ai.ch.user.dao.mapper.attach.CtScoreLogAttachMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CmCustFileExtMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtCurrentScoreMapper;
+import com.ai.ch.user.dao.mapper.interfaces.CtDepositRuleMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreKpiMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreLogMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopDefaultLogMapper;
+import com.ai.ch.user.dao.mapper.interfaces.ShopInfoLogMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopInfoMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopRankRuleMapper;
 
@@ -62,5 +64,13 @@ public class MapperFactory {
 
 	public static ShopInfoMapper getShopInfoMapperMapper() {
 		return sqlSessionTemplate.getMapper(ShopInfoMapper.class);
+	}
+	
+	public static CtDepositRuleMapper getCtDepositRuleMapper() {
+		return sqlSessionTemplate.getMapper(CtDepositRuleMapper.class);
+	}
+	
+	public static ShopInfoLogMapper getShopInfoLogMapper() {
+		return sqlSessionTemplate.getMapper(ShopInfoLogMapper.class);
 	}
 }

@@ -7,9 +7,9 @@ public class ShopRankRule {
 
     private String periodType;
 
-    private Long minFee;
+    private Long minScore;
 
-    private Long maxFee;
+    private Long maxScore;
 
     private String rankName;
 
@@ -20,6 +20,8 @@ public class ShopRankRule {
     private Timestamp updateTime;
 
     private Long operId;
+
+    private String operName;
 
     public Integer getRank() {
         return rank;
@@ -37,20 +39,20 @@ public class ShopRankRule {
         this.periodType = periodType == null ? null : periodType.trim();
     }
 
-    public Long getMinFee() {
-        return minFee;
+    public Long getMinScore() {
+        return minScore;
     }
 
-    public void setMinFee(Long minFee) {
-        this.minFee = minFee;
+    public void setMinScore(Long minScore) {
+        this.minScore = minScore;
     }
 
-    public Long getMaxFee() {
-        return maxFee;
+    public Long getMaxScore() {
+        return maxScore;
     }
 
-    public void setMaxFee(Long maxFee) {
-        this.maxFee = maxFee;
+    public void setMaxScore(Long maxScore) {
+        this.maxScore = maxScore;
     }
 
     public String getRankName() {
@@ -91,5 +93,13 @@ public class ShopRankRule {
 
     public void setOperId(Long operId) {
         this.operId = operId;
+    }
+
+    public String getOperName() {
+        return operName;
+    }
+
+    public void setOperName(String operName) {
+        this.operName = operName == null ? null : operName.trim();
     }
 }

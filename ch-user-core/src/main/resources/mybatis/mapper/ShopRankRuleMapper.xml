@@ -4,13 +4,14 @@
   <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.ShopRankRule" >
     <result column="rank" property="rank" jdbcType="INTEGER" />
     <result column="period_type" property="periodType" jdbcType="CHAR" />
-    <result column="min_fee" property="minFee" jdbcType="DECIMAL" />
-    <result column="max_fee" property="maxFee" jdbcType="DECIMAL" />
+    <result column="min_score" property="minScore" jdbcType="DECIMAL" />
+    <result column="max_score" property="maxScore" jdbcType="DECIMAL" />
     <result column="rank_name" property="rankName" jdbcType="VARCHAR" />
     <result column="rank_logo" property="rankLogo" jdbcType="VARCHAR" />
     <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="oper_Id" property="operId" jdbcType="DECIMAL" />
+    <result column="oper_name" property="operName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    rank, period_type, min_fee, max_fee, rank_name, rank_logo, TENANT_ID, update_time, 
-    oper_Id
+    rank, period_type, min_score, max_score, rank_name, rank_logo, TENANT_ID, update_time, 
+    oper_Id, oper_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria" >
     select
@@ -99,14 +100,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRule" >
-    insert into shop_rank_rule (rank, period_type, min_fee, 
-      max_fee, rank_name, rank_logo, 
-      TENANT_ID, update_time, oper_Id
-      )
-    values (#{rank,jdbcType=INTEGER}, #{periodType,jdbcType=CHAR}, #{minFee,jdbcType=DECIMAL}, 
-      #{maxFee,jdbcType=DECIMAL}, #{rankName,jdbcType=VARCHAR}, #{rankLogo,jdbcType=VARCHAR}, 
-      #{tenantId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=DECIMAL}
-      )
+    insert into shop_rank_rule (rank, period_type, min_score, 
+      max_score, rank_name, rank_logo, 
+      TENANT_ID, update_time, oper_Id, 
+      oper_name)
+    values (#{rank,jdbcType=INTEGER}, #{periodType,jdbcType=CHAR}, #{minScore,jdbcType=DECIMAL}, 
+      #{maxScore,jdbcType=DECIMAL}, #{rankName,jdbcType=VARCHAR}, #{rankLogo,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=DECIMAL}, 
+      #{operName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopRankRule" >
     insert into shop_rank_rule
@@ -117,11 +118,11 @@
       <if test="periodType != null" >
         period_type,
       </if>
-      <if test="minFee != null" >
-        min_fee,
+      <if test="minScore != null" >
+        min_score,
       </if>
-      <if test="maxFee != null" >
-        max_fee,
+      <if test="maxScore != null" >
+        max_score,
       </if>
       <if test="rankName != null" >
         rank_name,
@@ -138,6 +139,9 @@
       <if test="operId != null" >
         oper_Id,
       </if>
+      <if test="operName != null" >
+        oper_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="rank != null" >
@@ -146,11 +150,11 @@
       <if test="periodType != null" >
         #{periodType,jdbcType=CHAR},
       </if>
-      <if test="minFee != null" >
-        #{minFee,jdbcType=DECIMAL},
+      <if test="minScore != null" >
+        #{minScore,jdbcType=DECIMAL},
       </if>
-      <if test="maxFee != null" >
-        #{maxFee,jdbcType=DECIMAL},
+      <if test="maxScore != null" >
+        #{maxScore,jdbcType=DECIMAL},
       </if>
       <if test="rankName != null" >
         #{rankName,jdbcType=VARCHAR},
@@ -166,6 +170,9 @@
       </if>
       <if test="operId != null" >
         #{operId,jdbcType=DECIMAL},
+      </if>
+      <if test="operName != null" >
+        #{operName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -184,11 +191,11 @@
       <if test="record.periodType != null" >
         period_type = #{record.periodType,jdbcType=CHAR},
       </if>
-      <if test="record.minFee != null" >
-        min_fee = #{record.minFee,jdbcType=DECIMAL},
+      <if test="record.minScore != null" >
+        min_score = #{record.minScore,jdbcType=DECIMAL},
       </if>
-      <if test="record.maxFee != null" >
-        max_fee = #{record.maxFee,jdbcType=DECIMAL},
+      <if test="record.maxScore != null" >
+        max_score = #{record.maxScore,jdbcType=DECIMAL},
       </if>
       <if test="record.rankName != null" >
         rank_name = #{record.rankName,jdbcType=VARCHAR},
@@ -205,6 +212,9 @@
       <if test="record.operId != null" >
         oper_Id = #{record.operId,jdbcType=DECIMAL},
       </if>
+      <if test="record.operName != null" >
+        oper_name = #{record.operName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -214,13 +224,14 @@
     update shop_rank_rule
     set rank = #{record.rank,jdbcType=INTEGER},
       period_type = #{record.periodType,jdbcType=CHAR},
-      min_fee = #{record.minFee,jdbcType=DECIMAL},
-      max_fee = #{record.maxFee,jdbcType=DECIMAL},
+      min_score = #{record.minScore,jdbcType=DECIMAL},
+      max_score = #{record.maxScore,jdbcType=DECIMAL},
       rank_name = #{record.rankName,jdbcType=VARCHAR},
       rank_logo = #{record.rankLogo,jdbcType=VARCHAR},
       TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      oper_Id = #{record.operId,jdbcType=DECIMAL}
+      oper_Id = #{record.operId,jdbcType=DECIMAL},
+      oper_name = #{record.operName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
