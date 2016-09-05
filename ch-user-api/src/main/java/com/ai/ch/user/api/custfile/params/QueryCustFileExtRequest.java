@@ -10,6 +10,7 @@ public class QueryCustFileExtRequest extends BaseInfo {
 
 	private String infoType;
 	
+	
 	public String getUsreId() {
 		return usreId;
 	}
