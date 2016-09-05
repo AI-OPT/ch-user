@@ -52,6 +52,9 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 			criteria.andUserIdIsNull();
 		else
 			criteria.andUserIdEqualTo(request.getUsreId());
+		if(request.getInfoType()!=null&&!"".equals(request.getInfoType())){
+			criteria.andInfoTypeEqualTo(request.getInfoType());
+		}
 		List<CmCustFileExt> list = custFileAtomSV.selectByExample(example);
 		List<CmCustFileExtVo> responseList = new ArrayList<CmCustFileExtVo>();
 		for (CmCustFileExt cmCustFileExt : list) {
