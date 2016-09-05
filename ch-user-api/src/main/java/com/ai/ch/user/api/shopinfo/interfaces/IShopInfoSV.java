@@ -8,13 +8,19 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
+import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
@@ -116,4 +122,60 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/queryShopInfoLog")
 	public QueryShopInfoLogResponse queryShopInfoLog(QueryShopInfoLogRequest request)throws BusinessException,SystemException;
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-07
+	 * @RestRelativeURL shopinfoservice/queryShopScoreKpi
+	 */
+	@POST
+	@Path("/queryShopScoreKpi")
+	public QueryShopScoreKpiResponse queryShopScoreKpi(QueryShopScoreKpiRequest request) throws BusinessException,SystemException;
+	
+	/**
+	 * 保存店铺评级统计数据
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-08
+	 * @RestRelativeURL shopinfoservice/insertShopStatData
+	 */
+	@POST
+	@Path("/insertShopStatData")
+	public BaseResponse insertShopStatData(InsertShopStatDataRequest request)throws BusinessException,SystemException;
+	
+	/**
+	 * 更新店铺评级统计数据
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-09
+	 * @RestRelativeURL shopinfoservice/updateShopStatData
+	 */
+	@POST
+	@Path("/updateShopStatData")
+	public BaseResponse updateShopStatData(UpdateShopStatDataRequest request) throws BusinessException, SystemException;
+	
+	/**
+	 * 查询店铺评级统计数据
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-10
+	 * @RestRelativeURL shopinfoservice/queryShopInfoLog
+	 */
+	@POST
+	@Path("/queryShopStatData")
+	public QueryShopStatDataResponse queryShopStatData(QueryShopStatDataRequest request)throws BusinessException,SystemException;
 }

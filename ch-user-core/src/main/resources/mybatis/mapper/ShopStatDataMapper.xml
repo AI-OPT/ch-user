@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ch.user.dao.mapper.interfaces.ShopStatDataMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.ShopStatData" >
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="ORDER_AMOUNT" property="orderAmount" jdbcType="DECIMAL" />
+    <result column="ORDER_COUNT" property="orderCount" jdbcType="DECIMAL" />
+    <result column="SERV_CHARGE" property="servCharge" jdbcType="DECIMAL" />
+    <result column="GEN_TIME" property="genTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_NAME, ORDER_AMOUNT, ORDER_COUNT, SERV_CHARGE, GEN_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_stat_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria" >
+    delete from shop_stat_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.ShopStatData" >
+    insert into shop_stat_data (USER_ID, USER_NAME, ORDER_AMOUNT, 
+      ORDER_COUNT, SERV_CHARGE, GEN_TIME
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{orderAmount,jdbcType=DECIMAL}, 
+      #{orderCount,jdbcType=DECIMAL}, #{servCharge,jdbcType=DECIMAL}, #{genTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopStatData" >
+    insert into shop_stat_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="orderAmount != null" >
+        ORDER_AMOUNT,
+      </if>
+      <if test="orderCount != null" >
+        ORDER_COUNT,
+      </if>
+      <if test="servCharge != null" >
+        SERV_CHARGE,
+      </if>
+      <if test="genTime != null" >
+        GEN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCount != null" >
+        #{orderCount,jdbcType=DECIMAL},
+      </if>
+      <if test="servCharge != null" >
+        #{servCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="genTime != null" >
+        #{genTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria" resultType="java.lang.Integer" >
+    select count(*) from shop_stat_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_stat_data
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderAmount != null" >
+        ORDER_AMOUNT = #{record.orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderCount != null" >
+        ORDER_COUNT = #{record.orderCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.servCharge != null" >
+        SERV_CHARGE = #{record.servCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.genTime != null" >
+        GEN_TIME = #{record.genTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_stat_data
+    set USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      ORDER_AMOUNT = #{record.orderAmount,jdbcType=DECIMAL},
+      ORDER_COUNT = #{record.orderCount,jdbcType=DECIMAL},
+      SERV_CHARGE = #{record.servCharge,jdbcType=DECIMAL},
+      GEN_TIME = #{record.genTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

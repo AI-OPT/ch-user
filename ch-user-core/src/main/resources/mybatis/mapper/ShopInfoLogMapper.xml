@@ -20,6 +20,10 @@
     <result column="OPER_NAME" property="operName" jdbcType="VARCHAR" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="MERCHANT_NO" property="merchantNo" jdbcType="VARCHAR" />
+    <result column="close_time" property="closeTime" jdbcType="TIMESTAMP" />
+    <result column="open_time" property="openTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,7 +86,7 @@
   <sql id="Base_Column_List" >
     USER_ID, DEPOSIT_BALANCE, PERIOD_TYPE, RENT_CYCLE_TYPE, RENT_FEE, RATIO, RANK, RANK_LOGO, 
     SHOP_NAME, SHOP_DESC, BUSI_TYPE, GOODS_NUM, HAS_EXPERI, ECOMM_OWNER, OPER_ID, OPER_NAME, 
-    UPDATE_TIME, TENANT_ID
+    UPDATE_TIME, TENANT_ID, MERCHANT_NO, close_time, open_time, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria" >
     select
@@ -114,15 +118,17 @@
       RANK, RANK_LOGO, SHOP_NAME, 
       SHOP_DESC, BUSI_TYPE, GOODS_NUM, 
       HAS_EXPERI, ECOMM_OWNER, OPER_ID, 
-      OPER_NAME, UPDATE_TIME, TENANT_ID
-      )
+      OPER_NAME, UPDATE_TIME, TENANT_ID, 
+      MERCHANT_NO, close_time, open_time, 
+      status)
     values (#{userId,jdbcType=VARCHAR}, #{depositBalance,jdbcType=DECIMAL}, #{periodType,jdbcType=VARCHAR}, 
       #{rentCycleType,jdbcType=VARCHAR}, #{rentFee,jdbcType=DECIMAL}, #{ratio,jdbcType=INTEGER}, 
       #{rank,jdbcType=INTEGER}, #{rankLogo,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
       #{shopDesc,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, 
       #{hasExperi,jdbcType=INTEGER}, #{ecommOwner,jdbcType=VARCHAR}, #{operId,jdbcType=DECIMAL}, 
-      #{operName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{tenantId,jdbcType=VARCHAR}
-      )
+      #{operName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{tenantId,jdbcType=VARCHAR}, 
+      #{merchantNo,jdbcType=VARCHAR}, #{closeTime,jdbcType=TIMESTAMP}, #{openTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopInfoLog" >
     insert into shop_info_log
@@ -181,6 +187,18 @@
       <if test="tenantId != null" >
         TENANT_ID,
       </if>
+      <if test="merchantNo != null" >
+        MERCHANT_NO,
+      </if>
+      <if test="closeTime != null" >
+        close_time,
+      </if>
+      <if test="openTime != null" >
+        open_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -236,6 +254,18 @@
       </if>
       <if test="tenantId != null" >
         #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNo != null" >
+        #{merchantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="closeTime != null" >
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -302,6 +332,18 @@
       <if test="record.tenantId != null" >
         TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
       </if>
+      <if test="record.merchantNo != null" >
+        MERCHANT_NO = #{record.merchantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closeTime != null" >
+        close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.openTime != null" >
+        open_time = #{record.openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -326,7 +368,11 @@
       OPER_ID = #{record.operId,jdbcType=DECIMAL},
       OPER_NAME = #{record.operName,jdbcType=VARCHAR},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
-      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR}
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      MERCHANT_NO = #{record.merchantNo,jdbcType=VARCHAR},
+      close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+      open_time = #{record.openTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

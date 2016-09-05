@@ -16,6 +16,8 @@ import com.ai.ch.user.dao.mapper.interfaces.ShopDefaultLogMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopInfoLogMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopInfoMapper;
 import com.ai.ch.user.dao.mapper.interfaces.ShopRankRuleMapper;
+import com.ai.ch.user.dao.mapper.interfaces.ShopScoreKpiMapper;
+import com.ai.ch.user.dao.mapper.interfaces.ShopStatDataMapper;
 
 @Component
 public class MapperFactory {
@@ -70,6 +72,13 @@ public class MapperFactory {
 		return sqlSessionTemplate.getMapper(CtDepositRuleMapper.class);
 	}
 	
+	public static ShopScoreKpiMapper getShopScoreKpiMapper() {
+		return sqlSessionTemplate.getMapper(ShopScoreKpiMapper.class);
+	}
+	public static ShopStatDataMapper getShopStatDataMapper() {
+		return sqlSessionTemplate.getMapper(ShopStatDataMapper.class);
+	}
+
 	public static ShopInfoLogMapper getShopInfoLogMapper() {
 		return sqlSessionTemplate.getMapper(ShopInfoLogMapper.class);
 	}

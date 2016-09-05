@@ -1174,6 +1174,256 @@ public class ShopInfoCriteria {
             addCriterion("TENANT_ID not between", value1, value2, "tenantId");
             return (Criteria) this;
         }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeIsNull() {
+            addCriterion("open_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeIsNotNull() {
+            addCriterion("open_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeEqualTo(Timestamp value) {
+            addCriterion("open_time =", value, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeNotEqualTo(Timestamp value) {
+            addCriterion("open_time <>", value, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeGreaterThan(Timestamp value) {
+            addCriterion("open_time >", value, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("open_time >=", value, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeLessThan(Timestamp value) {
+            addCriterion("open_time <", value, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("open_time <=", value, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeIn(List<Timestamp> values) {
+            addCriterion("open_time in", values, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeNotIn(List<Timestamp> values) {
+            addCriterion("open_time not in", values, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("open_time between", value1, value2, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("open_time not between", value1, value2, "openTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeIsNull() {
+            addCriterion("close_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeIsNotNull() {
+            addCriterion("close_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeEqualTo(Timestamp value) {
+            addCriterion("close_time =", value, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeNotEqualTo(Timestamp value) {
+            addCriterion("close_time <>", value, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeGreaterThan(Timestamp value) {
+            addCriterion("close_time >", value, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("close_time >=", value, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeLessThan(Timestamp value) {
+            addCriterion("close_time <", value, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("close_time <=", value, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeIn(List<Timestamp> values) {
+            addCriterion("close_time in", values, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeNotIn(List<Timestamp> values) {
+            addCriterion("close_time not in", values, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("close_time between", value1, value2, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCloseTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("close_time not between", value1, value2, "closeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoIsNull() {
+            addCriterion("MERCHANT_NO is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoIsNotNull() {
+            addCriterion("MERCHANT_NO is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoEqualTo(String value) {
+            addCriterion("MERCHANT_NO =", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoNotEqualTo(String value) {
+            addCriterion("MERCHANT_NO <>", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoGreaterThan(String value) {
+            addCriterion("MERCHANT_NO >", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoGreaterThanOrEqualTo(String value) {
+            addCriterion("MERCHANT_NO >=", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoLessThan(String value) {
+            addCriterion("MERCHANT_NO <", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoLessThanOrEqualTo(String value) {
+            addCriterion("MERCHANT_NO <=", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoLike(String value) {
+            addCriterion("MERCHANT_NO like", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoNotLike(String value) {
+            addCriterion("MERCHANT_NO not like", value, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoIn(List<String> values) {
+            addCriterion("MERCHANT_NO in", values, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoNotIn(List<String> values) {
+            addCriterion("MERCHANT_NO not in", values, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoBetween(String value1, String value2) {
+            addCriterion("MERCHANT_NO between", value1, value2, "merchantNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerchantNoNotBetween(String value1, String value2) {
+            addCriterion("MERCHANT_NO not between", value1, value2, "merchantNo");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

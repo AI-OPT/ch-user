@@ -103,6 +103,58 @@ public class ShopInfoLogVo implements Serializable{
 	 */
 	private String operName;
 
+	/**
+	 * 店铺状态
+	 */
+	private Integer status;
+
+	/**
+	 * 开通时间
+	 */
+	private Timestamp openTime;
+
+	/**
+	 * 注销时间
+	 */
+	private Timestamp closeTime;
+
+	/**
+	 * 商户编号
+	 */
+	private String merchantNo;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Timestamp getOpenTime() {
+		return openTime;
+	}
+
+	public void setOpenTime(Timestamp openTime) {
+		this.openTime = openTime;
+	}
+
+	public Timestamp getCloseTime() {
+		return closeTime;
+	}
+
+	public void setCloseTime(Timestamp closeTime) {
+		this.closeTime = closeTime;
+	}
+
+	public String getMerchantNo() {
+		return merchantNo;
+	}
+
+	public void setMerchantNo(String merchantNo) {
+		this.merchantNo = merchantNo;
+	}
+	
 	public String getTenantId() {
 		return tenantId;
 	}

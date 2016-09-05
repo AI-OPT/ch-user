@@ -6,13 +6,19 @@ import org.springframework.stereotype.Component;
 import com.ai.ch.user.api.shopinfo.interfaces.IShopInfoSV;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
+import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
 import com.ai.ch.user.service.business.interfaces.IShopInfoLogBusiSV;
@@ -110,6 +116,66 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		ResponseHeader responseHeader =null;
 		try{
 		response = shopInfoLogBusiSV.queryShopInfoLog(request);
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public QueryShopScoreKpiResponse queryShopScoreKpi(QueryShopScoreKpiRequest request)
+			throws BusinessException, SystemException {
+		QueryShopScoreKpiResponse response = null;
+		ResponseHeader responseHeader =null;
+		try{
+		response = shopInfoBusiSV.queryShopScoreKpi(request);
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public BaseResponse insertShopStatData(InsertShopStatDataRequest request)
+			throws BusinessException, SystemException {
+		BaseResponse response = new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+		shopInfoBusiSV.insertShopStatData(request);
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public BaseResponse updateShopStatData(UpdateShopStatDataRequest request)
+			throws BusinessException, SystemException {
+		BaseResponse response = new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+		shopInfoBusiSV.updateShopStatData(request);
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public QueryShopStatDataResponse queryShopStatData(QueryShopStatDataRequest request)
+			throws BusinessException, SystemException {
+		QueryShopStatDataResponse response = null;
+		ResponseHeader responseHeader =null;
+		try{
+			response = shopInfoBusiSV.queryShopStatData(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");

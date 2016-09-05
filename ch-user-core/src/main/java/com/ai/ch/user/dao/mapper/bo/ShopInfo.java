@@ -35,6 +35,14 @@ public class ShopInfo {
 
     private String tenantId;
 
+    private Integer status;
+
+    private Timestamp openTime;
+
+    private Timestamp closeTime;
+
+    private String merchantNo;
+
     public String getUserId() {
         return userId;
     }
@@ -161,5 +169,37 @@ public class ShopInfo {
 
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId == null ? null : tenantId.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Timestamp getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(Timestamp openTime) {
+        this.openTime = openTime;
+    }
+
+    public Timestamp getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(Timestamp closeTime) {
+        this.closeTime = closeTime;
+    }
+
+    public String getMerchantNo() {
+        return merchantNo;
+    }
+
+    public void setMerchantNo(String merchantNo) {
+        this.merchantNo = merchantNo == null ? null : merchantNo.trim();
     }
 }
