@@ -255,123 +255,123 @@ public class ShopRankRuleCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeIsNull() {
-            addCriterion("min_fee is null");
+        public Criteria andMinScoreIsNull() {
+            addCriterion("min_score is null");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeIsNotNull() {
-            addCriterion("min_fee is not null");
+        public Criteria andMinScoreIsNotNull() {
+            addCriterion("min_score is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeEqualTo(Long value) {
-            addCriterion("min_fee =", value, "minFee");
+        public Criteria andMinScoreEqualTo(Long value) {
+            addCriterion("min_score =", value, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeNotEqualTo(Long value) {
-            addCriterion("min_fee <>", value, "minFee");
+        public Criteria andMinScoreNotEqualTo(Long value) {
+            addCriterion("min_score <>", value, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeGreaterThan(Long value) {
-            addCriterion("min_fee >", value, "minFee");
+        public Criteria andMinScoreGreaterThan(Long value) {
+            addCriterion("min_score >", value, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeGreaterThanOrEqualTo(Long value) {
-            addCriterion("min_fee >=", value, "minFee");
+        public Criteria andMinScoreGreaterThanOrEqualTo(Long value) {
+            addCriterion("min_score >=", value, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeLessThan(Long value) {
-            addCriterion("min_fee <", value, "minFee");
+        public Criteria andMinScoreLessThan(Long value) {
+            addCriterion("min_score <", value, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeLessThanOrEqualTo(Long value) {
-            addCriterion("min_fee <=", value, "minFee");
+        public Criteria andMinScoreLessThanOrEqualTo(Long value) {
+            addCriterion("min_score <=", value, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeIn(List<Long> values) {
-            addCriterion("min_fee in", values, "minFee");
+        public Criteria andMinScoreIn(List<Long> values) {
+            addCriterion("min_score in", values, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeNotIn(List<Long> values) {
-            addCriterion("min_fee not in", values, "minFee");
+        public Criteria andMinScoreNotIn(List<Long> values) {
+            addCriterion("min_score not in", values, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeBetween(Long value1, Long value2) {
-            addCriterion("min_fee between", value1, value2, "minFee");
+        public Criteria andMinScoreBetween(Long value1, Long value2) {
+            addCriterion("min_score between", value1, value2, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMinFeeNotBetween(Long value1, Long value2) {
-            addCriterion("min_fee not between", value1, value2, "minFee");
+        public Criteria andMinScoreNotBetween(Long value1, Long value2) {
+            addCriterion("min_score not between", value1, value2, "minScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeIsNull() {
-            addCriterion("max_fee is null");
+        public Criteria andMaxScoreIsNull() {
+            addCriterion("max_score is null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeIsNotNull() {
-            addCriterion("max_fee is not null");
+        public Criteria andMaxScoreIsNotNull() {
+            addCriterion("max_score is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeEqualTo(Long value) {
-            addCriterion("max_fee =", value, "maxFee");
+        public Criteria andMaxScoreEqualTo(Long value) {
+            addCriterion("max_score =", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeNotEqualTo(Long value) {
-            addCriterion("max_fee <>", value, "maxFee");
+        public Criteria andMaxScoreNotEqualTo(Long value) {
+            addCriterion("max_score <>", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeGreaterThan(Long value) {
-            addCriterion("max_fee >", value, "maxFee");
+        public Criteria andMaxScoreGreaterThan(Long value) {
+            addCriterion("max_score >", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeGreaterThanOrEqualTo(Long value) {
-            addCriterion("max_fee >=", value, "maxFee");
+        public Criteria andMaxScoreGreaterThanOrEqualTo(Long value) {
+            addCriterion("max_score >=", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeLessThan(Long value) {
-            addCriterion("max_fee <", value, "maxFee");
+        public Criteria andMaxScoreLessThan(Long value) {
+            addCriterion("max_score <", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeLessThanOrEqualTo(Long value) {
-            addCriterion("max_fee <=", value, "maxFee");
+        public Criteria andMaxScoreLessThanOrEqualTo(Long value) {
+            addCriterion("max_score <=", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeIn(List<Long> values) {
-            addCriterion("max_fee in", values, "maxFee");
+        public Criteria andMaxScoreIn(List<Long> values) {
+            addCriterion("max_score in", values, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeNotIn(List<Long> values) {
-            addCriterion("max_fee not in", values, "maxFee");
+        public Criteria andMaxScoreNotIn(List<Long> values) {
+            addCriterion("max_score not in", values, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeBetween(Long value1, Long value2) {
-            addCriterion("max_fee between", value1, value2, "maxFee");
+        public Criteria andMaxScoreBetween(Long value1, Long value2) {
+            addCriterion("max_score between", value1, value2, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxFeeNotBetween(Long value1, Long value2) {
-            addCriterion("max_fee not between", value1, value2, "maxFee");
+        public Criteria andMaxScoreNotBetween(Long value1, Long value2) {
+            addCriterion("max_score not between", value1, value2, "maxScore");
             return (Criteria) this;
         }
 
@@ -702,6 +702,76 @@ public class ShopRankRuleCriteria {
 
         public Criteria andOperIdNotBetween(Long value1, Long value2) {
             addCriterion("oper_Id not between", value1, value2, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameIsNull() {
+            addCriterion("oper_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameIsNotNull() {
+            addCriterion("oper_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameEqualTo(String value) {
+            addCriterion("oper_name =", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotEqualTo(String value) {
+            addCriterion("oper_name <>", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameGreaterThan(String value) {
+            addCriterion("oper_name >", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameGreaterThanOrEqualTo(String value) {
+            addCriterion("oper_name >=", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameLessThan(String value) {
+            addCriterion("oper_name <", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameLessThanOrEqualTo(String value) {
+            addCriterion("oper_name <=", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameLike(String value) {
+            addCriterion("oper_name like", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotLike(String value) {
+            addCriterion("oper_name not like", value, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameIn(List<String> values) {
+            addCriterion("oper_name in", values, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotIn(List<String> values) {
+            addCriterion("oper_name not in", values, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameBetween(String value1, String value2) {
+            addCriterion("oper_name between", value1, value2, "operName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNameNotBetween(String value1, String value2) {
+            addCriterion("oper_name not between", value1, value2, "operName");
             return (Criteria) this;
         }
     }

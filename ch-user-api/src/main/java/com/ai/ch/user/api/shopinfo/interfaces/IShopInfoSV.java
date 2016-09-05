@@ -6,7 +6,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.ai.ch.user.api.shopinfo.params.InsertShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
+import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
@@ -69,4 +74,46 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/updateShopInfo")
 	public BaseResponse updateShopInfo(UpdateShopInfoRequest request) throws BusinessException, SystemException;
+	
+	/**
+	 * 查询默认保证金
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-04
+	 * @RestRelativeURL shopinfoservice/queryDepositRule
+	 */
+	@POST
+	@Path("/queryDepositRule")
+	public QueryDepositRuleResposne queryDepositRule(QueryDepositRuleRequest request)throws BusinessException,SystemException;
+	
+	/**
+	 * 保存店铺信息日志
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-05
+	 * @RestRelativeURL shopinfoservice/insertShopInfoLog
+	 */
+	@POST
+	@Path("/insertShopInfoLog")
+	public BaseResponse insertShopInfoLog(InsertShopInfoLogRequest request)throws BusinessException,SystemException;
+	
+	/**
+	 * 查询店铺信息日志
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-06
+	 * @RestRelativeURL shopinfoservice/queryShopInfoLog
+	 */
+	@POST
+	@Path("/queryShopInfoLog")
+	public QueryShopInfoLogResponse queryShopInfoLog(QueryShopInfoLogRequest request)throws BusinessException,SystemException;
 }

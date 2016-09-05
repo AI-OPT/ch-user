@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
+import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
 import com.ai.ch.user.dao.mapper.factory.MapperFactory;
@@ -30,6 +32,11 @@ public class ShopInfoAtomSV implements IShopInfoAtomSV {
 	@Override
 	public int updateByExampleSelective(ShopInfo record, ShopInfoCriteria example) {
 		return MapperFactory.getShopInfoMapperMapper().updateByExampleSelective(record, example);
+	}
+
+	@Override
+	public List<CtDepositRule> selectByExample(CtDepositRuleCriteria example) {
+		return MapperFactory.getCtDepositRuleMapper().selectByExample(example);
 	}
 
 }

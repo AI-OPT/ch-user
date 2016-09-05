@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
+import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
 
@@ -16,4 +18,6 @@ public interface IShopInfoAtomSV {
 	 int updateByExample(@Param("record") ShopInfo record, @Param("example") ShopInfoCriteria example);
 	 
 	 int updateByExampleSelective(@Param("record") ShopInfo record, @Param("example") ShopInfoCriteria example);
+	 
+	 List<CtDepositRule> selectByExample(CtDepositRuleCriteria example);
 }
