@@ -1,5 +1,7 @@
 package com.ai.ch.user.api.contract.impl;
 
+import java.util.List;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.api.contract.interfaces.IContractSV;
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
-import com.ai.ch.user.api.contract.param.ContactInfoResponse;
+import com.ai.ch.user.api.contract.param.ContractInfoResponse;
 import com.ai.ch.user.constants.ExceptCodeConstants;
 import com.ai.ch.user.service.business.interfaces.IContractBusiSV;
 import com.ai.opt.base.exception.BusinessException;
@@ -44,10 +46,10 @@ public class contractSVImpl implements IContractSV{
 	@Override
 	@POST
 	@Path("/queryContractInfo")
-	public ContactInfoResponse queryContractInfo(ContactInfoRequest contactRequest)
+	public ContractInfoResponse queryContractInfo(ContactInfoRequest contactRequest)
 			throws BusinessException, SystemException {
 		ResponseHeader responseHeader = null;
-		ContactInfoResponse response = new ContactInfoResponse();
+		ContractInfoResponse response = new ContractInfoResponse();
 		 try {
 			 	response = contractBusiSV.queryContractInfo(contactRequest);
 	            responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
@@ -56,6 +58,25 @@ public class contractSVImpl implements IContractSV{
 	        }
 	        response.setResponseHeader(responseHeader);
 		return response;
+	}
+
+	@Override
+	@POST
+	@Path("/queryAllContractInfo")
+	public List<ContractInfoResponse> queryAllContractInfo(
+			ContactInfoRequest contactRequest) throws BusinessException,
+			SystemException {
+		ResponseHeader responseHeader = null;
+		List<ContractInfoResponse> list = null;
+		ContractInfoResponse response = new ContractInfoResponse();
+		 try {
+			    list = contractBusiSV.queryAllContractInfo(contactRequest);
+	            responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
+	        } catch (Exception e) {
+	            responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
+	        }
+	        response.setResponseHeader(responseHeader);
+		return list;
 	}
 
 }
