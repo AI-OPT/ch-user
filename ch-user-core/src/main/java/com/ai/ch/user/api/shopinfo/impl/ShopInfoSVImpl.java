@@ -13,6 +13,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
@@ -182,6 +183,11 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
+	}
+
+	@Override
+	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException {
+		return shopInfoBusiSV.queryShopRank(request);
 	}
 
 }

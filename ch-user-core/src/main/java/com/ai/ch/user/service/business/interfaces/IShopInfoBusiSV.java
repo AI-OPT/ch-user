@@ -6,6 +6,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
@@ -37,4 +38,6 @@ public interface IShopInfoBusiSV {
 	
 	public QueryShopStatDataResponse queryShopStatData(QueryShopStatDataRequest request)
 			throws BusinessException, SystemException;
+	
+	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException;
 }

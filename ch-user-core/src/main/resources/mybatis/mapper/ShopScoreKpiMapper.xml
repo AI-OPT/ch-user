@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ch.user.dao.mapper.interfaces.ShopScoreKpiMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ch.user.dao.mapper.bo.ShopScoreKpi" >
+    <result column="KPI_ID" property="kpiId" jdbcType="INTEGER" />
+    <result column="KPI_NAME" property="kpiName" jdbcType="VARCHAR" />
+    <result column="KPI_DESC" property="kpiDesc" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="WEIGHT" property="weight" jdbcType="DECIMAL" />
+    <result column="DATA_OBJECT" property="dataObject" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    KPI_ID, KPI_NAME, KPI_DESC, TENANT_ID, STATUS, WEIGHT, DATA_OBJECT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.ShopScoreKpiCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_score_kpi
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopScoreKpiCriteria" >
+    delete from shop_score_kpi
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.ShopScoreKpi" >
+    insert into shop_score_kpi (KPI_ID, KPI_NAME, KPI_DESC, 
+      TENANT_ID, STATUS, WEIGHT, 
+      DATA_OBJECT)
+    values (#{kpiId,jdbcType=INTEGER}, #{kpiName,jdbcType=VARCHAR}, #{kpiDesc,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{weight,jdbcType=DECIMAL}, 
+      #{dataObject,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopScoreKpi" >
+    insert into shop_score_kpi
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kpiId != null" >
+        KPI_ID,
+      </if>
+      <if test="kpiName != null" >
+        KPI_NAME,
+      </if>
+      <if test="kpiDesc != null" >
+        KPI_DESC,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="dataObject != null" >
+        DATA_OBJECT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kpiId != null" >
+        #{kpiId,jdbcType=INTEGER},
+      </if>
+      <if test="kpiName != null" >
+        #{kpiName,jdbcType=VARCHAR},
+      </if>
+      <if test="kpiDesc != null" >
+        #{kpiDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="dataObject != null" >
+        #{dataObject,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ch.user.dao.mapper.bo.ShopScoreKpiCriteria" resultType="java.lang.Integer" >
+    select count(*) from shop_score_kpi
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_score_kpi
+    <set >
+      <if test="record.kpiId != null" >
+        KPI_ID = #{record.kpiId,jdbcType=INTEGER},
+      </if>
+      <if test="record.kpiName != null" >
+        KPI_NAME = #{record.kpiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kpiDesc != null" >
+        KPI_DESC = #{record.kpiDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        WEIGHT = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dataObject != null" >
+        DATA_OBJECT = #{record.dataObject,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_score_kpi
+    set KPI_ID = #{record.kpiId,jdbcType=INTEGER},
+      KPI_NAME = #{record.kpiName,jdbcType=VARCHAR},
+      KPI_DESC = #{record.kpiDesc,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      WEIGHT = #{record.weight,jdbcType=DECIMAL},
+      DATA_OBJECT = #{record.dataObject,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

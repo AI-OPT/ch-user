@@ -1,5 +1,6 @@
 package com.ai.ch.user.service.business.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
@@ -25,12 +27,15 @@ import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
+import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
+import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpiCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopStatData;
 import com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria;
 import com.ai.ch.user.service.atom.interfaces.IDepositRuleAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopInfoAtomSV;
+import com.ai.ch.user.service.atom.interfaces.IShopRankRuleAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopScoreKpiAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopStatDataAtomSV;
 import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
@@ -44,12 +49,18 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Autowired
 	private IShopInfoAtomSV shopInfoAtomSV;
+	
 	@Autowired
 	private IDepositRuleAtomSV depositRuleAtomSV;
+	
 	@Autowired
 	private IShopScoreKpiAtomSV shopScoreKpiAtomSV;
+	
 	@Autowired
 	private IShopStatDataAtomSV shopStatDataAtomSV;
+	
+	@Autowired
+	private IShopRankRuleAtomSV shopRankRuleAtomSV;
 	
 	@Override
 	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request) throws BusinessException, SystemException {
@@ -144,5 +155,58 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if(!list.isEmpty())
 			BeanUtils.copyProperties(list.get(0), response);
 		return response;
+	}
+
+	@Override
+	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException {
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		
+		//店铺评级统计数据
+		ShopStatDataCriteria shopStatDataExample = new ShopStatDataCriteria();
+		ShopStatDataCriteria.Criteria shopStatDataCriteria = shopStatDataExample.createCriteria();
+		shopStatDataCriteria.andUserIdEqualTo(request.getUserId());
+		List<ShopStatData> shopStatDataList = shopStatDataAtomSV.selectByExample(shopStatDataExample);
+		Long servCharge = 0L;
+		//获取佣金
+		if(shopStatDataList.isEmpty())
+			throw new BusinessException("统计数据不存在");
+		else
+			servCharge = shopStatDataList.get(0).getServCharge(); 
+		//店铺评级指标
+		BigDecimal h =new BigDecimal("0");
+		BigDecimal a=new BigDecimal("0");
+		ShopScoreKpiCriteria shopScoreKpiExample = new ShopScoreKpiCriteria();
+		ShopScoreKpiCriteria.Criteria shopScoreKpiCriteria = shopScoreKpiExample.createCriteria();
+		shopScoreKpiCriteria.andTenantIdEqualTo(request.getTenantId());
+		List<String> strList = new ArrayList<String>();
+		strList.add("h");
+		strList.add("a");
+		shopScoreKpiCriteria.andKpiNameIn(strList);
+		List<ShopScoreKpi> shopScoreList = shopScoreKpiAtomSV.selectByExample(shopScoreKpiExample);
+		for (ShopScoreKpi shopScoreKpi : shopScoreList) {
+			if("h".equals(shopScoreKpi.getKpiName()))
+				h = shopScoreKpi.getWeight();
+			else if("a".equals(shopScoreKpi.getKpiName()))
+				a = shopScoreKpi.getWeight();
+		}
+		//计算分数公式   score=h(a*佣金+b*订单+.....)
+		BigDecimal score = h.multiply((a.multiply(BigDecimal.valueOf(servCharge))));
+		
+		Integer rank=0;
+		//查询score在平台评级规则表中的rank
+		ShopRankRuleCriteria shopRankRuleExample = new ShopRankRuleCriteria();
+		ShopRankRuleCriteria.Criteria shopRankRuleCriteria = shopRankRuleExample.createCriteria();
+		shopRankRuleCriteria.andTenantIdEqualTo(request.getTenantId());
+		shopRankRuleCriteria.andMinScoreLessThan(score.longValue());
+		shopRankRuleCriteria.andMaxScoreGreaterThan(score.longValue());
+		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(shopRankRuleExample);
+		if(shopRankRuleList.isEmpty())
+			throw new BusinessException("评分不在规则之内");
+		else
+			rank = shopRankRuleList.get(0).getRank();
+		return rank;
 	}
 }

@@ -15,6 +15,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
@@ -178,4 +179,18 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/queryShopStatData")
 	public QueryShopStatDataResponse queryShopStatData(QueryShopStatDataRequest request)throws BusinessException,SystemException;
+	
+	/**
+	 * 查询店铺评级
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-11
+	 * @RestRelativeURL shopinfoservice/queryShopRank
+	 */
+	@POST
+	@Path("/queryShopRank")
+	public Integer queryShopRank(QueryShopRankRequest request)throws BusinessException,SystemException;
 }
