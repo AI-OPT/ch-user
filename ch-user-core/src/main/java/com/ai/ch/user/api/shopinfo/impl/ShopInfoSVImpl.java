@@ -9,6 +9,7 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
@@ -188,6 +189,11 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException {
 		return shopInfoBusiSV.queryShopRank(request);
+	}
+
+	@Override
+	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException {
+		return shopInfoBusiSV.queryShopDeposit(request);
 	}
 
 }

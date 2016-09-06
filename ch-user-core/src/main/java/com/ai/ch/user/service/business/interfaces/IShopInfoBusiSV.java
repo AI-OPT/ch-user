@@ -4,6 +4,7 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
@@ -40,4 +41,6 @@ public interface IShopInfoBusiSV {
 			throws BusinessException, SystemException;
 	
 	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException;
+	
+	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException;
 }

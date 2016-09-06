@@ -13,6 +13,7 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
@@ -208,5 +209,32 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		else
 			rank = shopRankRuleList.get(0).getRank();
 		return rank;
+	}
+
+	@Override
+	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException {
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		Long deposit=0L;
+		if(list.isEmpty())
+			throw new BusinessException("店铺信息不存在");
+		else{
+			if(list.get(0).getDepositBalance()!=null)
+				deposit=list.get(0).getDepositBalance();
+			else{
+				CtDepositRuleCriteria ctDepositRuleExample = new CtDepositRuleCriteria();
+				CtDepositRuleCriteria.Criteria ctDepositRuleCriteria = ctDepositRuleExample.createCriteria();
+				ctDepositRuleCriteria.andProductCatIdEqualTo(list.get(0).getBusiType());
+				List<CtDepositRule> ctDepositRules = depositRuleAtomSV.selectByExample(ctDepositRuleExample);
+				if(list.isEmpty())
+					throw new BusinessException("默认保证金不存在");
+				else
+				deposit = ctDepositRules.get(0).getDefaultDeposit();
+			}
+		}
+		return deposit;
 	}
 }

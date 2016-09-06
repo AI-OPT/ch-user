@@ -11,6 +11,7 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
@@ -193,4 +194,18 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/queryShopRank")
 	public Integer queryShopRank(QueryShopRankRequest request)throws BusinessException,SystemException;
+	
+	/**
+	 * 查询店铺保证金服务
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-12
+	 * @RestRelativeURL shopinfoservice/queryShopDeposit
+	 */
+	@POST
+	@Path("/queryShopDeposit")
+	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException,SystemException;
 }

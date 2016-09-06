@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.ch.user.api.shopinfo.interfaces.IShopInfoSV;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,4 +24,13 @@ public class ShopInfoTest {
 		request.setUserId("00002");
 		shopInfoSV.queryShopRank(request);
 	}
+	
+	@Test
+	public void testQueryDeposit(){
+		QueryShopDepositRequest request = new QueryShopDepositRequest();
+		request.setTenantId("changhong");
+		request.setUserId("00002");
+		System.out.println(shopInfoSV.queryShopDeposit(request));
+	}
+	
 }
