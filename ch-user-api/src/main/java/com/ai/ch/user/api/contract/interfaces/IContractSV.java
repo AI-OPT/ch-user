@@ -1,5 +1,7 @@
 package com.ai.ch.user.api.contract.interfaces;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -7,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
-import com.ai.ch.user.api.contract.param.ContactInfoResponse;
+import com.ai.ch.user.api.contract.param.ContractInfoResponse;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
@@ -39,7 +41,7 @@ public interface IContractSV {
 	public BaseResponse insertContractInfo(ContactInfoRequest  contactRequest)throws BusinessException, SystemException;
 	
 	/**
-	 * 查询合同信息
+	 * 查询单个合同信息
 	 * 
 	 * @param request
 	 * @return
@@ -51,5 +53,20 @@ public interface IContractSV {
 	 */
 	@POST
 	@Path("/queryContractInfo")
-	public ContactInfoResponse queryContractInfo(ContactInfoRequest  contactRequest)throws BusinessException, SystemException;
+	public ContractInfoResponse queryContractInfo(ContactInfoRequest  contactRequest)throws BusinessException, SystemException;
+
+	/**
+	 * 查询所有合同信息
+	 * 
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangyuehong
+	 * @ApiCode COMM_TENANT_0014
+	 * @RestRelativeURL contractservice/queryContractInfo
+	 */
+	@POST
+	@Path("/queryAllContractInfo")
+	public List<ContractInfoResponse> queryAllContractInfo(ContactInfoRequest  contactRequest)throws BusinessException, SystemException;
 }
