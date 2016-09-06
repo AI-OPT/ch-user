@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.ai.opt.base.vo.BaseResponse;
 
-public class ContactInfoResponse  extends BaseResponse{
+public class ContractInfoResponse  extends BaseResponse{
 
 	private static final long serialVersionUID = 1L;
 	/**
