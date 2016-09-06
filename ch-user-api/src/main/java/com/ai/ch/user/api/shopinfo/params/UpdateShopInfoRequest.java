@@ -10,7 +10,7 @@ import com.ai.opt.base.vo.BaseInfo;
  * 
  * @author zhangqiang7
  */
-public class UpdateShopInfoRequest extends BaseInfo{
+public class UpdateShopInfoRequest extends BaseInfo {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,7 @@ public class UpdateShopInfoRequest extends BaseInfo{
 	/**
 	 * 订单划扣比例
 	 */
-	private Integer ratio;
+	private Float ratio;
 
 	/**
 	 * 店铺等级
@@ -83,7 +83,7 @@ public class UpdateShopInfoRequest extends BaseInfo{
 	 * 现有电商平台
 	 */
 	private String ecommOwner;
-	
+
 	/**
 	 * 店铺状态
 	 */
@@ -176,11 +176,11 @@ public class UpdateShopInfoRequest extends BaseInfo{
 		this.rentFee = rentFee;
 	}
 
-	public Integer getRatio() {
+	public Float getRatio() {
 		return ratio;
 	}
 
-	public void setRatio(Integer ratio) {
+	public void setRatio(Float ratio) {
 		this.ratio = ratio;
 	}
 

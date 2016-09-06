@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * 店铺信息日志表
- * Date: 2016年9月1日 <br>
+ * 店铺信息日志表 Date: 2016年9月1日 <br>
  * Copyright (c) 2016 asiainfo.com <br>
  * 
  * @author zhangqiang7
  */
-public class ShopInfoLogVo implements Serializable{
+public class ShopInfoLogVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +50,7 @@ public class ShopInfoLogVo implements Serializable{
 	/**
 	 * 订单划扣比例
 	 */
-	private Integer ratio;
+	private Float ratio;
 
 	/**
 	 * 店铺等级
@@ -154,7 +153,7 @@ public class ShopInfoLogVo implements Serializable{
 	public void setMerchantNo(String merchantNo) {
 		this.merchantNo = merchantNo;
 	}
-	
+
 	public String getTenantId() {
 		return tenantId;
 	}
@@ -211,11 +210,11 @@ public class ShopInfoLogVo implements Serializable{
 		this.rentFee = rentFee;
 	}
 
-	public Integer getRatio() {
+	public Float getRatio() {
 		return ratio;
 	}
 
-	public void setRatio(Integer ratio) {
+	public void setRatio(Float ratio) {
 		this.ratio = ratio;
 	}
 

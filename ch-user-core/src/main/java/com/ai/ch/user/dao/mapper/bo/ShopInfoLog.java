@@ -13,7 +13,7 @@ public class ShopInfoLog {
 
     private Long rentFee;
 
-    private Integer ratio;
+    private Float ratio;
 
     private Integer rank;
 
@@ -87,11 +87,11 @@ public class ShopInfoLog {
         this.rentFee = rentFee;
     }
 
-    public Integer getRatio() {
+    public Float getRatio() {
         return ratio;
     }
 
-    public void setRatio(Integer ratio) {
+    public void setRatio(Float ratio) {
         this.ratio = ratio;
     }
 

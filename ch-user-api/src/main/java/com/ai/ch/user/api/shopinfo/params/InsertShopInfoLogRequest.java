@@ -1,13 +1,11 @@
 package com.ai.ch.user.api.shopinfo.params;
 
-
 import java.sql.Timestamp;
 
 import com.ai.opt.base.vo.BaseInfo;
 
 /**
- *  保存店铺信息日志入参
- * Date: 2016年9月1日 <br>
+ * 保存店铺信息日志入参 Date: 2016年9月1日 <br>
  * Copyright (c) 2016 asiainfo.com <br>
  * 
  * @author zhangqiang7
@@ -44,7 +42,7 @@ public class InsertShopInfoLogRequest extends BaseInfo {
 	/**
 	 * 订单划扣比例
 	 */
-	private Integer ratio;
+	private Float ratio;
 
 	/**
 	 * 店铺等级
@@ -147,7 +145,7 @@ public class InsertShopInfoLogRequest extends BaseInfo {
 	public void setMerchantNo(String merchantNo) {
 		this.merchantNo = merchantNo;
 	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
@@ -188,11 +186,11 @@ public class InsertShopInfoLogRequest extends BaseInfo {
 		this.rentFee = rentFee;
 	}
 
-	public Integer getRatio() {
+	public Float getRatio() {
 		return ratio;
 	}
 
-	public void setRatio(Integer ratio) {
+	public void setRatio(Float ratio) {
 		this.ratio = ratio;
 	}
 

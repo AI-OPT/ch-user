@@ -456,62 +456,62 @@ public class ShopInfoLogCriteria {
         }
 
         public Criteria andRatioIsNull() {
-            addCriterion("RATIO is null");
+            addCriterion("ratio is null");
             return (Criteria) this;
         }
 
         public Criteria andRatioIsNotNull() {
-            addCriterion("RATIO is not null");
+            addCriterion("ratio is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRatioEqualTo(Integer value) {
-            addCriterion("RATIO =", value, "ratio");
+        public Criteria andRatioEqualTo(Float value) {
+            addCriterion("ratio =", value, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioNotEqualTo(Integer value) {
-            addCriterion("RATIO <>", value, "ratio");
+        public Criteria andRatioNotEqualTo(Float value) {
+            addCriterion("ratio <>", value, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioGreaterThan(Integer value) {
-            addCriterion("RATIO >", value, "ratio");
+        public Criteria andRatioGreaterThan(Float value) {
+            addCriterion("ratio >", value, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioGreaterThanOrEqualTo(Integer value) {
-            addCriterion("RATIO >=", value, "ratio");
+        public Criteria andRatioGreaterThanOrEqualTo(Float value) {
+            addCriterion("ratio >=", value, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioLessThan(Integer value) {
-            addCriterion("RATIO <", value, "ratio");
+        public Criteria andRatioLessThan(Float value) {
+            addCriterion("ratio <", value, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioLessThanOrEqualTo(Integer value) {
-            addCriterion("RATIO <=", value, "ratio");
+        public Criteria andRatioLessThanOrEqualTo(Float value) {
+            addCriterion("ratio <=", value, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioIn(List<Integer> values) {
-            addCriterion("RATIO in", values, "ratio");
+        public Criteria andRatioIn(List<Float> values) {
+            addCriterion("ratio in", values, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioNotIn(List<Integer> values) {
-            addCriterion("RATIO not in", values, "ratio");
+        public Criteria andRatioNotIn(List<Float> values) {
+            addCriterion("ratio not in", values, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioBetween(Integer value1, Integer value2) {
-            addCriterion("RATIO between", value1, value2, "ratio");
+        public Criteria andRatioBetween(Float value1, Float value2) {
+            addCriterion("ratio between", value1, value2, "ratio");
             return (Criteria) this;
         }
 
-        public Criteria andRatioNotBetween(Integer value1, Integer value2) {
-            addCriterion("RATIO not between", value1, value2, "ratio");
+        public Criteria andRatioNotBetween(Float value1, Float value2) {
+            addCriterion("ratio not between", value1, value2, "ratio");
             return (Criteria) this;
         }
 

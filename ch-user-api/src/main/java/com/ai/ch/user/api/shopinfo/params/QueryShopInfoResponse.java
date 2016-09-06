@@ -49,7 +49,7 @@ public class QueryShopInfoResponse extends BaseResponse {
 	/**
 	 * 订单划扣比例
 	 */
-	private Integer ratio;
+	private Float ratio;
 
 	/**
 	 * 店铺等级
@@ -191,11 +191,11 @@ public class QueryShopInfoResponse extends BaseResponse {
 		this.rentFee = rentFee;
 	}
 
-	public Integer getRatio() {
+	public Float getRatio() {
 		return ratio;
 	}
 
-	public void setRatio(Integer ratio) {
+	public void setRatio(Float ratio) {
 		this.ratio = ratio;
 	}
 
