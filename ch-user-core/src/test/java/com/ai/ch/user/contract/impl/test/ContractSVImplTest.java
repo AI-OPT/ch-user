@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.ch.user.api.contract.interfaces.IContractSV;
 import com.ai.ch.user.api.contract.param.ContactInfoRequest;
-import com.ai.ch.user.api.contract.param.ContactInfoResponse;
+import com.ai.ch.user.api.contract.param.ContractInfoResponse;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +39,7 @@ public class ContractSVImplTest {
 		contactInfoRequest.setTenantId("ch");
 		contactInfoRequest.setUserId("2");
 		contactInfoRequest.setContractType("1");
-		ContactInfoResponse response = contractSV.queryContractInfo(contactInfoRequest);
+		ContractInfoResponse response = contractSV.queryContractInfo(contactInfoRequest);
 		System.out.println(JSON.toJSONString(response));
 	}
 	
