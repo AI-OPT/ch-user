@@ -2,7 +2,7 @@ package com.ai.ch.user.api.shopinfo.params;
 
 import com.ai.opt.base.vo.BaseResponse;
 
-public class QueryDepositRuleResposne extends BaseResponse{
+public class QueryDepositRuleResponse extends BaseResponse{
 
 	private static final long serialVersionUID = 1L;
 

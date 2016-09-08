@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
-import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
@@ -21,6 +23,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
+import com.ai.ch.user.api.shopinfo.params.ShopInfoVo;
 import com.ai.ch.user.api.shopinfo.params.ShopScoreKpiVo;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
@@ -97,13 +100,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	}
 
 	@Override
-	public QueryDepositRuleResposne queryDepositRule(QueryDepositRuleRequest request)
+	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)
 			throws BusinessException, SystemException {
 		CtDepositRuleCriteria example = new CtDepositRuleCriteria();
 		CtDepositRuleCriteria.Criteria criteria  = example.createCriteria();
 		criteria.andProductCatIdEqualTo(request.getProductCatId());
 		List<CtDepositRule> list = depositRuleAtomSV.selectByExample(example);
-		QueryDepositRuleResposne response = new QueryDepositRuleResposne();
+		QueryDepositRuleResponse response = new QueryDepositRuleResponse();
 		if(!list.isEmpty()){
 			BeanUtils.copyProperties(list.get(0), response);
 		}
@@ -236,5 +239,25 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			}
 		}
 		return deposit;
+	}
+
+	@Override
+	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
+			throws BusinessException, SystemException {
+		QueryShopInfoBatchResponse response = new QueryShopInfoBatchResponse();
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andCreateTimeGreaterThan(request.getBeginTime());
+		criteria.andCreateTimeLessThan(request.getEndTime());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		List<ShopInfoVo> responseList = new ArrayList<ShopInfoVo>();
+		for (ShopInfo shopInfo : list) {
+			ShopInfoVo shopInfoVo = new ShopInfoVo();
+			BeanUtils.copyProperties(shopInfo, shopInfoVo);
+			responseList.add(shopInfoVo);
+		}
+		response.setList(responseList);
+		return response;
 	}
 }

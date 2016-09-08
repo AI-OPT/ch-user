@@ -10,8 +10,10 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
-import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
@@ -95,7 +97,7 @@ public interface IShopInfoSV {
 	 */
 	@POST
 	@Path("/queryDepositRule")
-	public QueryDepositRuleResposne queryDepositRule(QueryDepositRuleRequest request)throws BusinessException,SystemException;
+	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)throws BusinessException,SystemException;
 	
 	/**
 	 * 保存店铺信息日志
@@ -208,4 +210,19 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/queryShopDeposit")
 	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException,SystemException;
+	
+	/**
+	 * 查询批量店铺信息
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode ChUser-013
+	 * @RestRelativeURL shopinfoservice/queryShopInfoBatch
+	 */
+	@POST
+	@Path("/queryShopInfoBatch")
+	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
+			throws BusinessException, SystemException;
 }

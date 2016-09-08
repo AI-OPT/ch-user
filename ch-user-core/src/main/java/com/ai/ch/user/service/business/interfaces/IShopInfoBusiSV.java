@@ -3,8 +3,10 @@ package com.ai.ch.user.service.business.interfaces;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
-import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResposne;
+import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
@@ -25,7 +27,7 @@ public interface IShopInfoBusiSV {
 
 	public int updateShopInfo(UpdateShopInfoRequest request) throws BusinessException, SystemException;
 
-	public QueryDepositRuleResposne queryDepositRule(QueryDepositRuleRequest request)
+	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)
 			throws BusinessException, SystemException;
 	
 	public QueryShopScoreKpiResponse queryShopScoreKpi(QueryShopScoreKpiRequest request)
@@ -43,4 +45,7 @@ public interface IShopInfoBusiSV {
 	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException;
 	
 	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException;
+	
+	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
+			throws BusinessException, SystemException;
 }

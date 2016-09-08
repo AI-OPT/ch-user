@@ -16,7 +16,7 @@ public class QueryShopInfoLogRequest extends BaseInfo {
 	 * 店铺userId
 	 */
 	private String userId;
-
+	
 	public String getUserId() {
 		return userId;
 	}
