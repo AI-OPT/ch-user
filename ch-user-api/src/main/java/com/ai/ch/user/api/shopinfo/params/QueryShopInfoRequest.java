@@ -16,6 +16,11 @@ public class QueryShopInfoRequest extends BaseInfo{
 	 * 用戶Id
 	 */
 	private String userId;
+	
+	/**
+	 * 店铺名称
+	 */
+	private String shopName;
 
 
 	public String getUserId() {
@@ -26,4 +31,11 @@ public class QueryShopInfoRequest extends BaseInfo{
 		this.userId = userId;
 	}
 
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 }
