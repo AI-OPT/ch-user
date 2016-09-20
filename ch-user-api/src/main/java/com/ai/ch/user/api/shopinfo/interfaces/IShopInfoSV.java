@@ -49,10 +49,10 @@ public interface IShopInfoSV {
 	 * @throws SystemException
 	 * @author zhangqiang7
 	 * @ApiCode ChUser-01
-	 * @RestRelativeURL shopinfoservice/queryCurrentScore
+	 * @RestRelativeURL shopinfoservice/queryShopInfo
 	 */
 	@POST
-	@Path("/queryCurrentScore")
+	@Path("/queryShopInfo")
 	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request)
 			throws BusinessException, SystemException;
 	
