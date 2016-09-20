@@ -54,6 +54,12 @@ public class ContractBusiSVImpl implements IContractBusiSV{
 		if(StringUtil.isBlank(contactInfoRequest.getContractType())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:合同类型不能为空");
 		}
+		if(contactInfoRequest.getContractName()!=null){
+			criteria.andContractNameEqualTo(contactInfoRequest.getContractName());
+		}
+		if(contactInfoRequest.getContractCode()!=null){
+			criteria.andContractCodeEqualTo(contactInfoRequest.getContractCode());
+		}
 		criteria.andTenantIdEqualTo(contactInfoRequest.getTenantId());
 		criteria.andUserIdEqualTo(contactInfoRequest.getUserId());
 		criteria.andContractTypeEqualTo(contactInfoRequest.getContractType());
