@@ -77,7 +77,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		
 		if(request.getShopName()!=null&&!"".equals(request.getShopName())){
-			criteria.andShopNameEqualTo(request.getUserId());
+			criteria.andShopNameEqualTo(request.getShopName());
 		}
 		
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
