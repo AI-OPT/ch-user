@@ -45,7 +45,10 @@ import com.ai.ch.user.service.atom.interfaces.IShopStatDataAtomSV;
 import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 
 @Component
 @Transactional
@@ -266,5 +269,37 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		response.setList(responseList);
 		return response;
+	}
+
+	@Override
+	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+			throws BusinessException, SystemException {
+		
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
+		}
+		if(!StringUtil.isBlank(request.getUserId())){
+			criteria.andUserIdEqualTo(request.getUserId());
+		}
+
+		if(StringUtil.isBlank(request.getShopName())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:店铺名称不能为空");
+		}
+		criteria.andShopNameEqualTo(request.getShopName());
+		
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		
+		if(CollectionUtil.isEmpty(list)){
+			return true;
+		}else if(!StringUtil.isBlank(request.getUserId())){
+			ShopInfo shopInfo = list.get(0);
+			if(shopInfo.getUserId().equals(request.getUserId())){
+				return true;
+			}
+		}
+		return false;
 	}
 }
