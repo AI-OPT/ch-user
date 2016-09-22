@@ -48,4 +48,7 @@ public interface IShopInfoBusiSV {
 	
 	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
 			throws BusinessException, SystemException;
+	
+	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+			throws BusinessException, SystemException;
 }
