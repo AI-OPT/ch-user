@@ -1,5 +1,8 @@
 package com.ai.ch.user.api.shopinfo.impl;
 
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -202,6 +205,14 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
 			throws BusinessException, SystemException {
 		return shopInfoBusiSV.queryShopInfoBatch(request);
+	}
+
+	@Override
+	@POST
+	@Path("/checkShopNameOnly")
+	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+			throws BusinessException, SystemException {
+		return shopInfoBusiSV.checkShopNameOnly(request);
 	}
 
 }
