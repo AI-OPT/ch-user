@@ -5,7 +5,10 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.36'
     compile 'org.springframework:spring-tx:4.1.7.RELEASE'
     compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
-    compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
+    compile 'com.ai.opt.sdk:opt-sdk:2.2-SNAPSHOT'
+    //支付
+    compile "com.ai.opt.chpay:ch-payclient:1.0-SNAPSHOT"
+    
     testCompile(
             "org.springframework:spring-test:4.1.7.RELEASE",
             "junit:junit:4.12"
