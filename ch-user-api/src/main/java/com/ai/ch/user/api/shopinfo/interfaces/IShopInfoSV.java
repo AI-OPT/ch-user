@@ -225,4 +225,20 @@ public interface IShopInfoSV {
 	@Path("/queryShopInfoBatch")
 	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
 			throws BusinessException, SystemException;
+	
+	/**
+	 * 校验店铺名称的唯一性
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangyuehong
+	 * @ApiCode ChUser-014
+	 * @RestRelativeURL shopinfoservice/checkShopNameOnly
+	 */
+	@POST
+	@Path("/checkShopNameOnly")
+	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+			throws BusinessException, SystemException;
+	
 }
