@@ -48,8 +48,8 @@ public class ContractBusiSVImpl implements IContractBusiSV{
 		if(StringUtil.isBlank(contactInfoRequest.getTenantId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
 		}
-		if(StringUtil.isBlank(contactInfoRequest.getUserId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:用户ID不能为空");
+		if(!StringUtil.isBlank(contactInfoRequest.getUserId())){
+			criteria.andUserIdEqualTo(contactInfoRequest.getUserId());
 		}
 		if(StringUtil.isBlank(contactInfoRequest.getContractType())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:合同类型不能为空");
@@ -61,7 +61,6 @@ public class ContractBusiSVImpl implements IContractBusiSV{
 			criteria.andContractCodeEqualTo(contactInfoRequest.getContractCode());
 		}
 		criteria.andTenantIdEqualTo(contactInfoRequest.getTenantId());
-		criteria.andUserIdEqualTo(contactInfoRequest.getUserId());
 		criteria.andContractTypeEqualTo(contactInfoRequest.getContractType());
 		List<CtContractInfo> list = contractAtomSV.queryContractInfo(example);
 		ContractInfoResponse response = new ContractInfoResponse();
