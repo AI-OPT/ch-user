@@ -238,14 +238,16 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			if(list.get(0).getDepositBalance()!=null)
 				deposit=list.get(0).getDepositBalance();
 			else{
-				CtDepositRuleCriteria ctDepositRuleExample = new CtDepositRuleCriteria();
+				/*CtDepositRuleCriteria ctDepositRuleExample = new CtDepositRuleCriteria();
 				CtDepositRuleCriteria.Criteria ctDepositRuleCriteria = ctDepositRuleExample.createCriteria();
 				ctDepositRuleCriteria.andProductCatIdEqualTo(list.get(0).getBusiType());
 				List<CtDepositRule> ctDepositRules = depositRuleAtomSV.selectByExample(ctDepositRuleExample);
 				if(list.isEmpty())
 					throw new BusinessException("默认保证金不存在");
 				else
-				deposit = ctDepositRules.get(0).getDefaultDeposit();
+				deposit = ctDepositRules.get(0).getDefaultDeposit();*/
+				//若保证金未设置,默认0
+				deposit = 0L;
 			}
 		}
 		return deposit;
