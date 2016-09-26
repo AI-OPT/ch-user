@@ -102,12 +102,23 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
+		if(request.getStatus()!=null){
+			if("1".equals(request.getStatus())){
+				shopInfo.setCloseTime(DateUtil.getSysDate());
+			}else if("2".equals(request.getStatus())){
+				shopInfo.setCloseTime(DateUtil.getSysDate());
+			}else if("0".equals(request.getStatus())){
+				shopInfo.setStatus(request.getStatus());
+				shopInfo.setOpenTime(DateUtil.getSysDate());
+			}else
+				shopInfo.setStatus(null);
+		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria =example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
 		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
-	}
+}
 
 	@Override
 	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)
