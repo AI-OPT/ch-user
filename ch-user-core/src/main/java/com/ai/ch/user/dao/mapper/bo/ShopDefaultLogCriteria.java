@@ -405,52 +405,52 @@ public class ShopDefaultLogCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceEqualTo(Long value) {
+        public Criteria andDeductBalanceEqualTo(Double value) {
             addCriterion("DEDUCT_BALANCE =", value, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceNotEqualTo(Long value) {
+        public Criteria andDeductBalanceNotEqualTo(Double value) {
             addCriterion("DEDUCT_BALANCE <>", value, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceGreaterThan(Long value) {
+        public Criteria andDeductBalanceGreaterThan(Double value) {
             addCriterion("DEDUCT_BALANCE >", value, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceGreaterThanOrEqualTo(Long value) {
+        public Criteria andDeductBalanceGreaterThanOrEqualTo(Double value) {
             addCriterion("DEDUCT_BALANCE >=", value, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceLessThan(Long value) {
+        public Criteria andDeductBalanceLessThan(Double value) {
             addCriterion("DEDUCT_BALANCE <", value, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceLessThanOrEqualTo(Long value) {
+        public Criteria andDeductBalanceLessThanOrEqualTo(Double value) {
             addCriterion("DEDUCT_BALANCE <=", value, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceIn(List<Long> values) {
+        public Criteria andDeductBalanceIn(List<Double> values) {
             addCriterion("DEDUCT_BALANCE in", values, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceNotIn(List<Long> values) {
+        public Criteria andDeductBalanceNotIn(List<Double> values) {
             addCriterion("DEDUCT_BALANCE not in", values, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceBetween(Long value1, Long value2) {
+        public Criteria andDeductBalanceBetween(Double value1, Double value2) {
             addCriterion("DEDUCT_BALANCE between", value1, value2, "deductBalance");
             return (Criteria) this;
         }
 
-        public Criteria andDeductBalanceNotBetween(Long value1, Long value2) {
+        public Criteria andDeductBalanceNotBetween(Double value1, Double value2) {
             addCriterion("DEDUCT_BALANCE not between", value1, value2, "deductBalance");
             return (Criteria) this;
         }

@@ -11,7 +11,7 @@ public class ShopDefaultLog {
 
     private Timestamp deductDate;
 
-    private Long deductBalance;
+    private Double deductBalance;
 
     private Long operId;
 
@@ -49,11 +49,11 @@ public class ShopDefaultLog {
         this.deductDate = deductDate;
     }
 
-    public Long getDeductBalance() {
+    public Double getDeductBalance() {
         return deductBalance;
     }
 
-    public void setDeductBalance(Long deductBalance) {
+    public void setDeductBalance(Double deductBalance) {
         this.deductBalance = deductBalance;
     }
 
