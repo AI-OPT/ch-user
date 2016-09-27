@@ -116,7 +116,7 @@ public interface IScoreSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_00003
+	 * @ApiCode COMM_TENANT_0002
 	 * @RestRelativeURL scoreservice/queryScoreLog
 	 */
 	@POST
