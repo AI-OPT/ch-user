@@ -26,7 +26,7 @@ import com.ai.opt.base.vo.BaseResponse;
 public interface IDefaultLogSV {
 	
 	/**
-	 * 保存扣款记录
+	 * 新增违约扣款记录
 	 * @param request
 	 * @return
 	 * @throws SystemException
@@ -53,5 +53,21 @@ public interface IDefaultLogSV {
 	@POST
 	@Path("/queryDefaultLog")
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
+			throws SystemException, BusinessException;
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws SystemException
+	 * @throws BusinessException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_00018
+	 * @RestRelativeURL defaultlogservice/paymentNotifications
+	 */
+	@POST
+	@Path("/paymentNotifications")
+	public String paymentNotifications(String msgHeader,String xmlBody,String signMsg)
 			throws SystemException, BusinessException;
 }
