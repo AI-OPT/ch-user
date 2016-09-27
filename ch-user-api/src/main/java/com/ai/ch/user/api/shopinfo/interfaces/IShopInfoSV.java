@@ -48,7 +48,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-01
+	 * @ApiCode COMM_TENANT_0010
 	 * @RestRelativeURL shopinfoservice/queryShopInfo
 	 */
 	@POST
@@ -64,7 +64,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-02
+	 * @ApiCode COMM_TENANT_0005
 	 * @RestRelativeURL shopinfoservice/insertShopInfo
 	 */
 	@POST
@@ -78,7 +78,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-03
+	 * @ApiCode COMM_TENANT_0021
 	 * @RestRelativeURL shopinfoservice/updateShopInfo
 	 */
 	@POST
@@ -204,7 +204,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-12
+	 * @ApiCode COMM_TENANT_0015
 	 * @RestRelativeURL shopinfoservice/queryShopDeposit
 	 */
 	@POST
@@ -233,7 +233,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangyuehong
-	 * @ApiCode ChUser-014
+	 * @ApiCode COMM_TENANT_0023
 	 * @RestRelativeURL shopinfoservice/checkShopNameOnly
 	 */
 	@POST
