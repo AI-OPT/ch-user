@@ -22,7 +22,7 @@ import com.ai.opt.base.vo.BaseResponse;
  *
  */
 @Path("/contractservice")
-@Consumes({ MediaType.APPLICATION_JSON })
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IContractSV {
 	/**
