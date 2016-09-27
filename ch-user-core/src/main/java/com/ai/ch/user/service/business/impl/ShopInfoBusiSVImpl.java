@@ -31,6 +31,7 @@ import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
+import com.ai.ch.user.dao.mapper.bo.ShopInfoLog;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
@@ -39,6 +40,7 @@ import com.ai.ch.user.dao.mapper.bo.ShopStatData;
 import com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria;
 import com.ai.ch.user.service.atom.interfaces.IDepositRuleAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopInfoAtomSV;
+import com.ai.ch.user.service.atom.interfaces.IShopInfoLogAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopRankRuleAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopScoreKpiAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopStatDataAtomSV;
@@ -56,35 +58,38 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Autowired
 	private IShopInfoAtomSV shopInfoAtomSV;
-	
+
 	@Autowired
 	private IDepositRuleAtomSV depositRuleAtomSV;
-	
+
 	@Autowired
 	private IShopScoreKpiAtomSV shopScoreKpiAtomSV;
-	
+
 	@Autowired
 	private IShopStatDataAtomSV shopStatDataAtomSV;
-	
+
 	@Autowired
 	private IShopRankRuleAtomSV shopRankRuleAtomSV;
 	
+	@Autowired
+	private IShopInfoLogAtomSV shopInfoLogAtomSV;
+
 	@Override
 	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request) throws BusinessException, SystemException {
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
-		ShopInfoCriteria example= new ShopInfoCriteria();
+		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
-		if(request.getUserId()!=null&&!"".equals(request.getUserId())){
+		if (request.getUserId() != null && !"".equals(request.getUserId())) {
 			criteria.andUserIdEqualTo(request.getUserId());
 		}
-		
-		if(request.getShopName()!=null&&!"".equals(request.getShopName())){
+
+		if (request.getShopName() != null && !"".equals(request.getShopName())) {
 			criteria.andShopNameEqualTo(request.getShopName());
 		}
-		
+
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
-		if(!list.isEmpty())
+		if (!list.isEmpty())
 			BeanUtils.copyProperties(list.get(0), response);
 		return response;
 	}
@@ -94,6 +99,14 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
+		shopInfo.setStatus(0);
+		//插入日志表
+		ShopInfoLog shopInfoLog = new ShopInfoLog();
+		BeanUtils.copyProperties(request, shopInfoLog);
+		shopInfoLog.setOperId(request.getOperId());
+		shopInfoLog.setOperName(request.getOperName());
+		shopInfo.setCreateTime(DateUtil.getSysDate());
+		shopInfoLogAtomSV.insert(shopInfoLog);
 		return shopInfoAtomSV.insert(shopInfo);
 	}
 
@@ -101,34 +114,38 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	public int updateShopInfo(UpdateShopInfoRequest request) throws BusinessException, SystemException {
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
-		shopInfo.setCreateTime(DateUtil.getSysDate());
-		if(request.getStatus()!=null){
-			if("1".equals(request.getStatus())){
+		if (request.getStatus() != null) {
+			if ("1".equals(request.getStatus())) {
 				shopInfo.setCloseTime(DateUtil.getSysDate());
-			}else if("2".equals(request.getStatus())){
+			} else if ("2".equals(request.getStatus())) {
 				shopInfo.setCloseTime(DateUtil.getSysDate());
-			}else if("0".equals(request.getStatus())){
+			} else if ("0".equals(request.getStatus())) {
 				shopInfo.setStatus(request.getStatus());
 				shopInfo.setOpenTime(DateUtil.getSysDate());
-			}else
+			} else
 				shopInfo.setStatus(null);
 		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
-		ShopInfoCriteria.Criteria criteria =example.createCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
+		
+		//更新日志表
+		ShopInfoLog shopInfoLog = new ShopInfoLog();
+		BeanUtils.copyProperties(shopInfo, shopInfoLog);
+		shopInfoLog.setUpdateTime(DateUtil.getSysDate());
 		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
-}
+	}
 
 	@Override
 	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)
 			throws BusinessException, SystemException {
 		CtDepositRuleCriteria example = new CtDepositRuleCriteria();
-		CtDepositRuleCriteria.Criteria criteria  = example.createCriteria();
+		CtDepositRuleCriteria.Criteria criteria = example.createCriteria();
 		criteria.andProductCatIdEqualTo(request.getProductCatId());
 		List<CtDepositRule> list = depositRuleAtomSV.selectByExample(example);
 		QueryDepositRuleResponse response = new QueryDepositRuleResponse();
-		if(!list.isEmpty()){
+		if (!list.isEmpty()) {
 			BeanUtils.copyProperties(list.get(0), response);
 		}
 		return response;
@@ -177,7 +194,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopStatDataCriteria.Criteria criteria = example.createCriteria();
 		criteria.andUserIdEqualTo(request.getUserId());
 		List<ShopStatData> list = shopStatDataAtomSV.selectByExample(example);
-		if(!list.isEmpty())
+		if (!list.isEmpty())
 			BeanUtils.copyProperties(list.get(0), response);
 		return response;
 	}
@@ -188,21 +205,21 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
-		
-		//店铺评级统计数据
+
+		// 店铺评级统计数据
 		ShopStatDataCriteria shopStatDataExample = new ShopStatDataCriteria();
 		ShopStatDataCriteria.Criteria shopStatDataCriteria = shopStatDataExample.createCriteria();
 		shopStatDataCriteria.andUserIdEqualTo(request.getUserId());
 		List<ShopStatData> shopStatDataList = shopStatDataAtomSV.selectByExample(shopStatDataExample);
 		Long servCharge = 0L;
-		//获取佣金
-		if(shopStatDataList.isEmpty())
+		// 获取佣金
+		if (shopStatDataList.isEmpty())
 			throw new BusinessException("统计数据不存在");
 		else
-			servCharge = shopStatDataList.get(0).getServCharge(); 
-		//店铺评级指标
-		BigDecimal h =new BigDecimal("0");
-		BigDecimal a=new BigDecimal("0");
+			servCharge = shopStatDataList.get(0).getServCharge();
+		// 店铺评级指标
+		BigDecimal h = new BigDecimal("0");
+		BigDecimal a = new BigDecimal("0");
 		ShopScoreKpiCriteria shopScoreKpiExample = new ShopScoreKpiCriteria();
 		ShopScoreKpiCriteria.Criteria shopScoreKpiCriteria = shopScoreKpiExample.createCriteria();
 		shopScoreKpiCriteria.andTenantIdEqualTo(request.getTenantId());
@@ -212,23 +229,23 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopScoreKpiCriteria.andKpiNameIn(strList);
 		List<ShopScoreKpi> shopScoreList = shopScoreKpiAtomSV.selectByExample(shopScoreKpiExample);
 		for (ShopScoreKpi shopScoreKpi : shopScoreList) {
-			if("h".equals(shopScoreKpi.getKpiName()))
+			if ("h".equals(shopScoreKpi.getKpiName()))
 				h = shopScoreKpi.getWeight();
-			else if("a".equals(shopScoreKpi.getKpiName()))
+			else if ("a".equals(shopScoreKpi.getKpiName()))
 				a = shopScoreKpi.getWeight();
 		}
-		//计算分数公式   score=h(a*佣金+b*订单+.....)
+		// 计算分数公式 score=h(a*佣金+b*订单+.....)
 		BigDecimal score = h.multiply((a.multiply(BigDecimal.valueOf(servCharge))));
-		
-		Integer rank=0;
-		//查询score在平台评级规则表中的rank
+
+		Integer rank = 0;
+		// 查询score在平台评级规则表中的rank
 		ShopRankRuleCriteria shopRankRuleExample = new ShopRankRuleCriteria();
 		ShopRankRuleCriteria.Criteria shopRankRuleCriteria = shopRankRuleExample.createCriteria();
 		shopRankRuleCriteria.andTenantIdEqualTo(request.getTenantId());
 		shopRankRuleCriteria.andMinScoreLessThan(score.longValue());
 		shopRankRuleCriteria.andMaxScoreGreaterThan(score.longValue());
 		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(shopRankRuleExample);
-		if(shopRankRuleList.isEmpty())
+		if (shopRankRuleList.isEmpty())
 			throw new BusinessException("评分不在规则之内");
 		else
 			rank = shopRankRuleList.get(0).getRank();
@@ -242,22 +259,25 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
-		Long deposit=0L;
-		if(list.isEmpty())
+		Long deposit = 0L;
+		if (list.isEmpty())
 			throw new BusinessException("店铺信息不存在");
-		else{
-			if(list.get(0).getDepositBalance()!=null)
-				deposit=list.get(0).getDepositBalance();
-			else{
-				/*CtDepositRuleCriteria ctDepositRuleExample = new CtDepositRuleCriteria();
-				CtDepositRuleCriteria.Criteria ctDepositRuleCriteria = ctDepositRuleExample.createCriteria();
-				ctDepositRuleCriteria.andProductCatIdEqualTo(list.get(0).getBusiType());
-				List<CtDepositRule> ctDepositRules = depositRuleAtomSV.selectByExample(ctDepositRuleExample);
-				if(list.isEmpty())
-					throw new BusinessException("默认保证金不存在");
-				else
-				deposit = ctDepositRules.get(0).getDefaultDeposit();*/
-				//若保证金未设置,默认0
+		else {
+			if (list.get(0).getDepositBalance() != null)
+				deposit = list.get(0).getDepositBalance();
+			else {
+				/*
+				 * CtDepositRuleCriteria ctDepositRuleExample = new
+				 * CtDepositRuleCriteria(); CtDepositRuleCriteria.Criteria
+				 * ctDepositRuleCriteria =
+				 * ctDepositRuleExample.createCriteria();
+				 * ctDepositRuleCriteria.andProductCatIdEqualTo(list.get(0).
+				 * getBusiType()); List<CtDepositRule> ctDepositRules =
+				 * depositRuleAtomSV.selectByExample(ctDepositRuleExample);
+				 * if(list.isEmpty()) throw new BusinessException("默认保证金不存在");
+				 * else deposit = ctDepositRules.get(0).getDefaultDeposit();
+				 */
+				// 若保证金未设置,默认0
 				deposit = 0L;
 			}
 		}
@@ -285,31 +305,30 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	}
 
 	@Override
-	public boolean checkShopNameOnly(QueryShopInfoRequest request)
-			throws BusinessException, SystemException {
-		
+	public boolean checkShopNameOnly(QueryShopInfoRequest request) throws BusinessException, SystemException {
+
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		
-		if(StringUtil.isBlank(request.getTenantId())){
+
+		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
 		}
-		if(!StringUtil.isBlank(request.getUserId())){
+		if (!StringUtil.isBlank(request.getUserId())) {
 			criteria.andUserIdEqualTo(request.getUserId());
 		}
 
-		if(StringUtil.isBlank(request.getShopName())){
+		if (StringUtil.isBlank(request.getShopName())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:店铺名称不能为空");
 		}
 		criteria.andShopNameEqualTo(request.getShopName());
-		
+
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
-		
-		if(CollectionUtil.isEmpty(list)){
+
+		if (CollectionUtil.isEmpty(list)) {
 			return true;
-		}else if(!StringUtil.isBlank(request.getUserId())){
+		} else if (!StringUtil.isBlank(request.getUserId())) {
 			ShopInfo shopInfo = list.get(0);
-			if(shopInfo.getUserId().equals(request.getUserId())){
+			if (shopInfo.getUserId().equals(request.getUserId())) {
 				return true;
 			}
 		}

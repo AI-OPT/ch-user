@@ -104,6 +104,16 @@ public class InsertShopInfoRequst extends BaseInfo {
 	 */
 	private String merchantNo;
 
+	/**
+	 * 操作员Id
+	 */
+	private Long operId;
+
+	/**
+	 * 操作员姓名
+	 */
+	private String operName;
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -246,6 +256,22 @@ public class InsertShopInfoRequst extends BaseInfo {
 
 	public void setEcommOwner(String ecommOwner) {
 		this.ecommOwner = ecommOwner;
+	}
+
+	public Long getOperId() {
+		return operId;
+	}
+
+	public void setOperId(Long operId) {
+		this.operId = operId;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
 	}
 
 }
