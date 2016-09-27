@@ -6,7 +6,7 @@
     <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="DEFAULT_REASON" property="defaultReason" jdbcType="VARCHAR" />
     <result column="DEDUCT_DATE" property="deductDate" jdbcType="DATE" />
-    <result column="DEDUCT_BALANCE" property="deductBalance" jdbcType="BIGINT" />
+    <result column="DEDUCT_BALANCE" property="deductBalance" jdbcType="DOUBLE" />
     <result column="OPER_ID" property="operId" jdbcType="BIGINT" />
     <result column="OPER_NAME" property="operName" jdbcType="VARCHAR" />
   </resultMap>
@@ -110,7 +110,7 @@
       DEDUCT_DATE, DEDUCT_BALANCE, OPER_ID, 
       OPER_NAME)
     values (#{serialCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{defaultReason,jdbcType=VARCHAR}, 
-      #{deductDate,jdbcType=DATE}, #{deductBalance,jdbcType=BIGINT}, #{operId,jdbcType=BIGINT}, 
+      #{deductDate,jdbcType=DATE}, #{deductBalance,jdbcType=DOUBLE}, #{operId,jdbcType=BIGINT}, 
       #{operName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.ShopDefaultLog" >
@@ -152,7 +152,7 @@
         #{deductDate,jdbcType=DATE},
       </if>
       <if test="deductBalance != null" >
-        #{deductBalance,jdbcType=BIGINT},
+        #{deductBalance,jdbcType=DOUBLE},
       </if>
       <if test="operId != null" >
         #{operId,jdbcType=BIGINT},
@@ -184,7 +184,7 @@
         DEDUCT_DATE = #{record.deductDate,jdbcType=DATE},
       </if>
       <if test="record.deductBalance != null" >
-        DEDUCT_BALANCE = #{record.deductBalance,jdbcType=BIGINT},
+        DEDUCT_BALANCE = #{record.deductBalance,jdbcType=DOUBLE},
       </if>
       <if test="record.operId != null" >
         OPER_ID = #{record.operId,jdbcType=BIGINT},
@@ -203,7 +203,7 @@
       USER_ID = #{record.userId,jdbcType=VARCHAR},
       DEFAULT_REASON = #{record.defaultReason,jdbcType=VARCHAR},
       DEDUCT_DATE = #{record.deductDate,jdbcType=DATE},
-      DEDUCT_BALANCE = #{record.deductBalance,jdbcType=BIGINT},
+      DEDUCT_BALANCE = #{record.deductBalance,jdbcType=DOUBLE},
       OPER_ID = #{record.operId,jdbcType=BIGINT},
       OPER_NAME = #{record.operName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -223,7 +223,7 @@
         DEDUCT_DATE = #{deductDate,jdbcType=DATE},
       </if>
       <if test="deductBalance != null" >
-        DEDUCT_BALANCE = #{deductBalance,jdbcType=BIGINT},
+        DEDUCT_BALANCE = #{deductBalance,jdbcType=DOUBLE},
       </if>
       <if test="operId != null" >
         OPER_ID = #{operId,jdbcType=BIGINT},
@@ -239,7 +239,7 @@
     set USER_ID = #{userId,jdbcType=VARCHAR},
       DEFAULT_REASON = #{defaultReason,jdbcType=VARCHAR},
       DEDUCT_DATE = #{deductDate,jdbcType=DATE},
-      DEDUCT_BALANCE = #{deductBalance,jdbcType=BIGINT},
+      DEDUCT_BALANCE = #{deductBalance,jdbcType=DOUBLE},
       OPER_ID = #{operId,jdbcType=BIGINT},
       OPER_NAME = #{operName,jdbcType=VARCHAR}
     where SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
