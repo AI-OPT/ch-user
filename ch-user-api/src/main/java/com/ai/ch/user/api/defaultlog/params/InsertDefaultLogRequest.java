@@ -29,7 +29,7 @@ public class InsertDefaultLogRequest extends BaseInfo {
 	/**
 	 * 扣款金额
 	 */
-	private Long deductBalance;
+	private double deductBalance;
 
 	/**
 	 * 操作员
@@ -65,11 +65,14 @@ public class InsertDefaultLogRequest extends BaseInfo {
 		this.defaultReason = defaultReason;
 	}
 
-	public Long getDeductBalance() {
+	
+
+	
+	public double getDeductBalance() {
 		return deductBalance;
 	}
 
-	public void setDeductBalance(Long deductBalance) {
+	public void setDeductBalance(double deductBalance) {
 		this.deductBalance = deductBalance;
 	}
 
