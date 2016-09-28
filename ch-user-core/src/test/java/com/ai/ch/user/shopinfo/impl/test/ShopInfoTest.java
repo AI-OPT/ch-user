@@ -41,9 +41,9 @@ public class ShopInfoTest {
 	public void testInsert(){
 		InsertShopInfoRequst insertShopInfo = new InsertShopInfoRequst();
 		insertShopInfo.setTenantId("changhong");
-		insertShopInfo.setUserId("1");
+		insertShopInfo.setUserId("12345678");
 		insertShopInfo.setPeriodType("Y");
-		insertShopInfo.setStatus(0);
+		insertShopInfo.setStatus(1);
 		insertShopInfo.setShopName("shopy");
 		shopInfoSV.insertShopInfo(insertShopInfo);
 	}

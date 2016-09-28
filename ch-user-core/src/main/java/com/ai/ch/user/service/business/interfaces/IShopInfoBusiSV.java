@@ -14,6 +14,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
+import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.opt.base.exception.BusinessException;
@@ -51,4 +52,6 @@ public interface IShopInfoBusiSV {
 	
 	public boolean checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException;
+	
+	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException ;
 }

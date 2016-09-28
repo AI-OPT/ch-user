@@ -23,6 +23,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
+import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.ShopInfoVo;
 import com.ai.ch.user.api.shopinfo.params.ShopScoreKpiVo;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
@@ -56,6 +57,9 @@ import com.ai.opt.sdk.util.StringUtil;
 @Transactional
 public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
+	//电商平台位置
+	static private String[] shopOwner = {"京东","天猫","淘宝","苏宁","一号店","自有电商平台"};
+	
 	@Autowired
 	private IShopInfoAtomSV shopInfoAtomSV;
 
@@ -83,14 +87,20 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if (request.getUserId() != null && !"".equals(request.getUserId())) {
 			criteria.andUserIdEqualTo(request.getUserId());
 		}
-
 		if (request.getShopName() != null && !"".equals(request.getShopName())) {
 			criteria.andShopNameEqualTo(request.getShopName());
 		}
-
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if (!list.isEmpty())
 			BeanUtils.copyProperties(list.get(0), response);
+		String ecommOwner="";
+		if(response.getEcommOwner()!=null)
+			for (int index=0;index<response.getEcommOwner().length();index++) {
+				if('1'==response.getEcommOwner().charAt(index))
+					ecommOwner+=shopOwner[index]+"/";
+			}
+		ecommOwner = ecommOwner.substring(0,ecommOwner.length()-1);
+		response.setEcommOwner(ecommOwner);
 		return response;
 	}
 
@@ -333,5 +343,38 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException {
+		ShopInfo shopInfo = new ShopInfo();
+		if(StringUtil.isBlank(request.getTenantId()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
+		if(StringUtil.isBlank(request.getUserId()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户Id不能为空");
+		if(StringUtil.isBlank(request.getBusiType()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:经营类型不能为空");
+		if(StringUtil.isBlank(request.getGoodsNum()+""))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:可售商品数量不能为空");
+		if(StringUtil.isBlank(request.getMerchantNo()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户编号不能为空");
+		if(StringUtil.isBlank(request.getShopDesc()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户简介不能为空");
+		if(StringUtil.isBlank(request.getShopName()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户名称不能为空");
+		if(StringUtil.isBlank(request.getGoodsNum()+""))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商品数量不能为空");
+		if(StringUtil.isBlank(request.getHasExperi()+""))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:有无电商经验是否不能为空");
+		BeanUtils.copyProperties(request, shopInfo);
+		//0/1/2:未开通/已开通/注销
+		shopInfo.setStatus(0);
+		shopInfo.setCreateTime(DateUtil.getSysDate());
+		//插入日志表
+		ShopInfoLog shopInfoLog = new ShopInfoLog();
+		BeanUtils.copyProperties(request, shopInfoLog);
+		shopInfo.setCreateTime(DateUtil.getSysDate());
+		shopInfoLogAtomSV.insert(shopInfoLog);
+		return shopInfoAtomSV.insert(shopInfo);
 	}
 }
