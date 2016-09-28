@@ -316,20 +316,18 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public boolean checkShopNameOnly(QueryShopInfoRequest request) throws BusinessException, SystemException {
-
+		
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 
 		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
 		}
-		if (!StringUtil.isBlank(request.getUserId())) {
-			criteria.andUserIdEqualTo(request.getUserId());
-		}
 
 		if (StringUtil.isBlank(request.getShopName())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:店铺名称不能为空");
 		}
+		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andShopNameEqualTo(request.getShopName());
 
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
