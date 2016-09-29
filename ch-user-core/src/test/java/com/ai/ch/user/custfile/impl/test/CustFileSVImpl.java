@@ -41,4 +41,22 @@ public class CustFileSVImpl {
 		re.setList(list);
 		System.out.println(JSON.toJSONString(custFileSV.updateCustFileExt(re)));
 	}
+	
+	
+	@Test
+	public void testUpdateCondition(){
+		UpdateCustFileExtRequest re = new UpdateCustFileExtRequest();
+		re.setTenantId("changhong");
+		List<CmCustFileExtVo> list = new ArrayList<CmCustFileExtVo>();
+		CmCustFileExtVo c = new CmCustFileExtVo();
+		c.setTenantId("changhong");
+		c.setInfoType("30");
+		c.setInfoName("er555");
+		list.add(c);
+		list.add(c);
+		list.add(c);
+		re.setList(list);
+		System.out.println(JSON.toJSONString(custFileSV.updateCustFileExtBycondition(re)));
+	}
+	
 }
