@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.api.defaultlog.interfaces.IDefaultLogSV;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
+import com.ai.ch.user.api.defaultlog.params.PaymentNotificationsRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
 import com.ai.ch.user.constants.ChUserConstants;
@@ -79,13 +80,12 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 	@Override
 	@POST
 	@Path("/paymentNotifications")
-	public String paymentNotifications(String msgHeader,
-			String xmlBody, String signMsg) throws SystemException,
+	public String paymentNotifications(PaymentNotificationsRequest request) throws SystemException,
 			BusinessException {
 		//验签
-		com.ylink.upp.base.oxm.XmlBodyEntity resultMsg =  receiveMsg(msgHeader, xmlBody, signMsg);
+		com.ylink.upp.base.oxm.XmlBodyEntity resultMsg =  receiveMsg(request.getMsgHeader(), request.getXmlBody(), request.getSignMsg());
         com.ylink.upp.oxm.entity.upp_103_001_01.RespInfo receive = (com.ylink.upp.oxm.entity.upp_103_001_01.RespInfo)resultMsg;
-       
+        
         if(receive == null){
         	com.ylink.upp.oxm.entity.upp_599_001_01.RespInfo receive2 = (com.ylink.upp.oxm.entity.upp_599_001_01.RespInfo) resultMsg;
             if(!"90000".equals(receive2.getGrpBody().getStsRsn().getRespCode())){
