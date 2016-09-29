@@ -95,5 +95,5 @@ public interface ICustFileSV {
 	 */
 	@POST
 	@Path("/deleteCustFileExtBycondition")
-	public BaseResponse deleteCustFileExtBycondition(String infoExtId) throws SystemException, BusinessException;
+	public BaseResponse deleteCustFileExtBycondition(QueryCustFileExtRequest extRequest) throws SystemException, BusinessException;
 }
