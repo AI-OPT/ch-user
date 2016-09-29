@@ -82,4 +82,18 @@ public interface ICustFileSV {
 	@POST
 	@Path("/updateCustFileExtBycondition")
 	public BaseResponse updateCustFileExtBycondition(UpdateCustFileExtRequest request) throws SystemException, BusinessException;
+
+	/**
+	 * 删除用户附件表
+	 * @param request
+	 * @return
+	 * @throws SystemException
+	 * @throws BusinessException
+	 * @author zhangyh7
+	 * @ApiCode COMM_TENANT_00105
+	 * @RestRelativeURL custfileservice/updateCustFileExtBycondition
+	 */
+	@POST
+	@Path("/deleteCustFileExtBycondition")
+	public BaseResponse deleteCustFileExtBycondition(String infoExtId) throws SystemException, BusinessException;
 }
