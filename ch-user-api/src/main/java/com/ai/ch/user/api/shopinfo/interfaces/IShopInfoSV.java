@@ -51,7 +51,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_0010
+	 * @ApiCode COMM_TENANT_01
 	 * @RestRelativeURL shopinfoservice/queryShopInfo
 	 */
 	@POST
@@ -67,7 +67,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_01
+	 * @ApiCode COMM_TENANT_02
 	 * @RestRelativeURL shopinfoservice/insertShopInfo
 	 */
 	@POST
