@@ -15,6 +15,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
@@ -233,7 +234,31 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 
 	@Override
 	public BaseResponse updateShopStatus(UpdateShopStatusRequest request) throws BusinessException, SystemException {
-		return null;
+		BaseResponse response = new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			shopInfoBusiSV.updateShopStatus(request);
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public QueryShopInfoResponse queryShopInfoById(QueryShopInfoByIdRequest request)
+			throws BusinessException, SystemException {
+		QueryShopInfoResponse response = new QueryShopInfoResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			response = shopInfoBusiSV.queryShopInfoById(request);
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
 	}
 
 }

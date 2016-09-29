@@ -14,6 +14,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
@@ -273,4 +274,21 @@ public interface IShopInfoSV {
 	public BaseResponse updateShopStatus(UpdateShopStatusRequest request)
 			throws BusinessException, SystemException;
 	
+	
+	/**
+	 * 根据id查询店铺信息
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_0010
+	 * @RestRelativeURL shopinfoservice/queryShopInfoById
+	 */
+	@POST
+	@Path("/queryShopInfoById")
+	public QueryShopInfoResponse queryShopInfoById(QueryShopInfoByIdRequest request)
+			throws BusinessException, SystemException;
+	
+
 }

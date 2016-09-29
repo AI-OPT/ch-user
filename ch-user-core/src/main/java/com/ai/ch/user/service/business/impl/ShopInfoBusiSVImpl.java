@@ -16,6 +16,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
@@ -28,11 +29,13 @@ import com.ai.ch.user.api.shopinfo.params.ShopInfoVo;
 import com.ai.ch.user.api.shopinfo.params.ShopScoreKpiVo;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoLog;
+import com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
@@ -342,7 +345,8 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		return false;
 	}
-
+	
+	
 	@Override
 	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException {
 		ShopInfo shopInfo = new ShopInfo();
@@ -370,9 +374,67 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopInfo.setCreateTime(DateUtil.getSysDate());
 		//插入日志表
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
-		BeanUtils.copyProperties(request, shopInfoLog);
+		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
 		shopInfoLogAtomSV.insert(shopInfoLog);
 		return shopInfoAtomSV.insert(shopInfo);
+	}
+
+	@Override
+	public int updateShopStatus(UpdateShopStatusRequest request) throws BusinessException, SystemException {
+		if(StringUtil.isBlank(request.getTenantId()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id是否不能为空");
+		if(StringUtil.isBlank(request.getUserId()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:用户id是否不能为空");
+		if(StringUtil.isBlank(request.getStatus()+""))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:状态是否不能为空");
+		ShopInfo shopInfo = new ShopInfo();
+		BeanUtils.copyProperties(request, shopInfo);
+			//判断更新时间
+			if (request.getStatus()==1) {
+				shopInfo.setOpenTime(DateUtil.getSysDate());
+			} else if (request.getStatus()==2) {
+				shopInfo.setCloseTime(DateUtil.getSysDate());
+			} else if (request.getStatus()==0) {
+				shopInfo.setStatus(request.getStatus());
+				shopInfo.setCreateTime(DateUtil.getSysDate());
+			} else
+				shopInfo.setStatus(null);
+			
+		    //店铺日志表
+			ShopInfoLog shopInfoLog = new ShopInfoLog();
+			BeanUtils.copyProperties(shopInfo, shopInfoLog);
+			shopInfoLog.setUpdateTime(DateUtil.getSysDate());
+			ShopInfoLogCriteria shopLogExample = new ShopInfoLogCriteria();
+			ShopInfoLogCriteria.Criteria shopLogCriteria = shopLogExample.createCriteria();
+			shopLogCriteria.andTenantIdEqualTo(request.getTenantId());
+			shopLogCriteria.andUserIdEqualTo(request.getUserId());
+			shopInfoLogAtomSV.updateByExample(shopInfoLog, shopLogExample);
+			
+			ShopInfoCriteria shopExample = new ShopInfoCriteria();
+		    ShopInfoCriteria.Criteria shopCriteria = shopExample.createCriteria();
+		    shopCriteria.andTenantIdEqualTo(request.getTenantId());
+		    shopCriteria.andUserIdEqualTo(request.getUserId());
+		    
+		    return shopInfoAtomSV.updateByExample(shopInfo, shopExample);
+	}
+
+	@Override
+	public QueryShopInfoResponse queryShopInfoById(QueryShopInfoByIdRequest request)
+			throws BusinessException, SystemException {
+		if(StringUtil.isBlank(request.getTenantId()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id是否不能为空");
+		if(StringUtil.isBlank(request.getUserId()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:状态是否不能为空");
+		QueryShopInfoResponse response = new QueryShopInfoResponse();
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		if(list.isEmpty())
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "查询数据不存在");
+		BeanUtils.copyProperties(list.get(0), response);
+		return response;
 	}
 }
