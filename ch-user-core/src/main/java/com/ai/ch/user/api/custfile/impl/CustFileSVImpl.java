@@ -93,12 +93,12 @@ public class CustFileSVImpl implements ICustFileSV {
 	@POST
 	@Path("/deleteCustFileExtBycondition")
 	public BaseResponse deleteCustFileExtBycondition(
-			String infoExtId) throws SystemException,
+			QueryCustFileExtRequest request) throws SystemException,
 			BusinessException {
 		ResponseHeader responseHeader = null;
 		BaseResponse response = new BaseResponse();
 		try {
-			CustFileBusiSV.deleteCustFileExtBycondition(infoExtId);
+			CustFileBusiSV.deleteCustFileExtBycondition(request);
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
