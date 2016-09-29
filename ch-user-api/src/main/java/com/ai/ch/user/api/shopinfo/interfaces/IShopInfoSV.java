@@ -81,7 +81,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_0021
+	 * @ApiCode COMM_TENANT_0020
 	 * @RestRelativeURL shopinfoservice/updateShopInfo
 	 */
 	@POST
