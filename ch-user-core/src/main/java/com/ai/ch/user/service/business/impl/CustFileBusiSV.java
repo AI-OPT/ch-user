@@ -118,5 +118,15 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 		}
 		return 0;
 	}
+
+	@Override
+	public int deleteCustFileExtBycondition(QueryCustFileExtRequest request)
+			throws SystemException, BusinessException {
+		CmCustFileExtCriteria example = new CmCustFileExtCriteria();
+		CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getInfoExtId());
+		criteria.andInfoExtIdEqualTo(request.getInfoExtId());
+		return custFileAtomSV.deleteByExample(example);
+	}
 	
 }
