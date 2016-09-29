@@ -124,7 +124,7 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 			throws SystemException, BusinessException {
 		CmCustFileExtCriteria example = new CmCustFileExtCriteria();
 		CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getInfoExtId());
+		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andInfoExtIdEqualTo(request.getInfoExtId());
 		return custFileAtomSV.deleteByExample(example);
 	}
