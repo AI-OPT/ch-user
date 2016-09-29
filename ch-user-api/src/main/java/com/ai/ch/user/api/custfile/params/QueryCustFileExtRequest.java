@@ -10,6 +10,7 @@ public class QueryCustFileExtRequest extends BaseInfo {
 
 	private String infoType;
 	
+	private String infoExtId;
 	
 	public String getUsreId() {
 		return usreId;
@@ -25,6 +26,14 @@ public class QueryCustFileExtRequest extends BaseInfo {
 
 	public void setInfoType(String infoType) {
 		this.infoType = infoType;
+	}
+
+	public String getInfoExtId() {
+		return infoExtId;
+	}
+
+	public void setInfoExtId(String infoExtId) {
+		this.infoExtId = infoExtId;
 	}
 
 	
