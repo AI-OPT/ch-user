@@ -19,4 +19,6 @@ public interface ICustFileBusiSV {
 	            throws SystemException, BusinessException;
 	    public int updateCustFileExtBycondition(UpdateCustFileExtRequest request) 
 	    		throws SystemException, BusinessException;
+	    public int deleteCustFileExtBycondition(QueryCustFileExtRequest request) 
+	    		throws SystemException, BusinessException;
 }
