@@ -36,11 +36,20 @@ public class ContractSVImplTest {
 	@Test
 	public void queryContractInfoTest(){
 		ContactInfoRequest contactInfoRequest = new ContactInfoRequest();
-		contactInfoRequest.setTenantId("ch");
-		contactInfoRequest.setUserId("2");
-		contactInfoRequest.setContractType("1");
+		contactInfoRequest.setTenantId("changhong");
+		contactInfoRequest.setContractType("2");
+		contactInfoRequest.setContractName("1234577");
 		ContractInfoResponse response = contractSV.queryContractInfo(contactInfoRequest);
 		System.out.println(JSON.toJSONString(response));
 	}
+	
+	@Test
+	public void queryContractAllInfoTest(){
+		ContactInfoRequest contactInfoRequest = new ContactInfoRequest();
+		contactInfoRequest.setTenantId("changhong");
+		List<ContractInfoResponse> response = contractSV.queryAllContractInfo(contactInfoRequest);
+		System.out.println(JSON.toJSONString(response));
+	}
+	
 	
 }
