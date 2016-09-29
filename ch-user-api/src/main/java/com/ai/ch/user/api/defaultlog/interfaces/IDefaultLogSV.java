@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
+import com.ai.ch.user.api.defaultlog.params.PaymentNotificationsRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
 import com.ai.opt.base.exception.BusinessException;
@@ -68,6 +69,6 @@ public interface IDefaultLogSV {
 	 */
 	@POST
 	@Path("/paymentNotifications")
-	public String paymentNotifications(String msgHeader,String xmlBody,String signMsg)
+	public String paymentNotifications(PaymentNotificationsRequest request)
 			throws SystemException, BusinessException;
 }
