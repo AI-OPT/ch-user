@@ -225,8 +225,8 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		try{
 			shopInfoBusiSV.saveShopAuditInfo(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
-		}catch(Exception e){
-			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
@@ -239,8 +239,8 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		try{
 			shopInfoBusiSV.updateShopStatus(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
-		}catch(Exception e){
-			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
@@ -254,8 +254,8 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		try{
 			response = shopInfoBusiSV.queryShopInfoById(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
-		}catch(Exception e){
-			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
