@@ -21,6 +21,7 @@ import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 
 public interface IShopInfoBusiSV {
 
@@ -52,7 +53,7 @@ public interface IShopInfoBusiSV {
 	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
 			throws BusinessException, SystemException;
 	
-	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException;
 	
 	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException ;
