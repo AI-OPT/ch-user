@@ -51,6 +51,8 @@ import com.ai.ch.user.service.atom.interfaces.IShopStatDataAtomSV;
 import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
+import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
@@ -318,11 +320,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	}
 
 	@Override
-	public boolean checkShopNameOnly(QueryShopInfoRequest request) throws BusinessException, SystemException {
+	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request) throws BusinessException, SystemException {
 		
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-
 		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
 		}
@@ -335,15 +336,25 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 
+		BaseResponse baseResponse = new BaseResponse();
+		ResponseHeader responseHeader = new ResponseHeader();
 		if (CollectionUtil.isEmpty(list)) {
-			return true;
+			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
+			baseResponse.setResponseHeader(responseHeader);
+			return baseResponse;
 		} else if (!StringUtil.isBlank(request.getUserId())) {
 			ShopInfo shopInfo = list.get(0);
 			if (shopInfo.getUserId().equals(request.getUserId())) {
-				return true;
+				responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
+				baseResponse.setResponseHeader(responseHeader);
+				return baseResponse;
+			}else{
+				responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SYSTEM_ERROR, "店铺名称已注册");
+				baseResponse.setResponseHeader(responseHeader);
+				return baseResponse;
 			}
 		}
-		return false;
+		return baseResponse;
 	}
 	
 	
