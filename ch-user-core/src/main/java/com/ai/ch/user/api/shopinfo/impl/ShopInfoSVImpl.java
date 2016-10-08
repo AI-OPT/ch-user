@@ -213,7 +213,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	@POST
 	@Path("/checkShopNameOnly")
-	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException {
 		return shopInfoBusiSV.checkShopNameOnly(request);
 	}
