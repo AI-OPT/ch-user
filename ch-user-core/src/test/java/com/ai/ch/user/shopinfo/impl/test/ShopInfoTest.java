@@ -100,4 +100,12 @@ public class ShopInfoTest {
 		queryShopInfo.setShopName("taobao");
 		System.out.println(JSON.toJSONString(shopInfoSV.saveShopAuditInfo(queryShopInfo)));
 	}
+	
+	@Test
+	public void checkShopNameOnly(){
+		QueryShopInfoRequest request = new QueryShopInfoRequest();
+		//request.setShopName("ssss");
+		request.setTenantId("changhong");
+		System.out.println(JSON.toJSONString(shopInfoSV.checkShopNameOnly(request)));
+	}
 }
