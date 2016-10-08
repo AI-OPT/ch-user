@@ -241,7 +241,7 @@ public interface IShopInfoSV {
 	 */
 	@POST
 	@Path("/checkShopNameOnly")
-	public boolean checkShopNameOnly(QueryShopInfoRequest request)
+	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException;
 	
 	/**
