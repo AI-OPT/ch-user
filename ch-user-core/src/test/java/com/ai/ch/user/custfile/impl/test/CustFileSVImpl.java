@@ -13,6 +13,7 @@ import com.ai.ch.user.api.custfile.interfaces.ICustFileSV;
 import com.ai.ch.user.api.custfile.params.CmCustFileExtVo;
 import com.ai.ch.user.api.custfile.params.QueryCustFileExtRequest;
 import com.ai.ch.user.api.custfile.params.UpdateCustFileExtRequest;
+import com.ai.opt.base.vo.BaseResponse;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,4 +60,16 @@ public class CustFileSVImpl {
 		System.out.println(JSON.toJSONString(custFileSV.updateCustFileExtBycondition(re)));
 	}
 	
+	
+	@Test
+	public void testDeleteCondition(){
+		QueryCustFileExtRequest request = new QueryCustFileExtRequest();
+		request.setTenantId("changhong");
+		request.setInfoExtId("000000000000002282");
+		BaseResponse baseResponse = custFileSV.deleteCustFileExtBycondition(request);
+		/*request.setAttrValue("57ebf53d702da77c8bcaa8e8");
+		BaseResponse baseResponse = custFileSV.deleteCustFileExtBycondition(request);*/
+		//System.out.println(baseResponse.getResponseHeader().getIsSuccess());
+		
+	}
 }
