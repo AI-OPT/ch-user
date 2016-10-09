@@ -4,12 +4,12 @@
 APP_HOME=/dubbo-service
 #APP_NAME为各中心的名字，如订单中心记为changhong.order,
 
-APP_NAME="changhong.product"
-APP_PARM="aiopt.product.name=${APP_NAME}"
+APP_NAME="changhong.user"
+APP_PARM="aiopt.user.name=${APP_NAME}"
 
 #此处的端口要与dubbo.properties中的端口对应，
 #如，商品中心的为：slp.product.dubbo.port
-PROCESS_PARM="slp.product.dubbo.port=${REST_PORT}"
+PROCESS_PARM="ch.user.dubbo.port=${REST_PORT}"
 
 for file in ${APP_HOME}/libs/**/*.jar;
 do CP=${CP}:$file;
@@ -43,7 +43,7 @@ sed -i "s/dubbo.registry.address=.*/dubbo.registry.address=${REST_REGISTRY_ADDR}
 
 #此处的端口要与dubbo.properties中的端口对应，
 #如，商品中心的为：slp.product.dubbo.port
-sed -i "s/slp.product.dubbo.port=.*/slp.product.dubbo.port=${REST_PORT}/g" ${APP_HOME}/config/dubbo/dubbo.properties
+sed -i "s/ch.user.dubbo.port=.*/ch.user.dubbo.port=${REST_PORT}/g" ${APP_HOME}/config/dubbo/dubbo.properties
 
 #此处的信息要与dubbo.properties中对应
 sed -i "s/dubbo.protocol.contextpath=.*/dubbo.protocol.contextpath=${CONTEXT_PATH}/g" ${APP_HOME}/config/dubbo/dubbo.properties
