@@ -57,18 +57,4 @@ public interface IDefaultLogSV {
 			throws SystemException, BusinessException;
 	
 	
-	/**
-	 * 
-	 * @param request
-	 * @return
-	 * @throws SystemException
-	 * @throws BusinessException
-	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_00018
-	 * @RestRelativeURL defaultlogservice/paymentNotifications
-	 */
-	@POST
-	@Path("/paymentNotifications")
-	public String paymentNotifications(PaymentNotificationsRequest request)
-			throws SystemException, BusinessException;
 }
