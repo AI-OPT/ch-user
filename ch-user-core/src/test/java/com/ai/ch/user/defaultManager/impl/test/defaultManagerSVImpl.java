@@ -149,7 +149,7 @@ public class defaultManagerSVImpl {
 		String sign = null;
 		try {
 			ResourceLoader resourceLoader = new DefaultResourceLoader();
-			Resource pfxResource = resourceLoader.getResource("classpath:CO20160700000018.pfx"); 
+			Resource pfxResource = resourceLoader.getResource("classpath:mobile.pfx"); 
 			InputStream in = new FileInputStream(pfxResource.getFile());
 			byte[] pfxByte = IOUtils.toByteArray(in);
 		    sign = SecurityUtil.pfxWithSign(pfxByte,xmlMsg, "111111");
@@ -197,58 +197,6 @@ public class defaultManagerSVImpl {
 			System.out.println("接收数据时发生异常，错误信息为:" + e.getMessage());
 			throw new RuntimeException(e);
 		}
-	}
-	@Test
-	public void paymentNotifications(){
-		//包装数据
-		com.ylink.upp.oxm.entity.upp_103_001_01.GrpHdr hdr = new com.ylink.upp.oxm.entity.upp_103_001_01.GrpHdr();
-		hdr.setMerNo("CO20160700000004");//设置一级平台商户号
-		hdr.setCreDtTm(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
-		hdr.setTranType(TranType.PAY_NOTICE.getValue());
-		
-		com.ylink.upp.oxm.entity.upp_103_001_01.GrpBody body = new com.ylink.upp.oxm.entity.upp_103_001_01.GrpBody();
-		body.setMerOrderId("CO20160800000008");//设置要查询的二级商户编号
-		body.setPayTranSn("2");
-		body.setOrderAmt(40L);
-		body.setOrderDate(new Date().getTime());
-		body.setPayStatus("00");
-		body.setRemark("11");
-		body.setResv("11");//设置保留域
-
-		Map<String, String> param = new TreeMap<String, String>();
-		
-		com.ylink.upp.oxm.entity.upp_103_001_01.RespInfo reqsInfo = new com.ylink.upp.oxm.entity.upp_103_001_01.RespInfo();
-		reqsInfo.setGrpHdr(hdr);
-		reqsInfo.setGrpBody(body);
-		
-		// 发送消息
-		String xmlMsg = null;
-		try {
-			xmlMsg = oxmHandler.marshal(reqsInfo);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// 加签
-		String sign = null;
-		try {
-			ResourceLoader resourceLoader = new DefaultResourceLoader();
-			Resource pfxResource = resourceLoader.getResource("classpath:CO20160700000004.pfx"); 
-			InputStream in = new FileInputStream(pfxResource.getFile());
-			byte[] pfxByte = IOUtils.toByteArray(in);
-		    sign = SecurityUtil.pfxWithSign(pfxByte,xmlMsg, "111111");
-			param.put("signMsg", sign);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String msgHeader = initMsgHeader("CO20160700000004","103.001.01");
-		
-		PaymentNotificationsRequest request = new PaymentNotificationsRequest();
-		request.setMsgHeader(msgHeader);
-		request.setXmlBody(xmlMsg);
-		request.setSignMsg(sign);
-		
-		String str = defaultLogSV.paymentNotifications(request);
-		System.out.println(str);
 	}
 	
 	/**
@@ -301,7 +249,7 @@ public class defaultManagerSVImpl {
 	 */
 	public  boolean verify(String xmlMsg, String sign) throws Exception {
 		ResourceLoader resourceLoader = new DefaultResourceLoader();
-		Resource pfxResource = resourceLoader.getResource("classpath:server.cer"); 
+		Resource pfxResource = resourceLoader.getResource("classpath:mobile1.cer"); 
 		InputStream in = new FileInputStream(pfxResource.getFile());
 		byte[] cerByte = IOUtils.toByteArray(in);
 		return SecurityUtil.verify(cerByte, xmlMsg, sign);
