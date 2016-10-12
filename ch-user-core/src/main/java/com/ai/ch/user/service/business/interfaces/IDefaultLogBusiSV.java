@@ -12,4 +12,6 @@ public interface IDefaultLogBusiSV {
 	
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException;
+	
+	public int deleteDefaultLog(String serialCode)throws SystemException, BusinessException;
 }

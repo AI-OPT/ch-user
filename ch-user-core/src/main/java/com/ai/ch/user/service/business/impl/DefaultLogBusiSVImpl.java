@@ -64,4 +64,14 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		return response;
 	}
 
+	@Override
+	public int deleteDefaultLog(String serialCode) throws SystemException,
+			BusinessException {
+		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
+		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
+		criteria.andSerialCodeEqualTo(serialCode);
+		int count =defaultLogAtomSV.deleteDefaultLog(example);
+		return 0;
+	}
+
 }

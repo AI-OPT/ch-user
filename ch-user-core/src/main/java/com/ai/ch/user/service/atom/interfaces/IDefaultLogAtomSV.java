@@ -12,4 +12,6 @@ public interface IDefaultLogAtomSV {
 	int insert(ShopDefaultLog record);
 
 	List<ShopDefaultLog> selectByExample(ShopDefaultLogCriteria example);
+	
+	int deleteDefaultLog(ShopDefaultLogCriteria example);
 }

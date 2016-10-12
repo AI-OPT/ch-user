@@ -27,4 +27,9 @@ public class DefaultLogAtomSVImpl implements IDefaultLogAtomSV {
 		return MapperFactory.getShopDefaultLogMapper().selectByExample(example);
 	}
 
+	@Override
+	public int deleteDefaultLog(ShopDefaultLogCriteria example) {
+		return MapperFactory.getShopDefaultLogMapper().deleteByExample(example);
+	}
+
 }
