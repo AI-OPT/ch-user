@@ -33,6 +33,20 @@ public interface IDefaultLogSV {
 	 * @throws SystemException
 	 * @throws BusinessException
 	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_0009
+	 * @RestRelativeURL defaultlogservice/deleteDefaultLog
+	 */
+	@POST
+	@Path("/deleteDefaultLog")
+	public BaseResponse deleteDefaultLog(String serialCode) throws SystemException, BusinessException;
+	
+	/**
+	 * 新增违约扣款记录
+	 * @param request
+	 * @return
+	 * @throws SystemException
+	 * @throws BusinessException
+	 * @author zhangqiang7
 	 * @ApiCode COMM_TENANT_0006
 	 * @RestRelativeURL defaultlogservice/insertDefaultLog
 	 */
