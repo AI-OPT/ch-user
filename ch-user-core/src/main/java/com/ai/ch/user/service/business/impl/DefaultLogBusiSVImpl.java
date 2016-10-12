@@ -33,7 +33,6 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	public int insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException {
 		ShopDefaultLog shopDefaultLog = new ShopDefaultLog();
 		BeanUtils.copyProperties(request, shopDefaultLog);
-		shopDefaultLog.setSerialCode(SeqUtil.getNewId(UserSequenceCode.SHOP_DEFAULT_LOG$SERIAL_CODE_ID$SEQ,17));
 		return defaultLogAtomSV.insert(shopDefaultLog);
 	}
 
