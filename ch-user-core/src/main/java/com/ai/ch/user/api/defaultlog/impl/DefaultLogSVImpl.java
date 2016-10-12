@@ -76,4 +76,23 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		response.setResponseHeader(responseHeader);
 		return response;
 	}
+
+	@Override
+	@POST
+	@Path("/deleteDefaultLog")
+	public BaseResponse deleteDefaultLog(String serialCode)
+			throws SystemException, BusinessException {
+		BaseResponse response=new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+		  defaultLogBusiSV.deleteDefaultLog(serialCode);
+		  responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			LOG.error("操作失败");
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
 }
