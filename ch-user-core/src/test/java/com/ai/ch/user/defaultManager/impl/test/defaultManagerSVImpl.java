@@ -42,6 +42,7 @@ import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.PaymentNotificationsRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
+import com.ai.opt.base.vo.BaseResponse;
 import com.alibaba.fastjson.JSON;
 import com.upp.docking.covn.MsgString;
 import com.ylink.itfin.certificate.SecurityUtil;
@@ -183,6 +184,8 @@ public class defaultManagerSVImpl {
 
 	}
 	
+	
+	
 	private XmlBodyEntity receiveMsg(String msgHeader, String xmlMsg, String sign) {
 		try {
 			boolean verify = this.verify(xmlMsg, sign);
@@ -292,5 +295,13 @@ public class defaultManagerSVImpl {
 				httpClient.close();
 			}
 		}
+	}
+	
+	@Test
+	public void deleteDefaultLog (){
+		String serialCode = "00000000000000082";
+		BaseResponse response = defaultLogSV.deleteDefaultLog(serialCode);
+		System.out.println(JSON.toJSONString(response));
+		
 	}
 }
