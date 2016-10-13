@@ -63,7 +63,7 @@ import com.ai.opt.sdk.util.StringUtil;
 public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	//电商平台位置
-	static private String[] shopOwner = {"京东","天猫","淘宝","苏宁","一号店","自有电商平台"};
+	//static private String[] shopOwner = {"京东","天猫","淘宝","苏宁","一号店","自有电商平台"};
 	
 	@Autowired
 	private IShopInfoAtomSV shopInfoAtomSV;
@@ -99,12 +99,12 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if (!list.isEmpty())
 			BeanUtils.copyProperties(list.get(0), response);
 		String ecommOwner="";
-		if(response.getEcommOwner()!=null)
+		/*if(response.getEcommOwner()!=null)
 			for (int index=0;index<response.getEcommOwner().length();index++) {
 				if('1'==response.getEcommOwner().charAt(index))
 					ecommOwner+=shopOwner[index]+"/";
 			}
-		ecommOwner = ecommOwner.substring(0,ecommOwner.length()-1);
+		ecommOwner = ecommOwner.substring(0,ecommOwner.length()-1);*/
 		response.setEcommOwner(ecommOwner);
 		return response;
 	}
