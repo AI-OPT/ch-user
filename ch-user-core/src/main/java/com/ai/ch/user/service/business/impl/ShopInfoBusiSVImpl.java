@@ -98,14 +98,14 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if (!list.isEmpty())
 			BeanUtils.copyProperties(list.get(0), response);
-		String ecommOwner="";
-		/*if(response.getEcommOwner()!=null)
+		/*String ecommOwner="";
+		if(response.getEcommOwner()!=null)
 			for (int index=0;index<response.getEcommOwner().length();index++) {
 				if('1'==response.getEcommOwner().charAt(index))
 					ecommOwner+=shopOwner[index]+"/";
 			}
-		ecommOwner = ecommOwner.substring(0,ecommOwner.length()-1);*/
-		response.setEcommOwner(ecommOwner);
+		ecommOwner = ecommOwner.substring(0,ecommOwner.length()-1);
+		response.setEcommOwner(ecommOwner);*/
 		return response;
 	}
 
