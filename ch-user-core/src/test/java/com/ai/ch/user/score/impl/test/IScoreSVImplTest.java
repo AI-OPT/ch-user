@@ -79,8 +79,8 @@ public class IScoreSVImplTest{
 	@Test
 	public void queryAvgTest(){
 		CountScoreAvgRequest request = new CountScoreAvgRequest();
-		request.setTenantId("ch");
-		request.setUserId("111333");
+		request.setTenantId("changhong");
+		request.setUserId("d512de5b33de4c97");
 		System.out.println(JSON.toJSONString(scoreSV.countScoreAvg(request)));
 	}
 	

@@ -413,12 +413,12 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public int updateShopStatus(UpdateShopStatusRequest request) throws BusinessException, SystemException {
-		if(StringUtil.isBlank(request.getTenantId()))
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id是否不能为空");
-		if(StringUtil.isBlank(request.getUserId()))
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:用户id是否不能为空");
-		if(StringUtil.isBlank(request.getStatus()+""))
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:状态是否不能为空");
+		if(request.getTenantId().isEmpty())
+			throw new BusinessException("获取参数失败:租户id是否不能为空");
+		if(request.getUserId().isEmpty())
+			throw new BusinessException("获取参数失败:用户id是否不能为空");
+		if(request.getStatus().toString().isEmpty())
+			throw new BusinessException("获取参数失败:状态是否不能为空");
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 			//判断更新时间

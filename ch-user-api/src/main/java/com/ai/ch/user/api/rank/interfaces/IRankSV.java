@@ -26,13 +26,13 @@ import com.ai.opt.base.vo.BaseResponse;
 public interface IRankSV {
 
 	/**
-	 * 保存店铺评级设置
+	 * 店铺评级规则设置
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChRank_0001
+	 * @ApiCode COMM_TENANT_00016
 	 * @RestRelativeURL rankservice/insertRankRule
 	 */
 	@POST
@@ -54,13 +54,13 @@ public interface IRankSV {
 	public BaseResponse updateRankRule(UpdateRankRuleRequest request) throws BusinessException, SystemException;
 
 	/**
-	 * 查询店铺评级设置
+	 * 店铺评级规则查询
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChGrade-0003
+	 * @ApiCode COMM_TENANT_0007
 	 * @RestRelativeURL rankservice/queryRankRule
 	 */
 	@POST

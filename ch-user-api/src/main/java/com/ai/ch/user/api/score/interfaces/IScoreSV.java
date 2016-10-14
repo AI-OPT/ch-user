@@ -33,14 +33,14 @@ import com.ai.opt.base.vo.BaseResponse;
 public interface IScoreSV {
 
 	/**
-	 * 供应商综合评分查询
+	 * 供应商当前评分查询
 	 * 
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_0001
+	 * @ApiCode COMM_TENANT_1100
 	 * @RestRelativeURL scoreservice/queryCurrentScore
 	 */
 	@POST
@@ -109,7 +109,7 @@ public interface IScoreSV {
 	public BaseResponse updateCurrentScore(UpdateCurrentScoreRequest request) throws BusinessException, SystemException;
 
 	/**
-	 * 查询评分记录
+	 * 供应商评分记录
 	 * 
 	 * @param request
 	 * @return
@@ -124,13 +124,13 @@ public interface IScoreSV {
 	public QueryScoreLogResponse queryScoreLog(QueryScoreLogRequest request) throws BusinessException, SystemException;
 	
 	/**
-	 * 计算平均总分
+	 * 供应商综合评分查询
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-00000
+	 * @ApiCode COMM_TENANT_0001
 	 * @RestRelativeURL scoreservice/countScoreAvg
 	 */
 	@POST

@@ -61,13 +61,13 @@ public interface IShopInfoSV {
 	
 	
 	/**
-	 * 保存店铺信息
+	 * 设置商户附加资质信息
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_02
+	 * @ApiCode COMM_TENANT_0005
 	 * @RestRelativeURL shopinfoservice/insertShopInfo
 	 */
 	@POST
@@ -131,13 +131,13 @@ public interface IShopInfoSV {
 	public QueryShopInfoLogResponse queryShopInfoLog(QueryShopInfoLogRequest request)throws BusinessException,SystemException;
 	
 	/**
-	 * 
+	 * 店铺评级规则
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode ChUser-07
+	 * @ApiCode COMM_TENANT_0007
 	 * @RestRelativeURL shopinfoservice/queryShopScoreKpi
 	 */
 	@POST
@@ -201,7 +201,7 @@ public interface IShopInfoSV {
 	public Integer queryShopRank(QueryShopRankRequest request)throws BusinessException,SystemException;
 	
 	/**
-	 * 查询店铺保证金服务
+	 * 店铺应缴保证金查询
 	 * @param request
 	 * @return
 	 * @throws BusinessException
