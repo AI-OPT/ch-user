@@ -405,6 +405,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			throw new BusinessException("参数格式错误:有无电商经验状态码为0/1");
 		if(!request.getBusiType().equals("1")||!request.getBusiType().equals("2"))
 			throw new BusinessException("参数格式错误:经营类型状态码为1/2");
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		if(!list.isEmpty())
+			throw new BusinessException("店铺信息已存在");
 		BeanUtils.copyProperties(request, shopInfo);
 		//0/1/2:未开通/已开通/注销
 		shopInfo.setStatus(0);
