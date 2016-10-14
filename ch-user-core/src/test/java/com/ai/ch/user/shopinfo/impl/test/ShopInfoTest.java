@@ -81,7 +81,7 @@ public class ShopInfoTest {
 	public void testUpdate() {
 		UpdateShopStatusRequest queryShopInfo = new UpdateShopStatusRequest();
 		queryShopInfo.setTenantId("changhong");
-		queryShopInfo.setUserId("e85b0ee425964d7d");
+		queryShopInfo.setUserId("111");
 		queryShopInfo.setStatus(2);
 		System.out.println(JSON.toJSONString(shopInfoSV.updateShopStatus(queryShopInfo)));
 	}

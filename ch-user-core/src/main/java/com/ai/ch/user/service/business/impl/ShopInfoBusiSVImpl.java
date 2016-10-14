@@ -431,7 +431,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 				shopInfo.setCreateTime(DateUtil.getSysDate());
 			} else
 				shopInfo.setStatus(null);
-			
+			ShopInfoCriteria shopExample = new ShopInfoCriteria();
+		    ShopInfoCriteria.Criteria shopCriteria = shopExample.createCriteria();
+		    shopCriteria.andTenantIdEqualTo(request.getTenantId());
+		    shopCriteria.andUserIdEqualTo(request.getUserId());
+			List<ShopInfo> list = shopInfoAtomSV.selectByExample(shopExample);
+			if(list.isEmpty())
+				throw new BusinessException("数据库不存在记录");
 		    //店铺日志表
 			ShopInfoLog shopInfoLog = new ShopInfoLog();
 			BeanUtils.copyProperties(shopInfo, shopInfoLog);
@@ -442,11 +448,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			shopLogCriteria.andUserIdEqualTo(request.getUserId());
 			shopInfoLogAtomSV.updateByExample(shopInfoLog, shopLogExample);
 			
-			ShopInfoCriteria shopExample = new ShopInfoCriteria();
-		    ShopInfoCriteria.Criteria shopCriteria = shopExample.createCriteria();
-		    shopCriteria.andTenantIdEqualTo(request.getTenantId());
-		    shopCriteria.andUserIdEqualTo(request.getUserId());
-		    
 		    return shopInfoAtomSV.updateByExample(shopInfo, shopExample);
 	}
 

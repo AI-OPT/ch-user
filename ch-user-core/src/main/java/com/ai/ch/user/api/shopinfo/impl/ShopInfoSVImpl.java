@@ -238,7 +238,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		ResponseHeader responseHeader =null;
 		try{
 			shopInfoBusiSV.updateShopStatus(request);
-		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
