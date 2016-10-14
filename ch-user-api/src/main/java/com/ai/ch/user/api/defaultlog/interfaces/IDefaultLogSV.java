@@ -56,7 +56,7 @@ public interface IDefaultLogSV {
 	
 	
 	/**
-	 * 
+	 * 违约扣款记录查询
 	 * @param request
 	 * @return
 	 * @throws SystemException

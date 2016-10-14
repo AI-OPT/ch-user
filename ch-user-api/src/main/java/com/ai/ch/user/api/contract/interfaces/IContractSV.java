@@ -26,7 +26,7 @@ import com.ai.opt.base.vo.BaseResponse;
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IContractSV {
 	/**
-	 * 记录合同信息
+	 * 商户上传合同记录
 	 * 
 	 * @param request
 	 * @return
@@ -41,7 +41,7 @@ public interface IContractSV {
 	public BaseResponse insertContractInfo(ContactInfoRequest  contactRequest)throws BusinessException, SystemException;
 	
 	/**
-	 * 查询单个合同信息
+	 * 查询商户上传合同记录
 	 * 
 	 * @param request
 	 * @return
