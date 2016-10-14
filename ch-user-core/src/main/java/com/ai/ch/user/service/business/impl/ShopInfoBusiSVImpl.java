@@ -399,6 +399,8 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商品数量不能为空");
 		if(StringUtil.isBlank(request.getHasExperi()+""))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:有无电商经验是否不能为空");
+		if(request.getHasExperi()!=0||request.getHasExperi()!=1)
+			throw new BusinessException("参数格式错误:状态码为0/1");
 		BeanUtils.copyProperties(request, shopInfo);
 		//0/1/2:未开通/已开通/注销
 		shopInfo.setStatus(0);
