@@ -430,7 +430,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 				shopInfo.setStatus(request.getStatus());
 				shopInfo.setCreateTime(DateUtil.getSysDate());
 			} else
-				shopInfo.setStatus(null);
+				throw new BusinessException("参数格式错误:状态码为0/1/2");
 			ShopInfoCriteria shopExample = new ShopInfoCriteria();
 		    ShopInfoCriteria.Criteria shopCriteria = shopExample.createCriteria();
 		    shopCriteria.andTenantIdEqualTo(request.getTenantId());
