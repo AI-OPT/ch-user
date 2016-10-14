@@ -53,10 +53,10 @@ public class ShopInfoTest {
 
 	@Test
 	public void testQueryInfo() {
-		QueryShopInfoRequest queryShopInfo = new QueryShopInfoRequest();
+		QueryShopInfoByIdRequest queryShopInfo = new QueryShopInfoByIdRequest();
 		queryShopInfo.setTenantId("changhong");
-		queryShopInfo.setUserId("d548e76fd3034908");
-		QueryShopInfoResponse infoResponse = shopInfoSV.queryShopInfo(queryShopInfo);
+		queryShopInfo.setUserId("");
+		QueryShopInfoResponse infoResponse = shopInfoSV.queryShopInfoById(queryShopInfo);
 		System.out.println(JSON.toJSONString(infoResponse));
 	}
 

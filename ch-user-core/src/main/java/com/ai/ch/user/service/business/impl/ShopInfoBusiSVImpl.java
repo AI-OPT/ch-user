@@ -454,15 +454,15 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	@Override
 	public QueryShopInfoResponse queryShopInfoById(QueryShopInfoByIdRequest request)
 			throws BusinessException, SystemException {
-		if(StringUtil.isBlank(request.getTenantId()))
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id是否不能为空");
-		if(StringUtil.isBlank(request.getUserId()))
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:状态是否不能为空");
+		if(StringUtil.isBlank(request.getTenantId().trim()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id不能为空");
+		if(StringUtil.isBlank(request.getUserId().trim()))
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户id不能为空");
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId());
-		criteria.andUserIdEqualTo(request.getUserId());
+		criteria.andTenantIdEqualTo(request.getTenantId().trim());
+		criteria.andUserIdEqualTo(request.getUserId().trim());
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if(list.isEmpty())
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "查询数据不存在");
