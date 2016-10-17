@@ -20,4 +20,5 @@ public interface IShopInfoAtomSV {
 	 int updateByExampleSelective(@Param("record") ShopInfo record, @Param("example") ShopInfoCriteria example);
 	 
 	 List<CtDepositRule> selectByExample(CtDepositRuleCriteria example);
+	 
 }

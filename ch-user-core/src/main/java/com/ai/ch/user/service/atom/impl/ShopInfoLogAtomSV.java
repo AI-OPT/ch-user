@@ -27,4 +27,9 @@ public class ShopInfoLogAtomSV implements IShopInfoLogAtomSV {
 		return MapperFactory.getShopInfoLogMapper().updateByExample(record, example);
 	}
 
+	@Override
+	public int updateByExampleSelective(ShopInfoLog record, ShopInfoLogCriteria example) {
+		return MapperFactory.getShopInfoLogMapper().updateByExampleSelective(record, example);
+	}
+
 }

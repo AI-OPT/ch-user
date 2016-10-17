@@ -14,4 +14,6 @@ public interface IShopInfoLogAtomSV {
 	 List<ShopInfoLog> selectByExample(ShopInfoLogCriteria example);
 	 
 	 int updateByExample(@Param("record") ShopInfoLog record, @Param("example") ShopInfoLogCriteria example);
+	 
+	 int updateByExampleSelective(@Param("record") ShopInfoLog record, @Param("example") ShopInfoLogCriteria example);
 }
