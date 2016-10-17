@@ -358,13 +358,17 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 		BaseResponse baseResponse = new BaseResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
+		String userId = "";
+		if(!StringUtil.isBlank(request.getUserId())){
+			userId = request.getUserId().trim();
+		}
 		if (CollectionUtil.isEmpty(list)) {
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 			baseResponse.setResponseHeader(responseHeader);
 			return baseResponse;
-		} else if (!StringUtil.isBlank(request.getUserId().trim())) {
+		} else if (!StringUtil.isBlank(userId)&&list.size()==1) {
 			ShopInfo shopInfo = list.get(0);
-			if (shopInfo.getUserId().equals(request.getUserId().trim())) {
+			if (shopInfo.getUserId().equals(userId)) {
 				responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 				baseResponse.setResponseHeader(responseHeader);
 				return baseResponse;
@@ -373,8 +377,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 				baseResponse.setResponseHeader(responseHeader);
 				return baseResponse;
 			}
+		}else{
+			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SYSTEM_ERROR, "店铺名称已注册");
+			baseResponse.setResponseHeader(responseHeader);
+			return baseResponse;
 		}
-		return baseResponse;
 	}
 	
 	
