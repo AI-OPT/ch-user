@@ -431,10 +431,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if(!list.isEmpty())
 			throw new BusinessException("店铺id已存在");
 		//校验店铺名
-		ShopInfoCriteria.Criteria nameCriteria = example.createCriteria();
+		ShopInfoCriteria nameExample = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria nameCriteria = nameExample.createCriteria();
 		nameCriteria.andTenantIdEqualTo(request.getTenantId().trim());
 		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
-		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
+		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
 		if(!nameList.isEmpty())
 			throw new BusinessException("店铺名已存在");
 		BeanUtils.copyProperties(request, shopInfo);
