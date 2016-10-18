@@ -59,7 +59,7 @@ public class RankSVImpl implements IRankSV {
 
 	@Override
 	public QueryRankRuleResponse queryRankRule(QueryRankRuleRequest request) throws BusinessException, SystemException {
-		QueryRankRuleResponse response=null;
+		QueryRankRuleResponse response = new QueryRankRuleResponse();
 		ResponseHeader responseHeader =null;
 		try{
 		response = shopRankRuleBusiSV.queryRankRule(request);

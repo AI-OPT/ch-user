@@ -93,7 +93,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)
 			throws BusinessException, SystemException {
-		QueryDepositRuleResponse response = null;
+		QueryDepositRuleResponse response = new QueryDepositRuleResponse();
 		ResponseHeader responseHeader =null;
 		try{
 			response = shopInfoBusiSV.queryDepositRule(request);
@@ -122,7 +122,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	public QueryShopInfoLogResponse queryShopInfoLog(QueryShopInfoLogRequest request)
 			throws BusinessException, SystemException {
-		QueryShopInfoLogResponse response = null;
+		QueryShopInfoLogResponse response = new QueryShopInfoLogResponse();
 		ResponseHeader responseHeader =null;
 		try{
 		response = shopInfoLogBusiSV.queryShopInfoLog(request);
@@ -137,7 +137,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	public QueryShopScoreKpiResponse queryShopScoreKpi(QueryShopScoreKpiRequest request)
 			throws BusinessException, SystemException {
-		QueryShopScoreKpiResponse response = null;
+		QueryShopScoreKpiResponse response = new QueryShopScoreKpiResponse();
 		ResponseHeader responseHeader =null;
 		try{
 		response = shopInfoBusiSV.queryShopScoreKpi(request);
@@ -182,7 +182,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	public QueryShopStatDataResponse queryShopStatData(QueryShopStatDataRequest request)
 			throws BusinessException, SystemException {
-		QueryShopStatDataResponse response = null;
+		QueryShopStatDataResponse response = new QueryShopStatDataResponse();
 		ResponseHeader responseHeader =null;
 		try{
 			response = shopInfoBusiSV.queryShopStatData(request);

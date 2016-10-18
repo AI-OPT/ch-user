@@ -96,8 +96,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			criteria.andShopNameEqualTo(request.getShopName());
 		}
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
-		if (!list.isEmpty())
+		if (!list.isEmpty()){
 			BeanUtils.copyProperties(list.get(0), response);
+		}
 		/*String ecommOwner="";
 		if(response.getEcommOwner()!=null)
 			for (int index=0;index<response.getEcommOwner().length();index++) {
@@ -150,15 +151,16 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 		if (request.getStatus() != null) {
-			if ("1".equals(request.getStatus())) {
+			if (request.getStatus()==1) {
 				shopInfo.setCloseTime(DateUtil.getSysDate());
-			} else if ("2".equals(request.getStatus())) {
+			} else if (request.getStatus()==2) {
 				shopInfo.setCloseTime(DateUtil.getSysDate());
-			} else if ("0".equals(request.getStatus())) {
+			} else if (request.getStatus()==0) {
 				shopInfo.setStatus(request.getStatus());
 				shopInfo.setOpenTime(DateUtil.getSysDate());
-			} else
+			} else{
 				shopInfo.setStatus(null);
+			}
 		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
@@ -229,8 +231,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopStatDataCriteria.Criteria criteria = example.createCriteria();
 		criteria.andUserIdEqualTo(request.getUserId());
 		List<ShopStatData> list = shopStatDataAtomSV.selectByExample(example);
-		if (!list.isEmpty())
+		if (!list.isEmpty()){
 			BeanUtils.copyProperties(list.get(0), response);
+		}
 		return response;
 	}
 
@@ -248,10 +251,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		List<ShopStatData> shopStatDataList = shopStatDataAtomSV.selectByExample(shopStatDataExample);
 		Long servCharge = 0L;
 		// 获取佣金
-		if (shopStatDataList.isEmpty())
+		if (shopStatDataList.isEmpty()){
 			throw new BusinessException("统计数据不存在");
-		else
+		}else{
 			servCharge = shopStatDataList.get(0).getServCharge();
+		}
 		// 店铺评级指标
 		BigDecimal h = new BigDecimal("0");
 		BigDecimal a = new BigDecimal("0");
@@ -264,10 +268,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopScoreKpiCriteria.andKpiNameIn(strList);
 		List<ShopScoreKpi> shopScoreList = shopScoreKpiAtomSV.selectByExample(shopScoreKpiExample);
 		for (ShopScoreKpi shopScoreKpi : shopScoreList) {
-			if ("h".equals(shopScoreKpi.getKpiName()))
+			if ("h".equals(shopScoreKpi.getKpiName())){
 				h = shopScoreKpi.getWeight();
-			else if ("a".equals(shopScoreKpi.getKpiName()))
+			}else if ("a".equals(shopScoreKpi.getKpiName())){
 				a = shopScoreKpi.getWeight();
+			}
 		}
 		// 计算分数公式 score=h(a*佣金+b*订单+.....)
 		BigDecimal score = h.multiply((a.multiply(BigDecimal.valueOf(servCharge))));
@@ -280,10 +285,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopRankRuleCriteria.andMinScoreLessThan(score.longValue());
 		shopRankRuleCriteria.andMaxScoreGreaterThan(score.longValue());
 		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(shopRankRuleExample);
-		if (shopRankRuleList.isEmpty())
+		if (shopRankRuleList.isEmpty()){
 			throw new BusinessException("评分不在规则之内");
-		else
+		}else{
 			rank = shopRankRuleList.get(0).getRank();
+		}
 		return rank;
 	}
 
@@ -295,12 +301,12 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		criteria.andUserIdEqualTo(request.getUserId());
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		Long deposit = 0L;
-		if (list.isEmpty())
+		if (list.isEmpty()){
 			throw new BusinessException("店铺信息不存在");
-		else {
-			if (list.get(0).getDepositBalance() != null)
+		}else {
+			if (list.get(0).getDepositBalance() != null){
 				deposit = list.get(0).getDepositBalance();
-			else {
+			}else {
 				/*
 				 * CtDepositRuleCriteria ctDepositRuleExample = new
 				 * CtDepositRuleCriteria(); CtDepositRuleCriteria.Criteria
@@ -388,27 +394,42 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	@Override
 	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException {
 		ShopInfo shopInfo = new ShopInfo();
-		if(StringUtil.isBlank(request.getTenantId().trim()))
+		if(StringUtil.isBlank(request.getTenantId()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
-		if(StringUtil.isBlank(request.getUserId().trim()))
+		else
+			request.setTenantId(request.getTenantId().trim());
+		if(StringUtil.isBlank(request.getUserId()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户Id不能为空");
-		if(StringUtil.isBlank(request.getBusiType().trim()))
+		else
+			request.setUserId(request.getUserId().trim());
+		if(StringUtil.isBlank(request.getBusiType()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:经营类型不能为空");
+		else
+			request.setBusiType(request.getBusiType().trim());
 		if(request.getGoodsNum()==null)
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:可售商品数量不能为空");
-		if(StringUtil.isBlank(request.getMerchantNo().trim()))
+		if(StringUtil.isBlank(request.getMerchantNo()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户编号不能为空");
-		if(StringUtil.isBlank(request.getShopDesc().trim()))
+		else
+			request.setMerchantNo(request.getMerchantNo().trim());
+		if(StringUtil.isBlank(request.getShopDesc()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户简介不能为空");
-		if(StringUtil.isBlank(request.getShopName().trim()))
+		else
+			request.setShopDesc(request.getShopDesc().trim());
+		if(StringUtil.isBlank(request.getShopName()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户名称不能为空");
-		if(request.getHasExperi()==null)
+			request.setShopName(request.getShopName().trim());
+		if(request.getHasExperi()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:有无电商经验不能为空");
-		if(StringUtil.isBlank(request.getEcommOwner().trim()))
+		}
+		if(StringUtil.isBlank(request.getEcommOwner()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:拥有电商平台数量不能为空");
-		if(!(request.getHasExperi()==0||request.getHasExperi()==1))
+		else
+			request.setEcommOwner(request.getEcommOwner().trim());
+		if(!(request.getHasExperi()==0||request.getHasExperi()==1)){
 			throw new BusinessException("参数格式错误:有无电商经验状态码为0/1");
-		if(!(request.getBusiType().equals("1")||request.getBusiType().equals("2")))
+		}
+		if(!(request.getBusiType().trim().equals("1")||request.getBusiType().trim().equals("2")))
 			throw new BusinessException("参数格式错误:经营类型状态码为1/2");
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
@@ -416,12 +437,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		criteria.andUserIdEqualTo(request.getUserId().trim());
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if(!list.isEmpty())
-			throw new BusinessException("店铺信息已存在");
+			throw new BusinessException("店铺id已存在");
 		//校验店铺名
-		ShopInfoCriteria.Criteria nameCriteria = example.createCriteria();
+		ShopInfoCriteria nameExample = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria nameCriteria = nameExample.createCriteria();
 		nameCriteria.andTenantIdEqualTo(request.getTenantId().trim());
-		nameCriteria.andUserIdEqualTo(request.getUserId().trim());
-		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
+		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
+		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
 		if(!nameList.isEmpty())
 			throw new BusinessException("店铺名已存在");
 		BeanUtils.copyProperties(request, shopInfo);
@@ -438,12 +460,17 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public int updateShopStatus(UpdateShopStatusRequest request) throws BusinessException, SystemException {
-		if(request.getTenantId().trim().isEmpty())
-			throw new BusinessException("获取参数失败:租户id是否不能为空");
-		if(request.getUserId().trim().isEmpty())
-			throw new BusinessException("获取参数失败:用户id是否不能为空");
-		if(request.getStatus().toString().isEmpty())
-			throw new BusinessException("获取参数失败:状态是否不能为空");
+		String tenantId="";
+		String userId="";
+		if(StringUtil.isBlank(request.getTenantId()))
+			throw new BusinessException("获取参数失败:租户id不能为空");
+		else
+			tenantId = request.getTenantId().trim();
+		if(StringUtil.isBlank(request.getUserId()))
+			throw new BusinessException("获取参数失败:用户id不能为空");
+			userId = request.getUserId().trim(); 
+		if(request.getStatus()==null)
+			throw new BusinessException("获取参数失败:状态不能为空");
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 			//判断更新时间
@@ -458,8 +485,8 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 				throw new BusinessException("参数格式错误:状态码为0/1/2");
 			ShopInfoCriteria shopExample = new ShopInfoCriteria();
 		    ShopInfoCriteria.Criteria shopCriteria = shopExample.createCriteria();
-		    shopCriteria.andTenantIdEqualTo(request.getTenantId().trim());
-		    shopCriteria.andUserIdEqualTo(request.getUserId().trim());
+		    shopCriteria.andTenantIdEqualTo(tenantId);
+		    shopCriteria.andUserIdEqualTo(userId);
 			List<ShopInfo> list = shopInfoAtomSV.selectByExample(shopExample);
 			if(list.isEmpty())
 				throw new BusinessException("数据库不存在记录");
@@ -469,8 +496,8 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			shopInfoLog.setUpdateTime(DateUtil.getSysDate());
 			ShopInfoLogCriteria shopLogExample = new ShopInfoLogCriteria();
 			ShopInfoLogCriteria.Criteria shopLogCriteria = shopLogExample.createCriteria();
-			shopLogCriteria.andTenantIdEqualTo(request.getTenantId().trim());
-			shopLogCriteria.andUserIdEqualTo(request.getUserId().trim());
+			shopLogCriteria.andTenantIdEqualTo(tenantId);
+			shopLogCriteria.andUserIdEqualTo(userId);
 			shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog, shopLogExample);
 			
 		    return shopInfoAtomSV.updateByExampleSelective(shopInfo, shopExample);
@@ -479,15 +506,21 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	@Override
 	public QueryShopInfoResponse queryShopInfoById(QueryShopInfoByIdRequest request)
 			throws BusinessException, SystemException {
-		if(StringUtil.isBlank(request.getTenantId().trim()))
+		String tenantId="";
+		String userId="";
+		if(StringUtil.isBlank(request.getTenantId()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id不能为空");
-		if(StringUtil.isBlank(request.getUserId().trim()))
+		else
+			tenantId = request.getTenantId().trim();
+		if(StringUtil.isBlank(request.getUserId()))
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户id不能为空");
+		else
+			userId = request.getUserId().trim();
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId().trim());
-		criteria.andUserIdEqualTo(request.getUserId().trim());
+		criteria.andTenantIdEqualTo(tenantId);
+		criteria.andUserIdEqualTo(userId);
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if(list.isEmpty())
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "查询数据不存在");

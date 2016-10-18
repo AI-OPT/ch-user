@@ -70,7 +70,7 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
 		criteria.andSerialCodeEqualTo(serialCode);
 		int count =defaultLogAtomSV.deleteDefaultLog(example);
-		return 0;
+		return count;
 	}
 
 }

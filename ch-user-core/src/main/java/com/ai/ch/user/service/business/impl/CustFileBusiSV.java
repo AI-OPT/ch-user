@@ -48,10 +48,11 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 		CmCustFileExtCriteria example = new CmCustFileExtCriteria();
 		CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
-		if(null==request.getUsreId())
+		if(null==request.getUsreId()){
 			criteria.andUserIdIsNull();
-		else
+		}else{
 			criteria.andUserIdEqualTo(request.getUsreId());
+		}
 		if(request.getInfoType()!=null&&!"".equals(request.getInfoType())){
 			criteria.andInfoTypeEqualTo(request.getInfoType());
 		}

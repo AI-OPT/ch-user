@@ -51,8 +51,9 @@ public class ScoreSVImpl implements IScoreSV {
 			LOG.error("查询失败", e);
 			responseHeader = new ResponseHeader(false, ChUserConstants.SupplierScore.Fail, "操作失败");
 		}
-		if (response.getUserId() == null)
+		if (response.getUserId() == null){
 			responseHeader.setResultCode(ChUserConstants.SupplierScore.NOTFOUND);
+		}
 		response.setResponseHeader(responseHeader);
 		return response;
 	}
@@ -61,7 +62,7 @@ public class ScoreSVImpl implements IScoreSV {
 	public BaseResponse insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException {
 
 		BaseResponse response = new BaseResponse();
-		ResponseHeader responseHeader = new ResponseHeader();
+		ResponseHeader responseHeader = null;
 		try {
 			scoreLogBusiSV.insertScoreLog(request);
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
@@ -75,8 +76,8 @@ public class ScoreSVImpl implements IScoreSV {
 
 	@Override
 	public QueryScoreKpiResponse queryScoreKpi(QueryScoreKpiRequest request) throws BusinessException, SystemException {
-		QueryScoreKpiResponse response = null;
-		ResponseHeader responseHeader = new ResponseHeader();
+		QueryScoreKpiResponse response = new QueryScoreKpiResponse();
+		ResponseHeader responseHeader = null;
 		try {
 			response = scoreKpiBusiSV.queryScoreKpi(request);
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
@@ -91,7 +92,7 @@ public class ScoreSVImpl implements IScoreSV {
 	@Override
 	public BaseResponse insertCurrentScore(InsertCurrentScoreRequest request) throws BusinessException, SystemException {
 		BaseResponse response = new BaseResponse();
-		ResponseHeader responseHeader = new ResponseHeader();
+		ResponseHeader responseHeader = null;
 		try {
 			currentScoreBusiSV.insertCurrentScore(request);
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
@@ -107,7 +108,7 @@ public class ScoreSVImpl implements IScoreSV {
 	public BaseResponse updateCurrentScore(UpdateCurrentScoreRequest request)
 			throws BusinessException, SystemException {
 		BaseResponse response = new BaseResponse();
-		ResponseHeader responseHeader = new ResponseHeader();
+		ResponseHeader responseHeader = null;
 		try {
 			currentScoreBusiSV.updateCurrentScore(request);
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
@@ -121,8 +122,8 @@ public class ScoreSVImpl implements IScoreSV {
 
 	@Override
 	public QueryScoreLogResponse queryScoreLog(QueryScoreLogRequest request) throws BusinessException, SystemException {
-		QueryScoreLogResponse response = null;
-		ResponseHeader responseHeader = new ResponseHeader();
+		QueryScoreLogResponse response = new QueryScoreLogResponse();
+		ResponseHeader responseHeader = null;
 		try {
 			response = scoreLogBusiSV.queryScoreLog(request);
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
