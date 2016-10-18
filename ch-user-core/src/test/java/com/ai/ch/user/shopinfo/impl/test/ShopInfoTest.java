@@ -14,6 +14,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
 import com.alibaba.fastjson.JSON;
 
@@ -104,8 +105,14 @@ public class ShopInfoTest {
 	@Test
 	public void checkShopNameOnly(){
 		QueryShopInfoRequest request = new QueryShopInfoRequest();
-		//request.setShopName("ssss");
-		request.setTenantId("changhong");
+		request.setShopName("taobao1");
+		request.setTenantId("changhong1");
 		System.out.println(JSON.toJSONString(shopInfoSV.checkShopNameOnly(request)));
+	}
+	
+	@Test
+	public void updateTest(){
+		UpdateShopInfoRequest request = new UpdateShopInfoRequest();
+		System.out.println(request.getStatus());
 	}
 }
