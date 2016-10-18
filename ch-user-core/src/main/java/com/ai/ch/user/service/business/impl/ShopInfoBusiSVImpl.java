@@ -455,14 +455,14 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		String tenantId="";
 		String userId="";
 		if(StringUtil.isBlank(request.getTenantId()))
-			throw new BusinessException("获取参数失败:租户id是否不能为空");
+			throw new BusinessException("获取参数失败:租户id不能为空");
 		else
 			tenantId = request.getTenantId().trim();
 		if(StringUtil.isBlank(request.getUserId()))
-			throw new BusinessException("获取参数失败:用户id是否不能为空");
+			throw new BusinessException("获取参数失败:用户id不能为空");
 			userId = request.getUserId().trim(); 
 		if(request.getStatus()==null)
-			throw new BusinessException("获取参数失败:状态是否不能为空");
+			throw new BusinessException("获取参数失败:状态不能为空");
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 			//判断更新时间
