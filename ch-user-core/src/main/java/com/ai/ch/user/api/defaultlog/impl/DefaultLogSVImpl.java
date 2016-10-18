@@ -64,7 +64,7 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 	@Override
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException {
-		QueryDefaultLogResponse response=null;
+		QueryDefaultLogResponse response = new QueryDefaultLogResponse();
 		ResponseHeader responseHeader =null;
 		try{
 		response = defaultLogBusiSV.queryDefaultLog(request);
