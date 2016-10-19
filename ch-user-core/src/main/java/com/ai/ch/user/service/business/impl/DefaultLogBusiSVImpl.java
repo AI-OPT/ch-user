@@ -30,10 +30,12 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	private IDefaultLogAtomSV defaultLogAtomSV;
 	
 	@Override
-	public int insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException {
+	public String insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException {
 		ShopDefaultLog shopDefaultLog = new ShopDefaultLog();
 		BeanUtils.copyProperties(request, shopDefaultLog);
-		return defaultLogAtomSV.insert(shopDefaultLog);
+		shopDefaultLog.setSerialCode(SeqUtil.getNewId(UserSequenceCode.SHOP_DEFAULT_LOG$SERIAL_CODE_ID$SEQ,17));
+		defaultLogAtomSV.insert(shopDefaultLog);
+		return shopDefaultLog.getSerialCode();
 	}
 
 	@Override
