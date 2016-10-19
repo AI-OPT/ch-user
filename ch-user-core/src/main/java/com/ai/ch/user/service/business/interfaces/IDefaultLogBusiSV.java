@@ -8,7 +8,7 @@ import com.ai.opt.base.exception.SystemException;
 
 public interface IDefaultLogBusiSV {
 
-	public int insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException;
+	public String insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException;
 	
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException;
