@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
-import com.ai.ch.user.api.defaultlog.params.PaymentNotificationsRequest;
+import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogResponse;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
 import com.ai.opt.base.exception.BusinessException;
@@ -52,7 +52,7 @@ public interface IDefaultLogSV {
 	 */
 	@POST
 	@Path("/insertDefaultLog")
-	public BaseResponse insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException;
+	public InsertDefaultLogResponse insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException;
 	
 	
 	/**
