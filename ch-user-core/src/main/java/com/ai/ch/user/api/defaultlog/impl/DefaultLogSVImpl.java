@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.api.defaultlog.interfaces.IDefaultLogSV;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
-import com.ai.ch.user.api.defaultlog.params.PaymentNotificationsRequest;
+import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogResponse;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
 import com.ai.ch.user.constants.ChUserConstants;
@@ -47,17 +47,19 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 	private static final Log LOG = LogFactory.getLog(DefaultLogSVImpl.class);
 	
 	@Override
-	public BaseResponse insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException {
-		BaseResponse response = new BaseResponse();
+	public InsertDefaultLogResponse insertDefaultLog(InsertDefaultLogRequest request) throws SystemException, BusinessException {
+		InsertDefaultLogResponse response = new InsertDefaultLogResponse();
 		ResponseHeader responseHeader =null;
+		String serialCode = "";
 		try{
-			defaultLogBusiSV.insertDefaultLog(request);
+			serialCode = defaultLogBusiSV.insertDefaultLog(request);
 		    responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
 		}
 		response.setResponseHeader(responseHeader);
+		response.setSerialCode(serialCode);
 		return response;
 	}
 
