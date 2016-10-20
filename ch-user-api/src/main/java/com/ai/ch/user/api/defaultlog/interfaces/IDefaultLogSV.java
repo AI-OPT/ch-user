@@ -27,7 +27,7 @@ import com.ai.opt.base.vo.BaseResponse;
 public interface IDefaultLogSV {
 	
 	/**
-	 * 删除违约扣款记录
+	 * 删除违约扣款记录 
 	 * @param request
 	 * @return
 	 * @throws SystemException

@@ -16,5 +16,4 @@ public class InsertDefaultLogResponse extends BaseResponse{
 		this.serialCode = serialCode;
 	}
 	
-
 }
