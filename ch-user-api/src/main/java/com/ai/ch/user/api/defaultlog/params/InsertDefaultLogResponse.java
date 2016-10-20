@@ -15,5 +15,4 @@ public class InsertDefaultLogResponse extends BaseResponse{
 	public void setSerialCode(String serialCode) {
 		this.serialCode = serialCode;
 	}
-	
 }

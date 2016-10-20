@@ -39,7 +39,6 @@ public interface IDefaultLogSV {
 	@POST
 	@Path("/deleteDefaultLog")
 	public BaseResponse deleteDefaultLog(String serialCode) throws SystemException, BusinessException;
-	
 	/**
 	 * 新增违约扣款记录
 	 * @param request
