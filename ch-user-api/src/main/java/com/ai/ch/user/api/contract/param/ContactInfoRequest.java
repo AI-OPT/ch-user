@@ -34,6 +34,15 @@ public class ContactInfoRequest extends BaseInfo{
 	 */
 	private Timestamp inactiveTime;
 
+	/**
+	 * 合同金额
+	 */
+	private Double contractAmount;
+	/**
+	 * 备注
+	 */
+	private String remark;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -80,6 +89,22 @@ public class ContactInfoRequest extends BaseInfo{
 
 	public void setInactiveTime(Timestamp inactiveTime) {
 		this.inactiveTime = inactiveTime;
+	}
+
+	public Double getContractAmount() {
+		return contractAmount;
+	}
+
+	public void setContractAmount(Double contractAmount) {
+		this.contractAmount = contractAmount;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }
