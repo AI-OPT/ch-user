@@ -535,6 +535,66 @@ public class CtContractInfoCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andContractAmountIsNull() {
+            addCriterion("CONTRACT_AMOUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountIsNotNull() {
+            addCriterion("CONTRACT_AMOUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountEqualTo(Double value) {
+            addCriterion("CONTRACT_AMOUNT =", value, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountNotEqualTo(Double value) {
+            addCriterion("CONTRACT_AMOUNT <>", value, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountGreaterThan(Double value) {
+            addCriterion("CONTRACT_AMOUNT >", value, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountGreaterThanOrEqualTo(Double value) {
+            addCriterion("CONTRACT_AMOUNT >=", value, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountLessThan(Double value) {
+            addCriterion("CONTRACT_AMOUNT <", value, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountLessThanOrEqualTo(Double value) {
+            addCriterion("CONTRACT_AMOUNT <=", value, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountIn(List<Double> values) {
+            addCriterion("CONTRACT_AMOUNT in", values, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountNotIn(List<Double> values) {
+            addCriterion("CONTRACT_AMOUNT not in", values, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountBetween(Double value1, Double value2) {
+            addCriterion("CONTRACT_AMOUNT between", value1, value2, "contractAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractAmountNotBetween(Double value1, Double value2) {
+            addCriterion("CONTRACT_AMOUNT not between", value1, value2, "contractAmount");
+            return (Criteria) this;
+        }
+
         public Criteria andInactiveTimeIsNull() {
             addCriterion("INACTIVE_TIME is null");
             return (Criteria) this;
@@ -592,6 +652,76 @@ public class CtContractInfoCriteria {
 
         public Criteria andInactiveTimeNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("INACTIVE_TIME not between", value1, value2, "inactiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNull() {
+            addCriterion("REMARK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("REMARK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("REMARK =", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("REMARK <>", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("REMARK >", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("REMARK >=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("REMARK <", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("REMARK <=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLike(String value) {
+            addCriterion("REMARK like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("REMARK not like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("REMARK in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("REMARK not in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("REMARK between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("REMARK not between", value1, value2, "remark");
             return (Criteria) this;
         }
     }

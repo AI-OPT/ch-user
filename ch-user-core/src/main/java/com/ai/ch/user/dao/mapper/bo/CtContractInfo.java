@@ -11,7 +11,11 @@ public class CtContractInfo extends CtContractInfoKey {
 
     private Timestamp activeTime;
 
+    private Double contractAmount;
+
     private Timestamp inactiveTime;
+
+    private String remark;
 
     public String getTenantId() {
         return tenantId;
@@ -45,11 +49,27 @@ public class CtContractInfo extends CtContractInfoKey {
         this.activeTime = activeTime;
     }
 
+    public Double getContractAmount() {
+        return contractAmount;
+    }
+
+    public void setContractAmount(Double contractAmount) {
+        this.contractAmount = contractAmount;
+    }
+
     public Timestamp getInactiveTime() {
         return inactiveTime;
     }
 
     public void setInactiveTime(Timestamp inactiveTime) {
         this.inactiveTime = inactiveTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }

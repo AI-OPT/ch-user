@@ -8,7 +8,9 @@
     <result column="CONTRACT_CODE" property="contractCode" jdbcType="VARCHAR" />
     <result column="CONTRACT_NAME" property="contractName" jdbcType="VARCHAR" />
     <result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="CONTRACT_AMOUNT" property="contractAmount" jdbcType="DOUBLE" />
     <result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    USER_ID, CONTRACT_TYPE, TENANT_ID, CONTRACT_CODE, CONTRACT_NAME, ACTIVE_TIME, INACTIVE_TIME
+    USER_ID, CONTRACT_TYPE, TENANT_ID, CONTRACT_CODE, CONTRACT_NAME, ACTIVE_TIME, CONTRACT_AMOUNT, 
+    INACTIVE_TIME, REMARK
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria" >
     select
@@ -110,10 +113,12 @@
   <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.CtContractInfo" >
     insert into ct_contract_info (USER_ID, CONTRACT_TYPE, TENANT_ID, 
       CONTRACT_CODE, CONTRACT_NAME, ACTIVE_TIME, 
-      INACTIVE_TIME)
+      CONTRACT_AMOUNT, INACTIVE_TIME, REMARK
+      )
     values (#{userId,jdbcType=VARCHAR}, #{contractType,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
       #{contractCode,jdbcType=VARCHAR}, #{contractName,jdbcType=VARCHAR}, #{activeTime,jdbcType=TIMESTAMP}, 
-      #{inactiveTime,jdbcType=TIMESTAMP})
+      #{contractAmount,jdbcType=DOUBLE}, #{inactiveTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.CtContractInfo" >
     insert into ct_contract_info
@@ -136,8 +141,14 @@
       <if test="activeTime != null" >
         ACTIVE_TIME,
       </if>
+      <if test="contractAmount != null" >
+        CONTRACT_AMOUNT,
+      </if>
       <if test="inactiveTime != null" >
         INACTIVE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -159,8 +170,14 @@
       <if test="activeTime != null" >
         #{activeTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="contractAmount != null" >
+        #{contractAmount,jdbcType=DOUBLE},
+      </if>
       <if test="inactiveTime != null" >
         #{inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -191,8 +208,14 @@
       <if test="record.activeTime != null" >
         ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.contractAmount != null" >
+        CONTRACT_AMOUNT = #{record.contractAmount,jdbcType=DOUBLE},
+      </if>
       <if test="record.inactiveTime != null" >
         INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -207,7 +230,9 @@
       CONTRACT_CODE = #{record.contractCode,jdbcType=VARCHAR},
       CONTRACT_NAME = #{record.contractName,jdbcType=VARCHAR},
       ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
-      INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP}
+      CONTRACT_AMOUNT = #{record.contractAmount,jdbcType=DOUBLE},
+      INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,8 +252,14 @@
       <if test="activeTime != null" >
         ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="contractAmount != null" >
+        CONTRACT_AMOUNT = #{contractAmount,jdbcType=DOUBLE},
+      </if>
       <if test="inactiveTime != null" >
         INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where USER_ID = #{userId,jdbcType=VARCHAR}
@@ -240,7 +271,9 @@
       CONTRACT_CODE = #{contractCode,jdbcType=VARCHAR},
       CONTRACT_NAME = #{contractName,jdbcType=VARCHAR},
       ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
-      INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP}
+      CONTRACT_AMOUNT = #{contractAmount,jdbcType=DOUBLE},
+      INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
     where USER_ID = #{userId,jdbcType=VARCHAR}
       and CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}
   </update>
