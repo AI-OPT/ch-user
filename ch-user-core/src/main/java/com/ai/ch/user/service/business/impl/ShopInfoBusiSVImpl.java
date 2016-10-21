@@ -271,7 +271,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		// 店铺评级统计数据
 		ShopStatDataCriteria shopStatDataExample = new ShopStatDataCriteria();
 		ShopStatDataCriteria.Criteria shopStatDataCriteria = shopStatDataExample.createCriteria();
-		shopStatDataCriteria.andUserIdEqualTo(request.getUserId());
+		shopStatDataCriteria.andUserIdEqualTo(userId);
 		List<ShopStatData> shopStatDataList = shopStatDataAtomSV.selectByExample(shopStatDataExample);
 		Long servCharge = 0L;
 		// 获取佣金
@@ -285,7 +285,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		BigDecimal a = new BigDecimal("0");
 		ShopScoreKpiCriteria shopScoreKpiExample = new ShopScoreKpiCriteria();
 		ShopScoreKpiCriteria.Criteria shopScoreKpiCriteria = shopScoreKpiExample.createCriteria();
-		shopScoreKpiCriteria.andTenantIdEqualTo(request.getTenantId());
+		shopScoreKpiCriteria.andTenantIdEqualTo(tenantId);
 		List<String> strList = new ArrayList<String>();
 		strList.add("h");
 		strList.add("a");
@@ -305,7 +305,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		// 查询score在平台评级规则表中的rank
 		ShopRankRuleCriteria shopRankRuleExample = new ShopRankRuleCriteria();
 		ShopRankRuleCriteria.Criteria shopRankRuleCriteria = shopRankRuleExample.createCriteria();
-		shopRankRuleCriteria.andTenantIdEqualTo(request.getTenantId());
+		shopRankRuleCriteria.andTenantIdEqualTo(tenantId);
 		shopRankRuleCriteria.andMinScoreLessThan(score.longValue());
 		shopRankRuleCriteria.andMaxScoreGreaterThan(score.longValue());
 		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(shopRankRuleExample);
