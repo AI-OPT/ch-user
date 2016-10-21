@@ -196,7 +196,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	}
 
 	@Override
-	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException {
+	public QueryShopRankResponse queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException {
 		QueryShopRankResponse response = new QueryShopRankResponse();
 		ResponseHeader responseHeader =null;
 		Integer rank = 0;
@@ -208,7 +208,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		}
 		response.setRank(rank);
 		response.setResponseHeader(responseHeader);
-		return shopInfoBusiSV.queryShopRank(request);
+		return response;
 	}
 
 	@Override
