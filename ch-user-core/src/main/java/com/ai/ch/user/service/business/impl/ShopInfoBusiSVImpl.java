@@ -249,6 +249,12 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException {
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
+		}
+		if(StringUtil.isBlank(request.getUserId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:用户Id不能为空");
+		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
