@@ -25,6 +25,10 @@
          <AppenderRef ref="RollingFile" />
          <AppenderRef ref="STDOUT" />
     </logger>
+    <logger name="com.ai.ch.user.dao.mapper" level="debug" additivity="false">
+         <AppenderRef ref="RollingFile" />
+         <AppenderRef ref="STDOUT" />
+    </logger>
 	<logger name="com.mybatis" additivity="true">
 		<level value="DEBUG" />
 	</logger>
@@ -43,7 +47,7 @@
 	<logger name="java.sql.PreparedStatement" additivity="true">
 		<level value="debug" />
 	</logger>    
-    <Root level="debug">
+    <Root level="info">
       <AppenderRef ref="RollingFile" />
       <AppenderRef ref="STDOUT" />
     </Root>
