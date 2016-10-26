@@ -1,5 +1,6 @@
 package com.ai.ch.user.api.contract.param;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import com.ai.opt.base.vo.BaseInfo;
@@ -37,7 +38,7 @@ public class ContactInfoRequest extends BaseInfo{
 	/**
 	 * 合同金额
 	 */
-	private Double contractAmount;
+	private BigDecimal contractAmount;
 	/**
 	 * 备注
 	 */
@@ -91,11 +92,13 @@ public class ContactInfoRequest extends BaseInfo{
 		this.inactiveTime = inactiveTime;
 	}
 
-	public Double getContractAmount() {
+	
+
+	public BigDecimal getContractAmount() {
 		return contractAmount;
 	}
 
-	public void setContractAmount(Double contractAmount) {
+	public void setContractAmount(BigDecimal contractAmount) {
 		this.contractAmount = contractAmount;
 	}
 
