@@ -45,7 +45,7 @@ public class ShopInfoTest {
 	public void testInsert() {
 		InsertShopInfoRequst insertShopInfo = new InsertShopInfoRequst();
 		insertShopInfo.setTenantId("changhong");
-		insertShopInfo.setUserId("12345678");
+		insertShopInfo.setUserId("12311145678");
 		insertShopInfo.setPeriodType("Y");
 		insertShopInfo.setStatus(1);
 		insertShopInfo.setShopName("shopy");
@@ -56,7 +56,7 @@ public class ShopInfoTest {
 	public void testQueryInfo() {
 		QueryShopInfoByIdRequest queryShopInfo = new QueryShopInfoByIdRequest();
 		queryShopInfo.setTenantId("changhong");
-		queryShopInfo.setUserId("");
+		queryShopInfo.setUserId("5f42feacf1ce4ccc");
 		QueryShopInfoResponse infoResponse = shopInfoSV.queryShopInfoById(queryShopInfo);
 		System.out.println(JSON.toJSONString(infoResponse));
 	}
@@ -66,8 +66,8 @@ public class ShopInfoTest {
 		QueryShopDepositRequest queryShopInfo = new QueryShopDepositRequest();
 		queryShopInfo.setTenantId("changhong");
 		queryShopInfo.setUserId("e85b0ee425964d7d");
-		Long infoResponse = shopInfoSV.queryShopDeposit(queryShopInfo);
-		System.out.println(JSON.toJSONString(infoResponse));
+		//Long infoResponse = shopInfoSV.queryShopDeposit(queryShopInfo);
+		//System.out.println(JSON.toJSONString(infoResponse));
 	}
 
 	@Test
