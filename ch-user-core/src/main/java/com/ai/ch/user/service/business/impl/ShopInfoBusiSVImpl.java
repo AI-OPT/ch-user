@@ -28,6 +28,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
+import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.ShopInfoVo;
 import com.ai.ch.user.api.shopinfo.params.ShopScoreKpiVo;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
@@ -575,5 +577,28 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		BeanUtils.copyProperties(list.get(0), response);
 		return response;
+	}
+
+	@Override
+	public int setShopDeposit(SetShopDepositRequest request) throws BusinessException, SystemException {
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		ShopInfo shopInfo = new ShopInfo();
+		BeanUtils.copyProperties(request, shopInfo);
+		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
+	}
+
+	@Override
+	public int setShopBalance(SetShopBalanceRequest request) throws BusinessException, SystemException {
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		ShopInfo shopInfo = new ShopInfo();
+		BeanUtils.copyProperties(request, shopInfo);
+		shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
+		return 0;
 	}
 }

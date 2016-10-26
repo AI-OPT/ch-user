@@ -28,6 +28,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
+import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
@@ -80,7 +82,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 			log.info("后场保存资质信息服务开始"+beginTime);
 			shopInfoBusiSV.insertShopInfo(request);
 			log.info("后场保存资质信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
-		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
 		}
@@ -326,6 +328,40 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 			response = shopInfoBusiSV.queryShopInfoById(request);
 			log.info("后场查询店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public BaseResponse setShopDeposit(SetShopDepositRequest request) throws BusinessException, SystemException {
+		BaseResponse response = new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场设置店铺服务开始"+beginTime);
+			shopInfoBusiSV.setShopDeposit(request);
+			log.info("后场设置店铺服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public BaseResponse setShopBalance(SetShopBalanceRequest request) throws BusinessException, SystemException {
+		BaseResponse response = new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场设置店铺服务开始"+beginTime);
+			shopInfoBusiSV.setShopBalance(request);
+			log.info("后场设置店铺服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}

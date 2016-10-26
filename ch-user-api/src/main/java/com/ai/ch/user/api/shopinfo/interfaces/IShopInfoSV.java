@@ -27,6 +27,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
+import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
@@ -292,5 +294,34 @@ public interface IShopInfoSV {
 	public QueryShopInfoResponse queryShopInfoById(QueryShopInfoByIdRequest request)
 			throws BusinessException, SystemException;
 	
+	/**
+	 * 设置店铺应缴纳保证金
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_0004
+	 * @RestRelativeURL shopinfoservice/setShopDeposit
+	 */
+	@POST
+	@Path("/setShopDeposit")
+	public BaseResponse setShopDeposit(SetShopDepositRequest request)
+			throws BusinessException, SystemException;
+	
 
+	/**
+	 * 结算费率设置
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_0008
+	 * @RestRelativeURL shopinfoservice/setShopDeposit
+	 */
+	@POST
+	@Path("/setShopDeposit")
+	public BaseResponse setShopBalance(SetShopBalanceRequest request)
+			throws BusinessException, SystemException;
 }

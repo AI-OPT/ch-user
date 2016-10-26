@@ -13,12 +13,16 @@ import com.ai.ch.user.api.score.param.CtScoreLogVo;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogResponse;
+import com.ai.ch.user.dao.mapper.bo.CtCurrentScore;
+import com.ai.ch.user.dao.mapper.bo.CtCurrentScoreCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtScoreLog;
+import com.ai.ch.user.service.atom.interfaces.ICurrentScoreAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IScoreLogAtomSV;
 import com.ai.ch.user.service.business.interfaces.IScoreLogBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.DateUtil;
 
 @Component
@@ -27,13 +31,31 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 
 	@Autowired
 	private IScoreLogAtomSV scoreLogAtomSV;
+	
+	@Autowired
+	private ICurrentScoreAtomSV scoreAtomSV;
 
 	@Override
 	public int insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException {
 		CtScoreLog ctScoreLog = new CtScoreLog();
 		BeanUtils.copyProperties(request, ctScoreLog);
 		ctScoreLog.setScoreDate(DateUtil.getSysDate());
-		return scoreLogAtomSV.insert(ctScoreLog);
+		scoreLogAtomSV.insert(ctScoreLog);
+		//查询当前综合评分
+		CountScoreAvgRequest countScoreAvgRequest = new CountScoreAvgRequest();
+		BeanUtils.copyProperties(request, countScoreAvgRequest);
+		float score = countScoreAvg(countScoreAvgRequest);
+		//更新当前记录
+		CtCurrentScoreCriteria example = new CtCurrentScoreCriteria();
+		CtCurrentScoreCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		CtCurrentScore ctCurrentScore = new CtCurrentScore();
+		BeanUtils.copyProperties(request, ctCurrentScore);
+		ctCurrentScore.setTotalScore(Integer.valueOf(score+""));
+		ctCurrentScore.setScoreDate(DateUtil.getSysDate());
+		scoreAtomSV.updateByExample(ctCurrentScore, example);
+		return 0;
 	}
 
 	@Override
@@ -77,6 +99,8 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 				avgScore+=ctScoreLog.getTotalScore();
 			}
 			avgScore=avgScore/list.size();
+		}else{
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"没有找到该供应商评分");
 		}
 		return avgScore;
 	}
