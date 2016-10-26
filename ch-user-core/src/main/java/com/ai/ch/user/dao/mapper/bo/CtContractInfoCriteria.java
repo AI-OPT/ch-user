@@ -1,5 +1,6 @@
 package com.ai.ch.user.dao.mapper.bo;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -545,52 +546,52 @@ public class CtContractInfoCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountEqualTo(Double value) {
+        public Criteria andContractAmountEqualTo(BigDecimal value) {
             addCriterion("CONTRACT_AMOUNT =", value, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountNotEqualTo(Double value) {
+        public Criteria andContractAmountNotEqualTo(BigDecimal value) {
             addCriterion("CONTRACT_AMOUNT <>", value, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountGreaterThan(Double value) {
+        public Criteria andContractAmountGreaterThan(BigDecimal value) {
             addCriterion("CONTRACT_AMOUNT >", value, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountGreaterThanOrEqualTo(Double value) {
+        public Criteria andContractAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("CONTRACT_AMOUNT >=", value, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountLessThan(Double value) {
+        public Criteria andContractAmountLessThan(BigDecimal value) {
             addCriterion("CONTRACT_AMOUNT <", value, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountLessThanOrEqualTo(Double value) {
+        public Criteria andContractAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("CONTRACT_AMOUNT <=", value, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountIn(List<Double> values) {
+        public Criteria andContractAmountIn(List<BigDecimal> values) {
             addCriterion("CONTRACT_AMOUNT in", values, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountNotIn(List<Double> values) {
+        public Criteria andContractAmountNotIn(List<BigDecimal> values) {
             addCriterion("CONTRACT_AMOUNT not in", values, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountBetween(Double value1, Double value2) {
+        public Criteria andContractAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("CONTRACT_AMOUNT between", value1, value2, "contractAmount");
             return (Criteria) this;
         }
 
-        public Criteria andContractAmountNotBetween(Double value1, Double value2) {
+        public Criteria andContractAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("CONTRACT_AMOUNT not between", value1, value2, "contractAmount");
             return (Criteria) this;
         }

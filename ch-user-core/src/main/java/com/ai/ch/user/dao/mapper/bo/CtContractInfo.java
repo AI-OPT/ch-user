@@ -1,5 +1,6 @@
 package com.ai.ch.user.dao.mapper.bo;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class CtContractInfo extends CtContractInfoKey {
@@ -11,7 +12,7 @@ public class CtContractInfo extends CtContractInfoKey {
 
     private Timestamp activeTime;
 
-    private Double contractAmount;
+    private BigDecimal contractAmount;
 
     private Timestamp inactiveTime;
 
@@ -49,11 +50,11 @@ public class CtContractInfo extends CtContractInfoKey {
         this.activeTime = activeTime;
     }
 
-    public Double getContractAmount() {
+    public BigDecimal getContractAmount() {
         return contractAmount;
     }
 
-    public void setContractAmount(Double contractAmount) {
+    public void setContractAmount(BigDecimal contractAmount) {
         this.contractAmount = contractAmount;
     }
 
