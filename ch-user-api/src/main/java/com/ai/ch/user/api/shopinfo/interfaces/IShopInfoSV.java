@@ -12,6 +12,7 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
@@ -213,7 +214,7 @@ public interface IShopInfoSV {
 	 */
 	@POST
 	@Path("/queryShopDeposit")
-	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException,SystemException;
+	public QueryShopDepositResponse queryShopDeposit(QueryShopDepositRequest request) throws BusinessException,SystemException;
 	
 	/**
 	 * 查询批量店铺信息

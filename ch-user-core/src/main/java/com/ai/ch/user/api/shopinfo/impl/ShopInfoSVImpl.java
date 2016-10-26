@@ -13,6 +13,7 @@ import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
@@ -37,12 +38,16 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
+import com.alibaba.dubbo.common.logger.Logger;
+import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Component
 @Service
 public class ShopInfoSVImpl implements IShopInfoSV {
 
+	private static final Logger log = LoggerFactory.getLogger(ShopInfoSVImpl.class);
+	
 	@Autowired
 	private IShopInfoBusiSV shopInfoBusiSV;
 	
@@ -68,7 +73,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("保存资质信息服务开始"+beginTime);
 			shopInfoBusiSV.insertShopInfo(request);
+			log.info("保存资质信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -201,7 +209,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		ResponseHeader responseHeader =null;
 		Integer rank = 0;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("查询店铺等级服务开始"+beginTime);
 			rank = shopInfoBusiSV.queryShopRank(request);
+			log.info("查询店铺等级服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
@@ -212,8 +223,21 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	}
 
 	@Override
-	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException {
-		return shopInfoBusiSV.queryShopDeposit(request);
+	public QueryShopDepositResponse queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException {
+		QueryShopDepositResponse response = new QueryShopDepositResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("查询店铺保证金服务开始"+beginTime);
+			long deposit = shopInfoBusiSV.queryShopDeposit(request);
+			log.info("查询店铺保证金服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			response.setDeposit(deposit);
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
 	}
 
 	@Override

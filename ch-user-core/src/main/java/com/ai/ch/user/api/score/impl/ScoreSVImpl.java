@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.api.score.interfaces.IScoreSV;
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
+import com.ai.ch.user.api.score.param.CountScoreAvgResponse;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
@@ -136,8 +137,17 @@ public class ScoreSVImpl implements IScoreSV {
 	}
 
 	@Override
-	public float countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException {
-		return scoreLogBusiSV.countScoreAvg(request);
+	public CountScoreAvgResponse countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException {
+		CountScoreAvgResponse response = new CountScoreAvgResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			float scoreAvg = scoreLogBusiSV.countScoreAvg(request);
+			response.setScoreAvg(scoreAvg);
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(Exception e){
+			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
 	}
-
 }

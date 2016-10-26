@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
+import com.ai.ch.user.api.score.param.CountScoreAvgResponse;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
@@ -135,5 +136,5 @@ public interface IScoreSV {
 	 */
 	@POST
 	@Path("/countScoreAvg")
-	public float countScoreAvg(CountScoreAvgRequest request)throws BusinessException,SystemException;
+	public CountScoreAvgResponse countScoreAvg(CountScoreAvgRequest request)throws BusinessException,SystemException;
 }
