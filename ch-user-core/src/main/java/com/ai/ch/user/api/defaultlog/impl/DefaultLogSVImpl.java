@@ -1,20 +1,14 @@
 package com.ai.ch.user.api.defaultlog.impl;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
+import com.ai.ch.user.api.custfile.impl.CustFileSVImpl;
 import com.ai.ch.user.api.defaultlog.interfaces.IDefaultLogSV;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogResponse;
@@ -27,17 +21,13 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.ylink.itfin.certificate.SecurityUtil;
-import com.ylink.upp.base.oxm.XmlBodyEntity;
-import com.ylink.upp.base.oxm.util.Dom4jHelper;
-import com.ylink.upp.base.oxm.util.HandlerMsgUtil;
-import com.ylink.upp.base.oxm.util.HeaderBean;
 import com.ylink.upp.base.oxm.util.OxmHandler;
 
 @Component
 @Service
 public class DefaultLogSVImpl implements IDefaultLogSV {
-
+	private static final Log log = LogFactory.getLog(CustFileSVImpl.class);
+	
 	@Autowired
 	private IDefaultLogBusiSV defaultLogBusiSV;
 	
@@ -52,7 +42,10 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		ResponseHeader responseHeader =null;
 		String serialCode = "";
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场保存扣款信息服务开始"+beginTime);
 			serialCode = defaultLogBusiSV.insertDefaultLog(request);
+			log.info("后场保存扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		    responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
@@ -69,7 +62,10 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		QueryDefaultLogResponse response = new QueryDefaultLogResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		response = defaultLogBusiSV.queryDefaultLog(request);
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询扣款信息服务开始"+beginTime);
+			response = defaultLogBusiSV.queryDefaultLog(request);
+			log.info("后场查询扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
@@ -87,7 +83,10 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		BaseResponse response=new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		  defaultLogBusiSV.deleteDefaultLog(serialCode);
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场删除扣款信息服务开始"+beginTime);
+			defaultLogBusiSV.deleteDefaultLog(serialCode);
+			log.info("后场删除扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		  responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");

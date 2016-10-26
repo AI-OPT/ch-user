@@ -4,11 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.ch.user.api.score.impl.ScoreSVImpl;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
@@ -62,6 +65,7 @@ import com.ai.opt.sdk.util.StringUtil;
 @Transactional
 public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
+	static final Log LOG = LogFactory.getLog(ScoreSVImpl.class);
 	//电商平台位置
 	//static private String[] shopOwner = {"京东","天猫","淘宝","苏宁","一号店","自有电商平台"};
 	
@@ -384,7 +388,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		criteria.andTenantIdEqualTo(request.getTenantId().trim());
 		criteria.andShopNameEqualTo(request.getShopName().trim());
 
+		Long beginTime = System.currentTimeMillis();
+		LOG.info("后场校验唯一性服务开始"+beginTime);
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		LOG.info("后场校验唯一性服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 
 		BaseResponse baseResponse = new BaseResponse();
 		ResponseHeader responseHeader = new ResponseHeader();

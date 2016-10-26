@@ -59,7 +59,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询店铺信息服务开始"+beginTime);
 			response = shopInfoBusiSV.queryShopInfo(request);
+			log.info("后场查询店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -74,9 +77,9 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		ResponseHeader responseHeader =null;
 		try{
 			Long beginTime = System.currentTimeMillis();
-			log.info("保存资质信息服务开始"+beginTime);
+			log.info("后场保存资质信息服务开始"+beginTime);
 			shopInfoBusiSV.insertShopInfo(request);
-			log.info("保存资质信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			log.info("后场保存资质信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -90,7 +93,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场更新店铺信息服务开始"+beginTime);
 			shopInfoBusiSV.updateShopInfo(request);
+			log.info("后场更新店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -105,7 +111,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryDepositRuleResponse response = new QueryDepositRuleResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询保证金规则服务开始"+beginTime);
 			response = shopInfoBusiSV.queryDepositRule(request);
+			log.info("后场查询保证金规则服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -119,7 +128,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场保存店铺日志信息服务开始"+beginTime);
 			shopInfoLogBusiSV.insertShopInfoLog(request);
+			log.info("后场保存店铺日志信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -134,7 +146,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopInfoLogResponse response = new QueryShopInfoLogResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		response = shopInfoLogBusiSV.queryShopInfoLog(request);
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询店铺日志信息服务开始"+beginTime);
+			response = shopInfoLogBusiSV.queryShopInfoLog(request);
+			log.info("后场查询店铺日志信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -149,7 +164,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopScoreKpiResponse response = new QueryShopScoreKpiResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		response = shopInfoBusiSV.queryShopScoreKpi(request);
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询店铺规则信息服务开始"+beginTime);
+			response = shopInfoBusiSV.queryShopScoreKpi(request);
+			log.info("后场查询店铺规则信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -164,7 +182,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		shopInfoBusiSV.insertShopStatData(request);
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场保存店铺信息服务开始"+beginTime);
+			shopInfoBusiSV.insertShopStatData(request);
+			log.info("后场保存店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -179,7 +200,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		shopInfoBusiSV.updateShopStatData(request);
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场更新店铺信息服务开始"+beginTime);
+			shopInfoBusiSV.updateShopStatData(request);
+			log.info("后场更新店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -194,7 +218,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopStatDataResponse response = new QueryShopStatDataResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询店铺信息服务开始"+beginTime);
 			response = shopInfoBusiSV.queryShopStatData(request);
+			log.info("后场查询店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
@@ -210,9 +237,9 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		Integer rank = 0;
 		try{
 			Long beginTime = System.currentTimeMillis();
-			log.info("查询店铺等级服务开始"+beginTime);
+			log.info("后场查询店铺等级服务开始"+beginTime);
 			rank = shopInfoBusiSV.queryShopRank(request);
-			log.info("查询店铺等级服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			log.info("后场查询店铺等级服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
@@ -228,9 +255,9 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		ResponseHeader responseHeader =null;
 		try{
 			Long beginTime = System.currentTimeMillis();
-			log.info("查询店铺保证金服务开始"+beginTime);
+			log.info("后场查询店铺保证金服务开始"+beginTime);
 			long deposit = shopInfoBusiSV.queryShopDeposit(request);
-			log.info("查询店铺保证金服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			log.info("后场查询店铺保证金服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 			response.setDeposit(deposit);
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
@@ -259,7 +286,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询店铺信息服务开始"+beginTime);
 			shopInfoBusiSV.saveShopAuditInfo(request);
+			log.info("后场查询店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
@@ -273,7 +303,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场更新店铺状态服务开始"+beginTime);
 			shopInfoBusiSV.updateShopStatus(request);
+			log.info("后场更新店铺状态服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
@@ -288,7 +321,10 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场查询店铺信息服务开始"+beginTime);
 			response = shopInfoBusiSV.queryShopInfoById(request);
+			log.info("后场查询店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());

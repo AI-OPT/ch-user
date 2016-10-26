@@ -32,7 +32,10 @@ public class RankSVImpl implements IRankSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		shopRankRuleBusiSV.insertRankRule(request);
+			Long beginTime = System.currentTimeMillis();
+			LOG.info("后场保存规则信息服务开始"+beginTime);
+			shopRankRuleBusiSV.insertRankRule(request);
+			LOG.info("后场保存规则信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
@@ -47,7 +50,10 @@ public class RankSVImpl implements IRankSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		shopRankRuleBusiSV.updateRankRule(request);
+			Long beginTime = System.currentTimeMillis();
+			LOG.info("后场更新规则信息服务开始"+beginTime);
+			shopRankRuleBusiSV.updateRankRule(request);
+			LOG.info("后场更新规则信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
@@ -62,7 +68,10 @@ public class RankSVImpl implements IRankSV {
 		QueryRankRuleResponse response = new QueryRankRuleResponse();
 		ResponseHeader responseHeader =null;
 		try{
-		response = shopRankRuleBusiSV.queryRankRule(request);
+			Long beginTime = System.currentTimeMillis();
+			LOG.info("后场查询规则信息服务开始"+beginTime);
+			response = shopRankRuleBusiSV.queryRankRule(request);
+			LOG.info("后场查询规则信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
