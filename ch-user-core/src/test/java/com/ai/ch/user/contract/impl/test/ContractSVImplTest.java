@@ -1,5 +1,6 @@
 package com.ai.ch.user.contract.impl.test;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +28,11 @@ public class ContractSVImplTest {
 		contactInfoRequest.setContractCode("店铺code3");
 		contactInfoRequest.setContractName("店铺test3");
 		contactInfoRequest.setContractType("2");
-		contactInfoRequest.setTenantId("ch");
-		contactInfoRequest.setUserId("3");
+		contactInfoRequest.setTenantId("changhong");
+		contactInfoRequest.setUserId("e01977b835034f5d");
 		contactInfoRequest.setActiveTime(new Timestamp(11111111111L));
 		contactInfoRequest.setInactiveTime(new Timestamp(222222222L));
+		contactInfoRequest.setContractAmount(new BigDecimal(99999999.99D));
 		contractSV.insertContractInfo(contactInfoRequest);
 	}
 	@Test
@@ -38,7 +40,8 @@ public class ContractSVImplTest {
 		ContactInfoRequest contactInfoRequest = new ContactInfoRequest();
 		contactInfoRequest.setTenantId("changhong");
 		contactInfoRequest.setContractType("2");
-		contactInfoRequest.setContractName("1234577");
+		//contactInfoRequest.setContractName("1234577");
+		contactInfoRequest.setUserId("e01977b835034f5d");
 		ContractInfoResponse response = contractSV.queryContractInfo(contactInfoRequest);
 		System.out.println(JSON.toJSONString(response));
 	}
