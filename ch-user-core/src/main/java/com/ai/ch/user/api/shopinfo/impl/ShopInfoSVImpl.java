@@ -258,9 +258,9 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		try{
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场查询店铺保证金服务开始"+beginTime);
-			long deposit = shopInfoBusiSV.queryShopDeposit(request);
+			long depositBalance = shopInfoBusiSV.queryShopDeposit(request);
 			log.info("后场查询店铺保证金服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
-			response.setDeposit(deposit);
+			response.setDepositBalance(depositBalance);
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());

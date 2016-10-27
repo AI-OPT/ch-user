@@ -12,14 +12,14 @@ public class QueryShopDepositResponse extends BaseResponse {
 
 	private static final long serialVersionUID = 1L;
 
-	private long deposit;
+	private long depositBalance;
 
-	public long getDeposit() {
-		return deposit;
+	public long getDepositBalance() {
+		return depositBalance;
 	}
 
-	public void setDeposit(long deposit) {
-		this.deposit = deposit;
+	public void setDepositBalance(long depositBalance) {
+		this.depositBalance = depositBalance;
 	}
 
 }

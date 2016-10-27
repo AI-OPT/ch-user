@@ -41,7 +41,7 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 		BeanUtils.copyProperties(request, ctScoreLog);
 		ctScoreLog.setScoreDate(DateUtil.getSysDate());
 		scoreLogAtomSV.insert(ctScoreLog);
-		//查询当前综合评分
+		/*//查询当前综合评分
 		CountScoreAvgRequest countScoreAvgRequest = new CountScoreAvgRequest();
 		BeanUtils.copyProperties(request, countScoreAvgRequest);
 		float score = countScoreAvg(countScoreAvgRequest);
@@ -54,7 +54,7 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 		BeanUtils.copyProperties(request, ctCurrentScore);
 		ctCurrentScore.setTotalScore(Integer.valueOf(score+""));
 		ctCurrentScore.setScoreDate(DateUtil.getSysDate());
-		scoreAtomSV.updateByExample(ctCurrentScore, example);
+		scoreAtomSV.updateByExample(ctCurrentScore, example);*/
 		return 0;
 	}
 
