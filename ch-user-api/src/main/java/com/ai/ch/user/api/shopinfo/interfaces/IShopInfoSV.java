@@ -20,6 +20,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopKpiRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
@@ -323,5 +325,20 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/setShopDeposit")
 	public BaseResponse setShopBalance(SetShopBalanceRequest request)
+			throws BusinessException, SystemException;
+	
+	/**
+	 * 查询店铺考核参数
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_00100
+	 * @RestRelativeURL shopinfoservice/queryShopKpi
+	 */
+	@POST
+	@Path("/queryShopKpi")
+	public QueryShopKpiResponse queryShopKpi(QueryShopKpiRequest request)
 			throws BusinessException, SystemException;
 }

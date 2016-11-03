@@ -22,6 +22,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopKpiRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
@@ -600,5 +602,27 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		BeanUtils.copyProperties(request, shopInfo);
 		shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 		return 0;
+	}
+
+	@Override
+	public QueryShopKpiResponse queryShopKpi(QueryShopKpiRequest request) throws BusinessException, SystemException {
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户id不能为空");
+		}
+		ShopScoreKpiCriteria example= new ShopScoreKpiCriteria();
+		ShopScoreKpiCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		List<ShopScoreKpi> list = shopScoreKpiAtomSV.selectByExample(example);
+		List<ShopScoreKpiVo> responseList = new ArrayList<>();
+		if(list.size()>0){
+			for (ShopScoreKpi shopScoreKpi : list) {
+				ShopScoreKpiVo shopScoreKpiVo = new ShopScoreKpiVo();
+				BeanUtils.copyProperties(shopScoreKpi, shopScoreKpiVo);
+				responseList.add(shopScoreKpiVo);
+			}
+		}
+		QueryShopKpiResponse response = new QueryShopKpiResponse();
+		response.setShopKpiList(responseList);
+		return response;
 	}
 }

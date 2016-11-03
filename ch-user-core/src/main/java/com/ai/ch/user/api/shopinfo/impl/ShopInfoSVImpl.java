@@ -21,6 +21,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoLogResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
+import com.ai.ch.user.api.shopinfo.params.QueryShopKpiRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
@@ -361,6 +363,23 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 			log.info("后场设置店铺服务开始"+beginTime);
 			shopInfoBusiSV.setShopBalance(request);
 			log.info("后场设置店铺服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public QueryShopKpiResponse queryShopKpi(QueryShopKpiRequest request) throws BusinessException, SystemException {
+		QueryShopKpiResponse response = new QueryShopKpiResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("查询店铺评级指标服务开始"+beginTime);
+			response = shopInfoBusiSV.queryShopKpi(request);
+			log.info("查询店铺评级指标服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
