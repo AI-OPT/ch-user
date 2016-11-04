@@ -334,7 +334,7 @@ public interface IShopInfoSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_00100
+	 * @ApiCode COMM_TENANT_001000
 	 * @RestRelativeURL shopinfoservice/queryShopKpi
 	 */
 	@POST
