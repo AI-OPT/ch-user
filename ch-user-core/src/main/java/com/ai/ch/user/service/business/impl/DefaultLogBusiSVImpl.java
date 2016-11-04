@@ -21,6 +21,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
+import com.ai.opt.sdk.util.StringUtil;
 
 @Component
 @Transactional
@@ -41,10 +42,16 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	@Override
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException {
+		if(StringUtil.isBlank(request.getTenantId().trim())){
+			throw new BusinessException("获取参数失败:租户id不能为空");
+		}
+		if(StringUtil.isBlank(request.getUserId().trim())){
+			throw new BusinessException("获取参数失败:用户id不能为空");
+		}
 		QueryDefaultLogResponse response = new QueryDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
-		criteria.andUserIdEqualTo(request.getUserId());
+		criteria.andUserIdEqualTo(request.getUserId().trim());
 		int count =defaultLogAtomSV.countByExample(example);
 		int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
 		example.setLimitStart((request.getPageNo()-1)*request.getPageSize());

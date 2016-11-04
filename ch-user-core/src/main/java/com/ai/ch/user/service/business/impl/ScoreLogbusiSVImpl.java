@@ -13,8 +13,6 @@ import com.ai.ch.user.api.score.param.CtScoreLogVo;
 import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogResponse;
-import com.ai.ch.user.dao.mapper.bo.CtCurrentScore;
-import com.ai.ch.user.dao.mapper.bo.CtCurrentScoreCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtScoreLog;
 import com.ai.ch.user.service.atom.interfaces.ICurrentScoreAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IScoreLogAtomSV;
@@ -24,6 +22,7 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 
 @Component
 @Transactional
@@ -91,8 +90,19 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 
 	@Override
 	public float countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException {
-		
-		List<CtScoreLog> list = scoreLogAtomSV.selectScoreLogMax(request.getTenantId(), request.getUserId());
+		String tenantId="";
+		String userId="";
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException("获取参数失败:租户id不能为空");
+		}else{
+			tenantId = request.getTenantId().trim();
+		}
+		if(StringUtil.isBlank(request.getUserId())){
+			throw new BusinessException("获取参数失败:用户id不能为空");
+		}else{
+			userId= request.getUserId().trim();
+		}
+		List<CtScoreLog> list = scoreLogAtomSV.selectScoreLogMax(tenantId, userId);
 		float avgScore = 0;
 		if(!list.isEmpty()){
 			for (CtScoreLog ctScoreLog : list) {

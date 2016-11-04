@@ -43,8 +43,8 @@ public class defaultManagerSVImpl {
 	@Test
 	public void queryDetaultInfoListTest(){
 		QueryDefaultLogRequest defaultLogRequest = new QueryDefaultLogRequest();
-		defaultLogRequest.setTenantId("ch");
-		defaultLogRequest.setUserId("1");
+		//defaultLogRequest.setTenantId("ch");
+		//defaultLogRequest.setUserId("1");
 		
 		defaultLogRequest.setPageNo(1);
 		defaultLogRequest.setPageSize(5);
