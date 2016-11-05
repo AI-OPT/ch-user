@@ -121,34 +121,34 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	@Override
 	public int insertShopInfo(InsertShopInfoRequst request) throws BusinessException, SystemException {
 		if(request.getUserId().isEmpty()){
-			throw new BusinessException("商户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"商户id不能为空");
 		}
 		if(request.getShopName().isEmpty()){
-			throw new BusinessException("商户名称不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"商户名称不能为空");
 		}
 		if(request.getBusiType().isEmpty()){
-			throw new BusinessException("经营类型不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"经营类型不能为空");
 		}
 		if(request.getDepositBalance().toString().isEmpty()){
-			throw new BusinessException("保证金不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"保证金不能为空");
 		}
 		if(request.getEcommOwner().isEmpty()){
-			throw new BusinessException("现有电商平台不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"现有电商平台不能为空");
 		}
 		if(request.getGoodsNum().toString().isEmpty()){
-			throw new BusinessException("可售商品数量不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"可售商品数量不能为空");
 		}
 		if(request.getHasExperi().toString().isEmpty()){
-			throw new BusinessException("有无电商经验不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"有无电商经验不能为空");
 		}
 		if(request.getMerchantNo().isEmpty()){
-			throw new BusinessException("商户编号不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"商户编号不能为空");
 		}
 		if(request.getOperId().toString().isEmpty()){
-			throw new BusinessException("店铺介绍不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"店铺介绍不能为空");
 		}
 		if(request.getStatus().toString().isEmpty()){
-			throw new BusinessException("店铺状态不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"店铺状态不能为空");
 		}
 		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
@@ -284,7 +284,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		Long servCharge = 0L;
 		// 获取佣金
 		if (shopStatDataList.isEmpty()){
-			throw new BusinessException("统计数据不存在");
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"统计数据不存在");
 		}else{
 			servCharge = shopStatDataList.get(0).getServCharge();
 		}
@@ -318,7 +318,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopRankRuleCriteria.andMaxScoreGreaterThan(score.longValue());
 		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(shopRankRuleExample);
 		if (shopRankRuleList.isEmpty()){
-			throw new BusinessException("评分不在规则之内");
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"评分不在规则之内");
 		}else{
 			rank = shopRankRuleList.get(0).getRank();
 		}
