@@ -341,7 +341,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		Long deposit = 0L;
 		if (list.isEmpty()){
-			throw new BusinessException("店铺信息不存在");
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺信息不存在");
 		}else {
 			if (list.get(0).getDepositBalance() != null){
 				deposit = list.get(0).getDepositBalance();
@@ -477,10 +477,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			request.setEcommOwner(request.getEcommOwner().trim());
 		}
 		if(!(request.getHasExperi()==0||request.getHasExperi()==1)){
-			throw new BusinessException("参数格式错误:有无电商经验状态码为0/1");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:有无电商经验状态码为0/1");
 		}
 		if(!(request.getBusiType().trim().equals("1")||request.getBusiType().trim().equals("2"))){
-			throw new BusinessException("参数格式错误:经营类型状态码为1/2");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:经营类型状态码为1/2");
 		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
@@ -488,7 +488,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		criteria.andUserIdEqualTo(request.getUserId().trim());
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if(!list.isEmpty()){
-			throw new BusinessException("店铺id已存在");
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺id已存在");
 		}
 		//校验店铺名
 		ShopInfoCriteria nameExample = new ShopInfoCriteria();
@@ -497,7 +497,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
 		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
 		if(!nameList.isEmpty()){
-			throw new BusinessException("店铺名已存在");
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名已存在");
 		}
 		BeanUtils.copyProperties(request, shopInfo);
 		//0/1/2:未开通/已开通/注销
