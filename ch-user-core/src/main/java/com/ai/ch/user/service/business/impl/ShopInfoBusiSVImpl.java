@@ -522,8 +522,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		if(StringUtil.isBlank(request.getUserId().trim())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:用户id不能为空");
-		}
+		}else{
 			userId = request.getUserId().trim(); 
+		}
 		if(request.getStatus()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:状态不能为空");
 		}
