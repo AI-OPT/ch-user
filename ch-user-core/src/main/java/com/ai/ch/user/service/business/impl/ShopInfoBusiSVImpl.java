@@ -327,11 +327,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public Long queryShopDeposit(QueryShopDepositRequest request) throws BusinessException, SystemException {
-		if (StringUtil.isBlank(request.getTenantId().trim())) {
+		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
 		}
 
-		if (StringUtil.isBlank(request.getUserId().trim())) {
+		if (StringUtil.isBlank(request.getUserId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:店铺名称不能为空");
 		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
@@ -389,11 +389,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		if (StringUtil.isBlank(request.getTenantId().trim())) {
+		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户ID不能为空");
 		}
 
-		if (StringUtil.isBlank(request.getShopName().trim())) {
+		if (StringUtil.isBlank(request.getShopName())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:店铺名称不能为空");
 		}
 		criteria.andTenantIdEqualTo(request.getTenantId().trim());
@@ -515,12 +515,12 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	public int updateShopStatus(UpdateShopStatusRequest request) throws BusinessException, SystemException {
 		String tenantId="";
 		String userId="";
-		if(StringUtil.isBlank(request.getTenantId().trim())){
+		if(StringUtil.isBlank(request.getTenantId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
 		}else{
 			tenantId = request.getTenantId().trim();
 		}
-		if(StringUtil.isBlank(request.getUserId().trim())){
+		if(StringUtil.isBlank(request.getUserId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:用户id不能为空");
 		}else{
 			userId = request.getUserId().trim(); 
