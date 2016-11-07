@@ -703,9 +703,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			if(shopId.equals(shopInfolist.get(0).getUserId())){
 				throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR,"更新店铺名和原来一样");
 			}
-		}
-		else{
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
+			else{
+				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
+			}
 		}
 		BeanUtils.copyProperties(request, shopInfo);
 		//0/1/2:未开通/已开通/注销
