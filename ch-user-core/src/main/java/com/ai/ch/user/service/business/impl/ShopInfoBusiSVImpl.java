@@ -685,18 +685,31 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if(!(request.getBusiType().trim().equals("1")||request.getBusiType().trim().equals("2"))){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:经营类型状态码为1/2");
 		}
+		ShopInfoCriteria idExample = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria idCriteria = idExample.createCriteria();
+		idCriteria.andTenantIdEqualTo(request.getTenantId().trim());
+		idCriteria.andUserIdEqualTo(request.getUserId().trim());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(idExample);
+		if(list.isEmpty()){
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"更新的店铺不存在");
+		}
+		String shopId = list.get(0).getUserId();
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId().trim());
-		criteria.andUserIdEqualTo(request.getUserId().trim());
-		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
-		if(!list.isEmpty()){
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺id已存在");
+		criteria.andShopNameEqualTo(request.getShopName().trim());
+		List<ShopInfo> shopInfolist = shopInfoAtomSV.selectByExample(example);
+		if(!shopInfolist.isEmpty()){
+			if(shopId.equals(shopInfolist.get(0).getUserId())){
+				throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR,"更新店铺名和原来一样");
+			}
+		}
+		else{
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
 		}
 		BeanUtils.copyProperties(request, shopInfo);
 		//0/1/2:未开通/已开通/注销
 		shopInfo.setStatus(0);
-		shopInfo.setCreateTime(DateUtil.getSysDate());
 		/*//插入日志表
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
