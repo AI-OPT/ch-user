@@ -13,7 +13,9 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
 import com.alibaba.fastjson.JSON;
@@ -29,8 +31,8 @@ public class ShopInfoTest {
 	public void testQueryRank() {
 		QueryShopRankRequest request = new QueryShopRankRequest();
 		request.setTenantId("changhong");
-		request.setUserId("00002");
-		shopInfoSV.queryShopRank(request);
+		request.setUserId("e85b0ee425964d7d");
+		System.out.println(shopInfoSV.queryShopRank(request));
 	}
 
 	@Test
@@ -115,4 +117,27 @@ public class ShopInfoTest {
 		UpdateShopInfoRequest request = new UpdateShopInfoRequest();
 		System.out.println(request.getStatus());
 	}
+	
+	@Test
+	public void queryKpiTest(){
+		QueryShopScoreKpiRequest re= new QueryShopScoreKpiRequest();
+		re.setTenantId("changhong");
+		System.out.println(JSON.toJSONString(shopInfoSV.queryShopScoreKpi(re)));
+	}
+	
+	@Test
+	public void updateAudit(){
+		UpdateShopAuditInfoRequest re = new UpdateShopAuditInfoRequest();
+		re.setTenantId("changhong");
+		re.setUserId("5f42feacf1ce4ccc");
+		re.setBusiType("1");
+		re.setEcommOwner("001100");
+		re.setGoodsNum(500);
+		re.setHasExperi(1);
+		re.setMerchantNo("11000101");
+		re.setShopDesc("士大夫精神富可敌国放到空间");
+		re.setShopName("changhong");
+		System.out.println(JSON.toJSONString(shopInfoSV.updateShopAuditInfo(re)));
+	}
+	
 }

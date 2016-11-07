@@ -708,6 +708,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			}
 		}
 		BeanUtils.copyProperties(request, shopInfo);
+		ShopInfoCriteria updateExample = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria updateCriteria = updateExample.createCriteria();
+		updateCriteria.andTenantIdEqualTo(request.getTenantId().trim());
+		updateCriteria.andUserIdEqualTo(request.getUserId().trim());
 		//0/1/2:未开通/已开通/注销
 		shopInfo.setStatus(0);
 		/*//插入日志表
@@ -715,6 +719,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
 		shopInfoLogAtomSV.insert(shopInfoLog);*/
-		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
+		return shopInfoAtomSV.updateByExampleSelective(shopInfo, updateExample);
 	}
 }
