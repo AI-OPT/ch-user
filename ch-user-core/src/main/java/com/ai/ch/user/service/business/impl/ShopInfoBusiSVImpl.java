@@ -34,6 +34,7 @@ import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.ShopInfoVo;
 import com.ai.ch.user.api.shopinfo.params.ShopScoreKpiVo;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
@@ -632,5 +633,75 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		QueryShopKpiResponse response = new QueryShopKpiResponse();
 		response.setShopKpiList(responseList);
 		return response;
+	}
+
+	@Override
+	public int updateShopAuditInfo(UpdateShopAuditInfoRequest request)
+			throws BusinessException, SystemException {
+		ShopInfo shopInfo = new ShopInfo();
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
+		}else{
+			request.setTenantId(request.getTenantId().trim());
+		}
+		if(StringUtil.isBlank(request.getUserId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户Id不能为空");
+		}else{
+			request.setUserId(request.getUserId().trim());
+		}
+		if(StringUtil.isBlank(request.getBusiType())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:经营类型不能为空");
+		}else{
+			request.setBusiType(request.getBusiType().trim());
+		}
+		if(request.getGoodsNum()==null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:可售商品数量不能为空");
+		}
+		if(StringUtil.isBlank(request.getMerchantNo())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户编号不能为空");
+		}else{
+			request.setMerchantNo(request.getMerchantNo().trim());
+		}
+		if(StringUtil.isBlank(request.getShopDesc())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户简介不能为空");
+		}else{
+			request.setShopDesc(request.getShopDesc().trim());
+		}
+		if(StringUtil.isBlank(request.getShopName())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户名称不能为空");
+		}
+			request.setShopName(request.getShopName().trim());
+		if(request.getHasExperi()==null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:有无电商经验不能为空");
+		}
+		if(StringUtil.isBlank(request.getEcommOwner())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:拥有电商平台数量不能为空");
+		}else{
+			request.setEcommOwner(request.getEcommOwner().trim());
+		}
+		if(!(request.getHasExperi()==0||request.getHasExperi()==1)){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:有无电商经验状态码为0/1");
+		}
+		if(!(request.getBusiType().trim().equals("1")||request.getBusiType().trim().equals("2"))){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:经营类型状态码为1/2");
+		}
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId().trim());
+		criteria.andUserIdEqualTo(request.getUserId().trim());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		if(!list.isEmpty()){
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺id已存在");
+		}
+		BeanUtils.copyProperties(request, shopInfo);
+		//0/1/2:未开通/已开通/注销
+		shopInfo.setStatus(0);
+		shopInfo.setCreateTime(DateUtil.getSysDate());
+		/*//插入日志表
+		ShopInfoLog shopInfoLog = new ShopInfoLog();
+		BeanUtils.copyProperties(shopInfo, shopInfoLog);
+		shopInfo.setCreateTime(DateUtil.getSysDate());
+		shopInfoLogAtomSV.insert(shopInfoLog);*/
+		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 	}
 }

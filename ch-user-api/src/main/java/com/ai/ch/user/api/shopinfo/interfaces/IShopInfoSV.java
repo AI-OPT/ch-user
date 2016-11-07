@@ -31,6 +31,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
@@ -263,6 +264,21 @@ public interface IShopInfoSV {
 	@POST
 	@Path("/saveShopAuditInfo")
 	public BaseResponse saveShopAuditInfo(SaveShopAuditInfoRequest request)
+			throws BusinessException, SystemException;
+	
+	/**
+	 * 更新商户资质信息
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_00051
+	 * @RestRelativeURL shopinfoservice/updateShopAuditInfo
+	 */
+	@POST
+	@Path("/updateShopAuditInfo")
+	public BaseResponse updateShopAuditInfo(UpdateShopAuditInfoRequest request)
 			throws BusinessException, SystemException;
 	
 	/**

@@ -32,6 +32,7 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
@@ -381,6 +382,24 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 			response = shopInfoBusiSV.queryShopKpi(request);
 			log.info("查询店铺评级指标服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public BaseResponse updateShopAuditInfo(UpdateShopAuditInfoRequest request)
+			throws BusinessException, SystemException {
+		BaseResponse response = new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			Long beginTime = System.currentTimeMillis();
+			log.info("后场更新店铺信息服务开始"+beginTime);
+			shopInfoBusiSV.updateShopAuditInfo(request);
+			log.info("后场更新店铺信息服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
