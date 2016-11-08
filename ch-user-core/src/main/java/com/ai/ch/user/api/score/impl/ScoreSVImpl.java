@@ -165,8 +165,8 @@ public class ScoreSVImpl implements IScoreSV {
 			LOG.info("后场查询评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			response.setScoreAvg(scoreAvg);
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
-		}catch(Exception e){
-			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
+		}catch(BusinessException e){
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;

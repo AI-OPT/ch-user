@@ -93,12 +93,12 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 		String tenantId="";
 		String userId="";
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("获取参数失败:租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
 		}else{
 			tenantId = request.getTenantId().trim();
 		}
 		if(StringUtil.isBlank(request.getUserId())){
-			throw new BusinessException("获取参数失败:用户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:用户id不能为空");
 		}else{
 			userId= request.getUserId().trim();
 		}
@@ -110,7 +110,7 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 			}
 			avgScore=avgScore/list.size();
 		}else{
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"没有找到该供应商评分");
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"没有找到该供应商评分");
 		}
 		return avgScore;
 	}
