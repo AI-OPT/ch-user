@@ -100,6 +100,11 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		}
 		if(request.getBeginTime()!=null&&request.getEndTime()!=null){
 			criteria.andDeductDateBetween(request.getBeginTime(), request.getEndTime());
+		}else if(request.getBeginTime()!=null&&request.getEndTime()==null){
+			criteria.andDeductDateGreaterThanOrEqualTo(request.getBeginTime());
+		}
+		if(request.getBeginTime()!=null&&request.getEndTime()!=null){
+			criteria.andDeductDateLessThanOrEqualTo(request.getEndTime());
 		}
 		
 		int count =defaultLogAtomSV.countByExample(example);
