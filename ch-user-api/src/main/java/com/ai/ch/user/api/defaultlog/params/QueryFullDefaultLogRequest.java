@@ -1,7 +1,5 @@
 package com.ai.ch.user.api.defaultlog.params;
 
-import java.sql.Timestamp;
-
 import com.ai.opt.base.vo.BaseInfo;
 
 /**
@@ -22,12 +20,12 @@ public class QueryFullDefaultLogRequest extends BaseInfo {
 	/**
 	 * 可选
 	 */
-	private Timestamp beginTime;
+	private String beginTime;
 
 	/**
 	 * 可选
 	 */
-	private Timestamp endTime;
+	private String endTime;
 
 	private Integer pageNo;
 
@@ -41,19 +39,19 @@ public class QueryFullDefaultLogRequest extends BaseInfo {
 		this.userId = userId;
 	}
 
-	public Timestamp getBeginTime() {
+	public String getBeginTime() {
 		return beginTime;
 	}
 
-	public void setBeginTime(Timestamp beginTime) {
+	public void setBeginTime(String beginTime) {
 		this.beginTime = beginTime;
 	}
 
-	public Timestamp getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

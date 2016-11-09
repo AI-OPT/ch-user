@@ -1,5 +1,6 @@
 package com.ai.ch.user.service.business.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,13 +99,13 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		if(!StringUtil.isBlank(request.getUserId())){
 			criteria.andUserIdEqualTo(request.getUserId().trim());
 		}
-		if(request.getBeginTime()!=null&&request.getEndTime()!=null){
-			criteria.andDeductDateBetween(request.getBeginTime(), request.getEndTime());
-		}else if(request.getBeginTime()!=null&&request.getEndTime()==null){
-			criteria.andDeductDateGreaterThanOrEqualTo(request.getBeginTime());
+		if(!StringUtil.isBlank(request.getBeginTime())&&!StringUtil.isBlank(request.getEndTime())){
+			criteria.andDeductDateBetween(Timestamp.valueOf(request.getBeginTime()), Timestamp.valueOf(request.getEndTime()));
+		}else if(!StringUtil.isBlank(request.getBeginTime())&&StringUtil.isBlank(request.getEndTime())){
+			criteria.andDeductDateGreaterThanOrEqualTo(Timestamp.valueOf(request.getBeginTime()));
 		}
-		if(request.getBeginTime()!=null&&request.getEndTime()!=null){
-			criteria.andDeductDateLessThanOrEqualTo(request.getEndTime());
+		if(StringUtil.isBlank(request.getBeginTime())&&StringUtil.isBlank(request.getEndTime())){
+			criteria.andDeductDateLessThanOrEqualTo(Timestamp.valueOf(request.getEndTime()));
 		}
 		
 		int count =defaultLogAtomSV.countByExample(example);
