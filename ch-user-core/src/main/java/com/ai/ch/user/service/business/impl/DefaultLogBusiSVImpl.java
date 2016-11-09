@@ -12,6 +12,8 @@ import com.ai.ch.user.api.defaultlog.params.DefaultLogVo;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
+import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
+import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogResponse;
 import com.ai.ch.user.constants.SequenceCodeConstants.UserSequenceCode;
 import com.ai.ch.user.dao.mapper.bo.ShopDefaultLog;
 import com.ai.ch.user.dao.mapper.bo.ShopDefaultLogCriteria;
@@ -42,10 +44,10 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	@Override
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException {
-		if(StringUtil.isBlank(request.getTenantId().trim())){
+		if(StringUtil.isBlank(request.getTenantId())){
 			throw new BusinessException("获取参数失败:租户id不能为空");
 		}
-		if(StringUtil.isBlank(request.getUserId().trim())){
+		if(StringUtil.isBlank(request.getUserId())){
 			throw new BusinessException("获取参数失败:用户id不能为空");
 		}
 		QueryDefaultLogResponse response = new QueryDefaultLogResponse();
@@ -81,6 +83,44 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		criteria.andSerialCodeEqualTo(serialCode);
 		int count =defaultLogAtomSV.deleteDefaultLog(example);
 		return count;
+	}
+
+	@Override
+	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
+			throws SystemException, BusinessException {
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException("获取参数失败:租户id不能为空");
+		}
+		QueryFullDefaultLogResponse response = new QueryFullDefaultLogResponse();
+		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
+		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
+		
+		if(!StringUtil.isBlank(request.getUserId())){
+			criteria.andUserIdEqualTo(request.getUserId().trim());
+		}
+		if(request.getBeginTime()!=null&&request.getEndTime()!=null){
+			criteria.andDeductDateBetween(request.getBeginTime(), request.getEndTime());
+		}
+		
+		int count =defaultLogAtomSV.countByExample(example);
+		int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
+		example.setLimitStart((request.getPageNo()-1)*request.getPageSize());
+		example.setLimitEnd(request.getPageSize());
+		example.setOrderByClause("DEDUCT_DATE desc");
+		List<ShopDefaultLog> list = defaultLogAtomSV.selectByExample(example);
+		List<DefaultLogVo> responseList = new ArrayList<DefaultLogVo>();
+		for (ShopDefaultLog shopDefaultLog : list) {
+			DefaultLogVo defaultLogVo = new DefaultLogVo();
+			BeanUtils.copyProperties(shopDefaultLog, defaultLogVo);
+			responseList.add(defaultLogVo);
+		}
+		PageInfo<DefaultLogVo> pageInfo = new PageInfo<DefaultLogVo>();
+		pageInfo.setCount(count);
+		pageInfo.setPageCount(pageCount);
+		pageInfo.setPageSize(request.getPageSize());
+		pageInfo.setResult(responseList);
+		response.setPageInfo(pageInfo);
+		return response;
 	}
 
 }

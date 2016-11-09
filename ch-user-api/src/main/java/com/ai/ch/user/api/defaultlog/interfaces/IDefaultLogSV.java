@@ -10,6 +10,8 @@ import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogResponse;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
+import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
+import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogResponse;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
@@ -67,6 +69,21 @@ public interface IDefaultLogSV {
 	@POST
 	@Path("/queryDefaultLog")
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
+			throws SystemException, BusinessException;
+	
+	/**
+	 * 全量违约扣款记录查询
+	 * @param request
+	 * @return
+	 * @throws SystemException
+	 * @throws BusinessException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_00121
+	 * @RestRelativeURL defaultlogservice/queryFullDefaultLog
+	 */
+	@POST
+	@Path("/queryFullDefaultLog")
+	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
 			throws SystemException, BusinessException;
 	
 	

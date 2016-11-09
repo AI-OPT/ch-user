@@ -14,6 +14,7 @@ import com.ai.ch.user.api.defaultlog.interfaces.IDefaultLogSV;
 import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
+import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
 import com.ai.opt.base.vo.BaseResponse;
 import com.alibaba.fastjson.JSON;
 import com.ylink.upp.base.oxm.util.OxmHandler;
@@ -58,5 +59,19 @@ public class defaultManagerSVImpl {
 		BaseResponse response = defaultLogSV.deleteDefaultLog(serialCode);
 		System.out.println(JSON.toJSONString(response));
 		
+	}
+	
+	
+	@Test
+	public void queryFullDetaultInfoListTest(){
+		QueryFullDefaultLogRequest defaultLogRequest = new QueryFullDefaultLogRequest();
+		defaultLogRequest.setTenantId("changhong");
+		//defaultLogRequest.setUserId("1");
+		defaultLogRequest.setBeginTime(Timestamp.valueOf("2016-07-28 00:00:00"));
+		defaultLogRequest.setEndTime(Timestamp.valueOf("2016-11-28 00:00:00"));
+		defaultLogRequest.setPageNo(1);
+		defaultLogRequest.setPageSize(5);
+		
+		System.out.println(JSON.toJSONString(defaultLogSV.queryFullDefaultLog(defaultLogRequest)));
 	}
 }
