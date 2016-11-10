@@ -669,13 +669,18 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		/*if(StringUtil.isBlank(request.getShopName())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户名称不能为空");
-		}*/
-			request.setShopName(request.getShopName().trim());
+		}
+			request.setShopName(request.getShopName().trim()); */
 		if(request.getHasExperi()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:有无电商经验不能为空");
 		}
 		if(StringUtil.isBlank(request.getEcommOwner())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:拥有电商平台数量不能为空");
+		}else{
+			request.setEcommOwner(request.getEcommOwner().trim());
+		}
+		if(request.getHasExperi()==null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:是否拥有电商经验不能为空");
 		}else{
 			request.setEcommOwner(request.getEcommOwner().trim());
 		}
@@ -693,17 +698,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if(list.isEmpty()){
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"更新的店铺不存在");
 		}
-		String shopId = list.get(0).getUserId();
-		ShopInfoCriteria example = new ShopInfoCriteria();
-		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId().trim());
-		criteria.andShopNameEqualTo(request.getShopName().trim());
-		List<ShopInfo> shopInfolist = shopInfoAtomSV.selectByExample(example);
-		if(!shopInfolist.isEmpty()){
-			if(shopId.equals(shopInfolist.get(0).getUserId())){
-				throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR,"更新店铺名和原来一样");
-			}
-			else{
+		if(!StringUtil.isBlank(request.getShopName())){
+			ShopInfoCriteria example = new ShopInfoCriteria();
+			ShopInfoCriteria.Criteria criteria = example.createCriteria();
+			criteria.andTenantIdEqualTo(request.getTenantId().trim());
+			criteria.andShopNameEqualTo(request.getShopName().trim());
+			List<ShopInfo> shopInfolist = shopInfoAtomSV.selectByExample(example);
+			if(!shopInfolist.isEmpty()){
 				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
 			}
 		}
