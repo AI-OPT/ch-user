@@ -90,9 +90,6 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	@Override
 	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
 			throws SystemException, BusinessException {
-		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
-		}
 		QueryFullDefaultLogResponse response = new QueryFullDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();

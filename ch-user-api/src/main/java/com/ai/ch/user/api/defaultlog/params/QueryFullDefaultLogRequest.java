@@ -1,6 +1,6 @@
 package com.ai.ch.user.api.defaultlog.params;
 
-import com.ai.opt.base.vo.BaseInfo;
+import java.io.Serializable;
 
 /**
  * 查询全量扣款信息入参 Date: 2016年11月8日 <br>
@@ -8,7 +8,7 @@ import com.ai.opt.base.vo.BaseInfo;
  * 
  * @author zhangqiang7
  */
-public class QueryFullDefaultLogRequest extends BaseInfo {
+public class QueryFullDefaultLogRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
