@@ -68,7 +68,7 @@ public class defaultManagerSVImpl {
 		defaultLogRequest.setTenantId("changhong");
 		//defaultLogRequest.setUserId("1");
 		defaultLogRequest.setBeginTime("2016-07-28 00:00:00");
-		defaultLogRequest.setEndTime("2016-11-28 00:00:00");
+		//defaultLogRequest.setEndTime("2016-11-28 00:00:00");
 		defaultLogRequest.setPageNo(1);
 		defaultLogRequest.setPageSize(5);
 		

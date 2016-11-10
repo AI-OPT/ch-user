@@ -24,6 +24,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.StringUtil;
 
 @Component
@@ -90,7 +91,7 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
 			throws SystemException, BusinessException {
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("获取参数失败:租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
 		}
 		QueryFullDefaultLogResponse response = new QueryFullDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
@@ -99,12 +100,12 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		if(!StringUtil.isBlank(request.getUserId())){
 			criteria.andUserIdEqualTo(request.getUserId().trim());
 		}
-		if(!StringUtil.isBlank(request.getBeginTime())&&!StringUtil.isBlank(request.getEndTime())){
+		if((!StringUtil.isBlank(request.getBeginTime())&&(!StringUtil.isBlank(request.getEndTime())))){
 			criteria.andDeductDateBetween(Timestamp.valueOf(request.getBeginTime()), Timestamp.valueOf(request.getEndTime()));
 		}else if(!StringUtil.isBlank(request.getBeginTime())&&StringUtil.isBlank(request.getEndTime())){
 			criteria.andDeductDateGreaterThanOrEqualTo(Timestamp.valueOf(request.getBeginTime()));
 		}
-		if(StringUtil.isBlank(request.getBeginTime())&&StringUtil.isBlank(request.getEndTime())){
+		if(StringUtil.isBlank(request.getBeginTime())&&(!StringUtil.isBlank(request.getEndTime()))){
 			criteria.andDeductDateLessThanOrEqualTo(Timestamp.valueOf(request.getEndTime()));
 		}
 		
