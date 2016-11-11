@@ -65,9 +65,9 @@ public class defaultManagerSVImpl {
 	@Test
 	public void queryFullDetaultInfoListTest(){
 		QueryFullDefaultLogRequest defaultLogRequest = new QueryFullDefaultLogRequest();
-		defaultLogRequest.setUserId("1erteryrtyh");
+		//defaultLogRequest.setUserId("1erteryrtyh");
 		defaultLogRequest.setBeginTime("2016-07-28 00:00:00");
-		//defaultLogRequest.setEndTime("2016-11-28 00:00:00");
+		defaultLogRequest.setEndTime("2016-11-28 00:00:00");
 		defaultLogRequest.setPageNo(1);
 		defaultLogRequest.setPageSize(5);
 		

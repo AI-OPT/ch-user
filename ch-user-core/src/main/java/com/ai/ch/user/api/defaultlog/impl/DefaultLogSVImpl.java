@@ -70,9 +70,9 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 			response = defaultLogBusiSV.queryDefaultLog(request);
 			log.info("后场查询扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
-		}catch(Exception e){
+		}catch(BusinessException e){
 			LOG.error("操作失败");
-			responseHeader = new ResponseHeader(false, ExceptCodeConstants.Special.SYSTEM_ERROR, "操作失败");
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
@@ -110,9 +110,9 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 			response = defaultLogBusiSV.queryFullDefaultLog(request);
 			log.info("后场查询扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
-		}catch(Exception e){
+		}catch(BusinessException e){
 			LOG.error("操作失败");
-			responseHeader = new ResponseHeader(false, ExceptCodeConstants.Special.SYSTEM_ERROR, "操作失败");
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;

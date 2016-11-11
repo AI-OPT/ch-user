@@ -93,10 +93,10 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		QueryFullDefaultLogResponse response = new QueryFullDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
-		if(request.getPageNo()!=null){
+		if(request.getPageNo()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "PageNo不能为空");
 		}
-		if(request.getPageSize()!=null){
+		if(request.getPageSize()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "PageSize不能为空");
 		}
 		if(!StringUtil.isBlank(request.getUserId())){
@@ -106,8 +106,7 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 			criteria.andDeductDateBetween(Timestamp.valueOf(request.getBeginTime()), Timestamp.valueOf(request.getEndTime()));
 		}else if(!StringUtil.isBlank(request.getBeginTime())&&StringUtil.isBlank(request.getEndTime())){
 			criteria.andDeductDateGreaterThanOrEqualTo(Timestamp.valueOf(request.getBeginTime()));
-		}
-		if(StringUtil.isBlank(request.getBeginTime())&&(!StringUtil.isBlank(request.getEndTime()))){
+		}else if(StringUtil.isBlank(request.getBeginTime())&&(!StringUtil.isBlank(request.getEndTime()))){
 			criteria.andDeductDateLessThanOrEqualTo(Timestamp.valueOf(request.getEndTime()));
 		}
 		
