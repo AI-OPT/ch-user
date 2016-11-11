@@ -47,10 +47,10 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException {
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("获取参数失败:租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getUserId())){
-			throw new BusinessException("获取参数失败:用户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:用户id不能为空");
 		}
 		QueryDefaultLogResponse response = new QueryDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
@@ -93,7 +93,12 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		QueryFullDefaultLogResponse response = new QueryFullDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
-		
+		if(request.getPageNo()!=null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "PageNo不能为空");
+		}
+		if(request.getPageSize()!=null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "PageSize不能为空");
+		}
 		if(!StringUtil.isBlank(request.getUserId())){
 			criteria.andUserIdEqualTo(request.getUserId().trim());
 		}
