@@ -66,10 +66,10 @@ public class defaultManagerSVImpl {
 	public void queryFullDetaultInfoListTest(){
 		QueryFullDefaultLogRequest defaultLogRequest = new QueryFullDefaultLogRequest();
 		//defaultLogRequest.setUserId("1erteryrtyh");
-		defaultLogRequest.setBeginTime("2016-07-28 00:00:00");
-		defaultLogRequest.setEndTime("2016-11-28 00:00:00");
-		defaultLogRequest.setPageNo(1);
-		defaultLogRequest.setPageSize(5);
+		//defaultLogRequest.setBeginTime("2016-07-28 00:00:00");
+		//defaultLogRequest.setEndTime("2016-11-28 00:00:00");
+		defaultLogRequest.setPageNo(4444);
+		defaultLogRequest.setPageSize(554545);
 		
 		System.out.println(JSON.toJSONString(defaultLogSV.queryFullDefaultLog(defaultLogRequest)));
 	}

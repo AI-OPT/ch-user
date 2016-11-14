@@ -667,10 +667,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}else{
 			request.setShopDesc(request.getShopDesc().trim());
 		}
-		/*if(StringUtil.isBlank(request.getShopName())){
+		if(StringUtil.isBlank(request.getShopName())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:商户名称不能为空");
 		}
-			request.setShopName(request.getShopName().trim()); */
+			request.setShopName(request.getShopName().trim()); 
 		if(request.getHasExperi()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:有无电商经验不能为空");
 		}
@@ -704,7 +704,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			criteria.andTenantIdEqualTo(request.getTenantId().trim());
 			criteria.andShopNameEqualTo(request.getShopName().trim());
 			List<ShopInfo> shopInfolist = shopInfoAtomSV.selectByExample(example);
-			if(!shopInfolist.isEmpty()){
+			if(!shopInfolist.isEmpty()&&shopInfolist.get(0).getUserId()!=request.getUserId()){
 				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
 			}
 		}
