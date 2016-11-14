@@ -704,7 +704,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			criteria.andTenantIdEqualTo(request.getTenantId().trim());
 			criteria.andShopNameEqualTo(request.getShopName().trim());
 			List<ShopInfo> shopInfolist = shopInfoAtomSV.selectByExample(example);
-			if(!shopInfolist.isEmpty()&&shopInfolist.get(0).getUserId()!=request.getUserId()){
+			if((!shopInfolist.isEmpty())&&shopInfolist.get(0).getUserId()!=request.getUserId()){
 				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
 			}
 		}
