@@ -587,6 +587,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "查询数据不存在");
 		}
 		BeanUtils.copyProperties(list.get(0), response);
+		if(response.getDepositBalance()==null){
+			response.setDepositBalance(0L);
+		}
 		return response;
 	}
 
