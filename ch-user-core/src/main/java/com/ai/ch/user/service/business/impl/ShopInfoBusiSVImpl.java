@@ -483,7 +483,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if(!(request.getBusiType().trim().equals("1")||request.getBusiType().trim().equals("2"))){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:经营类型状态码为1/2");
 		}
-		if(request.getHasExperi()==0&&"000000".equals(request.getEcommOwner())){
+		if(request.getHasExperi()==0&&!"000000".equals(request.getEcommOwner())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数数据错误:是否拥有电商经验与数量不一致");
 		}
 		ShopInfoCriteria example = new ShopInfoCriteria();
@@ -696,7 +696,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if(!(request.getBusiType().trim().equals("1")||request.getBusiType().trim().equals("2"))){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数格式错误:经营类型状态码为1/2");
 		}
-		if(request.getHasExperi()==0&&"000000".equals(request.getEcommOwner())){
+		if(request.getHasExperi()==0&&!"000000".equals(request.getEcommOwner())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT,"参数数据错误:是否拥有电商经验与数量不一致");
 		}
 		ShopInfoCriteria idExample = new ShopInfoCriteria();
