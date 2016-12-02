@@ -5,6 +5,7 @@ import com.ai.ch.user.constants.SequenceCodeConstants;
 
 /**
  * 用户SequenceCode生成工具
+ * 生成表字段主键自增序列号
  */
 public final class SequenceUtil {
 

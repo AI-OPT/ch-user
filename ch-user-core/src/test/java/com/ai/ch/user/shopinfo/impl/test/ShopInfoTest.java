@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ai.ch.user.api.shopinfo.interfaces.IShopInfoSV;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.QueryShopDepositResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
@@ -67,9 +68,9 @@ public class ShopInfoTest {
 	public void testQueryDep(){
 		QueryShopDepositRequest queryShopInfo = new QueryShopDepositRequest();
 		queryShopInfo.setTenantId("changhong");
-		queryShopInfo.setUserId("e85b0ee425964d7d");
-		//Long infoResponse = shopInfoSV.queryShopDeposit(queryShopInfo);
-		//System.out.println(JSON.toJSONString(infoResponse));
+		queryShopInfo.setUserId("20000000010002");
+		QueryShopDepositResponse infoResponse = shopInfoSV.queryShopDeposit(queryShopInfo);
+		System.out.println(JSON.toJSONString(infoResponse));
 	}
 
 	@Test
