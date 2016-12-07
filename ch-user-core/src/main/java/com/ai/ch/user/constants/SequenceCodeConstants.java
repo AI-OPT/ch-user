@@ -22,6 +22,10 @@ public class SequenceCodeConstants {
 		 * uc_bank_info
 		 */
 		public static final String UC_BANK_INFO$BANK_SEQ_ID$SEQ = "UC_BANK_INFO$BANK_SEQ_ID$SEQ";
+		/**
+		 * ct_audit_log
+		 */
+		public static final String CT_AUDIT_LOG$LOG_SEQ_ID$SEQ = "CT_AUDIT_LOG$LOG_SEQ_ID$SEQ";
 
 		/**
 		 * uc_contacts_info

@@ -74,5 +74,9 @@ public final class SequenceUtil {
 	    long seq = SeqUtil.getNewId(SequenceCodeConstants.UserSequenceCode.CM_CUST_FILE_EXT$INFO_EXT$ID);
 	    return String.valueOf(seq);
 	}
+	public static String createLogId() {
+		long seq = SeqUtil.getNewId(SequenceCodeConstants.UserSequenceCode.CT_AUDIT_LOG$LOG_SEQ_ID$SEQ);
+		return String.valueOf(seq);
+	}
 
 }

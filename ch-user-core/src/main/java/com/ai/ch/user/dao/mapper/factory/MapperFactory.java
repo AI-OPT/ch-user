@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.dao.mapper.attach.CtScoreLogAttachMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CmCustFileExtMapper;
+import com.ai.ch.user.dao.mapper.interfaces.CtAuditLogMapper;
+import com.ai.ch.user.dao.mapper.interfaces.CtAuditMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtCurrentScoreMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtDepositRuleMapper;
 import com.ai.ch.user.dao.mapper.interfaces.CtScoreKpiMapper;
@@ -67,19 +69,28 @@ public class MapperFactory {
 	public static ShopInfoMapper getShopInfoMapperMapper() {
 		return sqlSessionTemplate.getMapper(ShopInfoMapper.class);
 	}
-	
+
 	public static CtDepositRuleMapper getCtDepositRuleMapper() {
 		return sqlSessionTemplate.getMapper(CtDepositRuleMapper.class);
 	}
-	
+
 	public static ShopScoreKpiMapper getShopScoreKpiMapper() {
 		return sqlSessionTemplate.getMapper(ShopScoreKpiMapper.class);
 	}
+
 	public static ShopStatDataMapper getShopStatDataMapper() {
 		return sqlSessionTemplate.getMapper(ShopStatDataMapper.class);
 	}
 
 	public static ShopInfoLogMapper getShopInfoLogMapper() {
 		return sqlSessionTemplate.getMapper(ShopInfoLogMapper.class);
+	}
+
+	public static CtAuditMapper getCtAuditMapper() {
+		return sqlSessionTemplate.getMapper(CtAuditMapper.class);
+	}
+
+	public static CtAuditLogMapper getCtAuditLogMapper() {
+		return sqlSessionTemplate.getMapper(CtAuditLogMapper.class);
 	}
 }
