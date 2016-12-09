@@ -27,4 +27,9 @@ public class CtAuditAtomSVImpl implements ICtAuditAtomSV {
 		return MapperFactory.getCtAuditMapper().selectByExample(example);
 	}
 
+	@Override
+	public int updateByExampleSelective(CtAudit record, CtAuditCriteria example) {
+		return MapperFactory.getCtAuditMapper().updateByExampleSelective(record, example);
+	}
+
 }

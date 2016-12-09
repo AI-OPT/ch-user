@@ -46,11 +46,11 @@ public class AuditSVImplTest {
 	@Test
 	public void queryAuditLog(){
 		QueryAuditLogInfoRequest re = new QueryAuditLogInfoRequest();
-		re.setUserId("1111111");
+		re.setUserId("b9315d05220440a5");
 		re.setTenantId("changhong");
 		re.setPageNo(1);
 		re.setPageSize(5);
-		re.setBeginTime(Timestamp.valueOf("2015-12-7 00:00:00"));
+		//re.setBeginTime(Timestamp.valueOf("2015-12-7 00:00:00"));
 		System.out.println(JSON.toJSONString(auditSV.queryAuditLogInfo(re)));
 	}
 }

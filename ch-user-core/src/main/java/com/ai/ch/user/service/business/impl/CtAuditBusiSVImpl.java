@@ -35,20 +35,20 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 
 	@Autowired
 	private ICtAuditAtomSV ctAuditAtomSV;
-	
+
 	@Autowired
 	private ICtAuditLogAtomSV ctAuditLogAtomSV;
-	
+
 	@Override
 	public int insertAuditInfo(InsertAuditInfoRequest request) throws BusinessException, SystemException {
-		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
-		}else{
+		if (StringUtil.isBlank(request.getTenantId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户id不能为空");
+		} else {
 			request.setTenantId(request.getTenantId().trim());
 		}
-		if(StringUtil.isBlank(request.getUserId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"用户id不能为空");
-		}else{
+		if (StringUtil.isBlank(request.getUserId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用户id不能为空");
+		} else {
 			request.setUserId(request.getUserId().trim());
 		}
 		CtAuditCriteria example = new CtAuditCriteria();
@@ -58,18 +58,26 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		CtAudit ctAudit = new CtAudit();
 		BeanUtils.copyProperties(request, ctAudit);
 		ctAudit.setAuditTime(DateUtil.getSysDate());
-		try{
-			ctAuditAtomSV.insertSelective(ctAudit);
-		}catch(Exception e){
-			throw new BusinessException(e.getMessage(),"保存审核记录失败");
+		if (ctAuditAtomSV.selectByExample(example).isEmpty()) {
+			try {
+				ctAuditAtomSV.insertSelective(ctAudit);
+			} catch (Exception e) {
+				throw new BusinessException(e.getMessage(), "保存审核记录失败");
+			}
+		}else{
+			try {
+				ctAuditAtomSV.updateByExampleSelective(ctAudit, example);
+			} catch (Exception e) {
+				throw new BusinessException(e.getMessage(), "更新审核记录失败");
+			}
 		}
 		CtAuditLog ctAuditLog = new CtAuditLog();
 		BeanUtils.copyProperties(ctAudit, ctAuditLog);
 		ctAuditLog.setLogId(SequenceUtil.createLogId());
-		try{
+		try {
 			ctAuditLogAtomSV.insertSelective(ctAuditLog);
-		}catch(Exception e){
-			throw new BusinessException(e.getMessage(),"保存审核日志记录失败");
+		} catch (Exception e) {
+			throw new BusinessException(e.getMessage(), "保存审核日志记录失败");
 		}
 		return 0;
 	}
@@ -77,14 +85,14 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 	@Override
 	public QueryAuditInfoResponse queryAuditInfo(QueryAuditInfoRequest request)
 			throws BusinessException, SystemException {
-		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
-		}else{
+		if (StringUtil.isBlank(request.getTenantId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户id不能为空");
+		} else {
 			request.setTenantId(request.getTenantId().trim());
 		}
-		if(StringUtil.isBlank(request.getUserId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"用户id不能为空");
-		}else{
+		if (StringUtil.isBlank(request.getUserId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用户id不能为空");
+		} else {
 			request.setUserId(request.getUserId().trim());
 		}
 		CtAuditCriteria example = new CtAuditCriteria();
@@ -93,11 +101,10 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		criteria.andUserIdEqualTo(request.getUserId());
 		List<CtAudit> list = ctAuditAtomSV.selectByExample(example);
 		QueryAuditInfoResponse response = new QueryAuditInfoResponse();
-		if(list.isEmpty()){
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"查询信息不存在");
-		}
-		else{
-			BeanUtils.copyProperties(list.get(0),response);
+		if (list.isEmpty()) {
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "查询信息不存在");
+		} else {
+			BeanUtils.copyProperties(list.get(0), response);
 		}
 		return response;
 	}
@@ -105,36 +112,36 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 	@Override
 	public QueryAuditLogInfoResponse queryAuditLogInfo(QueryAuditLogInfoRequest request)
 			throws BusinessException, SystemException {
-		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
-		}else{
+		if (StringUtil.isBlank(request.getTenantId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户id不能为空");
+		} else {
 			request.setTenantId(request.getTenantId().trim());
 		}
-		if(StringUtil.isBlank(request.getUserId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"用户id不能为空");
-		}else{
+		if (StringUtil.isBlank(request.getUserId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用户id不能为空");
+		} else {
 			request.setUserId(request.getUserId().trim());
 		}
-		
+
 		CtAuditLogCriteria example = new CtAuditLogCriteria();
 		CtAuditLogCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
 		example.setOrderByClause("AUDIT_TIME desc");
-		if(request.getBeginTime()!=null){
+		if (request.getBeginTime() != null) {
 			criteria.andAuditTimeGreaterThan(request.getBeginTime());
 		}
-		if(request.getEndTime()!=null){
+		if (request.getEndTime() != null) {
 			criteria.andAuditTimeLessThan(request.getEndTime());
 		}
 		int count = ctAuditLogAtomSV.countByExample(example);
 		int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
-		example.setLimitStart((request.getPageNo()-1)*request.getPageSize());
+		example.setLimitStart((request.getPageNo() - 1) * request.getPageSize());
 		example.setLimitEnd(request.getPageSize());
-		
+
 		List<CtAuditLog> list = ctAuditLogAtomSV.selectByExample(example);
-		if(list.isEmpty()){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"查询结果为空");
+		if (list.isEmpty()) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "查询结果为空");
 		}
 		List<AuditLogVo> responseList = new ArrayList<>();
 		for (CtAuditLog ctAuditLog : list) {
