@@ -38,6 +38,7 @@ import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
+import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
@@ -168,6 +169,14 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 	@Override
 	public int updateShopInfo(UpdateShopInfoRequest request) throws BusinessException, SystemException {
 		ShopInfo shopInfo = new ShopInfo();
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andUserIdEqualTo(request.getUserId());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		if(list.isEmpty()){
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "没有查到数据");
+		}
 		BeanUtils.copyProperties(request, shopInfo);
 		if (request.getStatus() != null) {
 			if (request.getStatus()==1) {
@@ -181,15 +190,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 				shopInfo.setStatus(null);
 			}
 		}
-		ShopInfoCriteria example = new ShopInfoCriteria();
-		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId());
-		criteria.andUserIdEqualTo(request.getUserId());
-		
-		//更新日志表
-		ShopInfoLog shopInfoLog = new ShopInfoLog();
-		BeanUtils.copyProperties(shopInfo, shopInfoLog);
-		shopInfoLog.setUpdateTime(DateUtil.getSysDate());
 		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 	}
 
