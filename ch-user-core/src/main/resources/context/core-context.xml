@@ -29,6 +29,7 @@
 	<bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
 		 <constructor-arg name="dataSourceName" value="ch-user-db"/>
 	</bean>
+	<!-- 加载数据源类 -->
 	 <bean id="seqDataSourceLoader"
     		class="com.ai.opt.sdk.components.sequence.datasource.SeqDataSourceLoader"
     		init-method="init">
