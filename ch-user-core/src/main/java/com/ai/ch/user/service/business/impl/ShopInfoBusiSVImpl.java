@@ -43,7 +43,6 @@ import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoLog;
-import com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
@@ -433,7 +432,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException {
-		ShopInfo shopInfo = new ShopInfo();
 		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
 		} else {
@@ -497,18 +495,21 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		nameCriteria.andTenantIdEqualTo(request.getTenantId().trim());
 		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
 		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
-		if (!nameList.isEmpty()) {
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名已存在");
+		if((!nameList.isEmpty())&&(!nameList.get(0).getUserId().equals(request.getUserId()))){
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
 		}
+		ShopInfo shopInfo = new ShopInfo();
 		BeanUtils.copyProperties(request, shopInfo);
 		// 0/1/2:未开通/已开通/注销
 		shopInfo.setStatus(0);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
 		// 插入日志表
-		/*ShopInfoLog shopInfoLog = new ShopInfoLog();
-		BeanUtils.copyProperties(shopInfo, shopInfoLog);
-		shopInfo.setCreateTime(DateUtil.getSysDate());
-		shopInfoLogAtomSV.insert(shopInfoLog);*/
+		/*
+		 * ShopInfoLog shopInfoLog = new ShopInfoLog();
+		 * BeanUtils.copyProperties(shopInfo, shopInfoLog);
+		 * shopInfo.setCreateTime(DateUtil.getSysDate());
+		 * shopInfoLogAtomSV.insert(shopInfoLog);
+		 */
 		return shopInfoAtomSV.insert(shopInfo);
 	}
 
@@ -546,20 +547,24 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfoCriteria.Criteria shopCriteria = shopExample.createCriteria();
 		shopCriteria.andTenantIdEqualTo(tenantId);
 		shopCriteria.andUserIdEqualTo(userId);
-		List<ShopInfo> list = shopInfoAtomSV.selectByExample(shopExample);
-		if (list.isEmpty())
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "数据库不存在记录");
 		// 店铺日志表
-		/*ShopInfoLog shopInfoLog = new ShopInfoLog();
-		BeanUtils.copyProperties(shopInfo, shopInfoLog);
-		shopInfoLog.setUpdateTime(DateUtil.getSysDate());
-		ShopInfoLogCriteria shopLogExample = new ShopInfoLogCriteria();
-		ShopInfoLogCriteria.Criteria shopLogCriteria = shopLogExample.createCriteria();
-		shopLogCriteria.andTenantIdEqualTo(tenantId);
-		shopLogCriteria.andUserIdEqualTo(userId);
-		shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog, shopLogExample);*/
-
-		return shopInfoAtomSV.updateByExampleSelective(shopInfo, shopExample);
+		/*
+		 * ShopInfoLog shopInfoLog = new ShopInfoLog();
+		 * BeanUtils.copyProperties(shopInfo, shopInfoLog);
+		 * shopInfoLog.setUpdateTime(DateUtil.getSysDate()); ShopInfoLogCriteria
+		 * shopLogExample = new ShopInfoLogCriteria();
+		 * ShopInfoLogCriteria.Criteria shopLogCriteria =
+		 * shopLogExample.createCriteria();
+		 * shopLogCriteria.andTenantIdEqualTo(tenantId);
+		 * shopLogCriteria.andUserIdEqualTo(userId);
+		 * shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog,
+		 * shopLogExample);
+		 */
+		int count = shopInfoAtomSV.updateByExampleSelective(shopInfo, shopExample);
+		if (count == 0) {
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "数据库不存在记录");
+		}
+		return 1;
 	}
 
 	@Override
@@ -695,23 +700,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if (request.getHasExperi() == 0 && !"000000".equals(request.getEcommOwner())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "参数数据错误:是否拥有电商经验与数量不一致");
 		}
-		ShopInfoCriteria idExample = new ShopInfoCriteria();
-		ShopInfoCriteria.Criteria idCriteria = idExample.createCriteria();
-		idCriteria.andTenantIdEqualTo(request.getTenantId());
-		idCriteria.andUserIdEqualTo(request.getUserId());
-		List<ShopInfo> list = shopInfoAtomSV.selectByExample(idExample);
-		if (list.isEmpty()) {
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "更新的店铺不存在");
-		} else {
-			ShopInfoCriteria example = new ShopInfoCriteria();
-			ShopInfoCriteria.Criteria criteria= example.createCriteria();
-			criteria.andTenantIdEqualTo(request.getTenantId());
-			criteria.andUserIdNotEqualTo(request.getUserId());
-			criteria.andShopNameEqualTo(request.getShopName().trim());
-			List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
-			if (!nameList.isEmpty()) {
-				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
-			}
+		ShopInfoCriteria example = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria criteria = example.createCriteria();
+		criteria.andTenantIdEqualTo(request.getTenantId());
+		criteria.andShopNameEqualTo(request.getShopName().trim());
+		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
+		if((!nameList.isEmpty())&&(!nameList.get(0).getUserId().equals(request.getUserId()))){
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
 		}
 		BeanUtils.copyProperties(request, shopInfo);
 		// 0/1/2:未开通/已开通/注销
@@ -722,6 +717,14 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		 * shopInfo.setCreateTime(DateUtil.getSysDate());
 		 * shopInfoLogAtomSV.insert(shopInfoLog);
 		 */
-		return shopInfoAtomSV.updateByExampleSelective(shopInfo, idExample);
+		ShopInfoCriteria idExample = new ShopInfoCriteria();
+		ShopInfoCriteria.Criteria idCriteria = idExample.createCriteria();
+		idCriteria.andTenantIdEqualTo(request.getTenantId());
+		idCriteria.andUserIdEqualTo(request.getUserId());
+		int count = shopInfoAtomSV.updateByExampleSelective(shopInfo, idExample);
+		if (count == 0) {
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "更新的店铺不存在");
+		}
+		return 1;
 	}
 }
