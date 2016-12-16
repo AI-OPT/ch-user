@@ -492,10 +492,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		// 校验店铺名
 		ShopInfoCriteria nameExample = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria nameCriteria = nameExample.createCriteria();
-		nameCriteria.andTenantIdEqualTo(request.getTenantId().trim());
+		nameCriteria.andTenantIdEqualTo(request.getTenantId());
+		nameCriteria.andUserIdNotEqualTo(request.getUserId());
 		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
 		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
-		if((!nameList.isEmpty())&&(!nameList.get(0).getUserId().equals(request.getUserId()))){
+		if(!nameList.isEmpty()){
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT,"店铺名称已存在");
 		}
 		ShopInfo shopInfo = new ShopInfo();
@@ -704,8 +705,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andShopNameEqualTo(request.getShopName().trim());
+		criteria.andUserIdNotEqualTo(request.getUserId());
 		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
-		if((!nameList.isEmpty())&&(!nameList.get(0).getUserId().equals(request.getUserId()))){
+		if(!nameList.isEmpty()){
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
 		}
 		BeanUtils.copyProperties(request, shopInfo);
