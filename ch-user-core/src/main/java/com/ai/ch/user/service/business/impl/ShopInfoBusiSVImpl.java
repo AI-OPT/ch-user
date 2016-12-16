@@ -505,10 +505,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopInfo.setStatus(0);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
 		// 插入日志表
-		ShopInfoLog shopInfoLog = new ShopInfoLog();
+		/*ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
-		shopInfoLogAtomSV.insert(shopInfoLog);
+		shopInfoLogAtomSV.insert(shopInfoLog);*/
 		return shopInfoAtomSV.insert(shopInfo);
 	}
 
@@ -550,14 +550,14 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if (list.isEmpty())
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "数据库不存在记录");
 		// 店铺日志表
-		ShopInfoLog shopInfoLog = new ShopInfoLog();
+		/*ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfoLog.setUpdateTime(DateUtil.getSysDate());
 		ShopInfoLogCriteria shopLogExample = new ShopInfoLogCriteria();
 		ShopInfoLogCriteria.Criteria shopLogCriteria = shopLogExample.createCriteria();
 		shopLogCriteria.andTenantIdEqualTo(tenantId);
 		shopLogCriteria.andUserIdEqualTo(userId);
-		shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog, shopLogExample);
+		shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog, shopLogExample);*/
 
 		return shopInfoAtomSV.updateByExampleSelective(shopInfo, shopExample);
 	}
