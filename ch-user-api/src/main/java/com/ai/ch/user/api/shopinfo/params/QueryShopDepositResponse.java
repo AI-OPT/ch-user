@@ -12,6 +12,9 @@ public class QueryShopDepositResponse extends BaseResponse {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 应缴纳保证金
+	 */
 	private long depositBalance;
 
 	public long getDepositBalance() {

@@ -13,8 +13,14 @@ public class SetShopDepositRequest extends BaseInfo {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 用户id
+	 */
 	private String userId;
 
+	/**
+	 * 应缴纳保证金
+	 */
 	private Long depositBalance;
 
 	public String getUserId() {

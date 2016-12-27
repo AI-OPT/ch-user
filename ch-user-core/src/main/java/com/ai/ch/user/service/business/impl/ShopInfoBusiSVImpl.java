@@ -532,7 +532,8 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:状态不能为空");
 		}
 		ShopInfo shopInfo = new ShopInfo();
-		BeanUtils.copyProperties(request, shopInfo);
+		shopInfo.setStatus(request.getStatus());
+		//BeanUtils.copyProperties(request, shopInfo);
 		// 判断更新时间
 		if (request.getStatus() == 1) {
 			shopInfo.setOpenTime(DateUtil.getSysDate());
@@ -606,7 +607,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
 		ShopInfo shopInfo = new ShopInfo();
-		BeanUtils.copyProperties(request, shopInfo);
+		shopInfo.setDepositBalance(request.getDepositBalance());
 		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 	}
 

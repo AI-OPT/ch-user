@@ -9,7 +9,7 @@ import com.ai.ch.user.constants.SequenceCodeConstants;
  */
 public final class SequenceUtil {
 
-	public static String createApiSeqId() {
+	/*public static String createApiSeqId() {
 		return SeqUtil.getNewId(SequenceCodeConstants.UserSequenceCode.UC_API_INFO$API_SEQ_ID$SEQ, 18);
 	}
 
@@ -70,10 +70,23 @@ public final class SequenceUtil {
 		long seq = SeqUtil.getNewId(SequenceCodeConstants.UserSequenceCode.UC_USER_PHONEBOOKS$TEL_NO$SEQ);
 		return String.valueOf(seq);
 	}
+	**/
+	/**
+	 * 附件表
+	 * @return
+	 * @author zhangqiang7
+	 * @UCUSER
+	 */
 	public static String createInfoExtId() {
 	    long seq = SeqUtil.getNewId(SequenceCodeConstants.UserSequenceCode.CM_CUST_FILE_EXT$INFO_EXT$ID);
 	    return String.valueOf(seq);
 	}
+	/**
+	 * 审核日志表
+	 * @return
+	 * @author zhangqiang7
+	 * @UCUSER
+	 */
 	public static String createLogId() {
 		long seq = SeqUtil.getNewId(SequenceCodeConstants.UserSequenceCode.CT_AUDIT_LOG$LOG_SEQ_ID$SEQ);
 		return String.valueOf(seq);
