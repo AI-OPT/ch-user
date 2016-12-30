@@ -184,11 +184,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
-
-		// 更新日志表
-		ShopInfoLog shopInfoLog = new ShopInfoLog();
-		BeanUtils.copyProperties(shopInfo, shopInfoLog);
-		shopInfoLog.setUpdateTime(DateUtil.getSysDate());
+		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
+		if (list.isEmpty()) {
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "更新数据不存在");
+		}
 		return shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 	}
 
