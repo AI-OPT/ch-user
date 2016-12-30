@@ -38,7 +38,6 @@ import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
-import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
@@ -161,7 +160,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		BeanUtils.copyProperties(request, shopInfoLog);
 		shopInfoLog.setOperId(request.getOperId());
 		shopInfoLog.setOperName(request.getOperName());
-		shopInfo.setCreateTime(DateUtil.getSysDate());
 		shopInfoLogAtomSV.insert(shopInfoLog);
 		return shopInfoAtomSV.insert(shopInfo);
 	}
