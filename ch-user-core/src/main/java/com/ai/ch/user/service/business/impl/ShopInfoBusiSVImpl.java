@@ -93,6 +93,9 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Override
 	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request) throws BusinessException, SystemException {
+		if (request.getUserId().isEmpty()) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "商户id不能为空");
+		}
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ShopInfoCriteria example = new ShopInfoCriteria();
 		ShopInfoCriteria.Criteria criteria = example.createCriteria();
