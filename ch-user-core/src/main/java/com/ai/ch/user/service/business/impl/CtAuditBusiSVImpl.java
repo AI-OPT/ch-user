@@ -140,9 +140,9 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		example.setLimitEnd(request.getPageSize());
 
 		List<CtAuditLog> list = ctAuditLogAtomSV.selectByExample(example);
-		if (list.isEmpty()) {
+		/*if (list.isEmpty()) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "查询结果为空");
-		}
+		}*/
 		List<AuditLogVo> responseList = new ArrayList<>();
 		for (CtAuditLog ctAuditLog : list) {
 			AuditLogVo auditLogVo = new AuditLogVo();
