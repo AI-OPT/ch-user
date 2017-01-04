@@ -15,23 +15,17 @@ public final class UcUserConstants {
     
     public final static class ResultCode{
     	private ResultCode(){}
-    	
+    	/**
+    	 * 成功返回code
+    	 */
     	public static final String SUCCESS_CODE = "000000";
     	
+    	/**
+    	 * 失败返回code
+    	 */
     	public static final String FAIL_CODE = "000001";
     }
     
-    public final static class SEQ {
-        private SEQ() {
-        }
-
-        public static final String ACCOUT_ID_SEQ = "GN_ACCOUNT$ACCOUNT_ID$SEQ";
-        
-        public static final String NICK_NAME = "GN_TENANT$TENANT_ID$SEQ";
-        
-        public static final String PHONE_MSG_SEQ = "GSM$PHONE$MSGSEQ";
-
-    }
 
     public final static class Account {
         private Account() {

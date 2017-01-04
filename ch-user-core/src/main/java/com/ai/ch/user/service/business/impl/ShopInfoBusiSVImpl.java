@@ -727,6 +727,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if (count == 0) {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "更新的店铺不存在");
 		}
-		return 1;
+		return 0;
 	}
 }
