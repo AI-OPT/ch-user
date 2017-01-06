@@ -9,9 +9,30 @@ import com.ai.opt.base.exception.SystemException;
 
 public interface IScoreLogBusiSV {
 
+	/**
+	 * 保存评分日志
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 */
 	public int insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException;
 
+	/**
+	 * 查询评分日志
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 */
 	public QueryScoreLogResponse queryScoreLog(QueryScoreLogRequest request) throws BusinessException, SystemException;
 	
+	/**
+	 * 查询综合评分
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 */
 	public float countScoreAvg(CountScoreAvgRequest request) throws BusinessException, SystemException;
 }

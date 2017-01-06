@@ -9,8 +9,29 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 
 public interface IContractBusiSV {
+	/**
+	 * 保存合同信息
+	 * @param ctContractInfo
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 */
 	public int insertContractInfo(ContactInfoRequest  ctContractInfo)throws BusinessException, SystemException;
+	/**
+	 * 查询合同信息
+	 * @param contactInfoRequest
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 */
 	public ContractInfoResponse queryContractInfo(ContactInfoRequest contactInfoRequest)throws BusinessException, SystemException;
+	/**
+	 * 查询所有的合同信息
+	 * @param contactInfoRequest
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 */
 	public List<ContractInfoResponse> queryAllContractInfo(ContactInfoRequest contactInfoRequest)throws BusinessException, SystemException;
 	
 }

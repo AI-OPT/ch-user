@@ -59,7 +59,7 @@ public class IScoreSVImplTest{
 	@Test
 	public void queryScoreLogTest(){
 		QueryScoreLogRequest request = new QueryScoreLogRequest();
-		request.setUserId("111333");
+		request.setUserId("1113dsf33");
 		request.setTenantId("ch");
 		request.setPageSize(10);
 		request.setPageNo(1);

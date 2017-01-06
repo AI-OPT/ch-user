@@ -57,10 +57,10 @@ public class ShopInfoTest {
 
 	@Test
 	public void testQueryInfo() {
-		QueryShopInfoByIdRequest queryShopInfo = new QueryShopInfoByIdRequest();
+		QueryShopInfoRequest queryShopInfo = new QueryShopInfoRequest();
 		queryShopInfo.setTenantId("changhong");
-		queryShopInfo.setUserId("5f42feacf1ce4ccc");
-		QueryShopInfoResponse infoResponse = shopInfoSV.queryShopInfoById(queryShopInfo);
+		queryShopInfo.setUserId("");
+		QueryShopInfoResponse infoResponse = shopInfoSV.queryShopInfo(queryShopInfo);
 		System.out.println(JSON.toJSONString(infoResponse));
 	}
 
@@ -116,7 +116,9 @@ public class ShopInfoTest {
 	@Test
 	public void updateTest(){
 		UpdateShopInfoRequest request = new UpdateShopInfoRequest();
-		System.out.println(request.getStatus());
+		request.setTenantId("changhong");
+		request.setUserId("123432213441");
+		System.out.println(JSON.toJSONString(shopInfoSV.updateShopInfo(request)));
 	}
 	
 	@Test

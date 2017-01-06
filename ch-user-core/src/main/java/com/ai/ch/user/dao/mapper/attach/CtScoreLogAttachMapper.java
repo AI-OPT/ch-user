@@ -11,8 +11,21 @@ import org.apache.ibatis.type.JdbcType;
 
 import com.ai.ch.user.dao.mapper.bo.CtScoreLog;
 
+/**
+ * 供应商评分表
+ * @author Zh
+ *
+ */
 public interface CtScoreLogAttachMapper {
 
+	/**
+	 * ct_score_log
+	 * @param tenantId
+	 * @param userId
+	 * @param startPage
+	 * @param endPage
+	 * @return
+	 */
 	@Results({ @Result(id = true, property = "userId", column = "user_id", javaType = String.class,jdbcType = JdbcType.VARCHAR),
 			@Result(property = "tenantId", column = "tenant_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
 			@Result(property = "operId", column = "oper_id", javaType = Long.class, jdbcType = JdbcType.VARCHAR),
@@ -39,10 +52,23 @@ public interface CtScoreLogAttachMapper {
 			@Result(property = "score19", column = "score19", javaType = Integer.class, jdbcType = JdbcType.VARCHAR),
 			@Result(property = "score20", column = "score20", javaType = Integer.class, jdbcType = JdbcType.VARCHAR), })
 
+	/**
+	 * 查询scorelog记录
+	 * @param tenantId
+	 * @param userId
+	 * @param startPage
+	 * @param endPage
+	 * @return
+	 */
 	@Select("select scoreLog.* from ct_score_log scoreLog where scoreLog.tenant_id=#{tenantId} and scoreLog.user_id=#{userId} limit #{startPage},#{endPage}")
 	List<CtScoreLog> queryScoreLog(@Param("tenantId") String tenantId, @Param("userId") String userId,@Param("startPage") int startPage, @Param("endPage") int endPage);
 
-	
+	/**
+	 * ct_score_log
+	 * @param tenantId
+	 * @param userId
+	 * @return
+	 */
 	@Results({ @Result(id = true, property = "userId", column = "user_id", javaType = String.class,jdbcType = JdbcType.VARCHAR),
 		@Result(property = "tenantId", column = "tenant_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
 		@Result(property = "operId", column = "oper_id", javaType = Long.class, jdbcType = JdbcType.VARCHAR),
@@ -69,9 +95,21 @@ public interface CtScoreLogAttachMapper {
 		@Result(property = "score19", column = "score19", javaType = Integer.class, jdbcType = JdbcType.VARCHAR),
 		@Result(property = "score20", column = "score20", javaType = Integer.class, jdbcType = JdbcType.VARCHAR), })
 	
+	/**
+	 * 查询scorelog信息
+	 * @param tenantId
+	 * @param userId
+	 * @return
+	 */
 	@Select("select scoreLog.* from ct_score_log scoreLog where scoreLog.tenant_id=#{tenantId} and scoreLog.user_id=#{userId} and scoreLog.score_date in (select  max(cs.score_date) from ct_score_log cs where cs.user_id=#{userId} group by cs.oper_id)")
 	List<CtScoreLog> selectScoreLogMax(@Param("tenantId") String tenantId, @Param("userId") String userId);
 	
+	/**
+	 * 查询供应商评分总数
+	 * @param tenantId
+	 * @param userId
+	 * @return
+	 */
 	@Select("select count(scoreLog.user_id) from ct_score_log scoreLog where scoreLog.tenant_id=#{tenantId} and scoreLog.user_id=#{userId}")
 	int queryCountScoreLog(@Param("tenantId") String tenantId, @Param("userId") String userId);
 	
