@@ -14,6 +14,11 @@ public class QueryAuditLogInfoRequest extends BaseInfo {
 	private String userId;
 
 	/**
+	 * 用户id
+	 */
+	private String userName;
+
+	/**
 	 * pageSize
 	 */
 	private Integer pageSize;
@@ -32,6 +37,14 @@ public class QueryAuditLogInfoRequest extends BaseInfo {
 	 * 结束时间
 	 */
 	private Timestamp endTime;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public Integer getPageSize() {
 		return pageSize;

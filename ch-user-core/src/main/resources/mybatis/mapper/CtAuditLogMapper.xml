@@ -11,6 +11,8 @@
     <result column="OPER_ID" property="operId" jdbcType="VARCHAR" />
     <result column="OPER_NAME" property="operName" jdbcType="VARCHAR" />
     <result column="AUDIT_DESC" property="auditDesc" jdbcType="VARCHAR" />
+    <result column="COMPONY_NAME" property="componyName" jdbcType="CHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List" >
     LOG_ID, TENANT_ID, CT_TYPE, USER_ID, AUDIT_STATUS, AUDIT_TIME, OPER_ID, OPER_NAME, 
-    AUDIT_DESC
+    AUDIT_DESC, COMPONY_NAME, USER_NAME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.CtAuditLogCriteria" >
     select
@@ -111,12 +113,12 @@
   <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.CtAuditLog" >
     insert into ct_audit_log (LOG_ID, TENANT_ID, CT_TYPE, 
       USER_ID, AUDIT_STATUS, AUDIT_TIME, 
-      OPER_ID, OPER_NAME, AUDIT_DESC
-      )
+      OPER_ID, OPER_NAME, AUDIT_DESC, 
+      COMPONY_NAME, USER_NAME)
     values (#{logId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{ctType,jdbcType=VARCHAR}, 
       #{userId,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
-      #{operId,jdbcType=VARCHAR}, #{operName,jdbcType=VARCHAR}, #{auditDesc,jdbcType=VARCHAR}
-      )
+      #{operId,jdbcType=VARCHAR}, #{operName,jdbcType=VARCHAR}, #{auditDesc,jdbcType=VARCHAR}, 
+      #{componyName,jdbcType=CHAR}, #{userName,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.CtAuditLog" >
     insert into ct_audit_log
@@ -148,6 +150,12 @@
       <if test="auditDesc != null" >
         AUDIT_DESC,
       </if>
+      <if test="componyName != null" >
+        COMPONY_NAME,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
@@ -176,6 +184,12 @@
       </if>
       <if test="auditDesc != null" >
         #{auditDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="componyName != null" >
+        #{componyName,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -215,6 +229,12 @@
       <if test="record.auditDesc != null" >
         AUDIT_DESC = #{record.auditDesc,jdbcType=VARCHAR},
       </if>
+      <if test="record.componyName != null" >
+        COMPONY_NAME = #{record.componyName,jdbcType=CHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -230,7 +250,9 @@
       AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
       OPER_ID = #{record.operId,jdbcType=VARCHAR},
       OPER_NAME = #{record.operName,jdbcType=VARCHAR},
-      AUDIT_DESC = #{record.auditDesc,jdbcType=VARCHAR}
+      AUDIT_DESC = #{record.auditDesc,jdbcType=VARCHAR},
+      COMPONY_NAME = #{record.componyName,jdbcType=CHAR},
+      USER_NAME = #{record.userName,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -262,6 +284,12 @@
       <if test="auditDesc != null" >
         AUDIT_DESC = #{auditDesc,jdbcType=VARCHAR},
       </if>
+      <if test="componyName != null" >
+        COMPONY_NAME = #{componyName,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=CHAR},
+      </if>
     </set>
     where LOG_ID = #{logId,jdbcType=VARCHAR}
   </update>
@@ -274,7 +302,9 @@
       AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
       OPER_ID = #{operId,jdbcType=VARCHAR},
       OPER_NAME = #{operName,jdbcType=VARCHAR},
-      AUDIT_DESC = #{auditDesc,jdbcType=VARCHAR}
+      AUDIT_DESC = #{auditDesc,jdbcType=VARCHAR},
+      COMPONY_NAME = #{componyName,jdbcType=CHAR},
+      USER_NAME = #{userName,jdbcType=CHAR}
     where LOG_ID = #{logId,jdbcType=VARCHAR}
   </update>
 </mapper>

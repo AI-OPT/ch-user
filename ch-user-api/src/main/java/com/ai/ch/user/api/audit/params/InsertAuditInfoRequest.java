@@ -17,7 +17,6 @@ public class InsertAuditInfoRequest extends BaseInfo {
 	 */
 	private String userId;
 
-
 	/**
 	 * 类型
 	 */
@@ -39,9 +38,36 @@ public class InsertAuditInfoRequest extends BaseInfo {
 	private String operName;
 
 	/**
+	 * 用户名
+	 */
+
+	private String userName;
+	/**
+	 * 企业名
+	 */
+
+	private String companyName;
+
+	/**
 	 * 审核原因
 	 */
 	private String auditDesc;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -50,7 +76,6 @@ public class InsertAuditInfoRequest extends BaseInfo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 
 	public String getCtType() {
 		return ctType;

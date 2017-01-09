@@ -21,6 +21,10 @@ public class CtAuditLog {
 
     private String auditDesc;
 
+    private String componyName;
+
+    private String userName;
+
     public String getLogId() {
         return logId;
     }
@@ -91,5 +95,21 @@ public class CtAuditLog {
 
     public void setAuditDesc(String auditDesc) {
         this.auditDesc = auditDesc == null ? null : auditDesc.trim();
+    }
+
+    public String getComponyName() {
+        return componyName;
+    }
+
+    public void setComponyName(String componyName) {
+        this.componyName = componyName == null ? null : componyName.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 }

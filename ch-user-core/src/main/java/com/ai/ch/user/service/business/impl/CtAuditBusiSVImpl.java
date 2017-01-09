@@ -124,11 +124,6 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		} else {
 			request.setTenantId(request.getTenantId().trim());
 		}
-		if (StringUtil.isBlank(request.getUserId())) {
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用户id不能为空");
-		} else {
-			request.setUserId(request.getUserId().trim());
-		}
 
 		CtAuditLogCriteria example = new CtAuditLogCriteria();
 		CtAuditLogCriteria.Criteria criteria = example.createCriteria();
@@ -137,6 +132,9 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		example.setOrderByClause("AUDIT_TIME desc");
 		if (request.getBeginTime() != null) {
 			criteria.andAuditTimeGreaterThan(request.getBeginTime());
+		}
+		if(StringUtil.isBlank(request.getUserName())){
+			criteria.andUserNameEqualTo(request.getUserName());
 		}
 		if (request.getEndTime() != null) {
 			criteria.andAuditTimeLessThan(request.getEndTime());
