@@ -128,7 +128,6 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		CtAuditLogCriteria example = new CtAuditLogCriteria();
 		CtAuditLogCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
-		criteria.andUserIdEqualTo(request.getUserId());
 		example.setOrderByClause("AUDIT_TIME desc");
 		if (request.getBeginTime() != null) {
 			criteria.andAuditTimeGreaterThan(request.getBeginTime());
