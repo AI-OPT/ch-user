@@ -28,6 +28,8 @@ import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
+import com.alibaba.fastjson.JSON;
+import com.esotericsoftware.minlog.Log;
 
 @Component
 @Transactional
@@ -77,6 +79,7 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		try {
 			ctAuditLogAtomSV.insertSelective(ctAuditLog);
 		} catch (Exception e) {
+			Log.error("保存审核日志记录失败,原因"+JSON.toJSONString(e));
 			throw new BusinessException(e.getMessage(), "保存审核日志记录失败");
 		}
 		return 0;
@@ -99,11 +102,15 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		CtAuditCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
-		List<CtAudit> list = ctAuditAtomSV.selectByExample(example);
-		QueryAuditInfoResponse response = new QueryAuditInfoResponse();
-		if (list.isEmpty()) {
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "查询信息不存在");
-		} else {
+		QueryAuditInfoResponse response  = null;
+		List<CtAudit> list = null;
+		try{
+		list = ctAuditAtomSV.selectByExample(example);
+		response = new QueryAuditInfoResponse();
+		}catch(Exception e){
+			Log.error("查询失败,原因"+JSON.toJSONString(e));
+		}
+		if (!list.isEmpty()) {
 			BeanUtils.copyProperties(list.get(0), response);
 		}
 		return response;
@@ -134,6 +141,8 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		if (request.getEndTime() != null) {
 			criteria.andAuditTimeLessThan(request.getEndTime());
 		}
+		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
+		try{
 		int count = ctAuditLogAtomSV.countByExample(example);
 		int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
 		example.setLimitStart((request.getPageNo() - 1) * request.getPageSize());
@@ -155,8 +164,10 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		pageInfo.setPageNo(request.getPageNo());
 		pageInfo.setPageSize(request.getPageSize());
 		pageInfo.setResult(responseList);
-		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
 		response.setPageInfo(pageInfo);
+		}catch(Exception e){
+			Log.error("查询失败,原因"+JSON.toJSONString(e));
+		}
 		return response;
 	}
 

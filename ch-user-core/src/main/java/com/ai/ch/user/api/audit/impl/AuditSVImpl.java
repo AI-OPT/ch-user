@@ -40,8 +40,8 @@ public class AuditSVImpl implements IAuditSV {
 			ctAuditBusiSV.insertAuditInfo(request);
 			log.info("保存资质审核信息结束" + System.currentTimeMillis() + "耗时:" + (System.currentTimeMillis() - beginTime)+ "毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
-		} catch (Exception e) {
-			responseHeader = new ResponseHeader(false, ExceptCodeConstants.Special.SYSTEM_ERROR, "操作失败");
+		} catch (BusinessException e) {
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
@@ -58,8 +58,8 @@ public class AuditSVImpl implements IAuditSV {
 			response = ctAuditBusiSV.queryAuditInfo(request);
 			log.info("查询资质审核信息结束" + System.currentTimeMillis() + "耗时:" + (System.currentTimeMillis() - beginTime)+ "毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
-		} catch (Exception e) {
-			responseHeader = new ResponseHeader(false, ExceptCodeConstants.Special.SYSTEM_ERROR, "操作失败");
+		} catch (BusinessException e) {
+			responseHeader = new ResponseHeader(false, e.getErrorCode(),e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
@@ -76,8 +76,8 @@ public class AuditSVImpl implements IAuditSV {
 			response = ctAuditBusiSV.queryAuditLogInfo(request);
 			log.info("查询资质日志审核信息结束" + System.currentTimeMillis() + "耗时:" + (System.currentTimeMillis() - beginTime)+ "毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
-		} catch (Exception e) {
-			responseHeader = new ResponseHeader(false, ExceptCodeConstants.Special.SYSTEM_ERROR, "操作失败");
+		} catch (BusinessException e) {
+			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
