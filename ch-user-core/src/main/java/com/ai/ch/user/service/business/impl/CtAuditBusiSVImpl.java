@@ -74,7 +74,8 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			}
 		}
 		CtAuditLog ctAuditLog = new CtAuditLog();
-		BeanUtils.copyProperties(ctAudit, ctAuditLog);
+		BeanUtils.copyProperties(request, ctAuditLog);
+		ctAuditLog.setAuditTime(ctAudit.getAuditTime());
 		ctAuditLog.setLogId(SequenceUtil.createLogId());
 		try {
 			ctAuditLogAtomSV.insertSelective(ctAuditLog);
