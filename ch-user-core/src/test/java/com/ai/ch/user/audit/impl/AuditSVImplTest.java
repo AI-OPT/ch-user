@@ -46,7 +46,7 @@ public class AuditSVImplTest {
 	@Test
 	public void queryAuditLog(){
 		QueryAuditLogInfoRequest re = new QueryAuditLogInfoRequest();
-		re.setUserId("e01977b835034f5d");
+		//re.setUserId("e01977b835034f5d");
 		re.setTenantId("changhong");
 		re.setPageNo(1);
 		re.setPageSize(5);

@@ -132,7 +132,7 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		if (request.getBeginTime() != null) {
 			criteria.andAuditTimeGreaterThan(request.getBeginTime());
 		}
-		if(StringUtil.isBlank(request.getUserName())){
+		if(request.getUserName()!=null){
 			criteria.andUserNameEqualTo(request.getUserName());
 		}
 		if (request.getEndTime() != null) {
