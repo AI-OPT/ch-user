@@ -50,6 +50,7 @@ public class AuditSVImplTest {
 		re.setTenantId("changhong");
 		re.setPageNo(1);
 		re.setPageSize(5);
+		re.setUserName("think");
 		//re.setBeginTime(Timestamp.valueOf("2015-12-7 00:00:00"));
 		System.out.println(JSON.toJSONString(auditSV.queryAuditLogInfo(re)));
 	}
