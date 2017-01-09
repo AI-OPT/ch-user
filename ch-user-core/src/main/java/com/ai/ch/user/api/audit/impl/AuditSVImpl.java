@@ -19,13 +19,14 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 
 @Component
 @Service
 public class AuditSVImpl implements IAuditSV {
 
 	
-	private static final Logger log = LoggerFactory.getLogger(ShopInfoSVImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ShopInfoSVImpl.class);
 	
 	@Autowired
 	private ICtAuditBusiSV ctAuditBusiSV;
@@ -35,12 +36,10 @@ public class AuditSVImpl implements IAuditSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("保存资质审核信息服务开始" + beginTime);
 			ctAuditBusiSV.insertAuditInfo(request);
-			log.info("保存资质审核信息结束" + System.currentTimeMillis() + "耗时:" + (System.currentTimeMillis() - beginTime)+ "毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 		} catch (BusinessException e) {
+			LOG.error("保存失败,原因"+JSON.toJSONString(e));
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
 		}
 		response.setResponseHeader(responseHeader);
@@ -53,13 +52,11 @@ public class AuditSVImpl implements IAuditSV {
 		QueryAuditInfoResponse response = new QueryAuditInfoResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("查询资质审核信息服务开始" + beginTime);
 			response = ctAuditBusiSV.queryAuditInfo(request);
-			log.info("查询资质审核信息结束" + System.currentTimeMillis() + "耗时:" + (System.currentTimeMillis() - beginTime)+ "毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 		} catch (BusinessException e) {
 			responseHeader = new ResponseHeader(false, e.getErrorCode(),e.getErrorMessage());
+			LOG.error("查询失败"+JSON.toJSONString(e));
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
@@ -71,13 +68,11 @@ public class AuditSVImpl implements IAuditSV {
 		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("查询资质日志审核信息服务开始" + beginTime);
 			response = ctAuditBusiSV.queryAuditLogInfo(request);
-			log.info("查询资质日志审核信息结束" + System.currentTimeMillis() + "耗时:" + (System.currentTimeMillis() - beginTime)+ "毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 		} catch (BusinessException e) {
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());
+			LOG.error("操作失败"+JSON.toJSONString(e));
 		}
 		response.setResponseHeader(responseHeader);
 		return response;
