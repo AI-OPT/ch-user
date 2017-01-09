@@ -745,76 +745,6 @@ public class CtAuditLogCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andComponyNameIsNull() {
-            addCriterion("COMPONY_NAME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameIsNotNull() {
-            addCriterion("COMPONY_NAME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameEqualTo(String value) {
-            addCriterion("COMPONY_NAME =", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameNotEqualTo(String value) {
-            addCriterion("COMPONY_NAME <>", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameGreaterThan(String value) {
-            addCriterion("COMPONY_NAME >", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameGreaterThanOrEqualTo(String value) {
-            addCriterion("COMPONY_NAME >=", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameLessThan(String value) {
-            addCriterion("COMPONY_NAME <", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameLessThanOrEqualTo(String value) {
-            addCriterion("COMPONY_NAME <=", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameLike(String value) {
-            addCriterion("COMPONY_NAME like", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameNotLike(String value) {
-            addCriterion("COMPONY_NAME not like", value, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameIn(List<String> values) {
-            addCriterion("COMPONY_NAME in", values, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameNotIn(List<String> values) {
-            addCriterion("COMPONY_NAME not in", values, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameBetween(String value1, String value2) {
-            addCriterion("COMPONY_NAME between", value1, value2, "componyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andComponyNameNotBetween(String value1, String value2) {
-            addCriterion("COMPONY_NAME not between", value1, value2, "componyName");
-            return (Criteria) this;
-        }
-
         public Criteria andUserNameIsNull() {
             addCriterion("USER_NAME is null");
             return (Criteria) this;
@@ -882,6 +812,76 @@ public class CtAuditLogCriteria {
 
         public Criteria andUserNameNotBetween(String value1, String value2) {
             addCriterion("USER_NAME not between", value1, value2, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameIsNull() {
+            addCriterion("COMPANY_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameIsNotNull() {
+            addCriterion("COMPANY_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameEqualTo(String value) {
+            addCriterion("COMPANY_NAME =", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameNotEqualTo(String value) {
+            addCriterion("COMPANY_NAME <>", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameGreaterThan(String value) {
+            addCriterion("COMPANY_NAME >", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameGreaterThanOrEqualTo(String value) {
+            addCriterion("COMPANY_NAME >=", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameLessThan(String value) {
+            addCriterion("COMPANY_NAME <", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameLessThanOrEqualTo(String value) {
+            addCriterion("COMPANY_NAME <=", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameLike(String value) {
+            addCriterion("COMPANY_NAME like", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameNotLike(String value) {
+            addCriterion("COMPANY_NAME not like", value, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameIn(List<String> values) {
+            addCriterion("COMPANY_NAME in", values, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameNotIn(List<String> values) {
+            addCriterion("COMPANY_NAME not in", values, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameBetween(String value1, String value2) {
+            addCriterion("COMPANY_NAME between", value1, value2, "companyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNameNotBetween(String value1, String value2) {
+            addCriterion("COMPANY_NAME not between", value1, value2, "companyName");
             return (Criteria) this;
         }
     }
