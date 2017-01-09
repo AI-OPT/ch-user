@@ -3,7 +3,7 @@ package com.ai.ch.user.api.audit.params;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class AuditLogVo implements Serializable{
+public class AuditLogVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +50,32 @@ public class AuditLogVo implements Serializable{
 	 * 审核描述
 	 */
 	private String auditDesc;
+
+	/**
+	 * 用户名
+	 */
+	private String userName;
+
+	/**
+	 * 企业名
+	 */
+	private String companyName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	public String getLogId() {
 		return logId;
