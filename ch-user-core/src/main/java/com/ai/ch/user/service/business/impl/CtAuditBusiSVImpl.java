@@ -133,13 +133,13 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		}
 		example.setOrderByClause("AUDIT_TIME desc");
 		if (request.getBeginTime() != null) {
-			criteria.andAuditTimeGreaterThan(request.getBeginTime());
+			criteria.andAuditTimeGreaterThanOrEqualTo(request.getBeginTime());
 		}
 		if (request.getUserName() != null) {
 			criteria.andOperNameLike("%"+request.getUserName()+"%");
 		}
 		if (request.getEndTime() != null) {
-			criteria.andAuditTimeLessThan(request.getEndTime());
+			criteria.andAuditTimeLessThanOrEqualTo(request.getEndTime());
 		}
 		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
 		try {
