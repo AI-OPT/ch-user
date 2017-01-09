@@ -64,12 +64,14 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			try {
 				ctAuditAtomSV.insertSelective(ctAudit);
 			} catch (Exception e) {
+				Log.error("保存审核记录失败,原因"+JSON.toJSONString(e));
 				throw new BusinessException(e.getMessage(), "保存审核记录失败");
 			}
 		} else {
 			try {
 				ctAuditAtomSV.updateByExampleSelective(ctAudit, example);
 			} catch (Exception e) {
+				Log.error("更新审核记录失败,原因"+JSON.toJSONString(e));
 				throw new BusinessException(e.getMessage(), "更新审核记录失败");
 			}
 		}
