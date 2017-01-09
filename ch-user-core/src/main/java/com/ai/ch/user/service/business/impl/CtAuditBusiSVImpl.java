@@ -66,7 +66,7 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			} catch (Exception e) {
 				throw new BusinessException(e.getMessage(), "保存审核记录失败");
 			}
-		}else{
+		} else {
 			try {
 				ctAuditAtomSV.updateByExampleSelective(ctAudit, example);
 			} catch (Exception e) {
@@ -79,7 +79,7 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		try {
 			ctAuditLogAtomSV.insertSelective(ctAuditLog);
 		} catch (Exception e) {
-			Log.error("保存审核日志记录失败,原因"+JSON.toJSONString(e));
+			Log.error("保存审核日志记录失败,原因" + JSON.toJSONString(e));
 			throw new BusinessException(e.getMessage(), "保存审核日志记录失败");
 		}
 		return 0;
@@ -102,13 +102,13 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		CtAuditCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		criteria.andUserIdEqualTo(request.getUserId());
-		QueryAuditInfoResponse response  = null;
+		QueryAuditInfoResponse response = null;
 		List<CtAudit> list = null;
-		try{
-		list = ctAuditAtomSV.selectByExample(example);
-		response = new QueryAuditInfoResponse();
-		}catch(Exception e){
-			Log.error("查询失败,原因"+JSON.toJSONString(e));
+		try {
+			list = ctAuditAtomSV.selectByExample(example);
+			response = new QueryAuditInfoResponse();
+		} catch (Exception e) {
+			Log.error("查询失败,原因" + JSON.toJSONString(e));
 		}
 		if (!list.isEmpty()) {
 			BeanUtils.copyProperties(list.get(0), response);
@@ -128,43 +128,47 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		CtAuditLogCriteria example = new CtAuditLogCriteria();
 		CtAuditLogCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
-		criteria.andCtTypeEqualTo(request.getCtType());
+		if (request.getCtType() != null) {
+			criteria.andCtTypeEqualTo(request.getCtType());
+		}
 		example.setOrderByClause("AUDIT_TIME desc");
 		if (request.getBeginTime() != null) {
 			criteria.andAuditTimeGreaterThan(request.getBeginTime());
 		}
-		if(request.getUserName()!=null){
+		if (request.getUserName() != null) {
 			criteria.andUserNameEqualTo(request.getUserName());
 		}
 		if (request.getEndTime() != null) {
 			criteria.andAuditTimeLessThan(request.getEndTime());
 		}
 		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
-		try{
-		int count = ctAuditLogAtomSV.countByExample(example);
-		int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
-		example.setLimitStart((request.getPageNo() - 1) * request.getPageSize());
-		example.setLimitEnd(request.getPageSize());
+		try {
+			int count = ctAuditLogAtomSV.countByExample(example);
+			int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
+			example.setLimitStart((request.getPageNo() - 1) * request.getPageSize());
+			example.setLimitEnd(request.getPageSize());
 
-		List<CtAuditLog> list = ctAuditLogAtomSV.selectByExample(example);
-		/*if (list.isEmpty()) {
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "查询结果为空");
-		}*/
-		List<AuditLogVo> responseList = new ArrayList<>();
-		for (CtAuditLog ctAuditLog : list) {
-			AuditLogVo auditLogVo = new AuditLogVo();
-			BeanUtils.copyProperties(ctAuditLog, auditLogVo);
-			responseList.add(auditLogVo);
-		}
-		PageInfo<AuditLogVo> pageInfo = new PageInfo<>();
-		pageInfo.setCount(count);
-		pageInfo.setPageCount(pageCount);
-		pageInfo.setPageNo(request.getPageNo());
-		pageInfo.setPageSize(request.getPageSize());
-		pageInfo.setResult(responseList);
-		response.setPageInfo(pageInfo);
-		}catch(Exception e){
-			Log.error("查询失败,原因"+JSON.toJSONString(e));
+			List<CtAuditLog> list = ctAuditLogAtomSV.selectByExample(example);
+			/*
+			 * if (list.isEmpty()) { throw new
+			 * BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,
+			 * "查询结果为空"); }
+			 */
+			List<AuditLogVo> responseList = new ArrayList<>();
+			for (CtAuditLog ctAuditLog : list) {
+				AuditLogVo auditLogVo = new AuditLogVo();
+				BeanUtils.copyProperties(ctAuditLog, auditLogVo);
+				responseList.add(auditLogVo);
+			}
+			PageInfo<AuditLogVo> pageInfo = new PageInfo<>();
+			pageInfo.setCount(count);
+			pageInfo.setPageCount(pageCount);
+			pageInfo.setPageNo(request.getPageNo());
+			pageInfo.setPageSize(request.getPageSize());
+			pageInfo.setResult(responseList);
+			response.setPageInfo(pageInfo);
+		} catch (Exception e) {
+			Log.error("查询失败,原因" + JSON.toJSONString(e));
 		}
 		return response;
 	}
