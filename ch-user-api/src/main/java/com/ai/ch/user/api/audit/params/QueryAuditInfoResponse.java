@@ -5,8 +5,7 @@ import java.sql.Timestamp;
 import com.ai.opt.base.vo.BaseResponse;
 
 /**
- * 审核记录查询
- * Date: 2016年12月7日 <br>
+ * 审核记录查询 Date: 2016年12月7日 <br>
  * Copyright (c) 2016 asiainfo.com <br>
  * 
  * @author zhangqiang7
@@ -54,6 +53,33 @@ public class QueryAuditInfoResponse extends BaseResponse {
 	 * 审核时间
 	 */
 	private Timestamp auditTime;
+
+	/**
+	 * 用户名
+	 */
+
+	private String userName;
+	/**
+	 * 企业名
+	 */
+
+	private String companyName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	public String getUserId() {
 		return userId;

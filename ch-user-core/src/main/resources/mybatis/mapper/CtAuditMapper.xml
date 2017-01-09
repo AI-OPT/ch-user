@@ -5,6 +5,8 @@
     <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
     <result column="CT_TYPE" property="ctType" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
     <result column="AUDIT_STATUS" property="auditStatus" jdbcType="VARCHAR" />
     <result column="AUDIT_TIME" property="auditTime" jdbcType="TIMESTAMP" />
     <result column="OPER_ID" property="operId" jdbcType="VARCHAR" />
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    USER_ID, TENANT_ID, CT_TYPE, AUDIT_STATUS, AUDIT_TIME, OPER_ID, OPER_NAME, AUDIT_DESC
+    USER_ID, TENANT_ID, CT_TYPE, USER_NAME, COMPANY_NAME, AUDIT_STATUS, AUDIT_TIME, OPER_ID, 
+    OPER_NAME, AUDIT_DESC
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ch.user.dao.mapper.bo.CtAuditCriteria" >
     select
@@ -108,11 +111,13 @@
   </delete>
   <insert id="insert" parameterType="com.ai.ch.user.dao.mapper.bo.CtAudit" >
     insert into ct_audit (USER_ID, TENANT_ID, CT_TYPE, 
-      AUDIT_STATUS, AUDIT_TIME, OPER_ID, 
-      OPER_NAME, AUDIT_DESC)
+      USER_NAME, COMPANY_NAME, AUDIT_STATUS, 
+      AUDIT_TIME, OPER_ID, OPER_NAME, 
+      AUDIT_DESC)
     values (#{userId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{ctType,jdbcType=VARCHAR}, 
-      #{auditStatus,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=VARCHAR}, 
-      #{operName,jdbcType=VARCHAR}, #{auditDesc,jdbcType=VARCHAR})
+      #{userName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=VARCHAR}, #{operName,jdbcType=VARCHAR}, 
+      #{auditDesc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.ch.user.dao.mapper.bo.CtAudit" >
     insert into ct_audit
@@ -125,6 +130,12 @@
       </if>
       <if test="ctType != null" >
         CT_TYPE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
       </if>
       <if test="auditStatus != null" >
         AUDIT_STATUS,
@@ -151,6 +162,12 @@
       </if>
       <if test="ctType != null" >
         #{ctType,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="auditStatus != null" >
         #{auditStatus,jdbcType=VARCHAR},
@@ -187,6 +204,12 @@
       <if test="record.ctType != null" >
         CT_TYPE = #{record.ctType,jdbcType=VARCHAR},
       </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
       <if test="record.auditStatus != null" >
         AUDIT_STATUS = #{record.auditStatus,jdbcType=VARCHAR},
       </if>
@@ -212,6 +235,8 @@
     set USER_ID = #{record.userId,jdbcType=VARCHAR},
       TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
       CT_TYPE = #{record.ctType,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
       AUDIT_STATUS = #{record.auditStatus,jdbcType=VARCHAR},
       AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
       OPER_ID = #{record.operId,jdbcType=VARCHAR},
@@ -229,6 +254,12 @@
       </if>
       <if test="ctType != null" >
         CT_TYPE = #{ctType,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="auditStatus != null" >
         AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
@@ -252,6 +283,8 @@
     update ct_audit
     set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
       CT_TYPE = #{ctType,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
       AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
       AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
       OPER_ID = #{operId,jdbcType=VARCHAR},

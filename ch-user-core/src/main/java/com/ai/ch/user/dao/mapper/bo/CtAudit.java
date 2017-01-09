@@ -9,6 +9,10 @@ public class CtAudit {
 
     private String ctType;
 
+    private String userName;
+
+    private String companyName;
+
     private String auditStatus;
 
     private Timestamp auditTime;
@@ -41,6 +45,22 @@ public class CtAudit {
 
     public void setCtType(String ctType) {
         this.ctType = ctType == null ? null : ctType.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName == null ? null : companyName.trim();
     }
 
     public String getAuditStatus() {

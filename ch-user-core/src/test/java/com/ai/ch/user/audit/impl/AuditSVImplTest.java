@@ -1,7 +1,5 @@
 package com.ai.ch.user.audit.impl;
 
-import java.sql.Timestamp;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
