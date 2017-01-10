@@ -141,6 +141,9 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		if (request.getUserName() != null) {
 			criteria.andOperNameLike("%"+request.getUserName()+"%");
 		}
+		if (request.getUserId() != null) {
+			criteria.andUserIdEqualTo(request.getUserId());
+		}
 		if (request.getEndTime() != null) {
 			criteria.andAuditTimeLessThanOrEqualTo(request.getEndTime());
 		}
