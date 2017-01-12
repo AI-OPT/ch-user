@@ -9,7 +9,9 @@ package com.ai.ch.user.constants;
 public final class ChUserConstants {
 
 	public final static class SupplierScore {
-		private SupplierScore(){}
+		private SupplierScore() {
+		}
+
 		/**
 		 * 成功，成功时取返回报文体
 		 */
@@ -25,19 +27,38 @@ public final class ChUserConstants {
 		 */
 		public static final String Fail = "999999";
 	}
-	
+
 	public final static class ShopRank {
-		private ShopRank(){}
+		private ShopRank() {
+		}
+
 		/**
 		 * 成功，成功时取返回报文体
 		 */
 		public static final String SUCCESS = "000000";
-		
-		
+
 		/**
 		 * 失败
 		 */
 		public static final String Fail = "999999";
 	}
 
+	public final static class Audit {
+		private Audit() {
+		}
+
+		/**
+		 * 全部审核状态
+		 */
+		public static final String ALL = "9";
+
+		/**
+		 * 审核已通过
+		 */
+		public static final String AUDIT_PASS = "1";
+		/**
+		 * 审核已拒绝
+		 */
+		public static final String AUDIT_REJECT = "2";
+	}
 }

@@ -14,6 +14,7 @@ import com.ai.ch.user.api.audit.params.QueryAuditInfoRequest;
 import com.ai.ch.user.api.audit.params.QueryAuditInfoResponse;
 import com.ai.ch.user.api.audit.params.QueryAuditLogInfoRequest;
 import com.ai.ch.user.api.audit.params.QueryAuditLogInfoResponse;
+import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.dao.mapper.bo.CtAudit;
 import com.ai.ch.user.dao.mapper.bo.CtAuditCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtAuditLog;
@@ -135,7 +136,9 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			criteria.andCtTypeEqualTo(request.getCtType());
 		}
 		if (request.getAuditStatus() != null) {
-			criteria.andAuditStatusEqualTo(request.getAuditStatus());
+			if(!ChUserConstants.Audit.ALL.equals(request.getAuditStatus())){
+				criteria.andAuditStatusEqualTo(request.getAuditStatus());
+			}
 		}
 		example.setOrderByClause("AUDIT_TIME desc");
 		if (request.getBeginTime() != null) {
