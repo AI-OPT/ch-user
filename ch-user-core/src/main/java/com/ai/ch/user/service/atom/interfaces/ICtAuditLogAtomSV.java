@@ -12,4 +12,6 @@ public interface ICtAuditLogAtomSV {
 	int insertSelective(CtAuditLog record);
 
 	List<CtAuditLog> selectByExample(CtAuditLogCriteria example);
+
+	List<CtAuditLog> selectByLike(CtAuditLogCriteria example);
 }

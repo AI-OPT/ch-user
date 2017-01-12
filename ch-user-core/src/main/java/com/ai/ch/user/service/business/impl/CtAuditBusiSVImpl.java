@@ -134,6 +134,9 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		if (request.getCtType() != null) {
 			criteria.andCtTypeEqualTo(request.getCtType());
 		}
+		if (request.getAuditStatus() != null) {
+			criteria.andAuditStatusEqualTo(request.getAuditStatus());
+		}
 		example.setOrderByClause("AUDIT_TIME desc");
 		if (request.getBeginTime() != null) {
 			criteria.andAuditTimeGreaterThanOrEqualTo(request.getBeginTime());

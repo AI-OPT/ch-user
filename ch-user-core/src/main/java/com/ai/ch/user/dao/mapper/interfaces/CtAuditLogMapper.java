@@ -17,6 +17,8 @@ public interface CtAuditLogMapper {
     int insertSelective(CtAuditLog record);
 
     List<CtAuditLog> selectByExample(CtAuditLogCriteria example);
+    
+    List<CtAuditLog> selectByLike(CtAuditLogCriteria example);
 
     CtAuditLog selectByPrimaryKey(String logId);
 

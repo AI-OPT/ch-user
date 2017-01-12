@@ -27,4 +27,9 @@ public class CtAuditLogAtomSVImpl implements ICtAuditLogAtomSV {
 		return MapperFactory.getCtAuditLogMapper().selectByExample(example);
 	}
 
+	@Override
+	public List<CtAuditLog> selectByLike(CtAuditLogCriteria example) {
+		return MapperFactory.getCtAuditLogMapper().selectByLike(example);
+	}
+
 }

@@ -14,6 +14,11 @@ public class QueryAuditLogInfoRequest extends BaseInfo {
 	private String userId;
 
 	/**
+	 * 审核状态
+	 */
+	private String auditStatus;
+
+	/**
 	 * 用户类型
 	 */
 	private String ctType;
@@ -42,6 +47,14 @@ public class QueryAuditLogInfoRequest extends BaseInfo {
 	 * 结束时间
 	 */
 	private Timestamp endTime;
+
+	public String getAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(String auditStatus) {
+		this.auditStatus = auditStatus;
+	}
 
 	public String getCtType() {
 		return ctType;
