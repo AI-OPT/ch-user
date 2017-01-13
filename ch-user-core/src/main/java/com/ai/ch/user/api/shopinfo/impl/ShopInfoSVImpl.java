@@ -283,7 +283,15 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Path("/checkShopNameOnly")
 	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException {
-		return shopInfoBusiSV.checkShopNameOnly(request);
+		BaseResponse response = null;
+		try{
+		response =  shopInfoBusiSV.checkShopNameOnly(request);
+		}catch(BusinessException e){
+			response = new BaseResponse();
+			ResponseHeader responseHeader=new ResponseHeader(false,e.getErrorCode(),e.getErrorMessage()); 
+			response.setResponseHeader(responseHeader);
+		}
+		return response;
 	}
 
 	@Override
