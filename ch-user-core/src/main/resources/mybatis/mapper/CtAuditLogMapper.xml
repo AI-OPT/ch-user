@@ -118,7 +118,7 @@
 		<if test="auditStatus != null">
 			and audit_status = #{auditStatus,jdbcType=VARCHAR}
 		</if>
-		<if test="ctType != null">
+		<if test="ctType != null and ctType !=''">
 			and ct_type = #{ctType,jdbcType=VARCHAR}
 		</if>
 		<if test="beginTime != null">
@@ -259,7 +259,7 @@
 		<if test="auditStatus != null">
 			and audit_status = #{auditStatus,jdbcType=VARCHAR}
 		</if>
-		<if test="ctType != null">
+		<if test="ctType != null and ctType !=''">
 			and ct_type = #{ctType,jdbcType=VARCHAR}
 		</if>
 		<if test="beginTime != null">
