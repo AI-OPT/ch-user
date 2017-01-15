@@ -8,6 +8,7 @@ import com.ai.ch.user.dao.mapper.bo.CtAuditLog;
 import com.ai.ch.user.dao.mapper.bo.CtAuditLogCriteria;
 import com.ai.ch.user.dao.mapper.factory.MapperFactory;
 import com.ai.ch.user.service.atom.interfaces.ICtAuditLogAtomSV;
+import com.ai.ch.user.vo.CtAuditLogVo;
 
 @Component
 public class CtAuditLogAtomSVImpl implements ICtAuditLogAtomSV {
@@ -28,8 +29,13 @@ public class CtAuditLogAtomSVImpl implements ICtAuditLogAtomSV {
 	}
 
 	@Override
-	public List<CtAuditLog> selectByLike(CtAuditLogCriteria example) {
-		return MapperFactory.getCtAuditLogMapper().selectByLike(example);
+	public List<CtAuditLog> selectByLike(CtAuditLogVo record) {
+		return MapperFactory.getCtAuditLogMapper().selectByLike(record);
+	}
+
+	@Override
+	public int countByLike(CtAuditLogVo record) {
+		return MapperFactory.getCtAuditLogMapper().countByLike(record);
 	}
 
 }

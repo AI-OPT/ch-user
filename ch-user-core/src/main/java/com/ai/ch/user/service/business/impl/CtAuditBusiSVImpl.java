@@ -14,15 +14,14 @@ import com.ai.ch.user.api.audit.params.QueryAuditInfoRequest;
 import com.ai.ch.user.api.audit.params.QueryAuditInfoResponse;
 import com.ai.ch.user.api.audit.params.QueryAuditLogInfoRequest;
 import com.ai.ch.user.api.audit.params.QueryAuditLogInfoResponse;
-import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.dao.mapper.bo.CtAudit;
 import com.ai.ch.user.dao.mapper.bo.CtAuditCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtAuditLog;
-import com.ai.ch.user.dao.mapper.bo.CtAuditLogCriteria;
 import com.ai.ch.user.service.atom.interfaces.ICtAuditAtomSV;
 import com.ai.ch.user.service.atom.interfaces.ICtAuditLogAtomSV;
 import com.ai.ch.user.service.business.interfaces.ICtAuditBusiSV;
 import com.ai.ch.user.util.SequenceUtil;
+import com.ai.ch.user.vo.CtAuditLogVo;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
@@ -129,7 +128,10 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			request.setTenantId(request.getTenantId().trim());
 		}
 
-		CtAuditLogCriteria example = new CtAuditLogCriteria();
+		CtAuditLogVo record = new CtAuditLogVo();
+		BeanUtils.copyProperties(request, record);
+		record.setOrderByClause("auditTime");
+		/*CtAuditLogCriteria example = new CtAuditLogCriteria();
 		CtAuditLogCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(request.getTenantId());
 		if (request.getCtType() != null) {
@@ -152,15 +154,15 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		}
 		if (request.getEndTime() != null) {
 			criteria.andAuditTimeLessThanOrEqualTo(request.getEndTime());
-		}
+		}*/
 		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
 		try {
-			int count = ctAuditLogAtomSV.countByExample(example);
+			int count = ctAuditLogAtomSV.countByLike(record);
 			int pageCount = count / request.getPageNo() + (count % request.getPageSize() > 0 ? 1 : 0);
-			example.setLimitStart((request.getPageNo() - 1) * request.getPageSize());
-			example.setLimitEnd(request.getPageSize());
+			record.setLimitStart((request.getPageNo() - 1) * request.getPageSize());
+			record.setLimitEnd(request.getPageSize());
 
-			List<CtAuditLog> list = ctAuditLogAtomSV.selectByExample(example);
+			List<CtAuditLog> list = ctAuditLogAtomSV.selectByLike(record);
 			/*
 			 * if (list.isEmpty()) { throw new
 			 * BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,
