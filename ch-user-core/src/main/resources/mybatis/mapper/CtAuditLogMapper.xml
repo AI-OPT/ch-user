@@ -122,10 +122,10 @@
 			and ct_type = #{ctType,jdbcType=VARCHAR}
 		</if>
 		<if test="beginTime != null">
-			and auditTime <![CDATA[>= #{beginTime,jdbcType=TIMESTAMP}]]>
+			and audit_time <![CDATA[>= #{beginTime,jdbcType=TIMESTAMP}]]>
 		</if>
 		<if test="endTime != null">
-			and auditTime  <![CDATA[<= #{endTime,jdbcType=TIMESTAMP}]]>
+			and audit_time  <![CDATA[<= #{endTime,jdbcType=TIMESTAMP}]]>
 		</if>
 		<if test="orderByClause != null">
 			order by #{orderByClause,jdbcType=VARCHAR}
@@ -263,10 +263,10 @@
 			and ct_type = #{ctType,jdbcType=VARCHAR}
 		</if>
 		<if test="beginTime != null">
-			and auditTime <![CDATA[>= #{beginTime,jdbcType=TIMESTAMP}]]>
+			and audit_time <![CDATA[>= #{beginTime,jdbcType=TIMESTAMP}]]>
 		</if>
 		<if test="endTime != null">
-			and auditTime  <![CDATA[<= #{endTime,jdbcType=TIMESTAMP}]]>
+			and audit_time  <![CDATA[<= #{endTime,jdbcType=TIMESTAMP}]]>
 		</if>
 	</select>
 
