@@ -14,6 +14,7 @@ import com.ai.ch.user.api.audit.params.QueryAuditInfoRequest;
 import com.ai.ch.user.api.audit.params.QueryAuditInfoResponse;
 import com.ai.ch.user.api.audit.params.QueryAuditLogInfoRequest;
 import com.ai.ch.user.api.audit.params.QueryAuditLogInfoResponse;
+import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.dao.mapper.bo.CtAudit;
 import com.ai.ch.user.dao.mapper.bo.CtAuditCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtAuditLog;
@@ -128,6 +129,9 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			request.setTenantId(request.getTenantId().trim());
 		}
 
+		if(ChUserConstants.Audit.ALL.equals(request.getCtType())){
+			request.setCtType("");
+		}
 		CtAuditLogVo record = new CtAuditLogVo();
 		BeanUtils.copyProperties(request, record);
 		record.setOrderByClause("auditTime");
