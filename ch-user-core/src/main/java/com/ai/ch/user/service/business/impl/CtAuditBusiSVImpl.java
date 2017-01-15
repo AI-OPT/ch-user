@@ -129,8 +129,8 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			request.setTenantId(request.getTenantId().trim());
 		}
 
-		if(ChUserConstants.Audit.ALL.equals(request.getCtType())){
-			request.setCtType("");
+		if(ChUserConstants.Audit.ALL.equals(request.getAuditStatus())){
+			request.setAuditStatus("");
 		}
 		CtAuditLogVo record = new CtAuditLogVo();
 		BeanUtils.copyProperties(request, record);

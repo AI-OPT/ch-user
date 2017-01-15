@@ -48,7 +48,7 @@ public class AuditSVImplTest {
 		re.setTenantId("changhong");
 		re.setPageNo(1);
 		re.setPageSize(5);
-		re.setUserName("thi");
+		//re.setUserName("thi");
 		re.setCtType("9");
 		//re.setUserId("63e5e83409d8499b");
 		//re.setBeginTime(Timestamp.valueOf("2015-12-7 00:00:00"));
