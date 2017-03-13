@@ -39,6 +39,7 @@ import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
 import com.ai.ch.user.constants.ChUserConstants;
 import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
 import com.ai.ch.user.service.business.interfaces.IShopInfoLogBusiSV;
+import com.ai.ch.user.util.ValidateUtils;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
@@ -241,6 +242,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		ResponseHeader responseHeader =null;
 		Integer rank = 0;
 		try{
+			ValidateUtils.validatQueryShopRank(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场查询店铺等级服务开始"+beginTime);
 			rank = shopInfoBusiSV.queryShopRank(request);
@@ -259,6 +261,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopDepositResponse response = new QueryShopDepositResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			ValidateUtils.validatQueryDeposit(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场查询店铺保证金服务开始"+beginTime);
 			long depositBalance = shopInfoBusiSV.queryShopDeposit(request);
@@ -285,7 +288,8 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 			throws BusinessException, SystemException {
 		BaseResponse response = null;
 		try{
-		response =  shopInfoBusiSV.checkShopNameOnly(request);
+			ValidateUtils.validatCheckShopName(request);
+			response =  shopInfoBusiSV.checkShopNameOnly(request);
 		}catch(BusinessException e){
 			response = new BaseResponse();
 			ResponseHeader responseHeader=new ResponseHeader(false,e.getErrorCode(),e.getErrorMessage()); 
@@ -299,6 +303,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			ValidateUtils.validatSaveAuditInfo(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场查询店铺信息服务开始"+beginTime);
 			shopInfoBusiSV.saveShopAuditInfo(request);
@@ -316,6 +321,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			ValidateUtils.validatUpdateShopStatus(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场更新店铺状态服务开始"+beginTime);
 			shopInfoBusiSV.updateShopStatus(request);
@@ -334,6 +340,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopInfoResponse response = new QueryShopInfoResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			ValidateUtils.validatQueryShopInfo(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场查询店铺信息服务开始"+beginTime);
 			response = shopInfoBusiSV.queryShopInfoById(request);
@@ -385,6 +392,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		QueryShopKpiResponse response = new QueryShopKpiResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			ValidateUtils.validatQueryShopKpi(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("查询店铺评级指标服务开始"+beginTime);
 			response = shopInfoBusiSV.queryShopKpi(request);
@@ -403,6 +411,7 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
+			ValidateUtils.validatUpdateAuditInfo(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场更新店铺信息服务开始"+beginTime);
 			shopInfoBusiSV.updateShopAuditInfo(request);

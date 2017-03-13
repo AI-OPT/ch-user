@@ -25,6 +25,8 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.StringUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Component
@@ -161,6 +163,16 @@ public class ScoreSVImpl implements IScoreSV {
 		try{
 			Long beginTime = System.currentTimeMillis();
 			LOG.info("后场查询评分信息服务开始"+beginTime);
+			if(StringUtil.isBlank(request.getTenantId())){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
+			}else{
+				request.setTenantId(request.getTenantId().trim());
+			}
+			if(StringUtil.isBlank(request.getUserId())){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:用户id不能为空");
+			}else{
+				request.setUserId(request.getUserId().trim());
+			}
 			float scoreAvg = scoreLogBusiSV.countScoreAvg(request);
 			LOG.info("后场查询评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			response.setScoreAvg(scoreAvg);

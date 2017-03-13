@@ -24,7 +24,6 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
-import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.StringUtil;
 
 @Component
@@ -46,12 +45,6 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	@Override
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException {
-		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
-		}
-		if(StringUtil.isBlank(request.getUserId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:用户id不能为空");
-		}
 		QueryDefaultLogResponse response = new QueryDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
@@ -78,27 +71,12 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	}
 
 	@Override
-	public int deleteDefaultLog(String serialCode) throws SystemException,
-			BusinessException {
-		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
-		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
-		criteria.andSerialCodeEqualTo(serialCode);
-		int count =defaultLogAtomSV.deleteDefaultLog(example);
-		return count;
-	}
-
-	@Override
 	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
 			throws SystemException, BusinessException {
 		QueryFullDefaultLogResponse response = new QueryFullDefaultLogResponse();
 		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
 		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
-		if(request.getPageNo()==null){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "PageNo不能为空");
-		}
-		if(request.getPageSize()==null){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "PageSize不能为空");
-		}
+		
 		if(!StringUtil.isBlank(request.getUserId())){
 			criteria.andUserIdEqualTo(request.getUserId().trim());
 		}

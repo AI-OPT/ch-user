@@ -15,7 +15,6 @@ import com.ai.ch.user.api.defaultlog.params.InsertDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogResponse;
 import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
-import com.ai.opt.base.vo.BaseResponse;
 import com.alibaba.fastjson.JSON;
 import com.ylink.upp.base.oxm.util.OxmHandler;
 
@@ -53,14 +52,6 @@ public class defaultManagerSVImpl {
 		QueryDefaultLogResponse defaultLogResponse = defaultLogSV.queryDefaultLog(defaultLogRequest);
 		System.out.println(JSON.toJSONString(defaultLogResponse.getPageInfo()));
 	}
-	@Test
-	public void deleteDefaultLog (){
-		String serialCode = "00000000000000082";
-		BaseResponse response = defaultLogSV.deleteDefaultLog(serialCode);
-		System.out.println(JSON.toJSONString(response));
-		
-	}
-	
 	
 	@Test
 	public void queryFullDetaultInfoListTest(){

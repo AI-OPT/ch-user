@@ -29,14 +29,6 @@ public interface IDefaultLogBusiSV {
 	public QueryDefaultLogResponse queryDefaultLog(QueryDefaultLogRequest request)
 			throws SystemException, BusinessException;
 	
-	/**
-	 * 删除违约扣款日志
-	 * @param serialCode
-	 * @return
-	 * @throws SystemException
-	 * @throws BusinessException
-	 */
-	public int deleteDefaultLog(String serialCode)throws SystemException, BusinessException;
 	
 	/**
 	 * 查询全量扣款日志
