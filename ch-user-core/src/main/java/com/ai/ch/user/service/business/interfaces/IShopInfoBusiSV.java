@@ -1,5 +1,7 @@
 package com.ai.ch.user.service.business.interfaces;
 
+import java.math.BigDecimal;
+
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
@@ -24,6 +26,7 @@ import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
+import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
@@ -55,7 +58,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int updateShopInfo(UpdateShopInfoRequest request) throws BusinessException, SystemException;
+	public int updateShopInfo(UpdateShopInfoRequest request,ShopInfo shopInfo) throws BusinessException, SystemException;
 
 	/**
 	 * 查询保证金设置
@@ -114,7 +117,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public Integer queryShopRank(QueryShopRankRequest request) throws BusinessException, SystemException;
+	public Integer queryShopRank(QueryShopRankRequest request,BigDecimal score) throws BusinessException, SystemException;
 	
 	/**
 	 * 查询店铺保证金设置
@@ -160,7 +163,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int updateShopStatus(UpdateShopStatusRequest request) throws BusinessException, SystemException;
+	public int updateShopStatus(UpdateShopStatusRequest request,ShopInfo shopInfo) throws BusinessException, SystemException;
 	
 	/**
 	 * 根据id查询店铺信息

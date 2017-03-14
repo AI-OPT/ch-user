@@ -13,7 +13,6 @@ import com.ai.ch.user.dao.mapper.bo.CtContractInfo;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria;
 import com.ai.ch.user.dao.mapper.bo.CtContractInfoCriteria.Criteria;
 import com.ai.ch.user.service.atom.interfaces.IContractAtomSV;
-import com.ai.ch.user.service.atom.interfaces.ICustFileAtomSV;
 import com.ai.ch.user.service.business.interfaces.IContractBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
@@ -29,9 +28,6 @@ public class ContractBusiSVImpl implements IContractBusiSV{
 	@Autowired
 	private IContractAtomSV contractAtomSV;
 	
-	@Autowired
-    private ICustFileAtomSV custFileAtomSV;
-    
 	@Override
 	public int insertContractInfo(ContactInfoRequest ctContractInfo)
 			throws BusinessException, SystemException {

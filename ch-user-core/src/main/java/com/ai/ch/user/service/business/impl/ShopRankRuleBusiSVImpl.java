@@ -19,6 +19,7 @@ import com.ai.ch.user.service.atom.interfaces.IShopRankRuleAtomSV;
 import com.ai.ch.user.service.business.interfaces.IShopRankRuleBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 
 @Component
@@ -65,7 +66,7 @@ public class ShopRankRuleBusiSVImpl implements IShopRankRuleBusiSV {
 		QueryRankRuleResponse response = new QueryRankRuleResponse();
 		List<ShopRankRule> shopRankRuleList = shopRankRuleAtomSV.selectByExample(example);
 		List<ShopRankRuleVo> responseList = new ArrayList<ShopRankRuleVo>();
-		if(!shopRankRuleList.isEmpty()){
+		if(!CollectionUtil.isEmpty(shopRankRuleList)){
 			for (ShopRankRule shopRankRule : shopRankRuleList) {
 				ShopRankRuleVo shopRankRuleVo = new ShopRankRuleVo();
 				BeanUtils.copyProperties(shopRankRule, shopRankRuleVo);

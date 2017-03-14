@@ -21,6 +21,7 @@ import com.ai.ch.user.service.business.interfaces.ICustFileBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
+import com.ai.opt.sdk.util.CollectionUtil;
 
 @Component
 @Transactional
@@ -31,7 +32,7 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 	
 	@Override
 	public int insertCustFileExt(InsertCustFileExtRequest request) throws SystemException, BusinessException {
-		if(!request.getList().isEmpty()){
+		if(!CollectionUtil.isEmpty(request.getList())){
 			for(CmCustFileExtVo cmCustFileExtVo : request.getList()){
 				CmCustFileExt cmCustFileExt = new CmCustFileExt();
 				BeanUtils.copyProperties(cmCustFileExtVo, cmCustFileExt);
@@ -70,9 +71,8 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 
 	@Override
 	public int updateCustFileExt(UpdateCustFileExtRequest request) throws SystemException, BusinessException {
-		if(!request.getList().isEmpty()){
+		if(!CollectionUtil.isEmpty(request.getList())){
 			for(CmCustFileExtVo cmCustFileExtVo : request.getList()){
-				
 				CmCustFileExtCriteria example = new CmCustFileExtCriteria();
 				CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
 				criteria.andTenantIdEqualTo(request.getTenantId());
@@ -93,16 +93,12 @@ public class CustFileBusiSV implements ICustFileBusiSV {
 	@Override
 	public int updateCustFileExtBycondition(UpdateCustFileExtRequest request) throws SystemException, BusinessException {
 		
-		if(!request.getList().isEmpty()){
-			
+		if(!CollectionUtil.isEmpty(request.getList())){
 			List<CmCustFileExtVo> list = request.getList();
-			
 			for(CmCustFileExtVo cmCustFileExtVo : list){
-				
 				CmCustFileExtCriteria example = new CmCustFileExtCriteria();
 				CmCustFileExtCriteria.Criteria criteria = example.createCriteria();
 				criteria.andTenantIdEqualTo(cmCustFileExtVo.getTenantId());
-				
 				if(cmCustFileExtVo.getUserId()!=null&&!"".equals(cmCustFileExtVo.getUserId())){
 					criteria.andUserIdEqualTo(cmCustFileExtVo.getUserId());
 				}											   

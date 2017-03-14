@@ -24,6 +24,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 
 @Component
@@ -56,10 +57,12 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		example.setOrderByClause("DEDUCT_DATE desc");
 		List<ShopDefaultLog> list = defaultLogAtomSV.selectByExample(example);
 		List<DefaultLogVo> responseList = new ArrayList<DefaultLogVo>();
+		if(!CollectionUtil.isEmpty(list)){
 		for (ShopDefaultLog shopDefaultLog : list) {
 			DefaultLogVo defaultLogVo = new DefaultLogVo();
 			BeanUtils.copyProperties(shopDefaultLog, defaultLogVo);
 			responseList.add(defaultLogVo);
+			}
 		}
 		PageInfo<DefaultLogVo> pageInfo = new PageInfo<DefaultLogVo>();
 		pageInfo.setCount(count);
@@ -95,10 +98,12 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 		example.setOrderByClause("DEDUCT_DATE desc");
 		List<ShopDefaultLog> list = defaultLogAtomSV.selectByExample(example);
 		List<DefaultLogVo> responseList = new ArrayList<DefaultLogVo>();
+		if(!CollectionUtil.isEmpty(list)){
 		for (ShopDefaultLog shopDefaultLog : list) {
 			DefaultLogVo defaultLogVo = new DefaultLogVo();
 			BeanUtils.copyProperties(shopDefaultLog, defaultLogVo);
 			responseList.add(defaultLogVo);
+			}
 		}
 		PageInfo<DefaultLogVo> pageInfo = new PageInfo<DefaultLogVo>();
 		pageInfo.setCount(count);

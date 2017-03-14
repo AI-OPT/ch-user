@@ -17,6 +17,7 @@ import com.ai.ch.user.service.atom.interfaces.ICurrentScoreAtomSV;
 import com.ai.ch.user.service.business.interfaces.ICurrentScoreBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 
 @Component
@@ -36,7 +37,7 @@ public class CurrentScoreBusiSVImpl implements ICurrentScoreBusiSV {
 		criteria.andUserIdEqualTo(request.getUserId());
 		QueryCurrentScoreResponse response = new QueryCurrentScoreResponse();
 		List<CtCurrentScore> list = currentScoreAtomSV.selectByExample(example);
-		if (!list.isEmpty()) {
+		if (!CollectionUtil.isEmpty(list)) {
 			BeanUtils.copyProperties(list.get(0), response);
 		}
 		return response;
