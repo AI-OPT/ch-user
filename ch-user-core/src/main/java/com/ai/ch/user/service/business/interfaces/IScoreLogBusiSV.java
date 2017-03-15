@@ -1,22 +1,12 @@
 package com.ai.ch.user.service.business.interfaces;
 
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
-import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogResponse;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 
 public interface IScoreLogBusiSV {
-
-	/**
-	 * 保存评分日志
-	 * @param request
-	 * @return
-	 * @throws BusinessException
-	 * @throws SystemException
-	 */
-	public int insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException;
 
 	/**
 	 * 查询评分日志

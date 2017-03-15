@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.CtScoreLogVo;
-import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogResponse;
 import com.ai.ch.user.dao.mapper.bo.CtScoreLog;
@@ -21,7 +20,6 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.CollectionUtil;
-import com.ai.opt.sdk.util.DateUtil;
 
 @Component
 @Transactional
@@ -30,15 +28,6 @@ public class ScoreLogbusiSVImpl implements IScoreLogBusiSV {
 	@Autowired
 	private IScoreLogAtomSV scoreLogAtomSV;
 	
-	@Override
-	public int insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException {
-		CtScoreLog ctScoreLog = new CtScoreLog();
-		BeanUtils.copyProperties(request, ctScoreLog);
-		ctScoreLog.setScoreDate(DateUtil.getSysDate());
-		scoreLogAtomSV.insert(ctScoreLog);
-		return 0;
-	}
-
 	@Override
 	public QueryScoreLogResponse queryScoreLog(QueryScoreLogRequest request) throws BusinessException, SystemException {
 		QueryScoreLogResponse response = new QueryScoreLogResponse();

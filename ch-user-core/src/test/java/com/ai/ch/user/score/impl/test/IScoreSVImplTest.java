@@ -9,12 +9,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ai.ch.user.api.score.interfaces.IScoreSV;
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
-import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.QueryScoreKpiRequest;
 import com.ai.ch.user.api.score.param.QueryScoreLogRequest;
 import com.ai.ch.user.api.score.param.UpdateCurrentScoreRequest;
-import com.ai.ch.user.service.business.interfaces.IScoreLogBusiSV;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,31 +27,6 @@ public class IScoreSVImplTest{
 		QueryScoreKpiRequest request = new QueryScoreKpiRequest();
 		request.setTenantId("ch");
 		System.out.println(JSON.toJSONString(scoreSV.queryScoreKpi(request)));
-	}
-	
-	@Test
-	public void insertScoreTest(){
-		InsertScoreLogRequest request = new InsertScoreLogRequest();
-		request.setTenantId("changhong");
-		request.setOperId(1111L);
-		request.setTotalScore(80);
-		request.setUserId("1234567");
-		request.setScore1(66);
-		System.out.println(JSON.toJSONString(scoreSV.insertScoreLog(request)));
-	}
-	
-	@Autowired
-	private IScoreLogBusiSV sv;
-	
-	@Test
-	public void insertTest(){
-		InsertScoreLogRequest request = new InsertScoreLogRequest();
-		request.setTenantId("changhong");
-		request.setOperId(1111L);
-		request.setTotalScore(80);
-		request.setUserId("1234567");
-		request.setScore1(66);
-		System.out.println(JSON.toJSONString(sv.insertScoreLog(request)));
 	}
 	
 	@Test

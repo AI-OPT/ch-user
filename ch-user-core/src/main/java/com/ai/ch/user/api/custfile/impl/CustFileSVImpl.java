@@ -26,7 +26,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 public class CustFileSVImpl implements ICustFileSV {
 
 	private static final Log log = LogFactory.getLog(CustFileSVImpl.class);
-	
+
 	@Autowired
 	private ICustFileBusiSV CustFileBusiSV;
 
@@ -36,10 +36,7 @@ public class CustFileSVImpl implements ICustFileSV {
 		ResponseHeader responseHeader = null;
 
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场保存附件服务开始"+beginTime);
 			CustFileBusiSV.insertCustFileExt(request);
-			log.info("后场保存附件服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
@@ -54,10 +51,7 @@ public class CustFileSVImpl implements ICustFileSV {
 		ResponseHeader responseHeader = null;
 		QueryCustFileExtResponse response = new QueryCustFileExtResponse();
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场查询附件服务开始"+beginTime);
 			response = CustFileBusiSV.QueryCustFileExt(request);
-			log.info("后场查询附件服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
@@ -72,10 +66,7 @@ public class CustFileSVImpl implements ICustFileSV {
 		ResponseHeader responseHeader = null;
 		BaseResponse response = new BaseResponse();
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场更新附件服务开始"+beginTime);
 			CustFileBusiSV.updateCustFileExt(request);
-			log.info("后场更新附件服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
@@ -87,16 +78,12 @@ public class CustFileSVImpl implements ICustFileSV {
 	@Override
 	@POST
 	@Path("/updateCustFileExtBycondition")
-	public BaseResponse updateCustFileExtBycondition(
-			UpdateCustFileExtRequest request) throws SystemException,
-			BusinessException {
+	public BaseResponse updateCustFileExtBycondition(UpdateCustFileExtRequest request)
+			throws SystemException, BusinessException {
 		ResponseHeader responseHeader = null;
 		BaseResponse response = new BaseResponse();
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场更新附件服务开始"+beginTime);
 			CustFileBusiSV.updateCustFileExtBycondition(request);
-			log.info("后场更新附件服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
@@ -108,19 +95,16 @@ public class CustFileSVImpl implements ICustFileSV {
 	@Override
 	@POST
 	@Path("/deleteCustFileExtBycondition")
-	public BaseResponse deleteCustFileExtBycondition(
-			QueryCustFileExtRequest request) throws SystemException,
-			BusinessException {
+	public BaseResponse deleteCustFileExtBycondition(QueryCustFileExtRequest request)
+			throws SystemException, BusinessException {
 		ResponseHeader responseHeader = null;
 		BaseResponse response = new BaseResponse();
 		try {
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场删除附件服务开始"+beginTime);
 			CustFileBusiSV.deleteCustFileExtBycondition(request);
-			log.info("后场删除附件服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
+			log.error("删除附件失败",e);
 		}
 		response.setResponseHeader(responseHeader);
 		return response;

@@ -23,30 +23,27 @@ import com.alibaba.dubbo.config.annotation.Service;
 
 @Component
 @Service
-public class contractSVImpl implements IContractSV{
+public class contractSVImpl implements IContractSV {
 
 	private static final Log log = LogFactory.getLog(contractSVImpl.class);
-	
+
 	@Autowired
 	private IContractBusiSV contractBusiSV;
-	
+
 	@Override
 	@POST
 	@Path("/insertContractInfo")
 	public BaseResponse insertContractInfo(ContactInfoRequest contactRequest)
 			throws BusinessException, SystemException {
 		BaseResponse response = new BaseResponse();
-	    ResponseHeader responseHeader = null;
-	    try {
-	    	Long beginTime = System.currentTimeMillis();
-			log.info("后场保存合同服务开始"+beginTime);
+		ResponseHeader responseHeader = null;
+		try {
 			contractBusiSV.insertContractInfo(contactRequest);
-			log.info("后场保存合同服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
-            responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
-        }
-        response.setResponseHeader(responseHeader);
+			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
+		} catch (Exception e) {
+			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
 		return response;
 	}
 
@@ -57,38 +54,32 @@ public class contractSVImpl implements IContractSV{
 			throws BusinessException, SystemException {
 		ResponseHeader responseHeader = null;
 		ContractInfoResponse response = new ContractInfoResponse();
-		 try {
-			 Long beginTime = System.currentTimeMillis();
-				log.info("后场查询合同服务开始"+beginTime);
-				response = contractBusiSV.queryContractInfo(contactRequest);
-				log.info("后场查询合同服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
-	            responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
-	        } catch (Exception e) {
-	            responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
-	        }
-	        response.setResponseHeader(responseHeader);
+		try {
+			response = contractBusiSV.queryContractInfo(contactRequest);
+			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
+		} catch (Exception e) {
+			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
 		return response;
 	}
 
 	@Override
 	@POST
 	@Path("/queryAllContractInfo")
-	public List<ContractInfoResponse> queryAllContractInfo(
-			ContactInfoRequest contactRequest) throws BusinessException,
-			SystemException {
+	public List<ContractInfoResponse> queryAllContractInfo(ContactInfoRequest contactRequest)
+			throws BusinessException, SystemException {
 		ResponseHeader responseHeader = null;
 		List<ContractInfoResponse> list = null;
 		ContractInfoResponse response = new ContractInfoResponse();
-		 try {
-			 	Long beginTime = System.currentTimeMillis();
-				log.info("后场查询合同服务开始"+beginTime);
-				list = contractBusiSV.queryAllContractInfo(contactRequest);
-				log.info("后场查询合同服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
-	            responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
-	        } catch (Exception e) {
-	            responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
-	        }
-	        response.setResponseHeader(responseHeader);
+		try {
+			list = contractBusiSV.queryAllContractInfo(contactRequest);
+			responseHeader = new ResponseHeader(true, ExceptCodeConstants.SUCCESS, "操作成功");
+		} catch (Exception e) {
+			responseHeader = new ResponseHeader(false, ExceptCodeConstants.FAILD, "操作失败");
+			log.error("查询合同信息失败",e);
+		}
+		response.setResponseHeader(responseHeader);
 		return list;
 	}
 

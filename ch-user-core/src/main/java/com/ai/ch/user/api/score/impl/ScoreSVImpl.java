@@ -9,7 +9,6 @@ import com.ai.ch.user.api.score.interfaces.IScoreSV;
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.CountScoreAvgResponse;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
-import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreResponse;
 import com.ai.ch.user.api.score.param.QueryScoreKpiRequest;
@@ -61,21 +60,6 @@ public class ScoreSVImpl implements IScoreSV {
 		return response;
 	}
 
-	@Override
-	public BaseResponse insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException {
-
-		BaseResponse response = new BaseResponse();
-		ResponseHeader responseHeader = null;
-		try {
-			scoreLogBusiSV.insertScoreLog(request);
-			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
-		} catch (Exception e) {
-			LOG.error("添加失败", e);
-			responseHeader = new ResponseHeader(false, ChUserConstants.SupplierScore.Fail, "操作失败");
-		}
-		response.setResponseHeader(responseHeader);
-		return response;
-	}
 
 	@Override
 	public QueryScoreKpiResponse queryScoreKpi(QueryScoreKpiRequest request) throws BusinessException, SystemException {

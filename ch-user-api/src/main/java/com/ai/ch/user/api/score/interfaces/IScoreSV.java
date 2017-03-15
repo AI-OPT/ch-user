@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import com.ai.ch.user.api.score.param.CountScoreAvgRequest;
 import com.ai.ch.user.api.score.param.CountScoreAvgResponse;
 import com.ai.ch.user.api.score.param.InsertCurrentScoreRequest;
-import com.ai.ch.user.api.score.param.InsertScoreLogRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreRequest;
 import com.ai.ch.user.api.score.param.QueryCurrentScoreResponse;
 import com.ai.ch.user.api.score.param.QueryScoreKpiRequest;
@@ -48,21 +47,6 @@ public interface IScoreSV {
 	@Path("/queryCurrentScore")
 	public QueryCurrentScoreResponse queryCurrentScore(QueryCurrentScoreRequest request)
 			throws BusinessException, SystemException;
-
-	/**
-	 * 记录供货商评分
-	 * 
-	 * @param request
-	 * @return
-	 * @throws BusinessException
-	 * @throws SystemException
-	 * @author zhangqiang7
-	 * @ApiCode COMM_TENANT_0002
-	 * @RestRelativeURL scoreservice/insertScoreLog
-	 */
-	@POST
-	@Path("/insertScoreLog")
-	public BaseResponse insertScoreLog(InsertScoreLogRequest request) throws BusinessException, SystemException;
 
 	/**
 	 * 供应商评分指标查询
