@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ai.ch.user.api.shopinfo.interfaces.IShopInfoSV;
-import com.ai.ch.user.api.shopinfo.params.InsertShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
@@ -37,6 +36,8 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopBalanceRequest;
 import com.ai.ch.user.api.shopinfo.params.SetShopDepositRequest;
+import com.ai.ch.user.api.shopinfo.params.ShopInfoVo;
+import com.ai.ch.user.api.shopinfo.params.ShopScoreKpiVo;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
@@ -58,7 +59,9 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -165,23 +168,6 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	}
 
 	@Override
-	public BaseResponse insertShopInfoLog(InsertShopInfoLogRequest request) throws BusinessException, SystemException {
-		BaseResponse response = new BaseResponse();
-		ResponseHeader responseHeader =null;
-		try{
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场保存店铺日志信息服务开始"+beginTime);
-			shopInfoLogBusiSV.insertShopInfoLog(request);
-			log.info("后场保存店铺日志信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
-		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
-		}catch(Exception e){
-			responseHeader = new ResponseHeader(false, ChUserConstants.ShopRank.Fail, "操作失败");
-		}
-		response.setResponseHeader(responseHeader);
-		return response;
-	}
-
-	@Override
 	public QueryShopInfoLogResponse queryShopInfoLog(QueryShopInfoLogRequest request)
 			throws BusinessException, SystemException {
 		QueryShopInfoLogResponse response = new QueryShopInfoLogResponse();
@@ -207,7 +193,16 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		try{
 			Long beginTime = System.currentTimeMillis();
 			log.info("后场查询店铺规则信息服务开始"+beginTime);
-			response = shopInfoBusiSV.queryShopScoreKpi(request);
+			List<ShopScoreKpi> scoreKpiVos = shopInfoBusiSV.queryShopScoreKpi(request);
+			List<ShopScoreKpiVo> responseList = new ArrayList<ShopScoreKpiVo>();
+			if(!CollectionUtil.isEmpty(scoreKpiVos)){
+			for (ShopScoreKpi shopScoreKpi : scoreKpiVos) {
+				ShopScoreKpiVo shopScoreKpiVo = new ShopScoreKpiVo();
+				BeanUtils.copyProperties(shopScoreKpi, shopScoreKpiVo);
+				responseList.add(shopScoreKpiVo);
+				}
+			}
+			response.setList(responseList);
 			log.info("后场查询店铺规则信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
@@ -350,7 +345,23 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Override
 	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
 			throws BusinessException, SystemException {
-		return shopInfoBusiSV.queryShopInfoBatch(request);
+		QueryShopInfoBatchResponse response = new QueryShopInfoBatchResponse();
+		try{
+		List<ShopInfo> shopInfos = shopInfoBusiSV.queryShopInfoBatch(request);
+		List<ShopInfoVo> responseList = new ArrayList<ShopInfoVo>();
+		if(!CollectionUtil.isEmpty(shopInfos)){
+		for (ShopInfo shopInfo : shopInfos) {
+			ShopInfoVo shopInfoVo = new ShopInfoVo();
+			BeanUtils.copyProperties(shopInfo, shopInfoVo);
+			responseList.add(shopInfoVo);
+			}
+		response.setList(responseList);
+		}
+		}catch(BusinessException e){
+			ResponseHeader responseHeader=new ResponseHeader(false,e.getErrorCode(),e.getErrorMessage()); 
+			response.setResponseHeader(responseHeader);
+		}
+		return response;
 	}
 
 	@Override
@@ -358,16 +369,41 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	@Path("/checkShopNameOnly")
 	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException {
-		BaseResponse response = null;
+		BaseResponse baseResponse = new BaseResponse();
+		ResponseHeader responseHeader = null;
 		try{
 			ValidateUtils.validatCheckShopName(request);
-			response =  shopInfoBusiSV.checkShopNameOnly(request);
+			List<ShopInfo> shopInfos = shopInfoBusiSV.checkShopNameOnly(request);
+			String userId = "";
+			if (!StringUtil.isBlank(request.getUserId())) {
+				userId = request.getUserId().trim();
+			}
+			if (CollectionUtil.isEmpty(shopInfos)) {
+				responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
+				baseResponse.setResponseHeader(responseHeader);
+				return baseResponse;
+			} else if (!StringUtil.isBlank(userId) && shopInfos.size() == 1) {
+				ShopInfo shopInfo = shopInfos.get(0);
+				if (shopInfo.getUserId().equals(userId)) {
+					responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
+					baseResponse.setResponseHeader(responseHeader);
+					return baseResponse;
+				} else {
+					responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SYSTEM_ERROR, "店铺名称已注册");
+					baseResponse.setResponseHeader(responseHeader);
+					return baseResponse;
+				}
+			} else {
+				responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SYSTEM_ERROR, "店铺名称已注册");
+				baseResponse.setResponseHeader(responseHeader);
+				return baseResponse;
+			}
 		}catch(BusinessException e){
-			response = new BaseResponse();
-			ResponseHeader responseHeader=new ResponseHeader(false,e.getErrorCode(),e.getErrorMessage()); 
-			response.setResponseHeader(responseHeader);
+			baseResponse = new BaseResponse();
+			responseHeader=new ResponseHeader(false,e.getErrorCode(),e.getErrorMessage()); 
+			baseResponse.setResponseHeader(responseHeader);
 		}
-		return response;
+		return baseResponse;
 	}
 
 	@Override
@@ -480,8 +516,16 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 			ValidateUtils.validatQueryShopKpi(request);
 			Long beginTime = System.currentTimeMillis();
 			log.info("查询店铺评级指标服务开始"+beginTime);
-			response = shopInfoBusiSV.queryShopKpi(request);
-			log.info("查询店铺评级指标服务结束"+System.currentTimeMillis()+"耗时:"+String.valueOf(System.currentTimeMillis()-beginTime)+"毫秒");
+			List<ShopScoreKpi> scoreKpis = shopInfoBusiSV.queryShopKpi(request);
+			List<ShopScoreKpiVo> responseList = new ArrayList<>();
+			if (!CollectionUtil.isEmpty(scoreKpis)) {
+				for (ShopScoreKpi shopScoreKpi : scoreKpis) {
+					ShopScoreKpiVo shopScoreKpiVo = new ShopScoreKpiVo();
+					BeanUtils.copyProperties(shopScoreKpi, shopScoreKpiVo);
+					responseList.add(shopScoreKpiVo);
+				}
+			}
+			response.setShopKpiList(responseList);
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			responseHeader = new ResponseHeader(false, e.getErrorCode(), e.getErrorMessage());

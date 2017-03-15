@@ -6,7 +6,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.ai.ch.user.api.shopinfo.params.InsertShopInfoLogRequest;
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
@@ -109,19 +108,6 @@ public interface IShopInfoSV {
 	@Path("/queryDepositRule")
 	public QueryDepositRuleResponse queryDepositRule(QueryDepositRuleRequest request)throws BusinessException,SystemException;
 	
-	/**
-	 * 保存店铺信息日志
-	 * @param request
-	 * @return
-	 * @throws BusinessException
-	 * @throws SystemException
-	 * @author zhangqiang7
-	 * @ApiCode ChUser-05
-	 * @RestRelativeURL shopinfoservice/insertShopInfoLog
-	 */
-	@POST
-	@Path("/insertShopInfoLog")
-	public BaseResponse insertShopInfoLog(InsertShopInfoLogRequest request)throws BusinessException,SystemException;
 	
 	/**
 	 * 查询店铺信息日志

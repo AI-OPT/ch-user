@@ -48,10 +48,7 @@ public class ScoreSVImpl implements IScoreSV {
 		QueryCurrentScoreResponse response = new QueryCurrentScoreResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场查询评分规则信息服务开始"+beginTime);
 			response = currentScoreBusiSV.queryCurrentScore(request);
-			LOG.info("后场查询评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			LOG.error("查询失败", e);
@@ -70,10 +67,7 @@ public class ScoreSVImpl implements IScoreSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场保存评分规则信息服务开始"+beginTime);
 			scoreLogBusiSV.insertScoreLog(request);
-			LOG.info("后场保存评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			LOG.error("添加失败", e);
@@ -88,10 +82,7 @@ public class ScoreSVImpl implements IScoreSV {
 		QueryScoreKpiResponse response = new QueryScoreKpiResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场查询评分规则信息服务开始"+beginTime);
 			response = scoreKpiBusiSV.queryScoreKpi(request);
-			LOG.info("后场查询评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			LOG.error("查询失败");
@@ -106,10 +97,7 @@ public class ScoreSVImpl implements IScoreSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场查询评分信息服务开始"+beginTime);
 			currentScoreBusiSV.insertCurrentScore(request);
-			LOG.info("后场查询评分服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			LOG.error("添加失败", e);
@@ -125,10 +113,7 @@ public class ScoreSVImpl implements IScoreSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场更新评分规则信息服务开始"+beginTime);
 			currentScoreBusiSV.updateCurrentScore(request);
-			LOG.info("后场更新评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			LOG.error("添加失败", e);
@@ -143,10 +128,7 @@ public class ScoreSVImpl implements IScoreSV {
 		QueryScoreLogResponse response = new QueryScoreLogResponse();
 		ResponseHeader responseHeader = null;
 		try {
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场查询评分记录信息服务开始"+beginTime);
 			response = scoreLogBusiSV.queryScoreLog(request);
-			LOG.info("后场查询评分记录服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			responseHeader = new ResponseHeader(true, ChUserConstants.SupplierScore.SUCCESS, "操作成功");
 		} catch (Exception e) {
 			LOG.error("添加失败", e);
@@ -161,8 +143,6 @@ public class ScoreSVImpl implements IScoreSV {
 		CountScoreAvgResponse response = new CountScoreAvgResponse();
 		ResponseHeader responseHeader =null;
 		try{
-			Long beginTime = System.currentTimeMillis();
-			LOG.info("后场查询评分信息服务开始"+beginTime);
 			if(StringUtil.isBlank(request.getTenantId())){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"获取参数失败:租户id不能为空");
 			}else{
@@ -174,7 +154,6 @@ public class ScoreSVImpl implements IScoreSV {
 				request.setUserId(request.getUserId().trim());
 			}
 			float scoreAvg = scoreLogBusiSV.countScoreAvg(request);
-			LOG.info("后场查询评分信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 			response.setScoreAvg(scoreAvg);
 			responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){

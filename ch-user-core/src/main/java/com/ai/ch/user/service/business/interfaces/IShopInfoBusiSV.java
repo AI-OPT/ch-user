@@ -1,6 +1,7 @@
 package com.ai.ch.user.service.business.interfaces;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.ai.ch.user.api.shopinfo.params.InsertShopInfoRequst;
 import com.ai.ch.user.api.shopinfo.params.InsertShopStatDataRequest;
@@ -8,15 +9,12 @@ import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryDepositRuleResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchRequest;
-import com.ai.ch.user.api.shopinfo.params.QueryShopInfoBatchResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoByIdRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopInfoResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopKpiRequest;
-import com.ai.ch.user.api.shopinfo.params.QueryShopKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiRequest;
-import com.ai.ch.user.api.shopinfo.params.QueryShopScoreKpiResponse;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopStatDataResponse;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
@@ -27,9 +25,9 @@ import com.ai.ch.user.api.shopinfo.params.UpdateShopInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatDataRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
+import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
-import com.ai.opt.base.vo.BaseResponse;
 
 public interface IShopInfoBusiSV {
 
@@ -58,7 +56,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int updateShopInfo(UpdateShopInfoRequest request,ShopInfo shopInfo) throws BusinessException, SystemException;
+	public void updateShopInfo(UpdateShopInfoRequest request,ShopInfo shopInfo) throws BusinessException, SystemException;
 
 	/**
 	 * 查询保证金设置
@@ -77,7 +75,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public QueryShopScoreKpiResponse queryShopScoreKpi(QueryShopScoreKpiRequest request)
+	public List<ShopScoreKpi> queryShopScoreKpi(QueryShopScoreKpiRequest request)
 			throws BusinessException, SystemException;
 	
 	/**
@@ -87,7 +85,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int updateShopStatData(UpdateShopStatDataRequest request)
+	public void updateShopStatData(UpdateShopStatDataRequest request)
 			throws BusinessException, SystemException;
 	
 	/**
@@ -97,7 +95,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int insertShopStatData(InsertShopStatDataRequest request)
+	public void insertShopStatData(InsertShopStatDataRequest request)
 			throws BusinessException, SystemException;
 	
 	/**
@@ -135,7 +133,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public QueryShopInfoBatchResponse queryShopInfoBatch(QueryShopInfoBatchRequest request)
+	public List<ShopInfo> queryShopInfoBatch(QueryShopInfoBatchRequest request)
 			throws BusinessException, SystemException;
 	/**
 	 * 校验店铺唯一性
@@ -144,7 +142,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public BaseResponse checkShopNameOnly(QueryShopInfoRequest request)
+	public List<ShopInfo> checkShopNameOnly(QueryShopInfoRequest request)
 			throws BusinessException, SystemException;
 	
 	/**
@@ -154,7 +152,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException ;
+	public void saveShopAuditInfo(SaveShopAuditInfoRequest request) throws BusinessException, SystemException ;
 	
 	/**
 	 * 更新店铺状态
@@ -163,7 +161,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int updateShopStatus(UpdateShopStatusRequest request,ShopInfo shopInfo) throws BusinessException, SystemException;
+	public void updateShopStatus(UpdateShopStatusRequest request,ShopInfo shopInfo) throws BusinessException, SystemException;
 	
 	/**
 	 * 根据id查询店铺信息
@@ -182,7 +180,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int setShopDeposit(SetShopDepositRequest request) throws BusinessException, SystemException;
+	public void setShopDeposit(SetShopDepositRequest request) throws BusinessException, SystemException;
 	
 	/**
 	 * 设置固定费
@@ -191,7 +189,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int setShopBalance(SetShopBalanceRequest request) throws BusinessException, SystemException ;
+	public void setShopBalance(SetShopBalanceRequest request) throws BusinessException, SystemException ;
 	
 	/**
 	 * 查询店铺kpi
@@ -200,7 +198,7 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public QueryShopKpiResponse queryShopKpi(QueryShopKpiRequest request) throws BusinessException, SystemException;
+	public List<ShopScoreKpi> queryShopKpi(QueryShopKpiRequest request) throws BusinessException, SystemException;
 	
 	/**
 	 * 更新资质信息
@@ -209,6 +207,6 @@ public interface IShopInfoBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int updateShopAuditInfo(UpdateShopAuditInfoRequest request)
+	public void updateShopAuditInfo(UpdateShopAuditInfoRequest request)
 			throws BusinessException, SystemException;
 }

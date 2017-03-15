@@ -25,6 +25,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 @Component
 @Service
 public class DefaultLogSVImpl implements IDefaultLogSV {
+	
 	private static final Log log = LogFactory.getLog(CustFileSVImpl.class);
 	
 	@Autowired
@@ -38,10 +39,7 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		ResponseHeader responseHeader =null;
 		String serialCode = "";
 		try{
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场保存扣款信息服务开始"+beginTime);
 			serialCode = defaultLogBusiSV.insertDefaultLog(request);
-			log.info("后场保存扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		    responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(Exception e){
 			LOG.error("操作失败");
@@ -59,10 +57,7 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		ResponseHeader responseHeader =null;
 		try{
 			ValidateUtils.validatQueryDefaultLog(request);
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场查询扣款信息服务开始"+beginTime);
 			response = defaultLogBusiSV.queryDefaultLog(request);
-			log.info("后场查询扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			LOG.error("操作失败");
@@ -80,10 +75,7 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		ResponseHeader responseHeader =null;
 		try{
 			ValidateUtils.validatQueryFullDefaultLog(request);
-			Long beginTime = System.currentTimeMillis();
-			log.info("后场查询扣款信息服务开始"+beginTime);
 			response = defaultLogBusiSV.queryFullDefaultLog(request);
-			log.info("后场查询扣款信息服务结束"+System.currentTimeMillis()+"耗时:"+(System.currentTimeMillis()-beginTime)+"毫秒");
 		responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
 		}catch(BusinessException e){
 			LOG.error("操作失败");

@@ -135,30 +135,6 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 		CtAuditLogVo record = new CtAuditLogVo();
 		BeanUtils.copyProperties(request, record);
 		record.setOrderByClause("auditTime");
-		/*CtAuditLogCriteria example = new CtAuditLogCriteria();
-		CtAuditLogCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId());
-		if (request.getCtType() != null) {
-			criteria.andCtTypeEqualTo(request.getCtType());
-		}
-		if (request.getAuditStatus() != null) {
-			if(!ChUserConstants.Audit.ALL.equals(request.getAuditStatus())){
-				criteria.andAuditStatusEqualTo(request.getAuditStatus());
-			}
-		}
-		example.setOrderByClause("AUDIT_TIME desc");
-		if (request.getBeginTime() != null) {
-			criteria.andAuditTimeGreaterThanOrEqualTo(request.getBeginTime());
-		}
-		if (request.getUserName() != null) {
-			criteria.andOperNameLike("%"+request.getUserName()+"%");
-		}
-		if (request.getUserId() != null) {
-			criteria.andUserIdEqualTo(request.getUserId());
-		}
-		if (request.getEndTime() != null) {
-			criteria.andAuditTimeLessThanOrEqualTo(request.getEndTime());
-		}*/
 		QueryAuditLogInfoResponse response = new QueryAuditLogInfoResponse();
 		try {
 			int count = ctAuditLogAtomSV.countByLike(record);
@@ -167,11 +143,6 @@ public class CtAuditBusiSVImpl implements ICtAuditBusiSV {
 			record.setLimitEnd(request.getPageSize());
 
 			List<CtAuditLog> list = ctAuditLogAtomSV.selectByLike(record);
-			/*
-			 * if (list.isEmpty()) { throw new
-			 * BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,
-			 * "查询结果为空"); }
-			 */
 			List<AuditLogVo> responseList = new ArrayList<>();
 			for (CtAuditLog ctAuditLog : list) {
 				AuditLogVo auditLogVo = new AuditLogVo();
