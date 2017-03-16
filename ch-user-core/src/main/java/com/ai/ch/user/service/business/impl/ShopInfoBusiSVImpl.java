@@ -36,8 +36,6 @@ import com.ai.ch.user.dao.mapper.bo.CtDepositRule;
 import com.ai.ch.user.dao.mapper.bo.CtDepositRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
-import com.ai.ch.user.dao.mapper.bo.ShopInfoLog;
-import com.ai.ch.user.dao.mapper.bo.ShopInfoLogCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRule;
 import com.ai.ch.user.dao.mapper.bo.ShopRankRuleCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
@@ -108,13 +106,13 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopInfo.setStatus(0);
 		shopInfoAtomSV.insert(shopInfo);
 		
-		// 插入日志表
+		/*// 插入日志表
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(request, shopInfoLog);
 		shopInfoLog.setOperId(request.getOperId());
 		shopInfoLog.setOperName(request.getOperName());
 		shopInfo.setCreateTime(DateUtil.getSysDate());
-		shopInfoLogAtomSV.insert(shopInfoLog);
+		shopInfoLogAtomSV.insert(shopInfoLog);*/
 		return 1;
 	}
 
@@ -130,11 +128,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		}
 		shopInfoAtomSV.updateByExampleSelective(shopInfo, example);
 		
-		// 插入日志表
+		/*// 插入日志表
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
-		shopInfoLogAtomSV.insert(shopInfoLog);
+		shopInfoLogAtomSV.insert(shopInfoLog);*/
 	}
 
 	@Override
@@ -266,11 +264,11 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		shopInfo.setCreateTime(DateUtil.getSysDate());
 		shopInfoAtomSV.insert(shopInfo);
 		
-		// 插入日志表
+		/*// 插入日志表
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
-		shopInfoLogAtomSV.insert(shopInfoLog);
+		shopInfoLogAtomSV.insert(shopInfoLog);*/
 	}
 
 	@Override
@@ -284,7 +282,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "更新记录失败");
 		}
 		
-		// 店铺日志表
+		/*// 店铺日志表
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfoLog.setUpdateTime(DateUtil.getSysDate()); 
@@ -292,7 +290,7 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		ShopInfoLogCriteria.Criteria shopLogCriteria =shopLogExample.createCriteria();
 		shopLogCriteria.andTenantIdEqualTo(request.getTenantId());
 		shopLogCriteria.andUserIdEqualTo(request.getUserId());
-		shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog,shopLogExample);
+		shopInfoLogAtomSV.updateByExampleSelective(shopInfoLog,shopLogExample);*/
 	}
 
 	@Override
@@ -358,10 +356,10 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "更新记录失败");
 		}
 		
-		//插入日志表 
+		/*//插入日志表 
 		ShopInfoLog shopInfoLog = new ShopInfoLog();
 		BeanUtils.copyProperties(shopInfo, shopInfoLog);
 		shopInfo.setCreateTime(DateUtil.getSysDate());
-		shopInfoLogAtomSV.insert(shopInfoLog);
+		shopInfoLogAtomSV.insert(shopInfoLog);*/
 	}
 }
