@@ -44,7 +44,6 @@ import com.ai.ch.user.dao.mapper.bo.ShopStatData;
 import com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria;
 import com.ai.ch.user.service.atom.interfaces.IDepositRuleAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopInfoAtomSV;
-import com.ai.ch.user.service.atom.interfaces.IShopInfoLogAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopRankRuleAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopScoreKpiAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopStatDataAtomSV;
@@ -75,9 +74,6 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 
 	@Autowired
 	private IShopRankRuleAtomSV shopRankRuleAtomSV;
-
-	@Autowired
-	private IShopInfoLogAtomSV shopInfoLogAtomSV;
 
 	@Override
 	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request) throws BusinessException, SystemException {
