@@ -1,5 +1,8 @@
 package com.ai.ch.user.api.defaultlog.impl;
 
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import com.ai.ch.user.service.business.interfaces.IDefaultLogBusiSV;
 import com.ai.ch.user.util.ValidateUtils;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -82,4 +86,21 @@ public class DefaultLogSVImpl implements IDefaultLogSV {
 		return response;
 	}
 
+	@Override
+	@POST
+	@Path("/deleteDefaultLog")
+	public BaseResponse deleteDefaultLog(String serialCode)
+			throws SystemException, BusinessException {
+		BaseResponse response=new BaseResponse();
+		ResponseHeader responseHeader =null;
+		try{
+			defaultLogBusiSV.deleteDefaultLog(serialCode);
+		  responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "操作成功");
+		}catch(Exception e){
+			LOG.error("操作失败");
+			responseHeader = new ResponseHeader(false, ExceptCodeConstants.Special.SYSTEM_ERROR, "操作失败");
+		}
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
 }

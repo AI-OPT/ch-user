@@ -12,6 +12,7 @@ import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogResponse;
 import com.ai.ch.user.constants.SequenceCodeConstants.UserSequenceCode;
 import com.ai.ch.user.dao.mapper.bo.ShopDefaultLog;
+import com.ai.ch.user.dao.mapper.bo.ShopDefaultLogCriteria;
 import com.ai.ch.user.service.atom.interfaces.IDefaultLogAtomSV;
 import com.ai.ch.user.service.business.interfaces.IDefaultLogBusiSV;
 import com.ai.opt.base.exception.BusinessException;
@@ -44,6 +45,16 @@ public class DefaultLogBusiSVImpl implements IDefaultLogBusiSV {
 	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
 			throws SystemException, BusinessException {
 		return defaultLogAtomSV.selectPageDefaultLog(request);
+	}
+	
+	@Override
+	public int deleteDefaultLog(String serialCode) throws SystemException,
+			BusinessException {
+		ShopDefaultLogCriteria example = new ShopDefaultLogCriteria();
+		ShopDefaultLogCriteria.Criteria criteria = example.createCriteria();
+		criteria.andSerialCodeEqualTo(serialCode);
+		int count =defaultLogAtomSV.deleteDefaultLog(example);
+		return count;
 	}
 
 }

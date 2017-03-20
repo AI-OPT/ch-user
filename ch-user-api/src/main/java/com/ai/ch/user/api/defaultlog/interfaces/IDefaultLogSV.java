@@ -14,6 +14,7 @@ import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogResponse;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 
 /**
  * 扣款记录服务
@@ -72,5 +73,19 @@ public interface IDefaultLogSV {
 	public QueryFullDefaultLogResponse queryFullDefaultLog(QueryFullDefaultLogRequest request)
 			throws SystemException, BusinessException;
 	
+	
+	/**
+	 * 新增违约扣款记录
+	 * @param request
+	 * @return
+	 * @throws SystemException
+	 * @throws BusinessException
+	 * @author zhangqiang7
+	 * @ApiCode COMM_TENANT_0009
+	 * @RestRelativeURL defaultlogservice/deleteDefaultLog
+	 */
+	@POST
+	@Path("/deleteDefaultLog")
+	public BaseResponse deleteDefaultLog(String serialCode) throws SystemException, BusinessException;
 	
 }
