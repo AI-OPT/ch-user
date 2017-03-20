@@ -13,7 +13,9 @@ import com.ai.ch.user.api.score.param.QueryCurrentScoreResponse;
 import com.ai.ch.user.api.score.param.UpdateCurrentScoreRequest;
 import com.ai.ch.user.dao.mapper.bo.CtCurrentScore;
 import com.ai.ch.user.dao.mapper.bo.CtCurrentScoreCriteria;
+import com.ai.ch.user.dao.mapper.bo.CtScoreLog;
 import com.ai.ch.user.service.atom.interfaces.ICurrentScoreAtomSV;
+import com.ai.ch.user.service.atom.interfaces.IScoreLogAtomSV;
 import com.ai.ch.user.service.business.interfaces.ICurrentScoreBusiSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
@@ -26,6 +28,9 @@ public class CurrentScoreBusiSVImpl implements ICurrentScoreBusiSV {
 
 	@Autowired
 	private ICurrentScoreAtomSV currentScoreAtomSV;
+	
+	@Autowired
+	private IScoreLogAtomSV scoreLogAtomSV;
 
 	@Override
 	public QueryCurrentScoreResponse queryCurrentScore(QueryCurrentScoreRequest request)
@@ -45,11 +50,14 @@ public class CurrentScoreBusiSVImpl implements ICurrentScoreBusiSV {
 	}
 
 	@Override
-	public int insertCurrentScore(InsertCurrentScoreRequest request) throws BusinessException, SystemException {
+	public void insertCurrentScore(InsertCurrentScoreRequest request) throws BusinessException, SystemException {
 		CtCurrentScore ctCurrentScore = new CtCurrentScore();
 		BeanUtils.copyProperties(request, ctCurrentScore);
 		ctCurrentScore.setScoreDate(DateUtil.getSysDate());
-		return currentScoreAtomSV.insert(ctCurrentScore);
+		currentScoreAtomSV.insert(ctCurrentScore);
+		CtScoreLog ctScoreLog = new CtScoreLog();
+		BeanUtils.copyProperties(ctCurrentScore, ctScoreLog);
+		scoreLogAtomSV.insert(ctScoreLog);
 	}
 
 	@Override

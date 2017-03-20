@@ -27,7 +27,7 @@ public interface ICurrentScoreBusiSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 */
-	public int insertCurrentScore(InsertCurrentScoreRequest request) throws BusinessException, SystemException;
+	public void insertCurrentScore(InsertCurrentScoreRequest request) throws BusinessException, SystemException;
 
 	/**
 	 * 更新评分记录
