@@ -12,7 +12,7 @@ public class CtAuditLogVo {
 	 * 用户id
 	 */
 	private String userId;
-
+ 
 	/**
 	 * 审核状态
 	 */
