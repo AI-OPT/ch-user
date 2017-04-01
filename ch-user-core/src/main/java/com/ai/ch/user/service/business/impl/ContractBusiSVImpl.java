@@ -30,7 +30,7 @@ public class ContractBusiSVImpl implements IContractBusiSV{
 	
 	@Override
 	public int insertContractInfo(ContactInfoRequest ctContractInfo)
-			throws BusinessException, SystemException {
+			throws BusinessException, SystemException  {
 		CtContractInfo contractInfo = new CtContractInfo();
 		BeanUtils.copyProperties(contractInfo, ctContractInfo);
 		return contractAtomSV.insertContractInfo(contractInfo);
