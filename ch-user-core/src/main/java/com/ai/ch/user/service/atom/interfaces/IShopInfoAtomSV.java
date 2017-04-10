@@ -15,6 +15,8 @@ public interface IShopInfoAtomSV {
 	 
 	 List<ShopInfo> selectByExample(ShopInfoCriteria example);
 	 
+	 ShopInfo selectOne(String tenantId,String shopName);
+	 
 	 int updateByExample(@Param("record") ShopInfo record, @Param("example") ShopInfoCriteria example);
 	 
 	 int updateByExampleSelective(@Param("record") ShopInfo record, @Param("example") ShopInfoCriteria example);

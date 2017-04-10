@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.type.JdbcType;
 
 import com.ai.ch.user.dao.mapper.bo.CtScoreLog;
+import com.ai.ch.user.dao.mapper.bo.ShopInfo;
 
 /**
  * 供应商评分表
@@ -63,6 +64,13 @@ public interface CtScoreLogAttachMapper {
 	@Select("select scoreLog.* from ct_score_log scoreLog where scoreLog.tenant_id=#{tenantId} and scoreLog.user_id=#{userId} limit #{startPage},#{endPage}")
 	List<CtScoreLog> queryScoreLog(@Param("tenantId") String tenantId, @Param("userId") String userId,@Param("startPage") int startPage, @Param("endPage") int endPage);
 
+	/**
+	 * 查询店铺信息
+	 * @return
+	 */
+	@Select("select shop_info.* from shop_info shopInfo where shopInfo.tenant_id=#{tenantId} and shopInfo.shop_name=#{shopName} limit 0,1")
+	ShopInfo selectOne(@Param("tenantId") String tenantId, @Param("shopName") String shopName);
+	
 	/**
 	 * ct_score_log
 	 * @param tenantId

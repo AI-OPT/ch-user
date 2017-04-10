@@ -87,6 +87,8 @@ public class ShopInfoBusiSVImpl implements IShopInfoBusiSV {
 		if (request.getShopName() != null && !"".equals(request.getShopName())) {
 			criteria.andShopNameEqualTo(request.getShopName());
 		}
+		example.setLimitStart(0);
+		example.setLimitEnd(1);
 		List<ShopInfo> list = shopInfoAtomSV.selectByExample(example);
 		if (!CollectionUtil.isEmpty(list)) {
 			BeanUtils.copyProperties(list.get(0), response);
