@@ -1,10 +1,5 @@
 package com.ai.ch.user.util;
 
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
 import com.ai.ch.user.api.defaultlog.params.QueryFullDefaultLogRequest;
 import com.ai.ch.user.api.shopinfo.params.QueryShopDepositRequest;
@@ -15,22 +10,16 @@ import com.ai.ch.user.api.shopinfo.params.QueryShopRankRequest;
 import com.ai.ch.user.api.shopinfo.params.SaveShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopAuditInfoRequest;
 import com.ai.ch.user.api.shopinfo.params.UpdateShopStatusRequest;
-import com.ai.ch.user.dao.mapper.bo.ShopInfo;
-import com.ai.ch.user.dao.mapper.bo.ShopInfoCriteria;
-import com.ai.ch.user.service.atom.impl.ShopInfoAtomSV;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.StringUtil;
 
 public class ValidateUtils {
-
-	@Autowired
-	private static ShopInfoAtomSV shopInfoAtomSV;
 	
-	private ValidateUtils() {
+	public ValidateUtils() {
 	}
 
-	public static void validatSaveAuditInfo(SaveShopAuditInfoRequest request) {
+	public void validatSaveAuditInfo(SaveShopAuditInfoRequest request) {
 		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
 		} else {
@@ -79,16 +68,6 @@ public class ValidateUtils {
 		}
 		if (request.getHasExperi() == 0 && !"000000".equals(request.getEcommOwner())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "参数数据错误:是否拥有电商经验与数量不一致");
-		}
-		// 校验店铺名
-		ShopInfoCriteria nameExample = new ShopInfoCriteria();
-		ShopInfoCriteria.Criteria nameCriteria = nameExample.createCriteria();
-		nameCriteria.andTenantIdEqualTo(request.getTenantId());
-		nameCriteria.andUserIdNotEqualTo(request.getUserId());
-		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
-		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
-		if (!CollectionUtils.isEmpty(nameList)) {
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
 		}
 	}
 
@@ -178,7 +157,7 @@ public class ValidateUtils {
 		}
 	}
 
-	public static void validatUpdateAuditInfo(UpdateShopAuditInfoRequest request) {
+	public void validatUpdateAuditInfo(UpdateShopAuditInfoRequest request) {
 		if (StringUtil.isBlank(request.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:租户Id不能为空");
 		} else {
@@ -233,14 +212,6 @@ public class ValidateUtils {
 		if (request.getHasExperi() == 0 && !"000000".equals(request.getEcommOwner())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "参数数据错误:是否拥有电商经验与数量不一致");
 		}
-		ShopInfoCriteria example = new ShopInfoCriteria();
-		ShopInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andTenantIdEqualTo(request.getTenantId());
-		criteria.andShopNameEqualTo(request.getShopName().trim());
-		criteria.andUserIdNotEqualTo(request.getUserId());
-		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
-		if(!CollectionUtils.isEmpty(nameList)){
-			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
-		}
+		
 	}
 }

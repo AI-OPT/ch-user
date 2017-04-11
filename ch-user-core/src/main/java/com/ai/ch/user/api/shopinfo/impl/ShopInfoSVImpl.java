@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +50,7 @@ import com.ai.ch.user.dao.mapper.bo.ShopScoreKpi;
 import com.ai.ch.user.dao.mapper.bo.ShopScoreKpiCriteria;
 import com.ai.ch.user.dao.mapper.bo.ShopStatData;
 import com.ai.ch.user.dao.mapper.bo.ShopStatDataCriteria;
+import com.ai.ch.user.service.atom.impl.ShopInfoAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopScoreKpiAtomSV;
 import com.ai.ch.user.service.atom.interfaces.IShopStatDataAtomSV;
 import com.ai.ch.user.service.business.interfaces.IShopInfoBusiSV;
@@ -83,6 +85,9 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 	
 	@Autowired
 	private IShopScoreKpiAtomSV shopScoreKpiAtomSV;
+	
+	@Autowired
+	private ShopInfoAtomSV shopInfoAtomSV;
 	
 	@Override
 	public QueryShopInfoResponse queryShopInfo(QueryShopInfoRequest request) throws BusinessException, SystemException {
@@ -378,7 +383,18 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-			ValidateUtils.validatSaveAuditInfo(request);
+			ValidateUtils validateUtils = new ValidateUtils();
+			validateUtils.validatSaveAuditInfo(request);
+			// 校验店铺名
+			ShopInfoCriteria nameExample = new ShopInfoCriteria();
+			ShopInfoCriteria.Criteria nameCriteria = nameExample.createCriteria();
+			nameCriteria.andTenantIdEqualTo(request.getTenantId());
+			nameCriteria.andUserIdNotEqualTo(request.getUserId());
+			nameCriteria.andShopNameEqualTo(request.getShopName().trim());
+			List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
+			if (!CollectionUtils.isEmpty(nameList)) {
+				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
+			}
 			shopInfoBusiSV.saveShopAuditInfo(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
@@ -490,7 +506,17 @@ public class ShopInfoSVImpl implements IShopInfoSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader =null;
 		try{
-			ValidateUtils.validatUpdateAuditInfo(request);
+			ValidateUtils validateUtils = new ValidateUtils();
+			validateUtils.validatUpdateAuditInfo(request);
+			ShopInfoCriteria example = new ShopInfoCriteria();
+			ShopInfoCriteria.Criteria criteria = example.createCriteria();
+			criteria.andTenantIdEqualTo(request.getTenantId());
+			criteria.andShopNameEqualTo(request.getShopName().trim());
+			criteria.andUserIdNotEqualTo(request.getUserId());
+			List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
+			if(!CollectionUtils.isEmpty(nameList)){
+				throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
+			}
 			shopInfoBusiSV.updateShopAuditInfo(request);
 		responseHeader = new ResponseHeader(true, ChUserConstants.ShopRank.SUCCESS, "操作成功");
 		}catch(BusinessException e){
