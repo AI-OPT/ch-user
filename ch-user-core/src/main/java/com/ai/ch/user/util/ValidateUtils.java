@@ -2,6 +2,7 @@ package com.ai.ch.user.util;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.ch.user.api.defaultlog.params.QueryDefaultLogRequest;
@@ -86,7 +87,7 @@ public class ValidateUtils {
 		nameCriteria.andUserIdNotEqualTo(request.getUserId());
 		nameCriteria.andShopNameEqualTo(request.getShopName().trim());
 		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(nameExample);
-		if (!nameList.isEmpty()) {
+		if (!CollectionUtils.isEmpty(nameList)) {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
 		}
 	}
@@ -238,7 +239,7 @@ public class ValidateUtils {
 		criteria.andShopNameEqualTo(request.getShopName().trim());
 		criteria.andUserIdNotEqualTo(request.getUserId());
 		List<ShopInfo> nameList = shopInfoAtomSV.selectByExample(example);
-		if(!nameList.isEmpty()){
+		if(!CollectionUtils.isEmpty(nameList)){
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "店铺名称已存在");
 		}
 	}
